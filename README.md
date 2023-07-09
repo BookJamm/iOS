@@ -34,22 +34,22 @@
 효율적인 버전관리와 충돌을 방지하기 위해 팀원은 목적에 따른 브랜치를 분기해 그 안에서만 작업해야 합니다.
 
 ### Main Branch
-#### 브랜치 이름 : `Main` <br>
+#### 브랜치 이름 : `main` <br>
 최종 배포가 가능한 상태만을 관리하는 브랜치입니다. <br>
 배포 이력을 관리하기 위한 브랜치이므로 배포 이전까지는 병합하지 않을 예정입니다.
 
 ### Develop Branch
-#### 브랜치 이름 : `Develop` <br>
+#### 브랜치 이름 : `develop` <br>
 배포 버전을 개발하는 브랜치입니다. <br>
 이 브랜치를 기반으로 기능을 추가하고 버그 없이 안정적으로 배포가 가능한 상태인 경우만 `Main branch`에 병합합니다.
 
 ### ⭐️ Feature Branch
-#### 브랜치 이름 : `Feature/<이슈번호>-<기능명>` <br> 브랜치 이름 예시 : `Feature/1-login`, `Feature/2-main-library-list` <br>
+#### 브랜치 이름 : `feature/<이슈번호>-<기능명>` <br> 브랜치 이름 예시 : `feature/1-login`, `feature/2-main-library-list` <br>
 개발 시 가장 많이 사용하게 될 브랜치입니다. 기능을 개발하는 브랜치로, `Develop Branch`에서 분기합니다. <br>
 개발이 완료되면 `Develop Branch`로 병합해 다른 사람과 공유하고, 개발이 완료되어 더이상 필요하지 않은 `Feature Branch`는 삭제합니다.
 
 ### Release Branch
-#### 브랜치 이름 : `Release/<버전명>` <br>
+#### 브랜치 이름 : `release/<버전명>` <br>
 버전 출시 직전 이용하게 될 브랜치입니다. <br>
 기능 수정 없이 테스트를 통한 최종적인 버그 수정이나 문서 추가 등의 단계를 수행할 때 사용합니다.
 
