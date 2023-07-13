@@ -1,0 +1,6 @@
+framework module Pods_Bookjam_BookjamUITests {
+  umbrella header "Pods-Bookjam-BookjamUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

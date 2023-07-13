@@ -1,7 +1,7 @@
 .DS_Store
 ios/.DS_Store
 */UserInterfaceState.xcuserstate
-Podfile.lock
+# Podfile.lock
 
 # Created by https://www.gitignore.io/api/xcode,swift,cocoapods
 # Edit at https://www.gitignore.io/?templates=xcode,swift,cocoapods
@@ -12,7 +12,7 @@ Podfile.lock
 # CocoaPods - Only use to conserve bandwidth / Save time on Pushing
 #           - Also handy if you have a large number of dependant pods
 #           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGNORE THE LOCK FILE
-Pods/
+# Pods/
 
 ### Swift ###
 # Xcode
