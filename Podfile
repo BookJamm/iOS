@@ -10,6 +10,7 @@ target 'Bookjam' do
   pod 'Moya', '~> 15.0.0'
   pod 'SnapKit', '~> 5.6.0'
   pod 'Kingfisher', '~> 7.8.1'
+  pod 'Then', '~> 3.0.0'
 
   target 'BookjamTests' do
     inherit! :search_paths
