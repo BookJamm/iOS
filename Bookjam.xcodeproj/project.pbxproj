@@ -18,6 +18,7 @@
 		DD38CFD42A59993400D32B00 /* BookjamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFD32A59993400D32B00 /* BookjamTests.swift */; };
 		DD38CFDE2A59993400D32B00 /* BookjamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */; };
 		DD38CFE02A59993400D32B00 /* BookjamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */; };
+		DDC6EA972A6142EB00C4B127 /* Onboard04ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA962A6142EB00C4B127 /* Onboard04ViewController.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		DD38CFD92A59993400D32B00 /* BookjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITests.swift; sourceTree = "<group>"; };
 		DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DDC6EA962A6142EB00C4B127 /* Onboard04ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboard04ViewController.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +175,7 @@
 			children = (
 				DD38CFC02A59993400D32B00 /* ViewController.swift */,
 				DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */,
+				DDC6EA962A6142EB00C4B127 /* Onboard04ViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 			files = (
 				DDDD436C2A5AD5140093CBD1 /* LoginViewController.swift in Sources */,
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
+				DDC6EA972A6142EB00C4B127 /* Onboard04ViewController.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 			);
