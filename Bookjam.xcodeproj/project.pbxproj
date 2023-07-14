@@ -18,7 +18,8 @@
 		DD38CFD42A59993400D32B00 /* BookjamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFD32A59993400D32B00 /* BookjamTests.swift */; };
 		DD38CFDE2A59993400D32B00 /* BookjamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */; };
 		DD38CFE02A59993400D32B00 /* BookjamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */; };
-		DDDD436C2A5AD5140093CBD1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */; };
+		DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */; };
+		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +61,8 @@
 		DD38CFD92A59993400D32B00 /* BookjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITests.swift; sourceTree = "<group>"; };
 		DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding04VC.swift; sourceTree = "<group>"; };
+		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				DD38CFC02A59993400D32B00 /* ViewController.swift */,
-				DDDD436B2A5AD5140093CBD1 /* LoginViewController.swift */,
+				DDC6EA982A61559C00C4B127 /* Onboarding */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -184,6 +186,15 @@
 				DD38CFBE2A59993400D32B00 /* SceneDelegate.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		DDC6EA982A61559C00C4B127 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
+				DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		E6D55292CB7C8BCF307DC310 /* Pods */ = {
@@ -437,8 +448,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DDDD436C2A5AD5140093CBD1 /* LoginViewController.swift in Sources */,
+				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
+				DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 			);

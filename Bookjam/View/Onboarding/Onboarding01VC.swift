@@ -13,7 +13,7 @@ import SnapKit
 import Then
 
 
-class LoginViewController: UIViewController {
+class Onboarding01VC: UIViewController {
     
     
     // MARK: Variables
@@ -23,9 +23,10 @@ class LoginViewController: UIViewController {
     }
     
     // TODO: 디자인 끝나면 애플 로그인 버튼 구현
-    let appleButton = UIButton()
     
-    let emailButton = UIButton().then {
+    let appleButton: UIButton = UIButton()
+    
+    let emailButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor.white
         $0.setTitle("북잼 로그인", for: .normal)
         $0.setTitleColor(UIColor(named: "MainColor"), for: .normal)
@@ -33,7 +34,7 @@ class LoginViewController: UIViewController {
         $0.layer.cornerRadius = 8
     }
     
-    let kakaoButton = UIButton().then {
+    let kakaoButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "KakaoColor")
         $0.setImage(UIImage(named: "KakaoLogo"), for: .normal)
         $0.setTitle(" 카카오 계정 연동하기", for: .normal)
@@ -42,7 +43,7 @@ class LoginViewController: UIViewController {
         $0.layer.cornerRadius = 8
     }
     
-    let signUpButton = UIButton().then {
+    let signUpButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
@@ -84,7 +85,6 @@ class LoginViewController: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.45)
@@ -113,9 +113,9 @@ class LoginViewController: UIViewController {
     }
 }
 
-struct LoginViewController_Preview: PreviewProvider {
+struct Onboarding01VC_Preview: PreviewProvider {
     static var previews: some View {
-        LoginViewController().toPreview()
+        Onboarding01VC().toPreview()
             .edgesIgnoringSafeArea(.all)
     }
 }
