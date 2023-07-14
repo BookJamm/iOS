@@ -23,6 +23,7 @@
 		DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */; };
 		DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */; };
 		DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */; };
+		DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding06VC.swift; sourceTree = "<group>"; };
 		DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding07VC.swift; sourceTree = "<group>"; };
 		DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding08VC.swift; sourceTree = "<group>"; };
+		DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding09VC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -205,6 +207,7 @@
 				DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */,
 				DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */,
 				DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */,
+				DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */,
 				DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */,
+				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
