@@ -13,17 +13,18 @@ import SnapKit
 import Then
 
 
-class Onboard04ViewController: UIViewController {
+class Onboarding04VC: UIViewController {
     
     // MARK: Variables
     
     let backButton = UIButton()
-    let informationText = UITextView()
+    let informationLabel = UILabel()
     let profileImageButton = UIButton()
     let nicknameTextField = UITextField()
     let confirmButton = UIButton()
     let decisionButton = UIButton()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,9 +56,9 @@ class Onboard04ViewController: UIViewController {
     
 }
 
-struct Onboard04ViewController_Preview: PreviewProvider {
+struct Onboarding04VC_Preview: PreviewProvider {
     static var previews: some View {
-        Onboard04ViewController().toPreview()
+        Onboarding04VC().toPreview()
             .edgesIgnoringSafeArea(.all)
     }
 }

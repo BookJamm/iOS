@@ -13,7 +13,7 @@ import SnapKit
 import Then
 
 
-class LoginViewController: UIViewController {
+class Onboarding01VC: UIViewController {
     
     
     // MARK: Variables
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
     }
     
     // TODO: 디자인 끝나면 애플 로그인 버튼 구현
+    
     let appleButton = UIButton()
     
     let emailButton = UIButton().then {
@@ -84,7 +85,6 @@ class LoginViewController: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.45)
@@ -113,9 +113,9 @@ class LoginViewController: UIViewController {
     }
 }
 
-struct LoginViewController_Preview: PreviewProvider {
+struct Onboarding01VC_Preview: PreviewProvider {
     static var previews: some View {
-        LoginViewController().toPreview()
+        Onboarding01VC().toPreview()
             .edgesIgnoringSafeArea(.all)
     }
 }
