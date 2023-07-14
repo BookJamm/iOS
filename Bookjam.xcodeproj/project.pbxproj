@@ -135,7 +135,6 @@
 				DD38CFEE2A599F0100D32B00 /* Screen */,
 				DD38CFEC2A599ECC00D32B00 /* Data */,
 				DD38CFC72A59993400D32B00 /* LaunchScreen.storyboard */,
-				DD38CFC52A59993400D32B00 /* Assets.xcassets */,
 				DD38CFCA2A59993400D32B00 /* Info.plist */,
 			);
 			path = Bookjam;
@@ -161,6 +160,7 @@
 		DD38CFEC2A599ECC00D32B00 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				DD38CFC52A59993400D32B00 /* Assets.xcassets */,
 			);
 			path = Data;
 			sourceTree = "<group>";
