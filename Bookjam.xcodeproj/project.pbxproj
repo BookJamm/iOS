@@ -19,6 +19,7 @@
 		DD38CFDE2A59993400D32B00 /* BookjamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */; };
 		DD38CFE02A59993400D32B00 /* BookjamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */; };
 		DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */; };
+		DDC6EA9A2A61725900C4B127 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA992A61725900C4B127 /* Onboarding05VC.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITests.swift; sourceTree = "<group>"; };
 		DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding04VC.swift; sourceTree = "<group>"; };
+		DDC6EA992A61725900C4B127 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 			children = (
 				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
 				DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */,
+				DDC6EA992A61725900C4B127 /* Onboarding05VC.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
+				DDC6EA9A2A61725900C4B127 /* Onboarding05VC.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
