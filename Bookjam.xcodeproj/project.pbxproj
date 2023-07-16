@@ -10,6 +10,7 @@
 		411FD826C5A9F974087EAC6B /* Pods_BookjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47ED49659B4E111FDC84ECA9 /* Pods_BookjamTests.framework */; };
 		4F360426894B4364D871ACEA /* Pods_Bookjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */; };
 		941A30FC2A61913A008152CC /* Onboarding02VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FB2A61913A008152CC /* Onboarding02VC.swift */; };
+		941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FD2A6260D0008152CC /* Onboarding03VC.swift */; };
 		A850162687B812BE16F67757 /* Pods_Bookjam_BookjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA7E41F969523A177659D68 /* Pods_Bookjam_BookjamUITests.framework */; };
 		DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBC2A59993400D32B00 /* AppDelegate.swift */; };
 		DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBE2A59993400D32B00 /* SceneDelegate.swift */; };
@@ -52,6 +53,7 @@
 		75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5C2379B29DA2D1BF353C4F /* Pods-BookjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookjamTests.debug.xcconfig"; path = "Target Support Files/Pods-BookjamTests/Pods-BookjamTests.debug.xcconfig"; sourceTree = "<group>"; };
 		941A30FB2A61913A008152CC /* Onboarding02VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding02VC.swift; sourceTree = "<group>"; };
+		941A30FD2A6260D0008152CC /* Onboarding03VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding03VC.swift; sourceTree = "<group>"; };
 		9EA7E41F969523A177659D68 /* Pods_Bookjam_BookjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam_BookjamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FFA03A0490112340DD11C1 /* Pods-BookjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookjamTests.release.xcconfig"; path = "Target Support Files/Pods-BookjamTests/Pods-BookjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		CAEDA6440DB30BEB7BAF980E /* Pods-Bookjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam.debug.xcconfig"; path = "Target Support Files/Pods-Bookjam/Pods-Bookjam.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
 				941A30FB2A61913A008152CC /* Onboarding02VC.swift */,
+				941A30FD2A6260D0008152CC /* Onboarding03VC.swift */,
 				DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */,
 				DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */,
 				DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */,
@@ -463,6 +466,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */,
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				941A30FC2A61913A008152CC /* Onboarding02VC.swift in Sources */,
 				DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */,
