@@ -31,12 +31,6 @@ class Onboarding02VC: UIViewController {
         $0.borderStyle = .none
         $0.textColor = UIColor.white
         
-        // Create and add the bottom border
-//           let bottomLine = CALayer()
-//           bottomLine.frame = CGRect(x: 0, y: $0.frame.size.height - 1, width: $0.bounds.width, height: 1)
-//           bottomLine.backgroundColor = UIColor.white.cgColor
-//           $0.layer.addSublayer(bottomLine)
-        
     }
     
     let verifyTextField: UITextField = UITextField().then{  //인증번호 입력 텍스트 필드
@@ -47,7 +41,7 @@ class Onboarding02VC: UIViewController {
         $0.setTitle("인증 요청", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         $0.backgroundColor = UIColor(named: "MainColor")
-        $0.layer.cornerRadius = 10
+        $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         
     }
@@ -151,10 +145,6 @@ class Onboarding02VC: UIViewController {
         }
         
         nextButton.snp.makeConstraints{
-//            make.leading.equalToSuperview().offset(10)
-//            make.trailing.equalToSuperview().offset(-10)
-//            make.bottom.equalToSuperview().offset(-30)
-//            make.height.equalTo(50)
             
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
