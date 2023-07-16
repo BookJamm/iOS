@@ -12,11 +12,6 @@ class Onboarding05VC: UIViewController {
     
     // MARK: Variables
     
-    let backImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "chevron.backward")
-        $0.tintColor = UIColor.black
-    }
-    
     let informationLabel: UILabel = UILabel().then {
         $0.textColor = .black
         $0.textAlignment = .left
@@ -77,7 +72,6 @@ class Onboarding05VC: UIViewController {
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(backImageView)
         view.addSubview(informationLabel)
         view.addSubview(searchIDLabel)
         view.addSubview(emailTextField)
@@ -92,13 +86,6 @@ class Onboarding05VC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        backImageView.snp.makeConstraints {
-            $0.centerX.equalToSuperview().multipliedBy(0.15)
-            $0.centerY.equalToSuperview().multipliedBy(0.06)
-            $0.height.equalToSuperview().multipliedBy(0.035)
-            $0.width.equalToSuperview().multipliedBy(0.04)
-        }
-        
         informationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(0.78)
             $0.centerY.equalToSuperview().multipliedBy(0.25)

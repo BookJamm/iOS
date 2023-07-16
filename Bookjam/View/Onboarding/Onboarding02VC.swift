@@ -160,6 +160,6 @@ class Onboarding02VC: UIViewController {
 struct Onboarding02VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding02VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
+            //.edgesIgnoringSafeArea(.all)
     }
 }
