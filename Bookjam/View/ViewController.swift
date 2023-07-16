@@ -10,10 +10,44 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    // MARK: Variables
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setUpView()
+        setUpLayout()
+        setUpConstraint()
     }
     
+
+    // MARK: View
+    
+    func setUpView() {
+        
+    }
+    
+    
+    // MARK: Layout
+    
+    func setUpLayout() {
+        
+    }
+    
+    
+    // MARK: Constraint
+    
+    func setUpConstraint() {
+        
+    }
+    
+}
+
+struct ViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        ViewController().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
 }
 
 #if DEBUG
