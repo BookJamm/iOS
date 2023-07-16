@@ -25,6 +25,7 @@
 		DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */; };
 		DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
+		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding08VC.swift; sourceTree = "<group>"; };
 		DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding09VC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
+		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +206,7 @@
 				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
 				941A30FB2A61913A008152CC /* Onboarding02VC.swift */,
 				DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */,
+				DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */,
 				DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */,
 				DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */,
 				DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */,
@@ -473,6 +476,7 @@
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
+				DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
