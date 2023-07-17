@@ -26,10 +26,11 @@ class Onboarding04VC: UIViewController {
         $0.sizeToFit()
     }
     
-    let profileImageView: UIImageView = UIImageView().then {
+    let profileButton: UIButton = UIButton().then {
         $0.layer.cornerRadius = $0.frame.height / 2
         $0.clipsToBounds = true
-        $0.image = UIImage(named: "BasicProfile")
+        $0.setImage(UIImage(named: "BasicProfile"), for: .normal)
+        $0.addTarget(self, action: #selector(didProfileButtonTapped), for: .touchUpInside)
     }
     
     let bottomLineView: UIView = UIView().then {
@@ -66,10 +67,6 @@ class Onboarding04VC: UIViewController {
         view.backgroundColor = .white
         
         hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didProfileImageViewTapped(_:)))
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.addGestureRecognizer(tap)
     }
     
     
@@ -77,7 +74,7 @@ class Onboarding04VC: UIViewController {
     
     func setUpLayout() {
         view.addSubview(informationLabel)
-        view.addSubview(profileImageView)
+        view.addSubview(profileButton)
         view.addSubview(nicknameTextField)
         view.addSubview(bottomLineView)
         view.addSubview(decisionButton)
@@ -92,7 +89,7 @@ class Onboarding04VC: UIViewController {
             $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
         
-        profileImageView.snp.makeConstraints {
+        profileButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
@@ -122,7 +119,7 @@ class Onboarding04VC: UIViewController {
     
     // MARK: Functions
     
-    @objc func didProfileImageViewTapped(_ sender: UITapGestureRecognizer? = nil) {
+    @objc func didProfileButtonTapped(_ sender: UITapGestureRecognizer? = nil) {
         print("11")
         var configuration = PHPickerConfiguration()
         
@@ -165,7 +162,7 @@ extension Onboarding04VC : PHPickerViewControllerDelegate {
                 DispatchQueue.main.async {
                     guard let selectedImage = image as? UIImage else { return }
                     
-                    self.profileImageView.image = selectedImage
+                    self.profileButton.setImage(selectedImage, for: .normal)
                 } // end of DispatchQueue
             } // end of itemProvider.loadObject()
         } // end of itemProvider.canLoadObject()
