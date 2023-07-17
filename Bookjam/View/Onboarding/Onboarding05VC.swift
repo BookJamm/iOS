@@ -52,6 +52,7 @@ class Onboarding05VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.setTitle("완료하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.addTarget(self, action: #selector(didFinishButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -65,7 +66,7 @@ class Onboarding05VC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        
+        view.backgroundColor = .white
     }
     
     
@@ -88,7 +89,7 @@ class Onboarding05VC: UIViewController {
     func setUpConstraint() {
         informationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(0.78)
-            $0.centerY.equalToSuperview().multipliedBy(0.25)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
         
         searchIDLabel.snp.makeConstraints {
@@ -98,7 +99,7 @@ class Onboarding05VC: UIViewController {
         
         finishButton.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
         }
@@ -120,12 +121,20 @@ class Onboarding05VC: UIViewController {
             $0.centerY.equalToSuperview().multipliedBy(0.72)
         }
     }
-
+    
+    // MARK: Functions
+    
+    @objc func didFinishButtonTapped() {
+        let onboarding06VC = Onboarding06VC()
+        onboarding06VC.modalPresentationStyle = .fullScreen
+        
+        self.present(onboarding06VC, animated: true)
+    } // end of didFinishButtonTapped()
 }
 
 struct Onboarding05VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding05VC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
     }
 }

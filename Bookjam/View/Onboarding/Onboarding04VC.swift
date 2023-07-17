@@ -5,6 +5,7 @@
 //  Created by YOUJIM on 2023/07/14.
 //
 
+import PhotosUI
 import SwiftUI
 import UIKit
 
@@ -26,6 +27,8 @@ class Onboarding04VC: UIViewController {
     }
     
     let profileImageView: UIImageView = UIImageView().then {
+        $0.layer.cornerRadius = $0.frame.height / 2
+        $0.clipsToBounds = true
         $0.image = UIImage(named: "BasicProfile")
     }
     
@@ -44,14 +47,15 @@ class Onboarding04VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.setTitle("결정하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.addTarget(self, action: #selector(didDecisionButtonTapped), for: .touchUpInside)
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpView()
         setUpLayout()
+        setUpView()
         setUpConstraint()
     }
     
@@ -59,7 +63,13 @@ class Onboarding04VC: UIViewController {
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
         
+        hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didProfileImageViewTapped(_:)))
+        profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(tap)
     }
     
     
@@ -78,13 +88,13 @@ class Onboarding04VC: UIViewController {
     
     func setUpConstraint() {
         informationLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview().multipliedBy(0.2)
             $0.centerX.equalToSuperview().multipliedBy(0.78)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
         
         profileImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.6)
+            $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
         
         nicknameTextField.snp.makeConstraints {
@@ -105,15 +115,59 @@ class Onboarding04VC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
         }
     }
     
+    
+    // MARK: Functions
+    
+    @objc func didProfileImageViewTapped(_ sender: UITapGestureRecognizer? = nil) {
+        print("11")
+        var configuration = PHPickerConfiguration()
+        
+        configuration.selectionLimit = 1 // 최대로 선택할 사진 수 1로 설정
+        configuration.filter = .images // 선택할 수 있는 미디어 종류 사진으로 제한
+        
+        let picker = PHPickerViewController(configuration: configuration)
+        
+        picker.delegate = self
+    } // end of didProfileImageViewTapped()
+    
+    
+    @objc func didDecisionButtonTapped() {
+        navigationController?.pushViewController(Onboarding05VC(), animated: true)
+    } // end of didDecisionButtonTapped()
 }
+
+
+// MARK: Preview
 
 struct Onboarding04VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding04VC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
     }
 }
+
+
+// MARK: Extension
+
+extension Onboarding04VC : PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        let itemProvider = results.first?.itemProvider
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.async {
+                    guard let selectedImage = image as? UIImage else { return }
+                    
+                    self.profileImageView.image = selectedImage
+                } // end of DispatchQueue
+            } // end of itemProvider.loadObject()
+        } // end of itemProvider.canLoadObject()
+    } // end of picker()
+} // end of extension

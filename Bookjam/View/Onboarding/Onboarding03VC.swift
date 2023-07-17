@@ -9,57 +9,61 @@ import SwiftUI
 import UIKit
 
 class Onboarding03VC: UIViewController {
-
-    let registerLabel: UILabel = UILabel().then{
+    
+    // MARK: Variables
+    
+    let registerLabel: UILabel = UILabel().then {
         $0.text = "회원 가입"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
         $0.textAlignment = .left
         $0.sizeToFit()
     }
     
-    let idLabel: UILabel = UILabel().then{
+    let idLabel: UILabel = UILabel().then {
         $0.text = "아이디 입력"
-        $0.font = UIFont.systemFont(ofSize: 20)
-        
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.textColor = UIColor(hexCode: "6F6F6F")
     }
     
-    let passWordLabel: UILabel = UILabel().then{
+    let passWordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호 입력"
-        $0.font = UIFont.systemFont(ofSize: 20)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.textColor = UIColor(hexCode: "6F6F6F")
     }
     
-    let emailTextField: UITextField = UITextField().then{
+    let emailTextField: UITextField = UITextField().then {
         $0.placeholder = "email@email.com"
     }
     
-    let passWordTextField: UITextField = UITextField().then{
+    let passWordTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 입력"
     }
 
-    let passWordConfirmTextField: UITextField = UITextField().then{
+    let passWordConfirmTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 확인"
     }
     
-    let idDuplicateLabel: UILabel = UILabel().then{
+    let idDuplicateLabel: UILabel = UILabel().then {
         $0.isHidden = false
         $0.text = "중복된 아이디입니다."
         $0.textColor = .red
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
-    let passWordConditionLabel: UILabel = UILabel().then{
+    let passWordConditionLabel: UILabel = UILabel().then {
         $0.text = "비밀번호 조건"
         $0.textColor = .red
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
-    let passWordAccrodLabel: UILabel = UILabel().then{
+    let passWordAccrodLabel: UILabel = UILabel().then {
         $0.text = "비밀번호가 일치합니다."
         $0.textColor = .green
         $0.font = UIFont.systemFont(ofSize: 14)
     }
     
-    let duplicateRequestButton: UIButton = UIButton().then {    //중복확인 버튼
+    // 중복확인 버튼
+    let duplicateRequestButton: UIButton = UIButton().then {
         $0.setTitle("중복 확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
         $0.backgroundColor = UIColor(named: "MainColor")
@@ -67,31 +71,45 @@ class Onboarding03VC: UIViewController {
         $0.layer.masksToBounds = true
     }
     
-    let nextButton: UIButton = UIButton().then{ //다음으로 버튼
+    // 다음으로 버튼
+    let nextButton: UIButton = UIButton().then{
         $0.setTitle("다음으로", for: .normal)
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
     
     let bottomLineView: UIView = UIView().then {
             $0.backgroundColor = UIColor(named: "GrayColor")
         }
+    
     let bottomLineView2: UIView = UIView().then {
             $0.backgroundColor = UIColor(named: "GrayColor")
         }
+    
     let bottomLineView3: UIView = UIView().then {
             $0.backgroundColor = UIColor(named: "GrayColor")
         }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUpView()
         setUpLayout()
         setUpConstraint()
-
-        // Do any additional setup after loading the view.
     }
+    
+    
+    // MARK: View
+    
+    func setUpView() {
+        view.backgroundColor = .white
+    }
+    
+    
+    // MARK: Layout
     
     func setUpLayout(){
         self.view.addSubview(registerLabel)
@@ -108,100 +126,112 @@ class Onboarding03VC: UIViewController {
         self.view.addSubview(bottomLineView)
         self.view.addSubview(bottomLineView2)
         self.view.addSubview(bottomLineView3)
-        
     }
+    
+    
+    // MARK: Constraints
 
     func setUpConstraint(){
-        registerLabel.snp.makeConstraints{
-            $0.centerY.equalToSuperview().multipliedBy(0.2)
-            $0.leading.equalToSuperview().offset(10)
+        registerLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview().multipliedBy(0.3)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
-        idLabel.snp.makeConstraints{
+        
+        idLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview().multipliedBy(0.31)
             $0.centerY.equalToSuperview().multipliedBy(0.45)
-            $0.leading.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-            
         }
-        emailTextField.snp.makeConstraints{
+        
+        emailTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
             $0.centerY.equalToSuperview().multipliedBy(0.58)
-            
-            
         }
         
-        bottomLineView.snp.makeConstraints{
+        bottomLineView.snp.makeConstraints {
             $0.top.equalTo(emailTextField.snp.bottom).offset(-18)
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.leading.equalToSuperview().offset(10)
             $0.height.equalToSuperview().multipliedBy(0.0011)
         }
         
-        duplicateRequestButton.snp.makeConstraints{
+        duplicateRequestButton.snp.makeConstraints {
             $0.leading.equalTo(emailTextField.snp.trailing).offset(10)
             $0.trailing.equalToSuperview().offset(-10)
             $0.size.width.equalTo(80)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerY.equalTo(emailTextField)
-
         }
-        idDuplicateLabel.snp.makeConstraints{
+        
+        idDuplicateLabel.snp.makeConstraints {
             $0.top.equalTo(bottomLineView).offset(10)
             $0.leading.equalToSuperview().offset(10)
         }
-        passWordLabel.snp.makeConstraints{
+        
+        passWordLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview().multipliedBy(1)
             $0.leading.equalToSuperview().offset(10)
         }
-        passWordTextField.snp.makeConstraints{
+        
+        passWordTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
             $0.centerY.equalToSuperview().multipliedBy(1.15)
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
-            
         }
-        bottomLineView2.snp.makeConstraints{
+        
+        bottomLineView2.snp.makeConstraints {
             $0.top.equalTo(passWordTextField.snp.bottom).offset(-18)
             $0.trailing.equalToSuperview().offset(-10)
             $0.leading.equalToSuperview().offset(10)
             $0.height.equalToSuperview().multipliedBy(0.0011)
         }
-        passWordConditionLabel.snp.makeConstraints{
+        
+        passWordConditionLabel.snp.makeConstraints {
             $0.top.equalTo(bottomLineView2).offset(10)
             $0.leading.equalToSuperview().offset(10)
         }
-        passWordConfirmTextField.snp.makeConstraints{
+        
+        passWordConfirmTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
             $0.centerY.equalToSuperview().multipliedBy(1.4)
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
         }
-        bottomLineView3.snp.makeConstraints{
+        
+        bottomLineView3.snp.makeConstraints {
             $0.top.equalTo(passWordConfirmTextField.snp.bottom).offset(-18)
             $0.trailing.equalToSuperview().offset(-10)
             $0.leading.equalToSuperview().offset(10)
             $0.height.equalToSuperview().multipliedBy(0.0011)
         }
-        passWordAccrodLabel.snp.makeConstraints{
+        
+        passWordAccrodLabel.snp.makeConstraints {
             $0.top.equalTo(bottomLineView3).offset(10)
             $0.leading.equalToSuperview().offset(10)
         }
-        nextButton.snp.makeConstraints{
+        
+        nextButton.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
         }
         
     }//end of setUpConstraint
     
     
+    // MARK: Functions
+    
+    @objc func didNextButtonTapped() {
+        navigationController?.pushViewController(Onboarding04VC(), animated: true)
+    } // end of didNextButtonTapped()
 }
 
 struct Onboarding03VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding03VC().toPreview()
-            //.edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
     }
 }

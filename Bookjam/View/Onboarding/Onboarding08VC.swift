@@ -44,6 +44,8 @@ class Onboarding08VC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
+    // TODO: 건너뛰기 버튼 누르면 메인으로 넘어가게 구현 필요
+    
     let skipButton: UIButton = UIButton().then {
         $0.setTitle("건너뛰기", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "A5A5A5"), for: .normal)
@@ -56,6 +58,7 @@ class Onboarding08VC: UIViewController {
         $0.setTitle("다음으로", for: .normal)
         $0.titleLabel?.textColor = .white
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
 
     
@@ -71,7 +74,17 @@ class Onboarding08VC: UIViewController {
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
         
+        // 오른쪽으로 View 슬라이드하면 온보딩 07로 이동
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.didToRightSwiped(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        // 왼쪽으로 View 슬라이드하면 온보딩 09로 이동
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.didToLeftSwiped(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
     }
     
     
@@ -95,26 +108,26 @@ class Onboarding08VC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.28)
             $0.height.equalToSuperview().multipliedBy(0.0045)
             $0.centerX.equalToSuperview().multipliedBy(0.4)
-            $0.top.equalToSuperview().multipliedBy(0.9)
+            $0.bottom.equalToSuperview().multipliedBy(0.07)
         }
         
         centerBarView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.28)
             $0.height.equalToSuperview().multipliedBy(0.0045)
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().multipliedBy(0.9)
+            $0.bottom.equalToSuperview().multipliedBy(0.07)
         }
         
         rightBarView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.28)
             $0.height.equalToSuperview().multipliedBy(0.0045)
             $0.centerX.equalToSuperview().multipliedBy(1.6)
-            $0.top.equalToSuperview().multipliedBy(0.9)
+            $0.bottom.equalToSuperview().multipliedBy(0.07)
         }
         
         informationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(0.75)
-            $0.centerY.equalToSuperview().multipliedBy(0.2)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
         
         characterImageView.snp.makeConstraints {
@@ -127,23 +140,63 @@ class Onboarding08VC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.03)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.89)
+            $0.bottom.equalToSuperview().multipliedBy(0.86)
         }
         
         nextButton.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
         }
     }
 
+    
+    // MARK: Functions
+    
+    @objc func didNextButtonTapped() {
+        let onboarding09VC = Onboarding09VC()
+        onboarding09VC.modalPresentationStyle = .fullScreen
+        onboarding09VC.modalTransitionStyle = .crossDissolve
+        
+        self.present(onboarding09VC, animated: true)
+    } // end of didNextButtonTapped()
+    
+    
+    @objc func didToRightSwiped(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.right:
+                let onboarding07VC = Onboarding07VC()
+                onboarding07VC.modalPresentationStyle = .fullScreen
+                onboarding07VC.modalTransitionStyle = .crossDissolve
+                
+                self.present(onboarding07VC, animated: true)
+            default: break
+            }
+        }
+    } // end of didToRightSwiped()
+    
+    
+    @objc func didToLeftSwiped(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizer.Direction.left:
+                let onboarding09VC = Onboarding09VC()
+                onboarding09VC.modalPresentationStyle = .fullScreen
+                onboarding09VC.modalTransitionStyle = .crossDissolve
+                
+                self.present(onboarding09VC, animated: true)
+            default: break
+            }
+        }
+    } // end of didToLeftSwiped()
 }
 
 struct Onboarding08VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding08VC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
     }
 }
 
