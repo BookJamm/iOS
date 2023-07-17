@@ -15,6 +15,7 @@ class Onboarding03VC: UIViewController {
     let registerLabel: UILabel = UILabel().then {
         $0.text = "회원 가입"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        $0.textColor = .black
         $0.textAlignment = .left
         $0.sizeToFit()
     }
@@ -25,7 +26,7 @@ class Onboarding03VC: UIViewController {
         $0.textColor = UIColor(hexCode: "6F6F6F")
     }
     
-    let passWordLabel: UILabel = UILabel().then {
+    let passwordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호 입력"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.textColor = UIColor(hexCode: "6F6F6F")
@@ -35,37 +36,37 @@ class Onboarding03VC: UIViewController {
         $0.placeholder = "email@email.com"
     }
     
-    let passWordTextField: UITextField = UITextField().then {
+    let passwordTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 입력"
     }
 
-    let passWordConfirmTextField: UITextField = UITextField().then {
+    let passwordConfirmTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 확인"
     }
     
     let idDuplicateLabel: UILabel = UILabel().then {
         $0.isHidden = false
         $0.text = "중복된 아이디입니다."
-        $0.textColor = .red
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.textColor = UIColor(hexCode: "F22222")
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
-    let passWordConditionLabel: UILabel = UILabel().then {
+    let passwordConditionLabel: UILabel = UILabel().then {
         $0.text = "비밀번호 조건"
-        $0.textColor = .red
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.textColor = UIColor(hexCode: "F22222")
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
-    let passWordAccrodLabel: UILabel = UILabel().then {
+    let passwordAccordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호가 일치합니다."
-        $0.textColor = .green
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.textColor = UIColor(hexCode: "00C950")
+        $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     // 중복확인 버튼
     let duplicateRequestButton: UIButton = UIButton().then {
         $0.setTitle("중복 확인", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -93,6 +94,9 @@ class Onboarding03VC: UIViewController {
             $0.backgroundColor = UIColor(named: "GrayColor")
         }
     
+    
+    // MARK: ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,13 +118,13 @@ class Onboarding03VC: UIViewController {
     func setUpLayout(){
         self.view.addSubview(registerLabel)
         self.view.addSubview(idLabel)
-        self.view.addSubview(passWordLabel)
+        self.view.addSubview(passwordLabel)
         self.view.addSubview(emailTextField)
-        self.view.addSubview(passWordTextField)
-        self.view.addSubview(passWordConfirmTextField)
+        self.view.addSubview(passwordTextField)
+        self.view.addSubview(passwordConfirmTextField)
         self.view.addSubview(idDuplicateLabel)
-        self.view.addSubview(passWordConditionLabel)
-        self.view.addSubview(passWordAccrodLabel)
+        self.view.addSubview(passwordConditionLabel)
+        self.view.addSubview(passwordAccordLabel)
         self.view.addSubview(duplicateRequestButton)
         self.view.addSubview(nextButton)
         self.view.addSubview(bottomLineView)
@@ -143,73 +147,72 @@ class Onboarding03VC: UIViewController {
         }
         
         emailTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(10)
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
+            $0.centerX.equalToSuperview().multipliedBy(0.82)
             $0.centerY.equalToSuperview().multipliedBy(0.58)
         }
         
         bottomLineView.snp.makeConstraints {
-            $0.top.equalTo(emailTextField.snp.bottom).offset(-18)
-            $0.width.equalToSuperview().multipliedBy(0.73)
-            $0.leading.equalToSuperview().offset(10)
+            $0.width.equalToSuperview().multipliedBy(0.68)
             $0.height.equalToSuperview().multipliedBy(0.0011)
+            $0.centerX.equalToSuperview().multipliedBy(0.77)
+            $0.centerY.equalToSuperview().multipliedBy(0.637)
         }
         
         duplicateRequestButton.snp.makeConstraints {
-            $0.leading.equalTo(emailTextField.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.size.width.equalTo(80)
-            $0.height.equalToSuperview().multipliedBy(0.06)
-            $0.centerY.equalTo(emailTextField)
+            $0.width.equalToSuperview().multipliedBy(0.22)
+            $0.height.equalToSuperview().multipliedBy(0.055)
+            $0.right.equalToSuperview().multipliedBy(0.97)
+            $0.centerY.equalToSuperview().multipliedBy(0.584)
         }
         
         idDuplicateLabel.snp.makeConstraints {
-            $0.top.equalTo(bottomLineView).offset(10)
-            $0.leading.equalToSuperview().offset(10)
+            $0.centerX.equalToSuperview().multipliedBy(0.35)
+            $0.centerY.equalToSuperview().multipliedBy(0.69)
         }
         
-        passWordLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview().multipliedBy(1)
-            $0.leading.equalToSuperview().offset(10)
+        passwordLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview().multipliedBy(0.34)
+            $0.centerY.equalToSuperview().multipliedBy(0.87)
         }
         
-        passWordTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(10)
-            $0.centerY.equalToSuperview().multipliedBy(1.15)
+        passwordTextField.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
+            $0.centerX.equalToSuperview().multipliedBy(0.82)
+            $0.centerY.equalToSuperview()
         }
         
         bottomLineView2.snp.makeConstraints {
-            $0.top.equalTo(passWordTextField.snp.bottom).offset(-18)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.leading.equalToSuperview().offset(10)
+            $0.width.equalToSuperview().multipliedBy(0.915)
             $0.height.equalToSuperview().multipliedBy(0.0011)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.53)
         }
         
-        passWordConditionLabel.snp.makeConstraints {
-            $0.top.equalTo(bottomLineView2).offset(10)
-            $0.leading.equalToSuperview().offset(10)
+        passwordConditionLabel.snp.makeConstraints {
+            $0.leftMargin.equalToSuperview().multipliedBy(1.6)
+            $0.bottom.equalToSuperview().multipliedBy(0.566)
         }
         
-        passWordConfirmTextField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(10)
-            $0.centerY.equalToSuperview().multipliedBy(1.4)
+        passwordConfirmTextField.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.73)
             $0.height.equalToSuperview().multipliedBy(0.1)
+            $0.centerX.equalToSuperview().multipliedBy(0.82)
+            $0.bottom.equalToSuperview().multipliedBy(0.67)
         }
         
         bottomLineView3.snp.makeConstraints {
-            $0.top.equalTo(passWordConfirmTextField.snp.bottom).offset(-18)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.leading.equalToSuperview().offset(10)
+            $0.width.equalToSuperview().multipliedBy(0.915)
             $0.height.equalToSuperview().multipliedBy(0.0011)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.65)
         }
         
-        passWordAccrodLabel.snp.makeConstraints {
-            $0.top.equalTo(bottomLineView3).offset(10)
-            $0.leading.equalToSuperview().offset(10)
+        passwordAccordLabel.snp.makeConstraints {
+            $0.leftMargin.equalToSuperview().multipliedBy(1.6)
+            $0.bottom.equalToSuperview().multipliedBy(0.688)
         }
         
         nextButton.snp.makeConstraints {
@@ -218,8 +221,7 @@ class Onboarding03VC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.94)
         }
-        
-    }//end of setUpConstraint
+    } //end of setUpConstraint
     
     
     // MARK: Functions

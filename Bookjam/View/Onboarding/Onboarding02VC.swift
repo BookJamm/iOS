@@ -17,6 +17,7 @@ class Onboarding02VC: UIViewController {
     let label1: UILabel = UILabel().then {
         $0.text = "회원가입을 위한 전화번호를 입력해주세요."
         $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        $0.textColor = .black
         $0.textAlignment = .left
         $0.sizeToFit()
     }
