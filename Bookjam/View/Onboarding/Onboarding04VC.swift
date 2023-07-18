@@ -27,8 +27,6 @@ class Onboarding04VC: UIViewController {
     }
     
     let profileButton: UIButton = UIButton().then {
-        $0.layer.cornerRadius = $0.frame.height / 2
-        $0.clipsToBounds = true
         $0.setImage(UIImage(named: "BasicProfile"), for: .normal)
         $0.addTarget(self, action: #selector(didProfileButtonTapped), for: .touchUpInside)
     }
@@ -119,19 +117,6 @@ class Onboarding04VC: UIViewController {
     
     // MARK: Functions
     
-    @objc func didProfileButtonTapped(_ sender: UITapGestureRecognizer? = nil) {
-        print("11")
-        var configuration = PHPickerConfiguration()
-        
-        configuration.selectionLimit = 1 // 최대로 선택할 사진 수 1로 설정
-        configuration.filter = .images // 선택할 수 있는 미디어 종류 사진으로 제한
-        
-        let picker = PHPickerViewController(configuration: configuration)
-        
-        picker.delegate = self
-    } // end of didProfileImageViewTapped()
-    
-    
     @objc func didDecisionButtonTapped() {
         navigationController?.pushViewController(Onboarding05VC(), animated: true)
     } // end of didDecisionButtonTapped()
@@ -150,21 +135,40 @@ struct Onboarding04VC_Preview: PreviewProvider {
 
 // MARK: Extension
 
-extension Onboarding04VC : PHPickerViewControllerDelegate {
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        let itemProvider = results.first?.itemProvider
+extension Onboarding04VC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func didProfileButtonTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    } // end of didProfileImageViewTapped()
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            profileButton.setImage(image.circularImage(), for: .normal)
+        }
+        dismiss(animated: true , completion: nil)
+    }
+}
+
+
+extension UIImage {
+    func circularImage() -> UIImage? {
+        let shorterSide = UIImage(named: "BasicProfile")?.size.width
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: shorterSide!, height: shorterSide!))
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = shorterSide! / 2.0
+        imageView.layer.masksToBounds = true
+        imageView.image = self
+
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        imageView.layer.render(in: context)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         
-        picker.dismiss(animated: true, completion: nil)
-        
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
-                DispatchQueue.main.async {
-                    guard let selectedImage = image as? UIImage else { return }
-                    
-                    self.profileButton.setImage(selectedImage, for: .normal)
-                } // end of DispatchQueue
-            } // end of itemProvider.loadObject()
-        } // end of itemProvider.canLoadObject()
-    } // end of picker()
-} // end of extension
+        return roundedImage
+    }
+}

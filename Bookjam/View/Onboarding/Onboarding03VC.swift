@@ -8,6 +8,9 @@
 import SwiftUI
 import UIKit
 
+import SnapKit
+import Then
+
 class Onboarding03VC: UIViewController {
     
     // MARK: Variables
@@ -73,13 +76,13 @@ class Onboarding03VC: UIViewController {
     }
     
     // 다음으로 버튼
-    let nextButton: UIButton = UIButton().then{
+    let nextButton: UIButton = UIButton().then {
         $0.setTitle("다음으로", for: .normal)
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
     let bottomLineView: UIView = UIView().then {

@@ -57,7 +57,7 @@ class Onboarding02VC: UIViewController {
         $0.layer.masksToBounds = true
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
     let bottomLineView: UIView = UIView().then {
