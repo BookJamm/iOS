@@ -119,6 +119,10 @@ class Onboarding01VC: UIViewController {
     @objc func didSignUpButtonTapped() {
         navigationController?.pushViewController(Onboarding02VC(), animated: true)
     } // end of didSignUpButtonTapped()
+    
+    @objc func didKakaoButtonTapped() {
+        
+    }
 }
 
 struct Onboarding01VC_Preview: PreviewProvider {

@@ -31,9 +31,6 @@ class Onboarding02VC: UIViewController {
     // 전화번호 입력 텍스트 필드
     let phoneNumberTextField: UITextField = UITextField().then {
         $0.placeholder = "000 0000 0000"
-        $0.textAlignment = .left
-        $0.borderStyle = .none
-        $0.textColor = UIColor.white
     }
     
     // 인증번호 입력 텍스트 필드
