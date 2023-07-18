@@ -50,6 +50,7 @@ class Onboarding01VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.layer.borderWidth = 1.5
         $0.layer.borderColor = UIColor.white.cgColor
+        $0.addTarget(self, action: #selector(didSignUpButtonTapped), for: .touchUpInside)
     }
     
     
@@ -82,7 +83,7 @@ class Onboarding01VC: UIViewController {
     }
     
     
-    // MARK: Constraint
+    // MARK: Constraints
     
     func setUpConstraint() {
         logoImage.snp.makeConstraints {
@@ -111,6 +112,13 @@ class Onboarding01VC: UIViewController {
             $0.bottom.equalToSuperview().multipliedBy(0.775)
         }
     }
+    
+    
+    // MARK: Functions
+    
+    @objc func didSignUpButtonTapped() {
+        navigationController?.pushViewController(Onboarding02VC(), animated: true)
+    } // end of didSignUpButtonTapped()
 }
 
 struct Onboarding01VC_Preview: PreviewProvider {

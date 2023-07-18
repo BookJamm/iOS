@@ -37,6 +37,7 @@ class Onboarding06VC: UIViewController {
         $0.setTitle("BOOKJAM 시작하기", for: .normal)
         $0.titleLabel?.textColor = .white
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.addTarget(self, action: #selector(didStartButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ class Onboarding06VC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        
+        view.backgroundColor = .white
     }
     
     
@@ -69,7 +70,7 @@ class Onboarding06VC: UIViewController {
     func setUpConstraint() {
         informationLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(0.75)
-            $0.centerY.equalToSuperview().multipliedBy(0.2)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
         
         characterImageView.snp.makeConstraints {
@@ -82,15 +83,24 @@ class Onboarding06VC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
         }
     }
     
+    // MARK: Functions
+    
+    @objc func didStartButtonTapped() {
+        let onboarding07VC = Onboarding07VC()
+        onboarding07VC.modalPresentationStyle = .fullScreen
+        onboarding07VC.modalTransitionStyle = .crossDissolve
+        
+        self.present(onboarding07VC, animated: true)
+    } // end of didStartButtonTapped()
 }
 
 struct Onboarding06VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding06VC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
     }
 }
