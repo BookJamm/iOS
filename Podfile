@@ -12,6 +12,7 @@ target 'Bookjam' do
   pod 'SnapKit', '~> 5.6.0'
   pod 'Kingfisher', '~> 7.8.1'
   pod 'Then', '~> 3.0.0'
+  pod 'KakaoSDK', '~> 2.16.0'
 
   target 'BookjamTests' do
     inherit! :search_paths

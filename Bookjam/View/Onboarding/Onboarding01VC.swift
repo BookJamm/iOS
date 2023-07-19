@@ -5,6 +5,7 @@
 //  Created by YOUJIM on 2023/07/09.
 //
 
+import AuthenticationServices
 import SwiftUI
 import UIKit
 
@@ -21,10 +22,6 @@ class Onboarding01VC: UIViewController {
     let logoImage = UIImageView().then {
         $0.image = UIImage(named: "BookJamLogo")
     }
-    
-    // TODO: 디자인 끝나면 애플 로그인 버튼 구현
-    
-    let appleButton: UIButton = UIButton()
     
     let emailButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor.white
@@ -51,6 +48,11 @@ class Onboarding01VC: UIViewController {
         $0.layer.borderWidth = 1.5
         $0.layer.borderColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(didSignUpButtonTapped), for: .touchUpInside)
+    }
+    
+    let appleButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton().then {
+        $0.layer.cornerRadius = 0
+        // $0.addTarget(self, action: #selector(didAppleButtonTapped), for: .touchUpInside)
     }
     
     
@@ -111,6 +113,13 @@ class Onboarding01VC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.775)
         }
+        
+        appleButton.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.8)
+            $0.height.equalToSuperview().multipliedBy(0.065)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.85)
+        }
     }
     
     
@@ -124,6 +133,25 @@ class Onboarding01VC: UIViewController {
         
     }
 }
+
+// MARK: Extension
+
+//extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+//        return
+//    }
+//
+//    @objc func didAppleButtonTapped() {
+//        let appleIDProvider = ASAuthorizationAppleIDProvider()
+//          let request = appleIDProvider.createRequest()
+//          request.requestedScopes = [.fullName, .email]
+//
+//          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//          authorizationController.delegate = self
+//          authorizationController.presentationContextProvider = self
+//          authorizationController.performRequests()
+//    } // end of didAppleButtonTapped()
+//}
 
 struct Onboarding01VC_Preview: PreviewProvider {
     static var previews: some View {
