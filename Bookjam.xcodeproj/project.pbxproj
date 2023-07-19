@@ -70,6 +70,7 @@
 		DD38CFD92A59993400D32B00 /* BookjamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookjamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD38CFDD2A59993400D32B00 /* BookjamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITests.swift; sourceTree = "<group>"; };
 		DD38CFDF2A59993400D32B00 /* BookjamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookjamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DDA76BFE2A66926200C8129B /* Bookjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookjam.entitlements; sourceTree = "<group>"; };
 		DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding04VC.swift; sourceTree = "<group>"; };
 		DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding06VC.swift; sourceTree = "<group>"; };
 		DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding07VC.swift; sourceTree = "<group>"; };
@@ -142,6 +143,7 @@
 		DD38CFBB2A59993400D32B00 /* Bookjam */ = {
 			isa = PBXGroup;
 			children = (
+				DDA76BFE2A66926200C8129B /* Bookjam.entitlements */,
 				DD38CFF02A599F1500D32B00 /* Utility */,
 				DD38CFEF2A599F0F00D32B00 /* View */,
 				DD38CFEE2A599F0100D32B00 /* Screen */,
@@ -243,6 +245,7 @@
 				DD38CFB62A59993400D32B00 /* Frameworks */,
 				DD38CFB72A59993400D32B00 /* Resources */,
 				C1C0516EEC3D447BF92D87E2 /* [CP] Embed Pods Frameworks */,
+				6901F32B9B82D3F60C123BDE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,6 +284,7 @@
 				DD38CFD62A59993400D32B00 /* Frameworks */,
 				DD38CFD72A59993400D32B00 /* Resources */,
 				7AA66BC5577705357EBF2202 /* [CP] Embed Pods Frameworks */,
+				EEB1B159D7E35BD2384F3B29 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -362,6 +366,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6901F32B9B82D3F60C123BDE /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7AA66BC5577705357EBF2202 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,6 +481,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EEB1B159D7E35BD2384F3B29 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -648,6 +686,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bookjam/Bookjam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
@@ -679,6 +718,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Bookjam/Bookjam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 2DF5SKQK2R;
