@@ -117,7 +117,7 @@ class Onboarding01VC: UIViewController {
     // MARK: Functions
     
     @objc func didSignUpButtonTapped() {
-        navigationController?.pushViewController(Onboarding02VC(), animated: true)
+        navigationController?.pushViewController(Onboarding03VC(), animated: true)
     } // end of didSignUpButtonTapped()
     
     @objc func didKakaoButtonTapped() {

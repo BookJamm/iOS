@@ -26,7 +26,7 @@ class Onboarding03VC: UIViewController {
     }
     
     let idLabel: UILabel = UILabel().then {
-        $0.text = "아이디 입력"
+        $0.text = "이메일 입력"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.textColor = UIColor(hexCode: "6F6F6F")
     }
@@ -269,6 +269,7 @@ class Onboarding03VC: UIViewController {
         
         //Check if the 3 textfields are filled in and if the passwords match.
         if !(emailCheck) && isPasswordValid{
+            passwordConditionLabel.isHidden = true
             if !(self.passwordTextField.text?.isEmpty ?? true) && isSamePassword(passwordTextField, passwordConfirmTextField) && isPasswordValid {
                 updateNextButton(willActive: true)
                 passwordAccordLabel.textColor = UIColor(hexCode: "00C950")
