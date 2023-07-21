@@ -118,6 +118,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		941A30FF2A6A8774008152CC /* AuthModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AuthModel;
+			sourceTree = "<group>";
+		};
 		DD38CFB02A59993400D32B00 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +214,7 @@
 		DDC6EA982A61559C00C4B127 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				941A30FF2A6A8774008152CC /* AuthModel */,
 				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
 				941A30FB2A61913A008152CC /* Onboarding02VC.swift */,
 				941A30FD2A6260D0008152CC /* Onboarding03VC.swift */,

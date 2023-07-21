@@ -258,7 +258,7 @@ class Onboarding03VC: UIViewController {
         print("text :", sender.text ?? "error")
         
         // 비밀번호 조건문 정규식
-        let passwordRegex = "^(?=(?:[^A-Z]*[A-Z]){0,1})(?=(?:[^a-z]*[a-z]){0,1})(?=(?:\\D*\\d){0,1})(?=(?:[^@$!%*?&]*[@$!%*?&]){0,1}).{9,}$"
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,}$"
 
 
         
