@@ -113,6 +113,7 @@ class Onboarding03VC: UIViewController {
         
         self.passwordTextField.addTarget(self, action: #selector(self.TFdidChanged(_:)), for: .editingChanged)
         self.passwordConfirmTextField.addTarget(self, action: #selector(self.TFdidChanged(_:)), for: .editingChanged)
+        self.duplicateRequestButton.addTarget(self, action: #selector(self.didDuplicateButtonTapped), for: .touchUpInside)
     }
     
     
@@ -283,6 +284,16 @@ class Onboarding03VC: UIViewController {
 
         
     }//end of T'Fdid'Changed
+    
+    @objc func didDuplicateButtonTapped(){
+        if let email = emailTextField.text, !email.isEmpty{
+            LoginAPI.emailCheckRequest(email: emailTextField.text!)
+        }
+        else{
+            idDuplicateLabel.text = "이메일을 입력해주세요."
+            idDuplicateLabel.isHidden = false
+        }
+    }
     
     //'다음으로'버튼 활성화/비활성화
     func updateNextButton(willActive: Bool) {
