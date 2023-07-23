@@ -15,6 +15,8 @@ class Onboarding03VC: UIViewController {
     
     // MARK: Variables
     
+    var emailCheck: Bool = false
+    
     let registerLabel: UILabel = UILabel().then {
         $0.text = "회원 가입"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
@@ -24,7 +26,7 @@ class Onboarding03VC: UIViewController {
     }
     
     let idLabel: UILabel = UILabel().then {
-        $0.text = "아이디 입력"
+        $0.text = "이메일 입력"
         $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.textColor = UIColor(hexCode: "6F6F6F")
     }
@@ -41,28 +43,30 @@ class Onboarding03VC: UIViewController {
     
     let passwordTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 입력"
+        $0.isSecureTextEntry = true
     }
 
     let passwordConfirmTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 확인"
+        $0.isSecureTextEntry = true
     }
     
     let idDuplicateLabel: UILabel = UILabel().then {
-        $0.isHidden = false
+        $0.isHidden = true
         $0.text = "중복된 아이디입니다."
         $0.textColor = UIColor(hexCode: "F22222")
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     let passwordConditionLabel: UILabel = UILabel().then {
-        $0.text = "비밀번호 조건"
+        $0.text = "영대문자, 영소문자, 숫자, 특수문자 중 3가지 이상 포함 9자 이상"
         $0.textColor = UIColor(hexCode: "F22222")
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     let passwordAccordLabel: UILabel = UILabel().then {
-        $0.text = "비밀번호가 일치합니다."
-        $0.textColor = UIColor(hexCode: "00C950")
+        $0.text = "비밀번호가 일치하지 않습니다."
+        $0.textColor = UIColor(hexCode: "F22222")
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
@@ -80,9 +84,9 @@ class Onboarding03VC: UIViewController {
         $0.setTitle("다음으로", for: .normal)
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = .gray
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
+        $0.addTarget(Onboarding03VC.self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
     let bottomLineView: UIView = UIView().then {
@@ -106,6 +110,10 @@ class Onboarding03VC: UIViewController {
         setUpView()
         setUpLayout()
         setUpConstraint()
+        
+        self.passwordTextField.addTarget(self, action: #selector(self.TFdidChanged(_:)), for: .editingChanged)
+        self.passwordConfirmTextField.addTarget(self, action: #selector(self.TFdidChanged(_:)), for: .editingChanged)
+        self.duplicateRequestButton.addTarget(self, action: #selector(self.didDuplicateButtonTapped), for: .touchUpInside)
     }
     
     
@@ -234,6 +242,92 @@ class Onboarding03VC: UIViewController {
     @objc func didNextButtonTapped() {
         navigationController?.pushViewController(Onboarding04VC(), animated: true)
     } // end of didNextButtonTapped()
+    
+    //비밀번호 일치 여부 확인
+    @objc func isSamePassword(_ first: UITextField, _ second: UITextField) -> Bool{
+        if(first.text == second.text) {
+            return true
+        } else {
+            return false
+        }
+    } //end of isSamePassword
+    
+    //텍스트 필드 입력값 변하면 유효성 검사
+    @objc func TFdidChanged(_ sender: UITextField) {
+        
+        print("텍스트 변경 감지")
+        print("text :", sender.text ?? "error")
+        
+        // 비밀번호 조건문 정규식
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,}$"
+
+
+        
+        let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
+        
+        // Check if the password matches the condition
+        let isPasswordValid = passwordPredicate.evaluate(with: self.passwordTextField.text)
+        
+        //Check if the 3 textfields are filled in and if the passwords match.
+        if !(emailCheck) && isPasswordValid{
+            passwordConditionLabel.isHidden = true
+            if !(self.passwordTextField.text?.isEmpty ?? true) && isSamePassword(passwordTextField, passwordConfirmTextField) && isPasswordValid {
+                updateNextButton(willActive: true)
+                passwordAccordLabel.textColor = UIColor(hexCode: "00C950")
+                passwordAccordLabel.text = "비밀번호가 일치합니다."
+            } else {
+                updateNextButton(willActive: false)
+                passwordAccordLabel.textColor = UIColor(hexCode: "F22222")
+                passwordAccordLabel.text = "비밀번호가 일치하지 않습니다."
+            }
+        }
+
+        
+    }//end of T'Fdid'Changed
+    
+    @objc func didDuplicateButtonTapped(){
+        if let email = emailTextField.text, !email.isEmpty {
+                if isValidEmail(email) {
+                    idDuplicateLabel.text = ""
+                    LoginAPI.emailCheckRequest(email: email)
+                } else {
+                    idDuplicateLabel.text = "이메일 형식이 아닙니다."
+                    idDuplicateLabel.textColor = .red
+                    idDuplicateLabel.isHidden = false
+                }
+            } else {
+                idDuplicateLabel.text = "이메일을 입력해주세요."
+                idDuplicateLabel.textColor = .red
+                idDuplicateLabel.isHidden = false
+            }
+    }
+    
+    //이메일 형식인지 아닌지 체크하는 함수
+    func isValidEmail(_ email: String) -> Bool {
+        // Regular expression to validate email format
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
+    }
+    
+    //'다음으로'버튼 활성화/비활성화
+    func updateNextButton(willActive: Bool) {
+            
+            if(willActive == true) {
+                //다음 버튼 색 변경
+                self.nextButton.backgroundColor = UIColor(named: "MainColor")
+                //다음 페이지 연결
+                print("다음 버튼 활성화")
+                nextButton.isEnabled = true
+                
+            } else {
+                //다음 버튼 색 변경
+                self.nextButton.backgroundColor = .gray
+                //다음 페이지 연결 해제
+                print("다음 버튼 비활성화")
+                nextButton.isEnabled = false
+            }
+        }
 }
 
 struct Onboarding03VC_Preview: PreviewProvider {

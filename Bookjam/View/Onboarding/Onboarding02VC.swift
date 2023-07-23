@@ -31,9 +31,6 @@ class Onboarding02VC: UIViewController {
     // 전화번호 입력 텍스트 필드
     let phoneNumberTextField: UITextField = UITextField().then {
         $0.placeholder = "000 0000 0000"
-        $0.textAlignment = .left
-        $0.borderStyle = .none
-        $0.textColor = UIColor.white
     }
     
     // 인증번호 입력 텍스트 필드
@@ -134,14 +131,14 @@ class Onboarding02VC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.8)
             $0.height.equalToSuperview().multipliedBy(0.2)
             $0.centerX.equalToSuperview().multipliedBy(0.9)
-            $0.bottom.equalToSuperview().multipliedBy(0.46)
+            $0.bottom.equalToSuperview().multipliedBy(0.5)
         }
         
         bottomLineView2.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.0011)
             $0.centerX.equalToSuperview().multipliedBy(0.99)
-            $0.bottom.equalToSuperview().multipliedBy(0.39)
+            $0.bottom.equalToSuperview().multipliedBy(0.43)
         }
         
         certifyRequestButton.snp.makeConstraints {

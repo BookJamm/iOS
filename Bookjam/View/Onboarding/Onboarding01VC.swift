@@ -12,7 +12,7 @@ import UIKit
 import Alamofire
 import SnapKit
 import Then
-
+import KakaoSDKUser
 
 class Onboarding01VC: UIViewController {
     
@@ -126,9 +126,36 @@ class Onboarding01VC: UIViewController {
     // MARK: Functions
     
     @objc func didSignUpButtonTapped() {
-        navigationController?.pushViewController(Onboarding02VC(), animated: true)
+        navigationController?.pushViewController(Onboarding03VC(), animated: true)
     } // end of didSignUpButtonTapped()
-}
+    
+    @objc func didKakaoButtonTapped() {
+        print("loginKakao() called.")
+        
+        // ✅ 카카오톡 설치 여부 확인
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    
+                    // ✅ 회원가입 성공 시 oauthToken 저장가능하다
+                    // _ = oauthToken
+                    
+                    // ✅ 사용자정보를 성공적으로 가져오면 화면전환 한다.
+//                    self.getUserInfo()
+                }
+            }
+        }
+        // ✅ 카카오톡 미설치
+        else {
+            print("카카오톡 미설치")
+        }
+    }
+    
+}//end of Onboarding01VC
 
 // MARK: Extension
 
