@@ -86,7 +86,7 @@ class Onboarding03VC: UIViewController {
         $0.layer.masksToBounds = true
         $0.backgroundColor = .gray
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
+        $0.addTarget(Onboarding03VC.self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
     let bottomLineView: UIView = UIView().then {
@@ -286,13 +286,28 @@ class Onboarding03VC: UIViewController {
     }//end of T'Fdid'Changed
     
     @objc func didDuplicateButtonTapped(){
-        if let email = emailTextField.text, !email.isEmpty{
-            LoginAPI.emailCheckRequest(email: emailTextField.text!)
-        }
-        else{
-            idDuplicateLabel.text = "이메일을 입력해주세요."
-            idDuplicateLabel.isHidden = false
-        }
+        if let email = emailTextField.text, !email.isEmpty {
+                if isValidEmail(email) {
+                    idDuplicateLabel.text = ""
+                    LoginAPI.emailCheckRequest(email: email)
+                } else {
+                    idDuplicateLabel.text = "이메일 형식이 아닙니다."
+                    idDuplicateLabel.textColor = .red
+                    idDuplicateLabel.isHidden = false
+                }
+            } else {
+                idDuplicateLabel.text = "이메일을 입력해주세요."
+                idDuplicateLabel.textColor = .red
+                idDuplicateLabel.isHidden = false
+            }
+    }
+    
+    //이메일 형식인지 아닌지 체크하는 함수
+    func isValidEmail(_ email: String) -> Bool {
+        // Regular expression to validate email format
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
+        return emailPredicate.evaluate(with: email)
     }
     
     //'다음으로'버튼 활성화/비활성화

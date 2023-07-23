@@ -12,7 +12,7 @@ struct LoginAPI {
     
    static func emailCheckRequest(email: String) -> Void{
            
-       let baseURLString = "http://Bookjam-dev-env.eba-nshzkmkh.ap-northeast-2.elasticbeanstalk.com/auth/email-check"
+       let baseURLString = "https://Bookjam-dev-env.eba-nshzkmkh.ap-northeast-2.elasticbeanstalk.com/auth/email-check"
               
               guard let url = URL(string: baseURLString) else {
                   print("Invalid URL")
