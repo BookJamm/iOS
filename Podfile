@@ -7,12 +7,13 @@ target 'Bookjam' do
   
 
   # Pods for Bookjam
-  pod 'Alamofire', '~> 5.7.1' 
-  pod 'Moya', '~> 15.0.0'
-  pod 'SnapKit', '~> 5.6.0'
-  pod 'Kingfisher', '~> 7.8.1'
-  pod 'Then', '~> 3.0.0'
-  pod 'KakaoSDK', '~> 2.16.0'
+  pod 'Alamofire'
+  pod 'Moya'
+  pod 'SnapKit'
+  pod 'Kingfisher'
+  pod 'Then'
+  pod 'KakaoSDK'
+  pod 'FloatingPanel'
 
   target 'BookjamTests' do
     inherit! :search_paths

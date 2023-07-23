@@ -8,7 +8,13 @@
 import SwiftUI
 import UIKit
 
-class Onboarding05VC: UIViewController {
+import Alamofire
+import FloatingPanel
+import SnapKit
+import Then
+
+
+class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     // MARK: Variables
     
@@ -29,9 +35,10 @@ class Onboarding05VC: UIViewController {
         $0.sizeToFit()
     }
     
-    let searchImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "magnifyingglass")
+    let searchButton: UIButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = UIColor(named: "MainColor")
+        $0.addTarget(self, action: #selector(didSearchButtonTapped), for: .touchUpInside)
     }
     
     let emailTextField: UITextField = UITextField().then {
@@ -67,6 +74,8 @@ class Onboarding05VC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
+        
+        hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
     }
     
     
@@ -76,7 +85,7 @@ class Onboarding05VC: UIViewController {
         view.addSubview(informationLabel)
         view.addSubview(searchIDLabel)
         view.addSubview(emailTextField)
-        view.addSubview(searchImageView)
+        view.addSubview(searchButton)
         view.addSubview(bottomLineView)
         view.addSubview(recommendFriendLabel)
         view.addSubview(friendsStackView)
@@ -104,7 +113,7 @@ class Onboarding05VC: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.06)
         }
         
-        searchImageView.snp.makeConstraints {
+        searchButton.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(1.78)
             $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
@@ -122,7 +131,16 @@ class Onboarding05VC: UIViewController {
         }
     }
     
+    
     // MARK: Functions
+    
+    @objc func didSearchButtonTapped() {
+        let floatingPanel = FloatingPanelController()
+        
+        floatingPanel.delegate = self
+        floatingPanel.set(contentViewController: Onboarding05VC())
+        floatingPanel.addPanel(toParent: self)
+    } // end of didSearchImageViewTapped()
     
     @objc func didFinishButtonTapped() {
         let onboarding06VC = Onboarding06VC()
