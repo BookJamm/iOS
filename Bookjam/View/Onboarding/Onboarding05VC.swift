@@ -51,9 +51,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         $0.backgroundColor = UIColor(named: "GrayColor")
     }
     
-    let recommendFriendLabel: UILabel = UILabel()
-    let friendsStackView: UIStackView = UIStackView()
-    
     let finishButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.layer.cornerRadius = 8
@@ -61,19 +58,24 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didFinishButtonTapped), for: .touchUpInside)
     }
+    
+    let floatingPanel: FloatingPanelController = FloatingPanelController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
         setUpLayout()
+        setUpDelegate()
         setUpConstraint()
     }
+    
     
     // MARK: View
     
     func setUpView() {
         view.backgroundColor = .white
+        finishButton.isEnabled = false
         
         hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
     }
@@ -87,8 +89,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         view.addSubview(emailTextField)
         view.addSubview(searchButton)
         view.addSubview(bottomLineView)
-        view.addSubview(recommendFriendLabel)
-        view.addSubview(friendsStackView)
         view.addSubview(finishButton)
     }
     
@@ -131,15 +131,20 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         }
     }
     
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        floatingPanel.delegate = self
+    }
+    
     
     // MARK: Functions
     
     @objc func didSearchButtonTapped() {
-        let floatingPanel = FloatingPanelController()
-        
-        floatingPanel.delegate = self
-        floatingPanel.set(contentViewController: Onboarding05VC())
         floatingPanel.addPanel(toParent: self)
+        floatingPanel.set(contentViewController: Onboarding05BottomSheet())
+        floatingPanel.hide()
+        floatingPanel.show(animated: true)
     } // end of didSearchImageViewTapped()
     
     @objc func didFinishButtonTapped() {

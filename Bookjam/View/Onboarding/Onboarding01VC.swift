@@ -52,7 +52,7 @@ class Onboarding01VC: UIViewController {
     
     let appleButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton().then {
         $0.layer.cornerRadius = 0
-        // $0.addTarget(self, action: #selector(didAppleButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didAppleButtonTapped), for: .touchUpInside)
     }
     
     
@@ -159,22 +159,36 @@ class Onboarding01VC: UIViewController {
 
 // MARK: Extension
 
-//extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-//        return
-//    }
-//
-//    @objc func didAppleButtonTapped() {
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//          let request = appleIDProvider.createRequest()
-//          request.requestedScopes = [.fullName, .email]
-//
-//          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//          authorizationController.delegate = self
-//          authorizationController.presentationContextProvider = self
-//          authorizationController.performRequests()
-//    } // end of didAppleButtonTapped()
-//}
+extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+
+    @objc func didAppleButtonTapped() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+          let request = appleIDProvider.createRequest()
+          request.requestedScopes = [.fullName, .email]
+            
+          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+          authorizationController.delegate = self
+          authorizationController.presentationContextProvider = self
+          authorizationController.performRequests()
+    } // end of didAppleButtonTapped()
+    
+    // 애플 인증 성공 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
+        print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
+        
+        // TODO: 서버랑 연결해서 정보 넘기고 메인으로 전환까지 진행
+    }
+    
+    // 애플 인증 실패 시
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Apple ID Credential failed with error : \(error.localizedDescription)")
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+}
 
 struct Onboarding01VC_Preview: PreviewProvider {
     static var previews: some View {
