@@ -75,7 +75,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     func setUpView() {
         view.backgroundColor = .white
-        finishButton.isEnabled = false
         
         hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
     }
