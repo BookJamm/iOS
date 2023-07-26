@@ -128,3 +128,25 @@ extension UIColor {
         }
     }
 #endif
+
+extension UIImage {
+    func circularImage() -> UIImage? {
+        let shorterSide = UIImage(named: "BasicProfile")?.size.width
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: shorterSide!, height: shorterSide!))
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = shorterSide! / 2.0
+        imageView.layer.masksToBounds = true
+        imageView.image = self
+
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        imageView.layer.render(in: context)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return roundedImage
+    }
+}
+
