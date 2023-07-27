@@ -12,7 +12,7 @@ struct LoginAPI {
     
    static func emailCheckRequest(email: String) -> Void{
            
-       let baseURLString = "https://Bookjam-dev-env.eba-nshzkmkh.ap-northeast-2.elasticbeanstalk.com/auth/email-check"
+       let baseURLString = "http://Bookjam-dev-env.eba-nshzkmkh.ap-northeast-2.elasticbeanstalk.com/auth/email-check"
               
               guard let url = URL(string: baseURLString) else {
                   print("Invalid URL")
@@ -51,6 +51,7 @@ struct LoginAPI {
                        //                   print("[\(self.ACTIVITY_NAME) >> postRequest() :: Post 방식 http 응답 확인]")
                        print("-------------------------------")
                        print("응답 코드 :: ", response.response?.statusCode ?? 0)
+                       print("응답값:", response.result ?? 0)
                        print("-------------------------------")
                        
                        

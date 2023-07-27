@@ -23,6 +23,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController(rootViewController: Onboarding01VC())
         navigationController.navigationBar.tintColor = .black
         self.window?.rootViewController = navigationController
+        
+        //탭바에 추가할 VC들
+        let mainPageViewController = UINavigationController(rootViewController: MainPageVC())
+        let locationViewController = UINavigationController(rootViewController: LocationVC())
+        let feedViewController = UINavigationController(rootViewController: FeedVC())
+        let myPageViewController = UINavigationController(rootViewController: MyPageVC())
+        
+        //탭바 컨트롤러 추가
+        let tabBarController = UITabBarController()
+        tabBarController.setViewControllers([mainPageViewController, locationViewController, feedViewController, myPageViewController], animated: true)
+        
+        if let items = tabBarController.tabBar.items{
+            items [0].selectedImage = UIImage (systemName: "folder.fill")
+            items[0].image = UIImage (systemName: "folder")
+            items[0].title = "메인"
+            items [1].selectedImage = UIImage (systemName: "star.fill")
+            items [1].image = UIImage (systemName: "star")
+            items[1].title = "내 주변"
+            items [2].selectedImage = UIImage (systemName: "star.fill")
+            items [2].image = UIImage (systemName: "star")
+            items[2].title="피드"
+            items [3].selectedImage = UIImage (systemName: "star.fill")
+            items [3].image = UIImage (systemName: "star")
+            items[3].title="마이"
+        }
+        window.makeKeyAndVisible()
+    
     }
     
     //카카오 로그인 HadnleOpenUrl() 추가
