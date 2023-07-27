@@ -24,10 +24,12 @@ class Onboarding07VC: UIViewController {
     
     let centerBarView: UIView = UIView().then {
         $0.backgroundColor = UIColor(hexCode: "EAEAEA")
+        $0.layer.cornerRadius = 2
     }
     
     let rightBarView: UIView = UIView().then {
         $0.backgroundColor = UIColor(hexCode: "EAEAEA")
+        $0.layer.cornerRadius = 2
     }
     
     let informationLabel: UILabel = UILabel().then {
@@ -44,8 +46,6 @@ class Onboarding07VC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
-    // TODO: 건너뛰기 버튼 누르면 메인으로 넘어가게 구현 필요
-    
     let skipButton: UIButton = UIButton().then {
         $0.setTitle("건너뛰기", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "A5A5A5"), for: .normal)
@@ -55,7 +55,7 @@ class Onboarding07VC: UIViewController {
     let nextButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.layer.cornerRadius = 8
-        $0.setTitle("다음으로", for: .normal)
+        $0.setTitle("메인으로", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
@@ -99,24 +99,24 @@ class Onboarding07VC: UIViewController {
     
     func setUpConstraint() {
         leftBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
-            $0.centerX.equalToSuperview().multipliedBy(0.4)
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.centerX.equalToSuperview().multipliedBy(0.93)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         centerBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         rightBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
-            $0.centerX.equalToSuperview().multipliedBy(1.6)
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.centerX.equalToSuperview().multipliedBy(1.07)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         informationLabel.snp.makeConstraints {

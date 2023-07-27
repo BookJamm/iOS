@@ -24,10 +24,12 @@ class Onboarding09VC: UIViewController {
     
     let centerBarView: UIView = UIView().then {
         $0.backgroundColor = UIColor(hexCode: "EAEAEA")
+        $0.layer.cornerRadius = 2
     }
     
     let rightBarView: UIView = UIView().then {
         $0.backgroundColor = UIColor(hexCode: "A5A5A5")
+        $0.layer.cornerRadius = 2
     }
     
     let informationLabel: UILabel = UILabel().then {
@@ -55,7 +57,7 @@ class Onboarding09VC: UIViewController {
     let nextButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.layer.cornerRadius = 8
-        $0.setTitle("BOOKJAM 시작하기", for: .normal)
+        $0.setTitle("메인으로", for: .normal)
         $0.titleLabel?.textColor = .white
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
@@ -100,24 +102,24 @@ class Onboarding09VC: UIViewController {
     
     func setUpConstraint() {
         leftBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
-            $0.centerX.equalToSuperview().multipliedBy(0.4)
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.centerX.equalToSuperview().multipliedBy(0.93)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         centerBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         rightBarView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.28)
+            $0.width.equalToSuperview().multipliedBy(0.01)
             $0.height.equalToSuperview().multipliedBy(0.0045)
-            $0.centerX.equalToSuperview().multipliedBy(1.6)
-            $0.bottom.equalToSuperview().multipliedBy(0.07)
+            $0.centerX.equalToSuperview().multipliedBy(1.07)
+            $0.bottom.equalToSuperview().multipliedBy(0.7)
         }
         
         informationLabel.snp.makeConstraints {

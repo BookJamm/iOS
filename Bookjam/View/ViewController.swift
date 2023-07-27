@@ -89,3 +89,64 @@ extension UIColor {
                   alpha: alpha)
     }
 }
+
+#if canImport(SwiftUI) && DEBUG
+    import SwiftUI
+
+    public struct UIViewPreview<View: UIView>: UIViewRepresentable {
+        public let view: View
+        public init(_ builder: @escaping () -> View) {
+            view = builder()
+        }
+        // MARK: - UIViewRepresentable
+        public func makeUIView(context: Context) -> UIView {
+            return view
+        }
+        public func updateUIView(_ view: UIView, context: Context) {
+            view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+            view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        }
+    }
+
+    public struct UIViewControllerPreview<ViewController: UIViewController>: UIViewControllerRepresentable {
+        public let viewController: ViewController
+
+        public init(_ builder: @escaping () -> ViewController) {
+            viewController = builder()
+        }
+
+        // MARK: - UIViewControllerRepresentable
+        public func makeUIViewController(context: Context) -> ViewController {
+            viewController
+        }
+
+        @available(iOS 13.0, tvOS 13.0, *)
+        @available(OSX, unavailable)
+        @available(watchOS, unavailable)
+        public func updateUIViewController(_ uiViewController: ViewController, context: UIViewControllerRepresentableContext<UIViewControllerPreview<ViewController>>) {
+            return
+        }
+    }
+#endif
+
+extension UIImage {
+    func circularImage() -> UIImage? {
+        let shorterSide = UIImage(named: "BasicProfile")?.size.width
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: shorterSide!, height: shorterSide!))
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = shorterSide! / 2.0
+        imageView.layer.masksToBounds = true
+        imageView.image = self
+
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        imageView.layer.render(in: context)
+        let roundedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return roundedImage
+    }
+}
+
