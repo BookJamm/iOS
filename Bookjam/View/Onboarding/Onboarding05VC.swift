@@ -8,7 +8,13 @@
 import SwiftUI
 import UIKit
 
-class Onboarding05VC: UIViewController {
+import Alamofire
+import FloatingPanel
+import SnapKit
+import Then
+
+
+class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     // MARK: Variables
     
@@ -29,9 +35,10 @@ class Onboarding05VC: UIViewController {
         $0.sizeToFit()
     }
     
-    let searchImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "magnifyingglass")
+    let searchButton: UIButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = UIColor(named: "MainColor")
+        $0.addTarget(self, action: #selector(didSearchButtonTapped), for: .touchUpInside)
     }
     
     let emailTextField: UITextField = UITextField().then {
@@ -44,9 +51,6 @@ class Onboarding05VC: UIViewController {
         $0.backgroundColor = UIColor(named: "GrayColor")
     }
     
-    let recommendFriendLabel: UILabel = UILabel()
-    let friendsStackView: UIStackView = UIStackView()
-    
     let finishButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(named: "MainColor")
         $0.layer.cornerRadius = 8
@@ -54,19 +58,25 @@ class Onboarding05VC: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didFinishButtonTapped), for: .touchUpInside)
     }
+    
+    let floatingPanel: FloatingPanelController = FloatingPanelController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
         setUpLayout()
+        setUpDelegate()
         setUpConstraint()
     }
+    
     
     // MARK: View
     
     func setUpView() {
         view.backgroundColor = .white
+        
+        hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
     }
     
     
@@ -76,10 +86,8 @@ class Onboarding05VC: UIViewController {
         view.addSubview(informationLabel)
         view.addSubview(searchIDLabel)
         view.addSubview(emailTextField)
-        view.addSubview(searchImageView)
+        view.addSubview(searchButton)
         view.addSubview(bottomLineView)
-        view.addSubview(recommendFriendLabel)
-        view.addSubview(friendsStackView)
         view.addSubview(finishButton)
     }
     
@@ -104,7 +112,7 @@ class Onboarding05VC: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.06)
         }
         
-        searchImageView.snp.makeConstraints {
+        searchButton.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(1.78)
             $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
@@ -122,7 +130,21 @@ class Onboarding05VC: UIViewController {
         }
     }
     
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        floatingPanel.delegate = self
+    }
+    
+    
     // MARK: Functions
+    
+    @objc func didSearchButtonTapped() {
+        floatingPanel.addPanel(toParent: self)
+        floatingPanel.set(contentViewController: Onboarding05BottomSheet())
+        floatingPanel.hide()
+        floatingPanel.show(animated: true)
+    } // end of didSearchImageViewTapped()
     
     @objc func didFinishButtonTapped() {
         let onboarding06VC = Onboarding06VC()

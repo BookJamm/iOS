@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.7.1)
+  - FloatingPanel (2.6.4)
   - KakaoSDK (2.16.0):
     - KakaoSDKAuth (= 2.16.0)
     - KakaoSDKCommon (= 2.16.0)
@@ -46,16 +47,18 @@ PODS:
   - Then (3.0.0)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.7.1)
+  - Alamofire
+  - FloatingPanel
   - KakaoSDK
-  - Kingfisher (~> 7.8.1)
-  - Moya (~> 15.0.0)
-  - SnapKit (~> 5.6.0)
-  - Then (~> 3.0.0)
+  - Kingfisher
+  - Moya
+  - SnapKit
+  - Then
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - FloatingPanel
     - KakaoSDK
     - KakaoSDKAuth
     - KakaoSDKCommon
@@ -74,6 +77,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 0123a34370cb170936ae79a8df46cc62b2edeb88
+  FloatingPanel: 00f816d4d7ba80fe8d7fdb5f43e4f02140f07fe2
   KakaoSDK: 53f557e4b10bb0a90965588691bba7234c4d4728
   KakaoSDKAuth: 1b85ed7c41b0517bfd1fc9dc46c292c75b8cb610
   KakaoSDKCommon: d6579aa2e9d963d74e13d741cbf1cce48b8b0c17
@@ -90,6 +94,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 10487ba9b3b02b3f76adbde2fe2bf1511f6637cb
+PODFILE CHECKSUM: 9ee6d611263908bf974559849ed2e005b3622b08
 
 COCOAPODS: 1.12.1

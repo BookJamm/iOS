@@ -86,7 +86,7 @@ class Onboarding03VC: UIViewController {
         $0.layer.masksToBounds = true
         $0.backgroundColor = .gray
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        $0.addTarget(Onboarding03VC.self, action: #selector(didNextButtonTapped), for: .touchDown)
+        $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
     let bottomLineView: UIView = UIView().then {
@@ -129,20 +129,24 @@ class Onboarding03VC: UIViewController {
     // MARK: Layout
     
     func setUpLayout(){
-        self.view.addSubview(registerLabel)
-        self.view.addSubview(idLabel)
-        self.view.addSubview(passwordLabel)
-        self.view.addSubview(emailTextField)
-        self.view.addSubview(passwordTextField)
-        self.view.addSubview(passwordConfirmTextField)
-        self.view.addSubview(idDuplicateLabel)
-        self.view.addSubview(passwordConditionLabel)
-        self.view.addSubview(passwordAccordLabel)
-        self.view.addSubview(duplicateRequestButton)
-        self.view.addSubview(nextButton)
-        self.view.addSubview(bottomLineView)
-        self.view.addSubview(bottomLineView2)
-        self.view.addSubview(bottomLineView3)
+        [
+            registerLabel,
+            idLabel,
+            passwordLabel,
+            emailTextField,
+            passwordTextField,
+            passwordConfirmTextField,
+            idDuplicateLabel,
+            passwordConditionLabel,
+            passwordAccordLabel,
+            duplicateRequestButton,
+            nextButton,
+            bottomLineView,
+            bottomLineView2,
+            bottomLineView3
+        ].forEach {
+            view.addSubview($0)
+        }
     }
     
     
@@ -260,9 +264,6 @@ class Onboarding03VC: UIViewController {
         
         // 비밀번호 조건문 정규식
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,}$"
-
-
-        
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         
         // Check if the password matches the condition
