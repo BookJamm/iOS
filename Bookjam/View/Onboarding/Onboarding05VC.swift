@@ -61,6 +61,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     let floatingPanel: FloatingPanelController = FloatingPanelController()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
