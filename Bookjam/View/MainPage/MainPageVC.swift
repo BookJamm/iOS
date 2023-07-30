@@ -20,11 +20,13 @@ class MainPageVC: UIViewController {
     }
     
     var alarmButton: UIButton = UIButton().then{
-        $0.setImage(UIImage(systemName: "bell.fill"), for: .normal)
+        $0.setImage(UIImage(systemName: "bell"), for: .normal)
+        $0.tintColor = .black
     }
     
     var moreButton: UIButton = UIButton().then{
         $0.setImage(UIImage(systemName: "line.3.horizontal"), for: .normal)
+        $0.tintColor = .black
     }
     
     var searchBar: UISearchBar = UISearchBar().then{
@@ -44,7 +46,8 @@ class MainPageVC: UIViewController {
     var independentBookstoreButton: UIButton = UIButton().then{
         $0.setTitle("독립서점", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "#EE7505"), for: .normal)
-        $0.setImage(.actions, for: .normal)
+        $0.tintColor = .black
+        $0.setImage(UIImage(systemName: "book.fill"), for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         $0.frame = CGRect(x: 100, y: 100, width: 200, height: 80)
         
