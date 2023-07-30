@@ -48,7 +48,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     }
     
     let bottomLineView: UIView = UIView().then {
-        $0.backgroundColor = UIColor(named: "GrayColor")
+        $0.backgroundColor = gray04
     }
     
     let finishButton: UIButton = UIButton().then {
@@ -61,6 +61,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     let floatingPanel: FloatingPanelController = FloatingPanelController()
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

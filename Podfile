@@ -14,6 +14,7 @@ target 'Bookjam' do
   pod 'Then'
   pod 'KakaoSDK'
   pod 'FloatingPanel'
+  pod 'Tabman'
 
   target 'BookjamTests' do
     inherit! :search_paths

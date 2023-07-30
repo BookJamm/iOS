@@ -32,7 +32,7 @@ class Onboarding04VC: UIViewController {
     }
     
     let bottomLineView: UIView = UIView().then {
-        $0.backgroundColor = UIColor(named: "GrayColor")
+        $0.backgroundColor = gray04
     }
     
     let nicknameTextField: UITextField = UITextField().then {
