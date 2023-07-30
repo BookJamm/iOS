@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController(rootViewController: Onboarding01VC())
         navigationController.navigationBar.tintColor = .black
-        self.window?.rootViewController = navigationController
+//        self.window?.rootViewController = navigationController
         
         //탭바에 추가할 VC들
         let mainPageViewController = UINavigationController(rootViewController: MainPageVC())
@@ -48,6 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             items [3].image = UIImage (systemName: "star")
             items[3].title="마이"
         }
+        self.window?.rootViewController = tabBarController
         window.makeKeyAndVisible()
     
     }

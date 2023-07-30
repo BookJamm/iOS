@@ -14,9 +14,9 @@
 		941A31012A6A8DCA008152CC /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31002A6A8DCA008152CC /* users.swift */; };
 		941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31032A6AAB3B008152CC /* LoginAPI.swift */; };
 		94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658F72A712FF300E7F183 /* MainPageVC.swift */; };
-		94D658FC2A7164B300E7F183 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FB2A7164B300E7F183 /* FeedVC.swift */; };
 		94D658FE2A71653A00E7F183 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FD2A71653A00E7F183 /* LocationVC.swift */; };
 		94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659002A7165AB00E7F183 /* MyPageVC.swift */; };
+		94D659032A72A71300E7F183 /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659022A72A71300E7F183 /* FeedVC.swift */; };
 		A850162687B812BE16F67757 /* Pods_Bookjam_BookjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA7E41F969523A177659D68 /* Pods_Bookjam_BookjamUITests.framework */; };
 		DD112CF12A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CF02A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift */; };
 		DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBC2A59993400D32B00 /* AppDelegate.swift */; };
@@ -67,9 +67,9 @@
 		941A31002A6A8DCA008152CC /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
 		941A31032A6AAB3B008152CC /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		94D658F72A712FF300E7F183 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
-		94D658FB2A7164B300E7F183 /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		94D658FD2A71653A00E7F183 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		94D659002A7165AB00E7F183 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
+		94D659022A72A71300E7F183 /* FeedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 		9EA7E41F969523A177659D68 /* Pods_Bookjam_BookjamUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam_BookjamUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0FFA03A0490112340DD11C1 /* Pods-BookjamTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookjamTests.release.xcconfig"; path = "Target Support Files/Pods-BookjamTests/Pods-BookjamTests.release.xcconfig"; sourceTree = "<group>"; };
 		CAEDA6440DB30BEB7BAF980E /* Pods-Bookjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam.debug.xcconfig"; path = "Target Support Files/Pods-Bookjam/Pods-Bookjam.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		94D658FA2A71649700E7F183 /* FeedPage */ = {
 			isa = PBXGroup;
 			children = (
-				94D658FB2A7164B300E7F183 /* FeedVC.swift */,
+				94D659022A72A71300E7F183 /* FeedVC.swift */,
 			);
 			path = FeedPage;
 			sourceTree = "<group>";
@@ -613,6 +613,7 @@
 				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,
 				94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */,
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
+				94D659032A72A71300E7F183 /* FeedVC.swift in Sources */,
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD112CF12A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift in Sources */,

@@ -2,7 +2,7 @@
 //  FeedVC.swift
 //  Bookjam
 //
-//  Created by 장준모 on 2023/07/26.
+//  Created by 장준모 on 2023/07/27.
 //
 
 import UIKit

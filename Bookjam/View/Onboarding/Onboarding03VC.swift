@@ -263,7 +263,9 @@ class Onboarding03VC: UIViewController {
         print("text :", sender.text ?? "error")
         
         // 비밀번호 조건문 정규식
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,}$"
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#%^&()+\\-=[]{}|;':\",./<>?~`\\\\])[A-Za-z\\d!@#%^&*()+\\-=[]{}|;':\",./<>?~`\\\\]{9,16}$"
+
+        
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         
         // Check if the password matches the condition
