@@ -34,6 +34,12 @@ class ViewController: UIViewController {
         
     }
     
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        
+    }
+    
     
     // MARK: Constraint
     

@@ -90,15 +90,15 @@ class Onboarding03VC: UIViewController {
     }
     
     let bottomLineView: UIView = UIView().then {
-            $0.backgroundColor = UIColor(named: "GrayColor")
+            $0.backgroundColor = gray04
         }
     
     let bottomLineView2: UIView = UIView().then {
-            $0.backgroundColor = UIColor(named: "GrayColor")
+            $0.backgroundColor = gray04
         }
     
     let bottomLineView3: UIView = UIView().then {
-            $0.backgroundColor = UIColor(named: "GrayColor")
+            $0.backgroundColor = gray04
         }
     
     

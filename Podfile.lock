@@ -43,7 +43,10 @@ PODS:
     - Moya/Core (= 15.0.0)
   - Moya/Core (15.0.0):
     - Alamofire (~> 5.0)
+  - Pageboy (4.0.2)
   - SnapKit (5.6.0)
+  - Tabman (3.0.2):
+    - Pageboy (~> 4.0.2)
   - Then (3.0.0)
 
 DEPENDENCIES:
@@ -53,6 +56,7 @@ DEPENDENCIES:
   - Kingfisher
   - Moya
   - SnapKit
+  - Tabman
   - Then
 
 SPEC REPOS:
@@ -72,7 +76,9 @@ SPEC REPOS:
     - KakaoSDKUser
     - Kingfisher
     - Moya
+    - Pageboy
     - SnapKit
+    - Tabman
     - Then
 
 SPEC CHECKSUMS:
@@ -91,9 +97,11 @@ SPEC CHECKSUMS:
   KakaoSDKUser: 427e5b3884abd19ee6d9a7bd6e3f3029eb2968b8
   Kingfisher: 63f677311d36a3473f6b978584f8a3845d023dc5
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  Pageboy: 34ff11e8d1041b81769d5bcde9b19a0cb7218bd9
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  Tabman: 6326ec3a792da1c2a6e79c7eddb56af7b591c9d6
   Then: 844265ae87834bbe1147d91d5d41a404da2ec27d
 
-PODFILE CHECKSUM: 9ee6d611263908bf974559849ed2e005b3622b08
+PODFILE CHECKSUM: b982be091bb732d2c23975ea59b451218279b59f
 
 COCOAPODS: 1.12.1
