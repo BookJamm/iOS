@@ -8,7 +8,9 @@
 import Foundation
 import UIKit
 
+
 // MARK: Gray
+
 var gray01 = UIColor(named: "Gray01")
 var gray02 = UIColor(named: "Gray02")
 var gray03 = UIColor(named: "Gray03")
@@ -20,3 +22,19 @@ var gray08 = UIColor(named: "Gray08")
 var gray09 = UIColor(named: "Gray09")
 var gray10 = UIColor(named: "Gray10")
 
+
+// MARK: System
+
+var active = UIColor(named: "Active")
+var alert = UIColor(named: "Alert")
+var complete = UIColor(named: "Complete")
+var warning = UIColor(named: "Warning")
+
+
+// MARK: Main
+
+var main01 = UIColor(named: "Main01")
+var main02 = UIColor(named: "Main02")
+var main03 = UIColor(named: "Main03")
+var main04 = UIColor(named: "Main04")
+var main05 = UIColor(named: "Main05")

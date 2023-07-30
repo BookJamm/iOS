@@ -24,8 +24,8 @@ var paragraph01 = UIFont.systemFont(ofSize: 16, weight: .semibold)
 var paragraph02 = UIFont.systemFont(ofSize: 16, weight: .medium)
 var paragraph03 = UIFont.systemFont(ofSize: 16, weight: .regular)
 var paragraph04 = UIFont.systemFont(ofSize: 14, weight: .semibold)
-var paragraph05 = UIFont.systemFont(ofSize: 16, weight: .medium)
-var paragraph06 = UIFont.systemFont(ofSize: 16, weight: .regular)
+var paragraph05 = UIFont.systemFont(ofSize: 14, weight: .medium)
+var paragraph06 = UIFont.systemFont(ofSize: 14, weight: .regular)
 
 
 // MARK: Caption Text
