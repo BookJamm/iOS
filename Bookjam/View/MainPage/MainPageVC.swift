@@ -21,12 +21,12 @@ class MainPageVC: UIViewController {
     
     var alarmButton: UIButton = UIButton().then{
         $0.setImage(UIImage(systemName: "bell"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = gray08
     }
     
     var moreButton: UIButton = UIButton().then{
         $0.setImage(UIImage(systemName: "line.3.horizontal"), for: .normal)
-        $0.tintColor = .black
+        $0.tintColor = gray08
     }
     
     var searchBar: UISearchBar = UISearchBar().then{
@@ -46,15 +46,18 @@ class MainPageVC: UIViewController {
     var independentBookstoreButton: UIButton = UIButton().then{
         $0.setTitle("독립서점", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "#EE7505"), for: .normal)
-        $0.tintColor = .black
-        $0.setImage(UIImage(systemName: "book.fill"), for: .normal)
+        $0.tintColor = gray05
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.frame = CGRect(x: 100, y: 100, width: 200, height: 80)
+        
+        //이미지 크기 쉽게 조절
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 30, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "book.fill", withConfiguration: config)
+        $0.setImage(image, for: .normal)
         
         // Create the button configuration
         var configuration = UIButton.Configuration.plain()
-        configuration.image = .actions
-        configuration.imagePadding = 10
+        configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
         // Create the button using the configuration
@@ -66,14 +69,17 @@ class MainPageVC: UIViewController {
     var bookPlayGroundButton: UIButton = UIButton().then{
         $0.setTitle("책 놀이터", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "#EE7505"), for: .normal)
-        $0.setImage(.actions, for: .normal)
+        $0.tintColor = gray05
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.frame = CGRect(x: 100, y: 100, width: 200, height: 80)
+        
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 30, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "cup.and.saucer.fill", withConfiguration: config)
+        $0.setImage(image, for: .normal)
         
         // Create the button configuration
         var configuration = UIButton.Configuration.plain()
-        configuration.image = .actions
-        configuration.imagePadding = 10
+        configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
         // Create the button using the configuration
@@ -84,14 +90,17 @@ class MainPageVC: UIViewController {
     var libraryButton: UIButton = UIButton().then{
         $0.setTitle("도서관", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "#EE7505"), for: .normal)
-        $0.setImage(.actions, for: .normal)
+        $0.tintColor = gray05
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        $0.frame = CGRect(x: 100, y: 100, width: 200, height: 80)
+        
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 30, weight: .regular, scale: .default)
+        let image = UIImage(systemName: "books.vertical.fill", withConfiguration: config)
+        $0.setImage(image, for: .normal)
         
         // Create the button configuration
         var configuration = UIButton.Configuration.plain()
-        configuration.image = .actions
-        configuration.imagePadding = 10
+        configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
         // Create the button using the configuration
@@ -158,11 +167,11 @@ class MainPageVC: UIViewController {
             $0.leading.equalToSuperview().offset(10)
             $0.top.equalTo(bookJamLabel.snp.bottom).offset(20)
             $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(60)
+            $0.height.equalTo(50)
+            
         }
         independentBookstoreButton.snp.makeConstraints{
-            $0.top.equalTo(searchBar.snp.bottom).offset(10)
-            
+            $0.top.equalTo(searchBar.snp.bottom).offset(25)
         }
         bookPlayGroundButton.snp.makeConstraints{
             $0.centerY.equalTo(independentBookstoreButton)
