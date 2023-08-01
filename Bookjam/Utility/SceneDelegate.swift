@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = BookstoreDetailVC()
     }
     
-    //카카오 로그인 HadnleOpenUrl() 추가
+    // 카카오 로그인 HadnleOpenUrl() 추가
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
             if (AuthApi.isKakaoTalkLoginUrl(url)) {
