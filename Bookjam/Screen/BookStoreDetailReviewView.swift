@@ -5,25 +5,56 @@
 //  Created by YOUJIM on 2023/07/30.
 //
 
+import SwiftUI
 import UIKit
 
+import SnapKit
+import Then
+
 class BookStoreDetailReviewView: UIViewController {
+
+    // MARK: Variables
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setUpView()
+        setUpLayout()
+        setUpConstraint()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: View
+    
+    func setUpView() {
+        
     }
-    */
+    
+    
+    // MARK: Layout
+    
+    func setUpLayout() {
+        
+    }
+    
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        
+    }
+    
+    
+    // MARK: Constraint
+    
+    func setUpConstraint() {
+        
+    }
 
+}
+
+struct BookStoreDetailReviewView_Preview: PreviewProvider {
+    static var previews: some View {
+        BookStoreDetailReviewView().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
 }

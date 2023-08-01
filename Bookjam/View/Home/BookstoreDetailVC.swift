@@ -19,22 +19,27 @@ class BookstoreDetailVC: UIViewController {
     private var tabVC: [UIViewController] = [
         BookStoreDetailHomeView(),
         BookStoreDetailNewsView(),
-        BookStoreDetailJoinView(),
+        BookStoreDetailActivityView(),
         BookStoreDetailReviewView(),
-        BookStoreDetailBookTypeView()
+        BookStoreDetailBookListView()
     ]
     
     var scrollView: UIScrollView  = UIScrollView().then {
         $0.backgroundColor = .clear
+        $0.isScrollEnabled = true
+    }
+    
+    var contentView: UIView = UIView().then {
+        $0.backgroundColor = .clear
     }
     
     var photoStackView: UIStackView = UIStackView().then {
-        $0.backgroundColor = .black
         $0.spacing = 1
     }
     
     var firstPhotoImageView: UIImageView = UIImageView().then {
-        $0.backgroundColor = .yellow
+        $0.image = UIImage(named: "squareDefaultImage")
+        // $0.contentMode = .scaleAspectFit
     }
     
     var photoCollectionView: UIStackView = UIStackView().then {
@@ -113,7 +118,44 @@ class BookstoreDetailVC: UIViewController {
         $0.backgroundColor = gray02
     }
     
-    var segmentControl: UISegmentedControl = UISegmentedControl()
+    var segmentController: UISegmentedControl = UISegmentedControl().then {
+        $0.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
+        $0.setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
+        
+        $0.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: gray04!,
+            NSAttributedString.Key.font: paragraph03
+        ], for: .normal)
+        $0.setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor: main03!,
+            NSAttributedString.Key.font: paragraph03
+        ], for: .selected)
+        
+        $0.insertSegment(withTitle: "홈", at: 0, animated: true)
+        $0.insertSegment(withTitle: "소식", at: 1, animated: true)
+        $0.insertSegment(withTitle: "참여", at: 2, animated: true)
+        $0.insertSegment(withTitle: "리뷰", at: 3, animated: true)
+        $0.insertSegment(withTitle: "책 종류", at: 4, animated: true)
+
+        $0.selectedSegmentIndex = 0
+        
+        $0.addTarget(self, action: #selector(didSegmentControllerValueChanged), for: .valueChanged)
+    }
+    
+    var segmentControlUnderlineView: UIView = UIView().then {
+        $0.backgroundColor = gray03
+    }
+    
+    var segmentControlSelectedUnderLineView: UIView = UIView().then {
+        $0.backgroundColor = main03
+    }
+    
+    var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView()
+    var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
+    var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
+    var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
+    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -135,8 +177,7 @@ class BookstoreDetailVC: UIViewController {
     
     func setUpLayout() {
         view.addSubview(scrollView)
-        photoStackView.addArrangedSubview(firstPhotoImageView)
-        photoStackView.addArrangedSubview(photoCollectionView)
+        scrollView.addSubview(contentView)
         [
             photoStackView,
             bookstoreLabel,
@@ -152,7 +193,13 @@ class BookstoreDetailVC: UIViewController {
             timeLabel,
             siteURL,
             dividerView,
-        ].forEach { scrollView.addSubview($0) }
+            segmentController,
+            segmentControlUnderlineView,
+            segmentControlSelectedUnderLineView,
+        ].forEach { contentView.addSubview($0) }
+        
+        photoStackView.addArrangedSubview(firstPhotoImageView)
+        photoStackView.addArrangedSubview(photoCollectionView)
     }
     
     
@@ -160,92 +207,119 @@ class BookstoreDetailVC: UIViewController {
     
     func setUpConstraint() {
         scrollView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalTo(UIScreen.main.bounds.size.height)
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.centerX.top.bottom.equalToSuperview()
         }
         
         photoStackView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width)
-            $0.height.equalToSuperview().multipliedBy(0.25)
+            $0.height.equalTo(200)
         }
-        
+
         firstPhotoImageView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width / 2)
-            $0.height.equalToSuperview()
+            $0.width.equalToSuperview().dividedBy(2)
+            $0.height.equalTo(200)
         }
-        
+
         photoCollectionView.snp.makeConstraints {
             $0.width.equalTo(UIScreen.main.bounds.size.width / 2)
             $0.height.equalToSuperview()
         }
-        
+
         bookstoreLabel.snp.makeConstraints {
             $0.left.equalTo(photoStackView).offset(15)
             $0.bottom.equalTo(photoStackView).multipliedBy(1.2)
         }
-        
+
         bookMarkImageView.snp.makeConstraints {
             $0.right.equalTo(bookstoreLabel).offset(30)
             $0.centerY.equalTo(bookstoreLabel)
         }
-        
+
         storeTypeLabel.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel)
             $0.bottom.equalTo(bookstoreLabel).offset(30)
         }
-        
+
         starImageView.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel)
             $0.bottom.equalTo(storeTypeLabel).offset(35)
         }
-        
+
         starLabel.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel).offset(25)
             $0.bottom.equalTo(storeTypeLabel).offset(35)
         }
-        
+
         reviewCountLabel.snp.makeConstraints {
             $0.left.equalTo(starLabel).offset(45)
             $0.bottom.equalTo(storeTypeLabel).offset(35)
         }
-        
+
         underLineView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.93)
-            $0.height.equalToSuperview().multipliedBy(0.001)
+            $0.height.equalTo(1)
             $0.centerX.equalToSuperview()
             $0.bottom.equalTo(starImageView).offset(20)
         }
-        
+
         locationPinImageView.snp.makeConstraints {
             $0.left.equalTo(starImageView)
             $0.bottom.equalTo(underLineView).offset(40)
         }
-        
+
         locationLabel.snp.makeConstraints {
             $0.left.equalTo(locationPinImageView).offset(25)
             $0.centerY.equalTo(locationPinImageView)
         }
-        
+
         clockImageView.snp.makeConstraints {
             $0.centerX.equalTo(locationPinImageView)
             $0.bottom.equalTo(locationPinImageView).offset(30)
         }
-        
+
         timeLabel.snp.makeConstraints {
             $0.left.equalTo(clockImageView).offset(25)
             $0.centerY.equalTo(clockImageView)
         }
-        
+
         siteURL.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.left.equalTo(clockImageView)
             $0.bottom.equalTo(clockImageView).offset(35)
         }
-        
+
         dividerView.snp.makeConstraints {
             $0.width.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.02)
-            $0.bottom.equalTo(siteURL).offset(30)
+            $0.height.equalTo(15)
+            $0.top.equalTo(siteURL.snp.bottom).offset(10)
+        }
+
+        segmentController.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalTo(40)
+            $0.centerX.equalToSuperview().offset(-10)
+            $0.top.equalTo(dividerView.snp.bottom).offset(5)
+        }
+
+        segmentControlUnderlineView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.height.equalTo(1)
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(segmentController.snp.bottom).offset(5)
+        }
+
+        segmentControlSelectedUnderLineView.snp.makeConstraints {
+            $0.width.equalTo(segmentController).dividedBy(5)
+            $0.height.equalTo(1)
+            $0.leading.equalToSuperview().offset(10)
+            $0.top.equalTo(segmentController.snp.bottom).offset(5)
         }
     }
     
@@ -258,6 +332,19 @@ class BookstoreDetailVC: UIViewController {
         let instaView: SFSafariViewController = SFSafariViewController(url: url! as URL)
         
         self.present(instaView, animated: true, completion: nil)
+    }
+    
+    @objc private func didSegmentControllerValueChanged() {
+        let segmentIndex = CGFloat(segmentController.selectedSegmentIndex)
+        let segmentWidth = segmentController.frame.width / CGFloat(segmentController.numberOfSegments)
+        let leadingDistance = segmentWidth * segmentIndex
+        
+        UIView.animate(withDuration: 1.0, animations: { [weak self] in
+            guard let self = self else { return }
+            self.segmentControlSelectedUnderLineView.snp.updateConstraints {
+                $0.leading.equalToSuperview().offset(10 + leadingDistance)
+            }
+        })
     }
 }
 

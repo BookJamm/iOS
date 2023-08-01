@@ -8,7 +8,6 @@
 import UIKit
 import SwiftUI
 
-import Kingfisher
 import SnapKit
 import Then
 
