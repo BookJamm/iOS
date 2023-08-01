@@ -25,8 +25,7 @@ class BookstoreDetailVC: UIViewController {
     ]
     
     var scrollView: UIScrollView  = UIScrollView().then {
-        $0.backgroundColor = .clear
-        $0.isScrollEnabled = true
+        $0.backgroundColor = .white
     }
     
     var contentView: UIView = UIView().then {
@@ -195,7 +194,7 @@ class BookstoreDetailVC: UIViewController {
             dividerView,
             segmentController,
             segmentControlUnderlineView,
-            segmentControlSelectedUnderLineView,
+            segmentControlSelectedUnderLineView
         ].forEach { contentView.addSubview($0) }
         
         photoStackView.addArrangedSubview(firstPhotoImageView)
