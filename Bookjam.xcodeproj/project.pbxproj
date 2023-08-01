@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		411FD826C5A9F974087EAC6B /* Pods_BookjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47ED49659B4E111FDC84ECA9 /* Pods_BookjamTests.framework */; };
 		4F360426894B4364D871ACEA /* Pods_Bookjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */; };
+		941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941176FF2A79727200847F26 /* BookStoreDetailHomeView.swift */; };
 		941A30FC2A61913A008152CC /* Onboarding02VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FB2A61913A008152CC /* Onboarding02VC.swift */; };
 		941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FD2A6260D0008152CC /* Onboarding03VC.swift */; };
 		941A31012A6A8DCA008152CC /* users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31002A6A8DCA008152CC /* users.swift */; };
@@ -42,10 +43,7 @@
 		DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
-		DDF844782A7659DC0035D112 /* BookStoreDetailHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF844772A7659DC0035D112 /* BookStoreDetailHomeView.swift */; };
-		DDF8447A2A7659FA0035D112 /* BookStoreDetailNewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */; };
 		DDF8447C2A765A320035D112 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
-		DDF8447E2A765A460035D112 /* BookStoreDetailReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447D2A765A460035D112 /* BookStoreDetailReviewView.swift */; };
 		DDF844802A765A610035D112 /* BookStoreDetailBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447F2A765A610035D112 /* BookStoreDetailBookListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +71,7 @@
 		6F687D70DC26FAB7B740C979 /* Pods-Bookjam-BookjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam-BookjamUITests.release.xcconfig"; path = "Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5C2379B29DA2D1BF353C4F /* Pods-BookjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookjamTests.debug.xcconfig"; path = "Target Support Files/Pods-BookjamTests/Pods-BookjamTests.debug.xcconfig"; sourceTree = "<group>"; };
+		941176FF2A79727200847F26 /* BookStoreDetailHomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookStoreDetailHomeView.swift; sourceTree = "<group>"; };
 		941A30FB2A61913A008152CC /* Onboarding02VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding02VC.swift; sourceTree = "<group>"; };
 		941A30FD2A6260D0008152CC /* Onboarding03VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding03VC.swift; sourceTree = "<group>"; };
 		941A31002A6A8DCA008152CC /* users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = users.swift; sourceTree = "<group>"; };
@@ -113,7 +112,6 @@
 		DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding09VC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
-		DDF844772A7659DC0035D112 /* BookStoreDetailHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailHomeView.swift; sourceTree = "<group>"; };
 		DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailNewsView.swift; sourceTree = "<group>"; };
 		DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailActivityView.swift; sourceTree = "<group>"; };
 		DDF8447D2A765A460035D112 /* BookStoreDetailReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailReviewView.swift; sourceTree = "<group>"; };
@@ -275,8 +273,8 @@
 		DD38CFEE2A599F0100D32B00 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				DDF844772A7659DC0035D112 /* BookStoreDetailHomeView.swift */,
 				DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */,
+				941176FF2A79727200847F26 /* BookStoreDetailHomeView.swift */,
 				DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */,
 				DDF8447D2A765A460035D112 /* BookStoreDetailReviewView.swift */,
 				DDF8447F2A765A610035D112 /* BookStoreDetailBookListView.swift */,
@@ -664,6 +662,7 @@
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD112CF12A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift in Sources */,
 				DD58E6142A760A0A0026BEE1 /* ColorData.swift in Sources */,
+				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 				DDF8447C2A765A320035D112 /* BookStoreDetailActivityView.swift in Sources */,
 				DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */,
