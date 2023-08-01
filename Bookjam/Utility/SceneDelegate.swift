@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let navigationController = UINavigationController(rootViewController: Onboarding01VC())
         navigationController.navigationBar.tintColor = .black
-        self.window?.rootViewController = navigationController
+        self.window?.rootViewController = BookstoreDetailVC()
     }
     
     //카카오 로그인 HadnleOpenUrl() 추가
