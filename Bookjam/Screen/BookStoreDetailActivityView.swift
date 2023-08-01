@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  BookStoreDetailJoinView.swift
 //  Bookjam
 //
-//  Created by YOUJIM on 2023/07/08.
+//  Created by YOUJIM on 2023/07/30.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import UIKit
 import SnapKit
 import Then
 
-class ViewController: UIViewController {
+class BookStoreDetailActivityView: UIViewController {
 
     // MARK: Variables
 
@@ -49,15 +49,11 @@ class ViewController: UIViewController {
     func setUpConstraint() {
         
     }
-    
 }
 
-struct ViewController_Preview: PreviewProvider {
+struct BookStoreDetailJoinView_Preview: PreviewProvider {
     static var previews: some View {
-        ViewController().toPreview()
+        BookStoreDetailActivityView().toPreview()
             // .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
