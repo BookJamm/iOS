@@ -108,6 +108,25 @@ class MainPageVC: UIViewController {
         $0.configuration = configuration
     }
     
+    var sortView: UIView = UIView().then{
+        $0.backgroundColor = .white
+    }
+    
+    var lineView: UIView = UIView().then {
+        $0.backgroundColor = gray04
+    }
+    
+    var sortButton: UIButton = UIButton().then{
+        $0.setTitle("거리순 ↓", for: .normal)
+        $0.setTitleColor(gray05, for: .normal)
+        $0.setTitle("거리순", for: .selected)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+    }
+    var infoButton: UIButton = UIButton().then{
+        $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
+        $0.tintColor = gray05
+    }
+    
     var tableView: UITableView = UITableView().then{
         $0.backgroundColor = .blue  //테스트 확인용 임시 색상
         
@@ -142,10 +161,14 @@ class MainPageVC: UIViewController {
             independentBookstoreButton,
             bookPlayGroundButton,
             libraryButton,
-            tableView
+            tableView,
+            sortView
         ].forEach {
             view.addSubview($0)
         }
+        sortView.addSubview(lineView)
+        sortView.addSubview(sortButton)
+        sortView.addSubview(infoButton)
     }
     
     // MARK: Constraints
@@ -181,12 +204,30 @@ class MainPageVC: UIViewController {
             $0.centerY.equalTo(independentBookstoreButton)
             $0.trailing.equalToSuperview().multipliedBy(1)
         }
-        tableView.snp.makeConstraints{
+        sortView.snp.makeConstraints{
             $0.top.equalTo(independentBookstoreButton.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
-            
+            $0.height.equalTo(40)
         }
+        sortButton.snp.makeConstraints{
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(15)
+        }
+        infoButton.snp.makeConstraints{
+            $0.centerY.equalTo(sortButton)
+            $0.trailing.equalToSuperview().offset(-15)
+        }
+        lineView.snp.makeConstraints{
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        tableView.snp.makeConstraints{
+            $0.top.equalTo(sortView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+        }
+        
     
     }
 }
