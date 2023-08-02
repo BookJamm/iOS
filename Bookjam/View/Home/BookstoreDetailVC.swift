@@ -24,12 +24,8 @@ class BookstoreDetailVC: UIViewController {
         BookStoreDetailBookListView()
     ]
     
-    var scrollView: UIScrollView  = UIScrollView().then {
-        $0.backgroundColor = .white
-    }
-    
     var contentView: UIView = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
     }
     
     var photoStackView: UIStackView = UIStackView().then {
@@ -175,8 +171,7 @@ class BookstoreDetailVC: UIViewController {
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
+        view.addSubview(contentView)
         [
             photoStackView,
             bookstoreLabel,
@@ -205,13 +200,6 @@ class BookstoreDetailVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.centerX.top.bottom.equalToSuperview()
@@ -350,6 +338,7 @@ class BookstoreDetailVC: UIViewController {
 struct BookstoreDetailVC_Preview: PreviewProvider {
     static var previews: some View {
         BookstoreDetailVC().toPreview()
+            .previewLayout(.sizeThatFits)
             // .edgesIgnoringSafeArea(.all)
     }
 }
