@@ -66,6 +66,7 @@ class BookStoreDetailReviewView: UIView {
         self.backgroundColor = .white
         
         visitReviewTableView.isScrollEnabled = false
+        visitReviewTableView.separatorStyle = .none
     }
     
     

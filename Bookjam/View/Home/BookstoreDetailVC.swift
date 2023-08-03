@@ -139,10 +139,10 @@ class BookstoreDetailVC: UIViewController {
     }
     
     var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView()
-//    var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
-//    var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
-//    var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
-//    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
+    var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
+    var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
+    var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
+    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
     
     
     override func viewDidLoad() {
@@ -157,6 +157,7 @@ class BookstoreDetailVC: UIViewController {
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
     }
     
     
@@ -184,22 +185,22 @@ class BookstoreDetailVC: UIViewController {
             segmentControlUnderlineView,
             segmentControlSelectedUnderLineView,
             homeView,
-//            newsView,
-//            activityView,
-//            reviewView,
-//            bookListView
+            newsView,
+            activityView,
+            reviewView,
+            bookListView
         ].forEach { contentView.addSubview($0) }
         
         photoStackView.addArrangedSubview(firstPhotoImageView)
         photoStackView.addArrangedSubview(photoCollectionView)
         
-        // viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
-//        [
-//            newsView,
-//            activityView,
-//            reviewView,
-//            bookListView
-//        ].forEach { $0.isHidden = true }
+//         viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
+        [
+            newsView,
+            activityView,
+            reviewView,
+            bookListView
+        ].forEach { $0.isHidden = true }
     }
     
     
@@ -207,18 +208,19 @@ class BookstoreDetailVC: UIViewController {
     
     func setUpConstraint() {
         scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.centerX.top.bottom.equalToSuperview()
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.height.equalTo(2000)
         }
         
         photoStackView.snp.makeConstraints {
+            $0.top.equalTo(contentView.snp.top)
+            $0.width.equalToSuperview()
             $0.height.equalTo(200)
         }
 
@@ -328,30 +330,30 @@ class BookstoreDetailVC: UIViewController {
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-//
-//        newsView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
-//            $0.bottom.equalToSuperview()
-//        }
-//
-//        activityView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
-//            $0.bottom.equalToSuperview()
-//        }
-//
-//        reviewView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
-//            $0.bottom.equalToSuperview()
-//        }
-//
-//        bookListView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
-//            $0.bottom.equalToSuperview()
-//        }
+
+        newsView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+        }
+
+        activityView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+        }
+
+        reviewView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+        }
+
+        bookListView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+        }
     }
     
     
@@ -379,15 +381,52 @@ class BookstoreDetailVC: UIViewController {
         })
         
         // segmentIndex 따라서 화면 전환
-//        if segmentIndex == 0 {
-//            homeView.isHidden = false
-//            [
-//                newsView,
-//                activityView,
-//                reviewView,
-//                bookListView
-//            ].forEach { $0.isHidden = true }
-//        }
+        if segmentIndex == 0 {
+            homeView.isHidden = false
+            [
+                newsView,
+                activityView,
+                reviewView,
+                bookListView
+            ].forEach { $0.isHidden = true }
+        }
+        else if segmentIndex == 1 {
+            newsView.isHidden = false
+            [
+                homeView,
+                activityView,
+                reviewView,
+                bookListView
+            ].forEach { $0.isHidden = true }
+        }
+        else if segmentIndex == 2 {
+            activityView.isHidden = false
+            [
+                homeView,
+                newsView,
+                reviewView,
+                bookListView
+            ].forEach { $0.isHidden = true }
+        }
+        else if segmentIndex == 3 {
+            reviewView.isHidden = false
+            [
+                homeView,
+                newsView,
+                activityView,
+                bookListView
+            ].forEach { $0.isHidden = true }
+        }
+        else if segmentIndex == 4 {
+            bookListView.isHidden = false
+            [
+                homeView,
+                activityView,
+                reviewView,
+                newsView
+            ].forEach { $0.isHidden = true }
+        }
+        
     }
 }
 

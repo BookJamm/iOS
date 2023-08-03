@@ -19,9 +19,6 @@ class ActivityTableViewCell: UITableViewCell {
     static let cellID =  "activityCell"
     
     var activityView: UIView = UIView().then {
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
         $0.backgroundColor = gray01
     }
     
@@ -80,17 +77,29 @@ class ActivityTableViewCell: UITableViewCell {
         fatalError("init (coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
+    }
+    
     // MARK: View
     
     func setUpView() {
         self.contentMode = .scaleAspectFit
+        
+        // TODO: 배경 회색으로 바꾸고 
+//        self.backgroundColor = gray01
+//        self.layer.borderColor = gray03?.cgColor
+//        self.layer.borderWidth = 1
+//        self.layer.cornerRadius = 8
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
-        self.addSubview(activityView)
+        contentView.addSubview(activityView)
         [
             activityImageView,
             activityLabel,

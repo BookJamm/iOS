@@ -44,6 +44,7 @@ class BookStoreDetailActivityView: UIView {
     func setUpView() {
         activityTableView.isScrollEnabled = false
         activityTableView.separatorStyle = .none
+        
     }
     
     
@@ -73,9 +74,9 @@ class BookStoreDetailActivityView: UIView {
         }
         
         activityTableView.snp.makeConstraints {
-            $0.top.equalTo(activityLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.top.equalTo(activityLabel.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
