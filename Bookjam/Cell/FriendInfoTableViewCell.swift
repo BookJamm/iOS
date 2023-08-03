@@ -61,7 +61,7 @@ class FriendInfoTableViewCell: UITableViewCell {
     // MARK: View
     
     func setUpView() {
-        self.backgroundColor = UIColor(hexCode: "F5F4F3")
+        self.backgroundColor = gray02
         self.contentMode = .scaleAspectFit
     }
     
