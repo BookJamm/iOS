@@ -12,7 +12,7 @@ import SnapKit
 import Then
 
 
-class BookStoreDetailHomeView: UIViewController {
+class BookStoreDetailHomeView: UIView {
 
     // MARK: Variables
     
@@ -20,11 +20,9 @@ class BookStoreDetailHomeView: UIViewController {
     var news = News(title: "", content: "", date: "", photo: "")
     var books = [Book]()
     
-    var scrollView: UIScrollView = UIScrollView().then {
+    var contentView: UIView = UIView().then {
         $0.backgroundColor = gray02
     }
-    
-    var contentView: UIView = UIView()
     
     var newsView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -125,9 +123,8 @@ class BookStoreDetailHomeView: UIViewController {
         $0.addTarget(self, action: #selector(didReviewTapped), for: .touchUpInside)
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    
+    override func draw(_ rect: CGRect) {
         setUpView()
         setUpLayout()
         setUpDelegate()
@@ -164,15 +161,12 @@ class BookStoreDetailHomeView: UIViewController {
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
         [
             newsView,
             bookListView,
             bookActivityView,
             reviewView
-        ].forEach { contentView.addSubview($0) }
+        ].forEach { self.addSubview($0) }
         
         [
             newsLabel,
@@ -213,18 +207,6 @@ class BookStoreDetailHomeView: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.centerX.top.bottom.equalToSuperview()
-        }
-        
         newsView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalTo(230)
@@ -342,9 +324,17 @@ class BookStoreDetailHomeView: UIViewController {
     }
 }
 
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
 struct BookStoreDetailHomeView_Preview: PreviewProvider {
     static var previews: some View {
-        BookStoreDetailHomeView().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+        UIViewPreview {
+            let button = BookStoreDetailHomeView()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
+#endif

@@ -16,17 +16,11 @@ class BookstoreDetailVC: UIViewController {
 
     // MARK: Variables
     
-    private var tabVC: [UIViewController] = [
-        BookStoreDetailHomeView(),
-        BookStoreDetailNewsView(),
-        BookStoreDetailActivityView(),
-        BookStoreDetailReviewView(),
-        BookStoreDetailBookListView()
-    ]
-    
-    var contentView: UIView = UIView().then {
+    var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = .white
     }
+    
+    var contentView: UIView = UIView()
     
     var photoStackView: UIStackView = UIStackView().then {
         $0.spacing = 1
@@ -34,7 +28,6 @@ class BookstoreDetailVC: UIViewController {
     
     var firstPhotoImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        // $0.contentMode = .scaleAspectFit
     }
     
     var photoCollectionView: UIStackView = UIStackView().then {
@@ -146,10 +139,10 @@ class BookstoreDetailVC: UIViewController {
     }
     
     var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView()
-    var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
-    var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
-    var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
-    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
+//    var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
+//    var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
+//    var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
+//    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
     
     
     override func viewDidLoad() {
@@ -164,14 +157,14 @@ class BookstoreDetailVC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(contentView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         [
             photoStackView,
             bookstoreLabel,
@@ -189,17 +182,37 @@ class BookstoreDetailVC: UIViewController {
             dividerView,
             segmentController,
             segmentControlUnderlineView,
-            segmentControlSelectedUnderLineView
+            segmentControlSelectedUnderLineView,
+            homeView,
+//            newsView,
+//            activityView,
+//            reviewView,
+//            bookListView
         ].forEach { contentView.addSubview($0) }
         
         photoStackView.addArrangedSubview(firstPhotoImageView)
         photoStackView.addArrangedSubview(photoCollectionView)
+        
+        // viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
+//        [
+//            newsView,
+//            activityView,
+//            reviewView,
+//            bookListView
+//        ].forEach { $0.isHidden = true }
     }
     
     
     // MARK: Constraint
     
     func setUpConstraint() {
+        scrollView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.left.equalToSuperview()
+            $0.right.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
         contentView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.centerX.top.bottom.equalToSuperview()
@@ -308,12 +321,43 @@ class BookstoreDetailVC: UIViewController {
             $0.leading.equalToSuperview().offset(10)
             $0.top.equalTo(segmentController.snp.bottom).offset(5)
         }
+        
+        homeView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.trailing.leading.equalToSuperview()
+            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+            $0.bottom.equalToSuperview()
+        }
+//
+//        newsView.snp.makeConstraints {
+//            $0.width.equalToSuperview()
+//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+//            $0.bottom.equalToSuperview()
+//        }
+//
+//        activityView.snp.makeConstraints {
+//            $0.width.equalToSuperview()
+//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+//            $0.bottom.equalToSuperview()
+//        }
+//
+//        reviewView.snp.makeConstraints {
+//            $0.width.equalToSuperview()
+//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+//            $0.bottom.equalToSuperview()
+//        }
+//
+//        bookListView.snp.makeConstraints {
+//            $0.width.equalToSuperview()
+//            $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
+//            $0.bottom.equalToSuperview()
+//        }
     }
     
     
     // MARK: Functions
-    
     // TODO: 나중에 연결할 인스타 링크 여기에 연결
+    
     @objc func didURLTapped() {
         let url = NSURL(string: "https://youz2me.notion.site/UIButton-ffc98dbfc08740ea9f16bec8e00d204f?pvs=4")
         let instaView: SFSafariViewController = SFSafariViewController(url: url! as URL)
@@ -326,12 +370,24 @@ class BookstoreDetailVC: UIViewController {
         let segmentWidth = segmentController.frame.width / CGFloat(segmentController.numberOfSegments)
         let leadingDistance = segmentWidth * segmentIndex
         
+        // segmentIndex 따라서 segmentControlSelectedUnderLineView 위치 업데이트
         UIView.animate(withDuration: 1.0, animations: { [weak self] in
             guard let self = self else { return }
             self.segmentControlSelectedUnderLineView.snp.updateConstraints {
                 $0.leading.equalToSuperview().offset(10 + leadingDistance)
             }
         })
+        
+        // segmentIndex 따라서 화면 전환
+//        if segmentIndex == 0 {
+//            homeView.isHidden = false
+//            [
+//                newsView,
+//                activityView,
+//                reviewView,
+//                bookListView
+//            ].forEach { $0.isHidden = true }
+//        }
     }
 }
 

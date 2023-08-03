@@ -11,13 +11,11 @@ import UIKit
 import SnapKit
 import Then
 
-class BookStoreDetailNewsView: UIViewController {
+class BookStoreDetailNewsView: UIView {
 
     // MARK: Variables
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func draw(_ rect: CGRect) {
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -51,9 +49,18 @@ class BookStoreDetailNewsView: UIViewController {
     }
 }
 
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
 struct BookStoreDetailNewsView_Preview: PreviewProvider {
     static var previews: some View {
-        BookStoreDetailNewsView().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+        UIViewPreview {
+            let button = BookStoreDetailNewsView()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
     }
 }
+#endif

@@ -11,13 +11,11 @@ import UIKit
 import SnapKit
 import Then
 
-class BookStoreDetailActivityView: UIViewController {
+class BookStoreDetailActivityView: UIView {
 
     // MARK: Variables
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func draw(_ rect: CGRect) {
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -51,9 +49,18 @@ class BookStoreDetailActivityView: UIViewController {
     }
 }
 
-struct BookStoreDetailJoinView_Preview: PreviewProvider {
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct BookStoreDetailActivityView_Preview: PreviewProvider {
     static var previews: some View {
-        BookStoreDetailActivityView().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+        UIViewPreview {
+            let button = BookStoreDetailActivityView()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
     }
 }
+#endif
