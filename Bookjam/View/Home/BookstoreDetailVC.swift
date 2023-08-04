@@ -426,7 +426,6 @@ class BookstoreDetailVC: UIViewController {
                 newsView
             ].forEach { $0.isHidden = true }
         }
-        
     }
 }
 
