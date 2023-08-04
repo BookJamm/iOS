@@ -8,6 +8,7 @@
 import Foundation
 
 struct News {
+    var storePhoto: String
     var title: String
     var content: String
     var date: String
