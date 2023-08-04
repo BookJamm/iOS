@@ -128,9 +128,10 @@ class MainPageVC: UIViewController {
     }
     
     var tableView: UITableView = UITableView().then{
-        $0.backgroundColor = .blue  //테스트 확인용 임시 색상
-        
+//        $0.backgroundColor = .blue  //테스트 확인용 임시 색상
+        $0.register(MainPageBookStoreTableViewCell.self, forCellReuseIdentifier: "bookStoreCell")
     }
+    
     
     // MARK: viewDidLoad()
     override func viewDidLoad() {
@@ -139,7 +140,7 @@ class MainPageVC: UIViewController {
         setUpView()
         setUpLayout()
         setUpConstraint()
-
+        setUpDelegate()
     }
     
     // MARK: View
@@ -228,11 +229,35 @@ class MainPageVC: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
         
+    }//end of setUpConstraint
     
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
     }
-}
+    
+}//end of MainPageVC
 
 // MARK: Extension
+
+extension MainPageVC: UITableViewDelegate, UITableViewDataSource{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
+        
+        return cell
+    }
+    
+    
+}
 extension UIImage {
     // Create a UIImage with a solid color
     convenience init(color: UIColor, size: CGSize) {

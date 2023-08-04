@@ -20,6 +20,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         setUpView()
         setUpLayout()
         setUpConstraint()
+        scrollWithImageView()
     }
     
     required init?(coder: NSCoder) {
@@ -40,6 +41,12 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     // MARK: Variable
 
+    static let cellID = "bookStoreCell"
+    
+    var imageNames: [String] = ["house.fill", "house", "house.fill", "house", "house.fill"]
+    
+    var imageUiView: UIView = UIView()
+    
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = .black
@@ -83,12 +90,26 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.textColor = gray06
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }
-    
+    var scrollView: UIScrollView = UIScrollView().then{
+        $0.showsVerticalScrollIndicator = false
+        $0.showsHorizontalScrollIndicator = false
+        $0.isPagingEnabled = false
+    }
+    var stackView: UIStackView = UIStackView().then{
+        $0.axis = .horizontal
+        $0.alignment = .center
+        $0.distribution = .equalSpacing
+        $0.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        $0.isLayoutMarginsRelativeArrangement = true
+        $0.spacing = 8
+    }
     // MARK: View
     
     func setUpView() {
-        self.backgroundColor = UIColor(hexCode: "F5F4F3")
+//        self.backgroundColor = UIColor(hexCode: "F5F4F3")
         self.contentMode = .scaleAspectFit
+        scrollView.delegate = self
+        scrollView.isUserInteractionEnabled = true
     }
     
     
@@ -103,7 +124,8 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
            starLabel,
            reviewCountLabel,
            locationLabel,
-           timeButton
+           timeButton,
+           scrollView
         ].forEach { self.addSubview($0) }
     }
     
@@ -139,12 +161,52 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
             $0.leading.equalTo(starLabel.snp.trailing).offset(10)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
+        scrollView.snp.makeConstraints{
+            $0.leading.equalTo(bookstoreLabel.snp.leading)
+            $0.trailing.equalToSuperview()
+            $0.top.equalTo(timeButton.snp.bottom).offset(10)
+            $0.height.equalTo(100)
+        }
     }
 
 }//end of MainPageBookStoreTableViewCell
 
+extension MainPageBookStoreTableViewCell: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset)
+        print("width: \(scrollView.frame.size.width)")
+    }
+    
+    func scrollWithImageView() {
+            
+            for imageName in imageNames {
+                let imageUiView = UIView()
+                let imageView = UIImageView().then {
+                    $0.image = UIImage(systemName: imageName)
+                    $0.tintColor = .black
+                    $0.contentMode = .scaleAspectFit
+
+                }
+                imageUiView.addSubview(imageView)
+                imageUiView.snp.makeConstraints{
+                        $0.height.width.equalTo(150)
+                }
+                imageView.snp.makeConstraints{
+                    $0.edges.equalToSuperview()
+                    $0.centerX.equalToSuperview()
+                }
+                stackView.addArrangedSubview(imageUiView)
+            }
+            
+        scrollView.addSubview(stackView)
+        stackView.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+        
+    }
+}
+
 #if DEBUG
-import SwiftUI
 
 @available(iOS 13.0, *)
 struct MainPageBookStoreTableViewCell_Preview: PreviewProvider {
