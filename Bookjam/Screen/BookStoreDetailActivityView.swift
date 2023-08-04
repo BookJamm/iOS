@@ -69,7 +69,7 @@ class BookStoreDetailActivityView: UIView {
     
     func setUpConstraint() {
         activityLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(30)
             $0.leading.equalToSuperview().offset(20)
         }
         

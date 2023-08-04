@@ -17,7 +17,7 @@ class BookStoreDetailHomeView: UIView {
     // MARK: Variables
     
     var bookstoreName = String()
-    var news = News(title: "", content: "", date: "", photo: "")
+    var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var books = [Book]()
     
     var contentView: UIView = UIView().then {

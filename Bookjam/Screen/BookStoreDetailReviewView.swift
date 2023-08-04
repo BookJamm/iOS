@@ -106,7 +106,7 @@ class BookStoreDetailReviewView: UIView {
         }
         
         writeReviewLabel.snp.makeConstraints {
-            $0.top.equalTo(20)
+            $0.top.equalTo(30)
             $0.leading.equalToSuperview().offset(20)
         }
         
@@ -114,7 +114,7 @@ class BookStoreDetailReviewView: UIView {
             $0.top.equalTo(writeReviewLabel.snp.bottom).offset(30)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalTo(writeReviewView.snp.bottom).offset(-30)
+            $0.bottom.equalTo(writeReviewView.snp.bottom).offset(-20)
         }
         
         visitReviewView.snp.makeConstraints {
@@ -134,7 +134,6 @@ class BookStoreDetailReviewView: UIView {
             $0.trailing.equalToSuperview().offset(-10)
             $0.bottom.equalToSuperview().offset(-30)
         }
-        
     }
     
     
