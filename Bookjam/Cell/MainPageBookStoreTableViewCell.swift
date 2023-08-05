@@ -165,7 +165,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
             $0.leading.equalTo(bookstoreLabel.snp.leading)
             $0.trailing.equalToSuperview()
             $0.top.equalTo(timeButton.snp.bottom).offset(10)
-            $0.height.equalTo(100)
+            $0.height.equalTo(150)
         }
     }
 
