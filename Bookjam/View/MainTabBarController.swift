@@ -12,15 +12,28 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBar.tintColor = main03
+        
         let mainVC = MainPageVC()
         let locationVC = LocationVC()
         let feedVC = FeedVC()
         let mypageVC = MyPageVC()
         
         mainVC.title = "메인"
+        mainVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        mainVC.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        
         locationVC.title = "내 주변"
+        locationVC.tabBarItem.image = UIImage(systemName: "map.fill")
+        locationVC.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
+        
         feedVC.title = "피드"
+        feedVC.tabBarItem.image = UIImage(systemName: "ellipsis.message.fill")
+        feedVC.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
+        
         mypageVC.title = "마이"
+        mypageVC.tabBarItem.image = UIImage(systemName: "person.fill")
+        mypageVC.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
         
         let mainNavigationController = UINavigationController(rootViewController: mainVC)
         let locationNavigationController = UINavigationController(rootViewController: locationVC)
@@ -34,27 +47,11 @@ class MainTabBarController: UITabBarController {
             mypageNavigationController
         ].forEach {
             $0.isNavigationBarHidden = true
-            $0.navigationItem.title = ""
-        }
-        
-        if let items = tabBar.items {
-            items [0].selectedImage = UIImage (systemName: "house.fill")
-            items[0].image = UIImage (systemName: "house")
-            items[0].title = "메인"
-            items [1].selectedImage = UIImage (systemName: "map.fill")
-            items [1].image = UIImage (systemName: "map")
-            items[1].title = "내 주변"
-            items [2].selectedImage = UIImage (systemName: "ellipsis.message.fill")
-            items [2].image = UIImage (systemName: "ellipsis.message")
-            items[2].title="피드"
-            items [3].selectedImage = UIImage (systemName: "person.fill")
-            items [3].image = UIImage (systemName: "person")
-            items[3].title="마이"
         }
         
         setViewControllers([mainNavigationController,
                             locationNavigationController,
                             feedNavigationController,
-                            mypageNavigationController], animated: false)
+                            mypageNavigationController], animated: true)
     }
 }
