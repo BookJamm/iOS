@@ -170,36 +170,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9411770D2A7A930000847F26 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				9411770E2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift */,
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
-		941A30FF2A6A8774008152CC /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				941A31002A6A8DCA008152CC /* users.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		941A31022A6AAB25008152CC /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				941A31032A6AAB3B008152CC /* LoginAPI.swift */,
-				941A30FF2A6A8774008152CC /* Models */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		94D658F62A712FC000E7F183 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				9411770D2A7A930000847F26 /* Cell */,
 				94D658F72A712FF300E7F183 /* MainPageVC.swift */,
+				DDB9074B2A73B0A6000A24F0 /* BookstoreDetailVC.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -257,6 +232,7 @@
 				DD38CFF02A599F1500D32B00 /* Utility */,
 				DD38CFEF2A599F0F00D32B00 /* View */,
 				DD38CFEE2A599F0100D32B00 /* Screen */,
+				DDD5DAB42A7DD36B0052C3EB /* API */,
 				DD48893C2A6FA84700F878C0 /* Cell */,
 				DD38CFEC2A599ECC00D32B00 /* Data */,
 				DD48893D2A6FAE2600F878C0 /* Model */,
@@ -309,13 +285,12 @@
 		DD38CFEF2A599F0F00D32B00 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DD38CFC02A59993400D32B00 /* ViewController.swift */,
+				DDC6EA982A61559C00C4B127 /* Onboarding */,
 				94D658FF2A71659A00E7F183 /* MyPage */,
 				94D658FA2A71649700E7F183 /* FeedPage */,
 				94D658F92A7162FD00E7F183 /* LocationPage */,
 				94D658F62A712FC000E7F183 /* MainPage */,
-				DD38CFC02A59993400D32B00 /* ViewController.swift */,
-				DD5B62912A73941A00D8F9A1 /* Home */,
-				DDC6EA982A61559C00C4B127 /* Onboarding */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -332,6 +307,7 @@
 		DD48893C2A6FA84700F878C0 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				9411770E2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift */,
 				DD4889402A6FB2C800F878C0 /* FriendInfoTableViewCell.swift */,
 				DDC090132A790B7F00CDCC8A /* BookListTableViewCell.swift */,
 				DD98D56E2A7AE44E002CCD4F /* VisitReviewTableViewCell.swift */,
@@ -344,6 +320,7 @@
 		DD48893D2A6FAE2600F878C0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				941A31002A6A8DCA008152CC /* users.swift */,
 				DD48893E2A6FAE8D00F878C0 /* FriendInfo.swift */,
 				DDC090172A79225300CDCC8A /* NewsInfo.swift */,
 				DDC090192A79226F00CDCC8A /* BookInfo.swift */,
@@ -353,18 +330,9 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		DD5B62912A73941A00D8F9A1 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				DDB9074B2A73B0A6000A24F0 /* BookstoreDetailVC.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		DDC6EA982A61559C00C4B127 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				941A31022A6AAB25008152CC /* Login */,
 				DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */,
 				941A30FB2A61913A008152CC /* Onboarding02VC.swift */,
 				941A30FD2A6260D0008152CC /* Onboarding03VC.swift */,
@@ -376,6 +344,14 @@
 				DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */,
 			);
 			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		DDD5DAB42A7DD36B0052C3EB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				941A31032A6AAB3B008152CC /* LoginAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		E6D55292CB7C8BCF307DC310 /* Pods */ = {
@@ -690,7 +666,6 @@
 				94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */,
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
 				DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */,
-				DDF8447E2A765A460035D112 /* BookStoreDetailReviewView.swift in Sources */,
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
 				DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */,
 				DD3A22132A7CD0E400E7B423 /* NewsTableViewCell.swift in Sources */,
