@@ -42,7 +42,7 @@ class Onboarding02VC: UIViewController {
     let certifyRequestButton: UIButton = UIButton().then {
         $0.setTitle("인증 요청", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .bold)
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
@@ -52,7 +52,7 @@ class Onboarding02VC: UIViewController {
         $0.setTitle("다음으로", for: .normal)
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }

@@ -55,7 +55,7 @@ class Onboarding09VC: UIViewController {
     }
     
     let nextButton: UIButton = UIButton().then {
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.setTitle("메인으로", for: .normal)
         $0.titleLabel?.textColor = .white
@@ -151,9 +151,12 @@ class Onboarding09VC: UIViewController {
     
     // MARK: Functions
     
-    // TODO: 메인 구현되면 연결
     @objc func didNextButtonTapped() {
+        let mainPage = MainTabBarController()
+        mainPage.modalPresentationStyle = .fullScreen
+        mainPage.modalTransitionStyle = .coverVertical
         
+        self.present(mainPage, animated: true, completion: nil)
     } // end of didNextButtonTapped()
     
     

@@ -12,19 +12,18 @@ import SnapKit
 import Then
 
 
-class BookStoreDetailHomeView: UIViewController {
+class BookStoreDetailHomeView: UIView {
 
     // MARK: Variables
     
     var bookstoreName = String()
-    var news = News(title: "", content: "", date: "", photo: "")
+
+    var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var books = [Book]()
     
-    var scrollView: UIScrollView = UIScrollView().then {
+    var contentView: UIView = UIView().then {
         $0.backgroundColor = gray02
     }
-    
-    var contentView: UIView = UIView()
     
     var newsView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -85,6 +84,15 @@ class BookStoreDetailHomeView: UIViewController {
         $0.addTarget(self, action: #selector(didBookListTapped), for: .touchUpInside)
     }
     
+    var bookListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 5
+        $0.minimumInteritemSpacing = 5
+    }).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+    }
+    
     var bookActivityView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -108,6 +116,16 @@ class BookStoreDetailHomeView: UIViewController {
         $0.addTarget(self, action: #selector(didBookActivityTapped), for: .touchUpInside)
     }
     
+    var bookActivityCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 5
+        $0.minimumInteritemSpacing = 5
+    }).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .black
+        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+    }
+    
     var reviewView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -124,10 +142,19 @@ class BookStoreDetailHomeView: UIViewController {
         $0.titleLabel?.font = paragraph06
         $0.addTarget(self, action: #selector(didReviewTapped), for: .touchUpInside)
     }
+    
+//    var reviewCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+//        $0.scrollDirection = .horizontal
+//        $0.minimumLineSpacing = 5
+//        $0.minimumInteritemSpacing = 5
+//    }).then {
+//        $0.showsHorizontalScrollIndicator = false
+//        $0.backgroundColor = .black
+//        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+//    }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    
+    override func draw(_ rect: CGRect) {
         setUpView()
         setUpLayout()
         setUpDelegate()
@@ -156,23 +183,24 @@ class BookStoreDetailHomeView: UIViewController {
         if news.content.count >= 18 { newsContent.numberOfLines = 2 }
         
         // 책 목록 Section 업데이트
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", photo: "tempBookImage"))
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", photo: "tempBookImage"))
+
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        
+
         [
             newsView,
             bookListView,
             bookActivityView,
             reviewView
-        ].forEach { contentView.addSubview($0) }
+        ].forEach { self.addSubview($0) }
         
         [
             newsLabel,
@@ -190,41 +218,41 @@ class BookStoreDetailHomeView: UIViewController {
         [
             bookListLabel,
             bookListMoreButton,
+            bookListCollectionView
         ].forEach { bookListView.addSubview($0) }
         
         [
             bookActivityLabel,
             bookActivityCountLabel,
-            bookActivityMoreButton
+            bookActivityMoreButton,
+            bookActivityCollectionView
         ].forEach { bookActivityView.addSubview($0)}
         
         [
             reviewLabel,
-            reviewMoreButton
+            reviewMoreButton,
+            // reviewCollectionView
         ].forEach { reviewView.addSubview($0)}
     }
+    
     
     // MARK: Delegate
     
     func setUpDelegate() {
+        bookListCollectionView.delegate = self
+        bookListCollectionView.dataSource = self
+        
+        bookActivityCollectionView.delegate = self
+        bookActivityCollectionView.dataSource = self
+        
+//        reviewCollectionView.delegate = self
+//        reviewCollectionView.dataSource = self
     }
     
     
     // MARK: Constraint
     
     func setUpConstraint() {
-        scrollView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.left.equalToSuperview()
-            $0.right.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-        
-        contentView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.centerX.top.bottom.equalToSuperview()
-        }
-        
         newsView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalTo(230)
@@ -270,7 +298,7 @@ class BookStoreDetailHomeView: UIViewController {
         bookListView.snp.makeConstraints {
             $0.top.equalTo(newsView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.height.equalTo(370)
         }
         
         bookListLabel.snp.makeConstraints {
@@ -281,6 +309,13 @@ class BookStoreDetailHomeView: UIViewController {
         bookListMoreButton.snp.makeConstraints {
             $0.centerY.equalTo(bookListLabel)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        bookListCollectionView.snp.makeConstraints {
+            $0.top.equalTo(bookListLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         bookActivityView.snp.makeConstraints {
@@ -302,6 +337,11 @@ class BookStoreDetailHomeView: UIViewController {
         bookActivityMoreButton.snp.makeConstraints {
             $0.centerY.equalTo(bookActivityLabel)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        bookActivityCollectionView.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.top.equalTo(bookActivityLabel)
         }
         
         reviewView.snp.makeConstraints {
@@ -342,9 +382,38 @@ class BookStoreDetailHomeView: UIViewController {
     }
 }
 
-struct BookStoreDetailHomeView_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreDetailHomeView().toPreview()
-            // .edgesIgnoringSafeArea(.all)
+extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.bookListCollectionView {
+            return books.count
+        }
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150, height: collectionView.frame.height)
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct BookStoreDetailHomeView_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let button = BookStoreDetailHomeView()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
+    }
+}
+#endif

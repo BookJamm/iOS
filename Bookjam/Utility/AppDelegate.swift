@@ -11,7 +11,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Tabbar 배경 컬러 지정
+        if #available(iOS 15, *) {
+            let appearance = UITabBarAppearance()
+            let tabBar = UITabBar()
+            appearance.configureWithOpaqueBackground()
+            appearance.selectionIndicatorTintColor = .white
+            
+            tabBar.standardAppearance = appearance;
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        
         return true
     }
 

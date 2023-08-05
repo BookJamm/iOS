@@ -74,7 +74,7 @@ class Onboarding03VC: UIViewController {
     let duplicateRequestButton: UIButton = UIButton().then {
         $0.setTitle("중복 확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
     }
