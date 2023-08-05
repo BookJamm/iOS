@@ -150,7 +150,7 @@ class MainPageVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
-        tableView.separatorStyle = .none
+        tableView.separatorStyle = .singleLine
         
         // hideKeyboard()
     }
@@ -221,8 +221,9 @@ class MainPageVC: UIViewController {
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(sortView.snp.bottom).offset(5)
-            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(sortView.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }//end of setUpConstraint
@@ -243,12 +244,12 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 260
+        return 250
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
-    
+        
         //임시 더미데이터 추가
         let book = dummyData[indexPath.row]
         cell.bookstoreLabel.text = book.bookStoreTitle
@@ -257,16 +258,16 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         cell.reviewCountLabel.text = book.bookStoreReviewNumber
         
         var images: [String] = []
-            if let image1 = book.image1 {
-                images.append(image1)
-            }
-            if let image2 = book.image2 {
-                images.append(image2)
-            }
-            if let image3 = book.image3 {
-                images.append(image3)
-            }
-            cell.images = images
+        if let image1 = book.image1 {
+            images.append(image1)
+        }
+        if let image2 = book.image2 {
+            images.append(image2)
+        }
+        if let image3 = book.image3 {
+            images.append(image3)
+        }
+        cell.images = images
         
         
         return cell
