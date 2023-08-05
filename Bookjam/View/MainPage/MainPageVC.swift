@@ -11,9 +11,9 @@ import SwiftUI
 import SnapKit
 import Then
 
+
 class MainPageVC: UIViewController {
 
-    
     // MARK: Variables
     
     var searchBar: UISearchBar = UISearchBar().then{
@@ -106,7 +106,7 @@ class MainPageVC: UIViewController {
         $0.tintColor = gray05
     }
     
-    var tableView: UITableView = UITableView().then{
+    var tableView: UITableView = UITableView().then {
 //        $0.backgroundColor = .blue  //테스트 확인용 임시 색상
         $0.register(MainPageBookStoreTableViewCell.self, forCellReuseIdentifier: "bookStoreCell")
     }
@@ -128,7 +128,7 @@ class MainPageVC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        hideKeyboard()
+        // hideKeyboard()
     }
 
     // MARK: Layout
@@ -201,7 +201,6 @@ class MainPageVC: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        
     }//end of setUpConstraint
     
     // MARK: Delegate
@@ -210,27 +209,26 @@ class MainPageVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
 }//end of MainPageVC
 
 // MARK: Extension
 
-extension MainPageVC: UITableViewDelegate, UITableViewDataSource{
+extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+        return 250
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
         
         return cell
     }
-    
-    
 }
+
 extension UIImage {
     // Create a UIImage with a solid color
     convenience init(color: UIColor, size: CGSize) {

@@ -11,41 +11,32 @@ import SwiftUI
 import SnapKit
 import Then
 
-class MainPageBookStoreTableViewCell: UITableViewCell {
 
+class MainPageBookStoreTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setUpView()
         setUpLayout()
+        setUpDelegate()
         setUpConstraint()
-        scrollWithImageView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
     
     // MARK: Variable
-
+    
     static let cellID = "bookStoreCell"
     
-    var imageNames: [String] = ["house.fill", "house", "house.fill", "house", "house.fill"]
-    
-    var imageUiView: UIView = UIView()
+    var images: [String] = ["squareDefaultImage",
+                            "squareDefaultImage",
+                            "squareDefaultImage",
+                            "squareDefaultImage",
+                            "squareDefaultImage"]
     
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -59,12 +50,15 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.tintColor = gray04
     }
     
-    var timeButton: UIButton = UIButton().then{
-        $0.setTitle("영업중", for: .normal)
+    var timeButton: UIButton = UIButton().then {
+        $0.setTitle("   영업중   ", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 10
+        $0.titleLabel?.font = captionText01
+        $0.layer.cornerRadius = 14
         $0.backgroundColor = UIColor(hexCode: "#00C950")
+        $0.addTarget(self, action: #selector(didTimeButtonTapped), for: .touchUpInside)
     }
+    
     var starImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(systemName: "star.fill")
         $0.tintColor = warning
@@ -81,35 +75,27 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.sizeToFit()
     }
     
-    var underLineView: UIView = UIView().then {
-        $0.backgroundColor = gray04
-    }
-    
     var locationLabel: UILabel = UILabel().then {
         $0.font = paragraph05
         $0.textColor = gray06
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }
-    var scrollView: UIScrollView = UIScrollView().then{
-        $0.showsVerticalScrollIndicator = false
+    
+    lazy var photosCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 5
+        $0.minimumInteritemSpacing = 5
+        $0.itemSize = CGSize(width: 120, height: 120)
+    }).then {
         $0.showsHorizontalScrollIndicator = false
-        $0.isPagingEnabled = false
+        $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
     }
-    var stackView: UIStackView = UIStackView().then{
-        $0.axis = .horizontal
-        $0.alignment = .center
-        $0.distribution = .equalSpacing
-        $0.layoutMargins = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        $0.isLayoutMarginsRelativeArrangement = true
-        $0.spacing = 8
-    }
+    
+    
     // MARK: View
     
     func setUpView() {
-//        self.backgroundColor = UIColor(hexCode: "F5F4F3")
-        self.contentMode = .scaleAspectFit
-        scrollView.delegate = self
-        scrollView.isUserInteractionEnabled = true
+        
     }
     
     
@@ -117,92 +103,93 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     func setUpLayout() {
         [
-           bookstoreLabel,
-           bookMarkImageView,
-           timeButton,
-           starImageView,
-           starLabel,
-           reviewCountLabel,
-           locationLabel,
-           timeButton,
-           scrollView
-        ].forEach { self.addSubview($0) }
+            bookstoreLabel,
+            bookMarkImageView,
+            timeButton,
+            starImageView,
+            starLabel,
+            reviewCountLabel,
+            locationLabel,
+            photosCollectionView
+        ].forEach { self.contentView.addSubview($0) }
+    }
+    
+    
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        photosCollectionView.delegate = self
+        photosCollectionView.dataSource = self
     }
     
     // MARK: Constraint
     
     func setUpConstraint() {
         bookstoreLabel.snp.makeConstraints{
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().offset(10)
         }
+        
         bookMarkImageView.snp.makeConstraints{
             $0.centerY.equalTo(bookstoreLabel)
             $0.leading.equalTo(bookstoreLabel.snp.trailing).offset(10)
         }
+        
         locationLabel.snp.makeConstraints{
-            $0.top.equalTo(bookstoreLabel.snp.bottom).offset(5)
+            $0.top.equalTo(bookstoreLabel.snp.bottom).offset(8)
             $0.leading.equalTo(bookstoreLabel.snp.leading)
         }
+        
         timeButton.snp.makeConstraints{
-            $0.top.equalTo(locationLabel.snp.bottom).offset(5)
+            $0.top.equalTo(locationLabel.snp.bottom).offset(8)
             $0.leading.equalTo(bookstoreLabel.snp.leading)
         }
-        starImageView.snp.makeConstraints{
-            $0.leading.equalTo(timeButton.snp.trailing).offset(15)
+        
+        starImageView.snp.makeConstraints {
+            $0.leading.equalTo(timeButton.snp.trailing).offset(5)
             $0.centerY.equalTo(timeButton.snp.centerY)
-            
         }
-        starLabel.snp.makeConstraints{
+        
+        starLabel.snp.makeConstraints {
             $0.leading.equalTo(starImageView.snp.trailing).offset(5)
             $0.centerY.equalTo(timeButton.snp.centerY)
-
         }
-        reviewCountLabel.snp.makeConstraints{
+        
+        reviewCountLabel.snp.makeConstraints {
             $0.leading.equalTo(starLabel.snp.trailing).offset(10)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
-        scrollView.snp.makeConstraints{
-            $0.leading.equalTo(bookstoreLabel.snp.leading)
-            $0.trailing.equalToSuperview()
+
+        photosCollectionView.snp.makeConstraints {
             $0.top.equalTo(timeButton.snp.bottom).offset(10)
-            $0.height.equalTo(150)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(120)
         }
-    }
-
-}//end of MainPageBookStoreTableViewCell
-
-extension MainPageBookStoreTableViewCell: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset)
-        print("width: \(scrollView.frame.size.width)")
     }
     
-    func scrollWithImageView() {
-            
-            for imageName in imageNames {
-                let imageUiView = UIView()
-                let imageView = UIImageView().then {
-                    $0.image = UIImage(systemName: imageName)
-                    $0.tintColor = .black
-                    $0.contentMode = .scaleAspectFit
+    @objc func didTimeButtonTapped() {
+        print(0)
+    }
+}//end of MainPageBookStoreTableViewCell
 
-                }
-                imageUiView.addSubview(imageView)
-                imageUiView.snp.makeConstraints{
-                        $0.height.width.equalTo(150)
-                }
-                imageView.snp.makeConstraints{
-                    $0.edges.equalToSuperview()
-                    $0.centerX.equalToSuperview()
-                }
-                stackView.addArrangedSubview(imageUiView)
-            }
-            
-        scrollView.addSubview(stackView)
-        stackView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
+
+// MARK: Extension
+
+extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
+        cell.photoImageView.image = UIImage(named: images[indexPath.row])
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
     }
 }
 
