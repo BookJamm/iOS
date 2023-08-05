@@ -26,7 +26,7 @@ class Onboarding01VC: UIViewController {
     let emailButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor.white
         $0.setTitle("북잼 로그인", for: .normal)
-        $0.setTitleColor(UIColor(named: "MainColor"), for: .normal)
+        $0.setTitleColor(main01, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         $0.layer.cornerRadius = 8
     }
@@ -41,7 +41,7 @@ class Onboarding01VC: UIViewController {
     }
     
     let signUpButton: UIButton = UIButton().then {
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         $0.layer.cornerRadius = 8
@@ -70,7 +70,7 @@ class Onboarding01VC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        view.backgroundColor = UIColor(named: "MainColor")
+        view.backgroundColor = main01
     }
     
     

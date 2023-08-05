@@ -42,7 +42,7 @@ class Onboarding04VC: UIViewController {
     }
     
     let decisionButton: UIButton = UIButton().then {
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.setTitle("결정하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
