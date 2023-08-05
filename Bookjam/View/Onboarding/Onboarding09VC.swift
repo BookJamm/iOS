@@ -153,7 +153,10 @@ class Onboarding09VC: UIViewController {
     
     // TODO: 메인 구현되면 연결
     @objc func didNextButtonTapped() {
+        let mainPage = MainTabBarController()
+        mainPage.modalPresentationStyle = .fullScreen
         
+        self.present(mainPage, animated: true)
     } // end of didNextButtonTapped()
     
     
