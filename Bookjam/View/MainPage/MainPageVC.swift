@@ -127,6 +127,7 @@ class MainPageVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
+        tableView.separatorStyle = .none
         
         // hideKeyboard()
     }
@@ -215,17 +216,25 @@ class MainPageVC: UIViewController {
 
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 260
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailPage = BookstoreDetailVC()
+        
+        // TODO: 데이터 넣기
+        
+        navigationController?.pushViewController(detailPage, animated: true)
     }
 }
 

@@ -56,7 +56,6 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.titleLabel?.font = captionText01
         $0.layer.cornerRadius = 14
         $0.backgroundColor = UIColor(hexCode: "#00C950")
-        $0.addTarget(self, action: #selector(didTimeButtonTapped), for: .touchUpInside)
     }
     
     var starImageView: UIImageView = UIImageView().then {
@@ -95,7 +94,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     // MARK: View
     
     func setUpView() {
-        
+        self.selectionStyle = .none
     }
     
     
@@ -165,10 +164,6 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(120)
         }
-    }
-    
-    @objc func didTimeButtonTapped() {
-        print(0)
     }
 }//end of MainPageBookStoreTableViewCell
 
