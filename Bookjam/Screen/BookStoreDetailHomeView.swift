@@ -83,6 +83,19 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didBookListTapped), for: .touchUpInside)
     }
     
+    var bookListTableView: UITableView = UITableView().then {
+        $0.backgroundColor = .black
+    }
+    
+    var bookListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 5
+        $0.minimumInteritemSpacing = 5
+    }).then {
+        $0.showsHorizontalScrollIndicator = false
+        $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+    }
+    
     var bookActivityView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -106,6 +119,10 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didBookActivityTapped), for: .touchUpInside)
     }
     
+    var bookActivityTableView: UITableView = UITableView().then {
+        $0.backgroundColor = .black
+    }
+    
     var reviewView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -121,6 +138,10 @@ class BookStoreDetailHomeView: UIView {
         $0.setTitleColor(main01, for: .normal)
         $0.titleLabel?.font = paragraph06
         $0.addTarget(self, action: #selector(didReviewTapped), for: .touchUpInside)
+    }
+    
+    var reviewTableView: UITableView = UITableView().then {
+        $0.backgroundColor = .black
     }
 
     
@@ -155,6 +176,8 @@ class BookStoreDetailHomeView: UIView {
         // 책 목록 Section 업데이트
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
     }
     
     
@@ -184,23 +207,28 @@ class BookStoreDetailHomeView: UIView {
         [
             bookListLabel,
             bookListMoreButton,
+            bookListCollectionView
         ].forEach { bookListView.addSubview($0) }
         
         [
             bookActivityLabel,
             bookActivityCountLabel,
-            bookActivityMoreButton
+            bookActivityMoreButton,
+            bookActivityTableView
         ].forEach { bookActivityView.addSubview($0)}
         
         [
             reviewLabel,
-            reviewMoreButton
+            reviewMoreButton,
+            reviewTableView
         ].forEach { reviewView.addSubview($0)}
     }
     
     // MARK: Delegate
     
     func setUpDelegate() {
+        bookListCollectionView.delegate = self
+        bookListCollectionView.dataSource = self
     }
     
     
@@ -252,7 +280,7 @@ class BookStoreDetailHomeView: UIView {
         bookListView.snp.makeConstraints {
             $0.top.equalTo(newsView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.height.equalTo(350)
         }
         
         bookListLabel.snp.makeConstraints {
@@ -263,6 +291,13 @@ class BookStoreDetailHomeView: UIView {
         bookListMoreButton.snp.makeConstraints {
             $0.centerY.equalTo(bookListLabel)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        bookListCollectionView.snp.makeConstraints {
+            $0.top.equalTo(bookListLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-10)
         }
         
         bookActivityView.snp.makeConstraints {
@@ -321,6 +356,27 @@ class BookStoreDetailHomeView: UIView {
     
     @objc func didReviewTapped() {
         // navigationController?.pushViewController(BookStoreDetailReviewView(), animated: true)
+    }
+}
+
+extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == self.bookListCollectionView {
+            return books.count
+        }
+        
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 150, height: collectionView.frame.height)
     }
 }
 

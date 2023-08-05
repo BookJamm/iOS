@@ -16,22 +16,22 @@ class MainTabBarController: UITabBarController {
         // MARK: Variables
         
         let mainVC = MainPageVC()
-        mainVC.title = "메인"
+        mainVC.tabBarItem.title = "메인"
         mainVC.tabBarItem.image = UIImage(systemName: "house.fill")
         mainVC.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         
         let locationVC = LocationVC()
-        locationVC.title = "내 주변"
+        locationVC.tabBarItem.title = "내 주변"
         locationVC.tabBarItem.image = UIImage(systemName: "map.fill")
         locationVC.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         
         let feedVC = FeedVC()
-        feedVC.title = "피드"
+        feedVC.tabBarItem.title = "피드"
         feedVC.tabBarItem.image = UIImage(systemName: "ellipsis.message.fill")
         feedVC.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
         
         let mypageVC = MyPageVC()
-        mypageVC.title = "마이"
+        mypageVC.tabBarItem.title = "마이"
         mypageVC.tabBarItem.image = UIImage(systemName: "person.fill")
         mypageVC.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
         
@@ -40,13 +40,11 @@ class MainTabBarController: UITabBarController {
                                           target: self,
                                           action: .none)
         
-        // TODO: 나중에 action 메소드 만들어서 수정
         let alertButton = UIBarButtonItem(image: UIImage(systemName: "bell"),
                                           style: .plain,
                                           target: self,
                                           action: .none)
         
-        // TODO: 나중에 action 메소드 만들어서 수정
         let settingButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"),
                                             style: .plain,
                                             target: self,

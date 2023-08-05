@@ -38,6 +38,7 @@ class Onboarding01VC: UIViewController {
         $0.setTitleColor(UIColor(hexCode: "191919"), for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         $0.layer.cornerRadius = 8
+        $0.addTarget(self, action: #selector(didKakaoButtonTapped), for: .touchUpInside)
     }
     
     let signUpButton: UIButton = UIButton().then {
@@ -177,8 +178,12 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
         
+        // 일단 화면 전환만 가능하게 설정
         navigationController?.pushViewController(Onboarding05VC(), animated: true)
+        
         // TODO: 서버랑 연결해서 정보 넘기고 메인으로 전환까지 진행
+        // 회원이면 로그인 처리하고 메인으로 전환
+        // 회원 아니면 온보딩 04로 연결해서 가입 진행
     }
     
     // 애플 인증 실패 시
