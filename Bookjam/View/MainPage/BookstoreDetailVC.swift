@@ -138,7 +138,9 @@ class BookstoreDetailVC: UIViewController {
         $0.backgroundColor = main03
     }
     
-    var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView()
+    var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView().then {
+        $0.backgroundColor = gray02
+    }
     var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
     var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
     var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()

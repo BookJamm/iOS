@@ -83,10 +83,6 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didBookListTapped), for: .touchUpInside)
     }
     
-    var bookListTableView: UITableView = UITableView().then {
-        $0.backgroundColor = .black
-    }
-    
     var bookListCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 5
@@ -119,8 +115,14 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didBookActivityTapped), for: .touchUpInside)
     }
     
-    var bookActivityTableView: UITableView = UITableView().then {
+    var bookActivityCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 5
+        $0.minimumInteritemSpacing = 5
+    }).then {
+        $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .black
+        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
     }
     
     var reviewView: UIView = UIView().then {
@@ -140,9 +142,15 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didReviewTapped), for: .touchUpInside)
     }
     
-    var reviewTableView: UITableView = UITableView().then {
-        $0.backgroundColor = .black
-    }
+//    var reviewCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+//        $0.scrollDirection = .horizontal
+//        $0.minimumLineSpacing = 5
+//        $0.minimumInteritemSpacing = 5
+//    }).then {
+//        $0.showsHorizontalScrollIndicator = false
+//        $0.backgroundColor = .black
+//        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+//    }
 
     
     override func draw(_ rect: CGRect) {
@@ -214,21 +222,28 @@ class BookStoreDetailHomeView: UIView {
             bookActivityLabel,
             bookActivityCountLabel,
             bookActivityMoreButton,
-            bookActivityTableView
+            bookActivityCollectionView
         ].forEach { bookActivityView.addSubview($0)}
         
         [
             reviewLabel,
             reviewMoreButton,
-            reviewTableView
+            // reviewCollectionView
         ].forEach { reviewView.addSubview($0)}
     }
+    
     
     // MARK: Delegate
     
     func setUpDelegate() {
         bookListCollectionView.delegate = self
         bookListCollectionView.dataSource = self
+        
+        bookActivityCollectionView.delegate = self
+        bookActivityCollectionView.dataSource = self
+        
+//        reviewCollectionView.delegate = self
+//        reviewCollectionView.dataSource = self
     }
     
     
@@ -280,7 +295,7 @@ class BookStoreDetailHomeView: UIView {
         bookListView.snp.makeConstraints {
             $0.top.equalTo(newsView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(350)
+            $0.height.equalTo(370)
         }
         
         bookListLabel.snp.makeConstraints {
@@ -297,7 +312,7 @@ class BookStoreDetailHomeView: UIView {
             $0.top.equalTo(bookListLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         bookActivityView.snp.makeConstraints {
@@ -319,6 +334,11 @@ class BookStoreDetailHomeView: UIView {
         bookActivityMoreButton.snp.makeConstraints {
             $0.centerY.equalTo(bookActivityLabel)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        bookActivityCollectionView.snp.makeConstraints {
+            $0.height.equalTo(40)
+            $0.top.equalTo(bookActivityLabel)
         }
         
         reviewView.snp.makeConstraints {
