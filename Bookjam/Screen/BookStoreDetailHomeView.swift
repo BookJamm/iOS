@@ -315,6 +315,8 @@ class BookStoreDetailHomeView: UIView {
             $0.bottom.equalToSuperview().offset(-20)
         }
         
+        //
+        
         bookActivityView.snp.makeConstraints {
             $0.top.equalTo(bookListView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
@@ -337,9 +339,12 @@ class BookStoreDetailHomeView: UIView {
         }
         
         bookActivityCollectionView.snp.makeConstraints {
-            $0.height.equalTo(40)
-            $0.top.equalTo(bookActivityLabel)
+            $0.top.equalTo(bookActivityLabel).offset(20)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(200)
         }
+        
+        //
         
         reviewView.snp.makeConstraints {
             $0.top.equalTo(bookActivityView.snp.bottom).offset(14)
