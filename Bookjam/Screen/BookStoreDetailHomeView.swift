@@ -17,6 +17,7 @@ class BookStoreDetailHomeView: UIView {
     // MARK: Variables
     
     var bookstoreName = String()
+
     var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var books = [Book]()
     
@@ -182,6 +183,7 @@ class BookStoreDetailHomeView: UIView {
         if news.content.count >= 18 { newsContent.numberOfLines = 2 }
         
         // 책 목록 Section 업데이트
+
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
@@ -192,6 +194,7 @@ class BookStoreDetailHomeView: UIView {
     // MARK: Layout
     
     func setUpLayout() {
+
         [
             newsView,
             bookListView,

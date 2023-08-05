@@ -188,6 +188,8 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
     }
 }
 
+
+
 #if DEBUG
 
 @available(iOS 13.0, *)
