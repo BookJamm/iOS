@@ -11,6 +11,7 @@ import UIKit
 import SnapKit
 import Then
 
+
 class BookStoreDetailNewsView: UIView {
 
     // MARK: Variables
@@ -51,6 +52,7 @@ class BookStoreDetailNewsView: UIView {
     // MARK: Layout
     
     func setUpLayout() {
+
         [
             bookPlaceLabel,
             newsTableView
@@ -68,6 +70,7 @@ class BookStoreDetailNewsView: UIView {
     // MARK: Constraint
     
     func setUpConstraint() {
+
         bookPlaceLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(30)
         }

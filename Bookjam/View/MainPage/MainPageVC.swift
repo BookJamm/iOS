@@ -15,6 +15,31 @@ import Then
 class MainPageVC: UIViewController {
 
     // MARK: Variables
+
+    //임시 더미데이터
+    let bookStore1 = bookStoreMain(title: "책방연희",
+                                   address: "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층",
+                                   reviewScore: "3.75",
+                                   reviewNumber: "리뷰 5",
+                                   image1: "ChaekYeon",
+                                   image2: "ChaekYeonTwo",
+                                   image3: "ChaekYeonThree")
+    
+    let bookStore2 = bookStoreMain(title: "1984store",
+                                   address: "서울특별시 마포구 동교로 194 (동교동, 혜원빌딩) 1층",
+                                   reviewScore: "4.78",
+                                   reviewNumber: "리뷰 110",
+                                   image1: "1984Store",
+                                   image2: "1984StoreTwo")
+    let bookStore3 = bookStoreMain(title: "공상온도",
+                                   address: "서울특별시 마포구 동교로23길 40 (동교동) 지하1층",
+                                   reviewScore: "4.96",
+                                   reviewNumber: "리뷰 98",
+                                   image1: "Gongsang",
+                                   image2: "GongsangTwo",
+                                   image3: "GongsangThree")
+    
+   lazy var dummyData: [bookStoreMain] = [bookStore1, bookStore2, bookStore3]
     
     var searchBar: UISearchBar = UISearchBar().then{
         $0.placeholder = "상호명 또는 주소 검색"
@@ -107,10 +132,8 @@ class MainPageVC: UIViewController {
     }
     
     var tableView: UITableView = UITableView().then {
-//        $0.backgroundColor = .blue  //테스트 확인용 임시 색상
         $0.register(MainPageBookStoreTableViewCell.self, forCellReuseIdentifier: "bookStoreCell")
     }
-    
     
     // MARK: viewDidLoad()
     
@@ -216,7 +239,7 @@ class MainPageVC: UIViewController {
 
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return dummyData.count  //임시
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -225,6 +248,26 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
+    
+        //임시 더미데이터 추가
+        let book = dummyData[indexPath.row]
+        cell.bookstoreLabel.text = book.bookStoreTitle
+        cell.locationLabel.text = book.bookStoreAddress
+        cell.starLabel.text = book.bookStoreReviewScore
+        cell.reviewCountLabel.text = book.bookStoreReviewNumber
+        
+        var images: [String] = []
+            if let image1 = book.image1 {
+                images.append(image1)
+            }
+            if let image2 = book.image2 {
+                images.append(image2)
+            }
+            if let image3 = book.image3 {
+                images.append(image3)
+            }
+            cell.images = images
+        
         
         return cell
     }

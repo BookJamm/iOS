@@ -59,7 +59,7 @@ class Onboarding03VC: UIViewController {
     }
     
     let passwordConditionLabel: UILabel = UILabel().then {
-        $0.text = "영대문자, 영소문자, 숫자, 특수문자 중 3가지 이상 포함 9자 이상"
+        $0.text = "영문자, 숫자, 특수문자 중 3가지 이상 포함 9자 이상 16글자 이하"
         $0.textColor = UIColor(hexCode: "F22222")
         $0.font = UIFont.systemFont(ofSize: 12)
     }
@@ -263,8 +263,8 @@ class Onboarding03VC: UIViewController {
         print("text :", sender.text ?? "error")
         
         // 비밀번호 조건문 정규식
-        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#%^&()+\\-=[]{}|;':\",./<>?~`\\\\])[A-Za-z\\d!@#%^&*()+\\-=[]{}|;':\",./<>?~`\\\\]{9,16}$"
-
+        let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,16}$"
+        
         
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         
