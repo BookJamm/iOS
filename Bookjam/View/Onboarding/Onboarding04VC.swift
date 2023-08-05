@@ -118,7 +118,7 @@ class Onboarding04VC: UIViewController {
     // MARK: Functions
     
     @objc func didDecisionButtonTapped() {
-        navigationController?.pushViewController(Onboarding05VC(), animated: true)
+        navigationController?.pushViewController(Onboarding04VC(), animated: true)
     } // end of didDecisionButtonTapped()
 }
 

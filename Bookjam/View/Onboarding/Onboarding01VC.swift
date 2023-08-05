@@ -126,7 +126,7 @@ class Onboarding01VC: UIViewController {
     // MARK: Functions
     
     @objc func didSignUpButtonTapped() {
-        navigationController?.pushViewController(Onboarding09VC(), animated: true)
+        navigationController?.pushViewController(Onboarding02VC(), animated: true)
     } // end of didSignUpButtonTapped()
     
     @objc func didKakaoButtonTapped() {
@@ -177,6 +177,7 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
         guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else { return }
         print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
         
+        navigationController?.pushViewController(Onboarding05VC(), animated: true)
         // TODO: 서버랑 연결해서 정보 넘기고 메인으로 전환까지 진행
     }
     

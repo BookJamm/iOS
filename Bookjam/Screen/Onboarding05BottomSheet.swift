@@ -37,7 +37,7 @@ class Onboarding05BottomSheet: UIViewController {
     }
     
     let addFinishButton: UIButton = UIButton().then {
-        $0.backgroundColor = UIColor(named: "MainColor")
+        $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.setTitle("추가 완료", for: .normal)
         $0.titleLabel?.textColor = .white
