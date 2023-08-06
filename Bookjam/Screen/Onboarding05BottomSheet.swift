@@ -19,8 +19,7 @@ class Onboarding05BottomSheet: UIViewController {
     // MARK: Variable
     
     let searchResult: [friendInfo] = [
-        friendInfo(nickname: "유진", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false),
-        friendInfo(nickname: "유진", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false)
+        friendInfo(nickname: "짐깅", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false)
     ]
     
     let searchLabel: UILabel = UILabel().then {
@@ -124,7 +123,7 @@ extension Onboarding05BottomSheet: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchResultTableView.dequeueReusableCell(withIdentifier: "friendInfoCell", for: indexPath) as! FriendInfoTableViewCell
-        let buttonImage: String = searchResult[indexPath.row].isFriend ? "addButton" : "removeButton"
+        let buttonImage: String = searchResult[indexPath.row].isFriend ? "removeButton" : "addButton"
         
         // cell.profileImageView.image = searchResult[indexPath.row].photoURL
         cell.nicknameLabel.text = searchResult[indexPath.row].nickname

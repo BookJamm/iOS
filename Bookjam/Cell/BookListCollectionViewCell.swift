@@ -19,7 +19,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
     static var cellID = "homeViewCell"
     
     var bookImageView: UIImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowOffset = CGSize(width: 0, height: 7)
         $0.layer.shadowRadius = 3
@@ -72,7 +72,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
             titleLabel,
             authorLabel,
             publisherLabel
-        ].forEach { self.addSubview($0) }
+        ].forEach { self.contentView.addSubview($0) }
     }
     
     // MARK: Constraint
@@ -80,7 +80,9 @@ class BookListCollectionViewCell: UICollectionViewCell {
     func setUpConstraint() {
         bookImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(30)
+            $0.height.equalTo(200)
+            $0.width.equalTo(100)
         }
         
         titleLabel.snp.makeConstraints {

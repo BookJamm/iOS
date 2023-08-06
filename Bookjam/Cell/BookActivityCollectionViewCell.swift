@@ -19,7 +19,9 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     static var cellID = "homeViewCell"
     
     var activityImageView: UIImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleToFill
+        $0.layer.cornerRadius = 8
+        $0.clipsToBounds = true
         $0.image = UIImage(named: "squareDefaultImage")
     }
     
@@ -97,7 +99,7 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     
     func setUpConstraint() {
         activityImageView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview()
+            $0.top.leading.trailing.equalToSuperview()
             $0.height.width.equalTo(150)
         }
         

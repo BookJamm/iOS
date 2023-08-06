@@ -30,6 +30,7 @@ class FriendInfoTableViewCell: UITableViewCell {
     // MARK: Variable
     
     static let cellID =  "friendInfoCell"
+    var isFriend: Bool = false
     
     let profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "defaultProfile")
@@ -55,6 +56,7 @@ class FriendInfoTableViewCell: UITableViewCell {
     let addFriendButton: UIButton = UIButton().then {
         $0.setImage(UIImage(named: "addButton"), for: .normal)
         $0.contentMode = .scaleAspectFill
+        $0.addTarget(self, action: #selector(didFriendButtonTapped), for: .touchUpInside)
     }
     
 
@@ -74,7 +76,7 @@ class FriendInfoTableViewCell: UITableViewCell {
             nicknameLabel,
             emailLabel,
             addFriendButton
-        ].forEach { self.addSubview($0) }
+        ].forEach { self.contentView.addSubview($0) }
     }
     
     
@@ -104,6 +106,15 @@ class FriendInfoTableViewCell: UITableViewCell {
             $0.right.equalToSuperview().multipliedBy(0.98)
             $0.top.equalTo(nicknameLabel).offset(8)
         }
+    }
+    
+    
+    // MARK: Functions
+    
+    @objc func didFriendButtonTapped() {
+        isFriend.toggle()
+        if isFriend == true { addFriendButton.setImage(UIImage(named: "removeButton"), for: .normal) }
+        else { addFriendButton.setImage(UIImage(named: "addButton"), for: .normal) }
     }
     
 }

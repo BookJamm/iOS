@@ -32,7 +32,7 @@ class BookListTableViewCell: UITableViewCell {
     static let cellID =  "bookListCell"
     
     var bookImageView: UIImageView = UIImageView().then {
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowOffset = CGSize(width: 0, height: 7)
         $0.layer.shadowRadius = 3
@@ -67,7 +67,7 @@ class BookListTableViewCell: UITableViewCell {
     // MARK: View
     
     func setUpView() {
-        self.contentMode = .scaleAspectFit
+
     }
     
     
@@ -89,13 +89,14 @@ class BookListTableViewCell: UITableViewCell {
     func setUpConstraint() {
         bookImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.leading.equalToSuperview().offset(30)
+            $0.height.equalTo(200)
+            $0.width.equalTo(100)
         }
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
-            $0.leading.equalTo(bookImageView.snp.trailing).offset(20)
+            $0.leading.equalTo(bookImageView.snp.trailing).offset(40)
         }
         
         authorLabel.snp.makeConstraints {
@@ -111,7 +112,7 @@ class BookListTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints {
             $0.top.equalTo(authorLabel.snp.bottom).offset(10)
             $0.leading.equalTo(authorLabel.snp.leading)
-            $0.trailing.equalToSuperview().offset(-20)
+            $0.trailing.equalToSuperview().offset(-30)
         }
     }
 }

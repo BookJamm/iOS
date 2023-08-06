@@ -16,13 +16,15 @@ class BookStoreDetailReviewView: UIView {
     // MARK: Variables
     
     var reviews: [Review] = [
-        Review(userName: "독서 장인", visitDate: "2023 / 06 / 06 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]),
-        Review(userName: "독서 장인", visitDate: "2023 / 06 / 06 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]),
-        Review(userName: "독서 장인", visitDate: "2023 / 06 / 06 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]),
-        Review(userName: "독서 장인", visitDate: "2023 / 06 / 06 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"])
+        Review(userName: "독서 장인", visitDate: "2023 / 08 / 03 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["ChaekYeonFive", "ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine"]),
+        Review(userName: "짐깅", visitDate: "2023 / 07 / 24 방문", comment: "조용하고 혼자 앉아서 힐링하기 좋아요! 추천합니다 🙌", photos: ["ChaekYeon", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonTwo"]),
+        Review(userName: "장모", visitDate: "2023 / 07 / 22 방문", comment: "분위기가 정말 좋아요! 친구에게 추천해주고 싶습니다", photos: ["ChaekYeonFive", "ChaekYeonSeven", "ChaekYeonNine", "ChaekYeonFour"]),
+        Review(userName: "모아", visitDate: "2023 / 06 / 08 방문", comment: "ㅠㅠ 오늘 휴무인줄 몰랐어요 다음에 또 올게요!", photos: ["ChaekYeonNine", "ChaekYeonEight", "ChaekYeon", "squareDefaultImage"])
     ]
     
-    var writeReviewView: UIView = UIView()
+    var writeReviewView: UIView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
     var writeReviewLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -39,7 +41,9 @@ class BookStoreDetailReviewView: UIView {
         $0.layer.cornerRadius = 4
     }
     
-    var visitReviewView: UIView = UIView()
+    var visitReviewView: UIView = UIView().then {
+        $0.backgroundColor = .white
+    }
     
     var visitReviewLabel: UILabel = UILabel().then {
         $0.font = title06

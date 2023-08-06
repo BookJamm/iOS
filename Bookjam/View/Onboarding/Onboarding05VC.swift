@@ -119,7 +119,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         }
         
         emailTextField.snp.makeConstraints {
-            $0.centerX.equalToSuperview().multipliedBy(0.55)
+            $0.leading.equalTo(searchIDLabel.snp.leading)
             $0.centerY.equalToSuperview().multipliedBy(0.65)
         }
         

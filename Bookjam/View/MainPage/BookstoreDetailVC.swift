@@ -16,7 +16,7 @@ class BookstoreDetailVC: UIViewController {
 
     // MARK: Variables
     
-    var images = ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]
+    var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
     
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = .white
@@ -26,17 +26,17 @@ class BookstoreDetailVC: UIViewController {
     
     var photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
-        $0.minimumLineSpacing = 0
-        $0.minimumInteritemSpacing = 0
+        $0.minimumLineSpacing = 1
+        $0.minimumInteritemSpacing = 1
     }).then {
-        $0.backgroundColor = .brown
+        $0.backgroundColor = .white
         $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
     }
     
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = .black
-        $0.text = "천천히스미는"
+        $0.text = "책방연희"
         $0.sizeToFit()
     }
     
@@ -59,12 +59,12 @@ class BookstoreDetailVC: UIViewController {
     
     var starLabel: UILabel = UILabel().then {
         $0.font = paragraph03
-        $0.text = "4.53"
+        $0.text = "3.75"
     }
     
     var reviewCountLabel: UILabel = UILabel().then {
         $0.font = paragraph03
-        $0.text = "리뷰 132"
+        $0.text = "리뷰 5"
         $0.sizeToFit()
     }
     
@@ -85,17 +85,17 @@ class BookstoreDetailVC: UIViewController {
     var locationLabel: UILabel = UILabel().then {
         $0.font = paragraph05
         $0.textColor = gray06
-        $0.text = "경기도 수원시 팔달구 매산로52번길 20"
+        $0.text = "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층"
     }
     
     var timeLabel: UILabel = UILabel().then {
         $0.font = paragraph05
-        $0.textColor = alert
-        $0.text = "영업 종료"
+        $0.textColor = complete
+        $0.text = "영업 중"
     }
     
     var siteURL: UIButton = UIButton().then {
-        $0.setTitle("https://youz2me.notion.site/UIButton-ffc98dbfc08740ea9f16bec8e00d204f?pvs=4", for: .normal)
+        $0.setTitle("https://www.instagram.com/chaegbangyeonhui/", for: .normal)
         $0.setTitleColor(main03, for: .normal)
         $0.titleLabel?.font = paragraph06
         $0.addTarget(self, action: #selector(didURLTapped), for: .touchUpInside)
@@ -140,10 +140,14 @@ class BookstoreDetailVC: UIViewController {
     var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView().then {
         $0.backgroundColor = gray02
     }
+    
     var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
     var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
     var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
-    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
+    
+    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView().then {
+        $0.backgroundColor = gray02
+    }
     
     
     override func viewDidLoad() {
@@ -228,7 +232,7 @@ class BookstoreDetailVC: UIViewController {
         photoCollectionView.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.top)
             $0.width.equalToSuperview()
-            $0.height.equalTo(200)
+            $0.height.equalTo(215)
         }
 
         bookstoreLabel.snp.makeConstraints {
@@ -289,8 +293,7 @@ class BookstoreDetailVC: UIViewController {
         }
 
         siteURL.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.left.equalTo(clockImageView)
+            $0.leading.equalTo(clockImageView.snp.leading).offset(5)
             $0.bottom.equalTo(clockImageView).offset(35)
         }
 
@@ -358,7 +361,7 @@ class BookstoreDetailVC: UIViewController {
     // TODO: 나중에 연결할 인스타 링크 여기에 연결
     
     @objc func didURLTapped() {
-        let url = NSURL(string: "https://youz2me.notion.site/UIButton-ffc98dbfc08740ea9f16bec8e00d204f?pvs=4")
+        let url = NSURL(string: "https://www.instagram.com/chaegbangyeonhui/")
         let instaView: SFSafariViewController = SFSafariViewController(url: url! as URL)
         
         self.present(instaView, animated: true, completion: nil)
@@ -432,16 +435,19 @@ extension BookstoreDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath) as! BookStorePhotoCollectionViewCell
+        
+        cell.photoImageView.image = UIImage(named: images[indexPath.row])
+        cell.photoImageView.contentMode = .scaleAspectFill
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.row == 0 {
-            return CGSize(width: photoCollectionView.frame.height, height: photoCollectionView.frame.height)
+            return CGSize(width: photoCollectionView.frame.height - 1, height: photoCollectionView.frame.height - 1)
         }
-        return CGSize(width: photoCollectionView.frame.height / 2, height: photoCollectionView.frame.height / 2)
+        return CGSize(width: photoCollectionView.frame.height / 2 - 1, height: photoCollectionView.frame.height / 2 - 1)
     }
 }
 
