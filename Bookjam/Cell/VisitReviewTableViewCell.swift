@@ -56,26 +56,30 @@ class VisitReviewTableViewCell: UITableViewCell {
 
     var firstImage: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 4
+        $0.clipsToBounds = true
     }
 
     var secondImage: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 4
+        $0.clipsToBounds = true
     }
 
     var thirdImage: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 4
+        $0.clipsToBounds = true
     }
 
     var fourthImage: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 4
+        $0.clipsToBounds = true
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

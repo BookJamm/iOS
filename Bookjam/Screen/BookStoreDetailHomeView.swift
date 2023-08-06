@@ -21,6 +21,7 @@ class BookStoreDetailHomeView: UIView {
     var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var books = [Book]()
     var reviews = [Review]()
+    var activities = [Activity]()
     
     var contentView: UIView = UIView().then {
         $0.backgroundColor = gray02
@@ -107,7 +108,7 @@ class BookStoreDetailHomeView: UIView {
     var bookActivityCountLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = main03
-        $0.text = "0"
+        $0.text = "1"
     }
     
     var bookActivityMoreButton: UIButton = UIButton().then {
@@ -145,6 +146,7 @@ class BookStoreDetailHomeView: UIView {
     
     var reviewTableView: UITableView = UITableView().then {
         $0.register(VisitReviewTableViewCell.self, forCellReuseIdentifier: VisitReviewTableViewCell.cellID)
+        $0.isScrollEnabled = false
     }
 
     
@@ -160,32 +162,36 @@ class BookStoreDetailHomeView: UIView {
     
     func setUpView() {
         // TODO: 데이터 받아올 부분
-        bookstoreName = "bookstore_name"
-        news.title = "연휴 휴무 안내"
-        news.photo = "squareDefaultImage"
-        news.content = "이번 연휴 기간동안 휴무입니다 ;)\n좋은 연휴 보내세요"
-        news.date = "2023. 05. 28"
+        bookstoreName = "책방연희"
+        news.title = "<책방 연희> 7기 종강"
+        news.photo = "ChaekYeon"
+        news.content = "갑자기 억수가 퍼부었던 7월의 마지막 일요일인 오늘, 『나만의 엽서북 만들기』 with <책방 연희> 7기를 마무리했습니다."
+        news.date = "2023. 07. 22"
         
         // 소식 Section 업데이트
         newsLabel.text = "\(bookstoreName)의 소식"
         newsTitle.text = news.title
         newsContent.text = news.content
         newsDate.text = news.date
-        newsPhoto.image = UIImage(named: "squareDefaultImage")
+        newsPhoto.image = UIImage(named: news.photo)
         
         // newsContent 글자 수 일정 이상이면 2줄로 표시
-        if news.content.count >= 18 { newsContent.numberOfLines = 2 }
+        if news.content.count >= 18 { newsContent.numberOfLines = 3 }
         
         // 책 목록 Section 업데이트
 
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        books.append(Book(title: "기후변화 시대의 사랑", author: "김기창", publisher: "민음사", content: "", photo: "chaekYeonBook1"))
+        books.append(Book(title: "돈과 나의 일", author: "이원지", publisher: "독립 출판물", content: "", photo: "chaekYeonBook2"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         
+        reviews.append(Review(userName: "짐깅", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine", ""]))
+        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 08", comment: "짱이예요", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
         reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
+        
+        activities.append(Activity(photo: "ChaekYeonSix", name: "박정미 작가 북토크", starValue: 4.92, numOfReview: 265, description: "시골에 살아 본 적 없는 저자가 여행 가방 하나 들고 실골에 살러 간 이유와 7년 간 시골에 살며 책방을 운영하고 글을 쓰고 사진을 찍고 농사를 지으며 알게 된 것에 관한 이야기"))
+        
+        bookActivityCountLabel.text = String(activities.count)
     }
     
     
@@ -270,7 +276,7 @@ class BookStoreDetailHomeView: UIView {
             $0.top.equalTo(newsLabel.snp.bottom).offset(25)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(120)
+            $0.height.equalTo(130)
         }
         
         newsPhoto.snp.makeConstraints {
@@ -286,6 +292,7 @@ class BookStoreDetailHomeView: UIView {
         newsContent.snp.makeConstraints {
             $0.top.equalTo(newsTitle.snp.bottom).offset(10)
             $0.leading.equalTo(newsPhoto.snp.trailing).offset(15)
+            $0.trailing.equalTo(newsPreview.snp.trailing).offset(-5)
         }
         
         newsDate.snp.makeConstraints {
@@ -319,7 +326,7 @@ class BookStoreDetailHomeView: UIView {
         //
         
         bookActivityView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(650)
+            $0.top.equalToSuperview().offset(630)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(380)
         }
@@ -349,7 +356,7 @@ class BookStoreDetailHomeView: UIView {
         //
         
         reviewView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(1080)
+            $0.top.equalToSuperview().offset(1030)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -396,6 +403,9 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         if collectionView == self.bookListCollectionView {
             return books.count
         }
+        else if collectionView == self.bookActivityCollectionView {
+            return activities.count
+        }
         
         return 5
     }
@@ -403,6 +413,26 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath)
+        
+        if collectionView == self.bookListCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookListCollectionViewCell
+            
+            cell.bookImageView.image = UIImage(named: books[indexPath.row].photo)
+            cell.titleLabel.text = books[indexPath.row].title
+            cell.authorLabel.text = books[indexPath.row].author
+            cell.publisherLabel.text = books[indexPath.row].publisher
+            
+            return cell
+        }
+        else if collectionView == self.bookActivityCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookActivityCollectionViewCell
+            
+            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
+            cell.titleLabel.text = activities[indexPath.row].name
+            cell.ratingLabel.text = String(activities[indexPath.row].starValue)
+            
+            return cell
+        }
         
         return cell
     }
