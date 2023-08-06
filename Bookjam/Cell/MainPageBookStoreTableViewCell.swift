@@ -75,7 +75,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     }
     
     var locationLabel: UILabel = UILabel().then {
-        $0.font = paragraph05
+        $0.font = paragraph03
         $0.textColor = gray06
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }
@@ -84,7 +84,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 5
         $0.minimumInteritemSpacing = 5
-        $0.itemSize = CGSize(width: 120, height: 120)
+        $0.itemSize = CGSize(width: 100, height: 100)
     }).then {
         $0.showsHorizontalScrollIndicator = false
         $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
@@ -125,8 +125,8 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     func setUpConstraint() {
         bookstoreLabel.snp.makeConstraints{
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
         
         bookMarkImageView.snp.makeConstraints{
@@ -161,8 +161,9 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
 
         photosCollectionView.snp.makeConstraints {
             $0.top.equalTo(timeButton.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(120)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(110)
         }
     }
 }//end of MainPageBookStoreTableViewCell
@@ -179,6 +180,7 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
         cell.photoImageView.image = UIImage(named: images[indexPath.row])
+        cell.photoImageView.layer.cornerRadius = 8
         
         return cell
     }

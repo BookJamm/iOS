@@ -20,6 +20,7 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
     
     var photoImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
+        $0.clipsToBounds = true
     }
     
     override init(frame: CGRect) {
@@ -45,6 +46,7 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
     
     func setUpLayout() {
         self.addSubview(photoImageView)
+        self.clipsToBounds = true
     }
     
     // MARK: Constraint

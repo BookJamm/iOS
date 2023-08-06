@@ -16,22 +16,21 @@ class BookstoreDetailVC: UIViewController {
 
     // MARK: Variables
     
+    var images = ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]
+    
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = .white
     }
     
     var contentView: UIView = UIView()
     
-    var photoStackView: UIStackView = UIStackView().then {
-        $0.spacing = 1
-    }
-    
-    var firstPhotoImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(named: "squareDefaultImage")
-    }
-    
-    var photoCollectionView: UIStackView = UIStackView().then {
+    var photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.scrollDirection = .horizontal
+        $0.minimumLineSpacing = 0
+        $0.minimumInteritemSpacing = 0
+    }).then {
         $0.backgroundColor = .brown
+        $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
     }
     
     var bookstoreLabel: UILabel = UILabel().then {
@@ -152,6 +151,7 @@ class BookstoreDetailVC: UIViewController {
 
         setUpView()
         setUpLayout()
+        setUpDelegate()
         setUpConstraint()
     }
     
@@ -169,7 +169,7 @@ class BookstoreDetailVC: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         [
-            photoStackView,
+            photoCollectionView,
             bookstoreLabel,
             bookMarkImageView,
             storeTypeLabel,
@@ -193,9 +193,6 @@ class BookstoreDetailVC: UIViewController {
             bookListView
         ].forEach { contentView.addSubview($0) }
         
-        photoStackView.addArrangedSubview(firstPhotoImageView)
-        photoStackView.addArrangedSubview(photoCollectionView)
-        
 //         viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
         [
             newsView,
@@ -203,6 +200,14 @@ class BookstoreDetailVC: UIViewController {
             reviewView,
             bookListView
         ].forEach { $0.isHidden = true }
+    }
+    
+    
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        photoCollectionView.delegate = self
+        photoCollectionView.dataSource = self
     }
     
     
@@ -220,25 +225,15 @@ class BookstoreDetailVC: UIViewController {
             $0.height.equalTo(2000)
         }
         
-        photoStackView.snp.makeConstraints {
+        photoCollectionView.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.top)
             $0.width.equalToSuperview()
             $0.height.equalTo(200)
         }
 
-        firstPhotoImageView.snp.makeConstraints {
-            $0.width.equalToSuperview().dividedBy(2)
-            $0.height.equalTo(200)
-        }
-
-        photoCollectionView.snp.makeConstraints {
-            $0.width.equalTo(UIScreen.main.bounds.size.width / 2)
-            $0.height.equalToSuperview()
-        }
-
         bookstoreLabel.snp.makeConstraints {
-            $0.left.equalTo(photoStackView).offset(15)
-            $0.bottom.equalTo(photoStackView).multipliedBy(1.2)
+            $0.left.equalTo(photoCollectionView).offset(15)
+            $0.bottom.equalTo(photoCollectionView).multipliedBy(1.2)
         }
 
         bookMarkImageView.snp.makeConstraints {
@@ -428,6 +423,25 @@ class BookstoreDetailVC: UIViewController {
                 newsView
             ].forEach { $0.isHidden = true }
         }
+    }
+}
+
+extension BookstoreDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath)
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.row == 0 {
+            return CGSize(width: photoCollectionView.frame.height, height: photoCollectionView.frame.height)
+        }
+        return CGSize(width: photoCollectionView.frame.height / 2, height: photoCollectionView.frame.height / 2)
     }
 }
 

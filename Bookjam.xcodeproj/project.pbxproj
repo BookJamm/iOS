@@ -57,6 +57,7 @@
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
 		DDF8447C2A765A320035D112 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
 		DDF844802A765A610035D112 /* BookStoreDetailBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447F2A765A610035D112 /* BookStoreDetailBookListView.swift */; };
+		DDFFD9E32A7F66280095F76A /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFFD9E22A7F66280095F76A /* BookActivityCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailActivityView.swift; sourceTree = "<group>"; };
 		DDF8447D2A765A460035D112 /* BookStoreDetailReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailReviewView.swift; sourceTree = "<group>"; };
 		DDF8447F2A765A610035D112 /* BookStoreDetailBookListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailBookListView.swift; sourceTree = "<group>"; };
+		DDFFD9E22A7F66280095F76A /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +326,7 @@
 				DD3A22122A7CD0E400E7B423 /* NewsTableViewCell.swift */,
 				DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */,
 				DD4E84742A7EA2C4004E373E /* BookListCollectionViewCell.swift */,
+				DDFFD9E22A7F66280095F76A /* BookActivityCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 				DDF8447C2A765A320035D112 /* BookStoreDetailActivityView.swift in Sources */,
 				DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */,
+				DDFFD9E32A7F66280095F76A /* BookActivityCollectionViewCell.swift in Sources */,
 				DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */,
 				DDF844802A765A610035D112 /* BookStoreDetailBookListView.swift in Sources */,
 			);
