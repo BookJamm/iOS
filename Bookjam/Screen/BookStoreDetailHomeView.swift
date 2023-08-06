@@ -20,6 +20,7 @@ class BookStoreDetailHomeView: UIView {
 
     var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var books = [Book]()
+    var reviews = [Review]()
     
     var contentView: UIView = UIView().then {
         $0.backgroundColor = gray02
@@ -143,15 +144,9 @@ class BookStoreDetailHomeView: UIView {
         $0.addTarget(self, action: #selector(didReviewTapped), for: .touchUpInside)
     }
     
-//    var reviewCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
-//        $0.scrollDirection = .horizontal
-//        $0.minimumLineSpacing = 5
-//        $0.minimumInteritemSpacing = 5
-//    }).then {
-//        $0.showsHorizontalScrollIndicator = false
-//        $0.backgroundColor = .black
-//        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
-//    }
+    var reviewTableView: UITableView = UITableView().then {
+        $0.register(VisitReviewTableViewCell.self, forCellReuseIdentifier: VisitReviewTableViewCell.cellID)
+    }
 
     
     override func draw(_ rect: CGRect) {
@@ -188,6 +183,8 @@ class BookStoreDetailHomeView: UIView {
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
+        
+        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
     }
     
     
@@ -231,7 +228,7 @@ class BookStoreDetailHomeView: UIView {
         [
             reviewLabel,
             reviewMoreButton,
-            // reviewCollectionView
+            reviewTableView
         ].forEach { reviewView.addSubview($0)}
     }
     
@@ -245,8 +242,8 @@ class BookStoreDetailHomeView: UIView {
         bookActivityCollectionView.delegate = self
         bookActivityCollectionView.dataSource = self
         
-//        reviewCollectionView.delegate = self
-//        reviewCollectionView.dataSource = self
+        reviewTableView.dataSource = self
+        reviewTableView.delegate = self
     }
     
     
@@ -321,36 +318,35 @@ class BookStoreDetailHomeView: UIView {
         //
         
         bookActivityView.snp.makeConstraints {
-            $0.top.equalTo(bookListView.snp.bottom).offset(14)
+            $0.top.equalToSuperview().offset(650)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(400)
         }
-        
+
         bookActivityLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(30)
+            $0.top.equalTo(bookActivityView.snp.top).offset(30)
             $0.leading.equalToSuperview().offset(20)
         }
-        
+
         bookActivityCountLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(30)
-            $0.leading.equalTo(bookActivityLabel.snp.trailing).offset(5)
+            $0.top.equalTo(bookActivityLabel.snp.top)
+            $0.leading.equalTo(bookActivityLabel.snp.trailing).offset(10)
         }
-        
+
         bookActivityMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(bookActivityLabel)
+            $0.top.equalTo(bookActivityLabel.snp.top)
             $0.trailing.equalToSuperview().offset(-20)
         }
-        
+
         bookActivityCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bookActivityLabel).offset(20)
+            $0.top.equalTo(bookActivityCountLabel.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(200)
         }
         
         //
         
         reviewView.snp.makeConstraints {
-            $0.top.equalTo(bookActivityView.snp.bottom).offset(14)
+            $0.top.equalToSuperview().offset(950)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(400)
             $0.bottom.equalToSuperview()
@@ -364,6 +360,12 @@ class BookStoreDetailHomeView: UIView {
         reviewMoreButton.snp.makeConstraints {
             $0.centerY.equalTo(reviewLabel)
             $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        reviewTableView.snp.makeConstraints {
+            $0.top.equalTo(reviewLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -405,6 +407,30 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: collectionView.frame.height)
+    }
+}
+
+extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviews.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = reviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
+        
+        cell.userNameLabel.text = reviews[indexPath.row].userName
+        cell.userVisitDateLabel.text = reviews[indexPath.row].visitDate
+        cell.commentLabel.text = reviews[indexPath.row].comment
+        cell.firstImage.image = UIImage(named: reviews[indexPath.row].photos[0])
+        cell.secondImage.image = UIImage(named: reviews[indexPath.row].photos[1])
+        cell.thirdImage.image = UIImage(named: reviews[indexPath.row].photos[2])
+        cell.fourthImage.image = UIImage(named: reviews[indexPath.row].photos[3])
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 260
     }
 }
 

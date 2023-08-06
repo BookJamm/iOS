@@ -112,7 +112,7 @@ class MainPageVC: UIViewController {
         $0.configuration = configuration
     }
     
-    var sortView: UIView = UIView().then{
+    var sortView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
     
@@ -152,6 +152,7 @@ class MainPageVC: UIViewController {
         view.backgroundColor = .white
         tableView.separatorStyle = .singleLine
         
+        // hideKeyboard 적용하면 tableViewCell 터치가 안되는 이슈가 있어서 일단 주석처리함
         // hideKeyboard()
     }
 
