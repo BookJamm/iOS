@@ -18,31 +18,46 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
     static var cellID = "homeViewCell"
     
-    var bookImageView: UIImageView = UIImageView().then {
+    var activityImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.layer.shadowOpacity = 0.3
-        $0.layer.shadowOffset = CGSize(width: 0, height: 7)
-        $0.layer.shadowRadius = 3
-        $0.layer.masksToBounds = false
-        $0.image = UIImage(named: "tempBookImage")
+        $0.image = UIImage(named: "squareDefaultImage")
     }
     
     var titleLabel: UILabel = UILabel().then {
-        $0.font = paragraph02
-        $0.textColor = .black
-        $0.text = "책 이름"
+        $0.font = paragraph01
+        $0.textColor = main03
+        $0.text = "활동 이름"
     }
     
-    var authorLabel: UILabel = UILabel().then {
-        $0.font = captionText02
-        $0.textColor = gray06
-        $0.text = "작가 이름"
+    var starImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(systemName: "star.fill")
+        $0.tintColor = warning
     }
     
-    var publisherLabel: UILabel = UILabel().then {
-        $0.font = captionText02
-        $0.textColor = gray06
-        $0.text = "출판사 이름"
+    var ratingLabel: UILabel = UILabel().then {
+        $0.font = paragraph05
+        $0.text = "5.00"
+    }
+    
+    var heartImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(systemName: "heart")
+        $0.tintColor = .black
+    }
+    
+    var shareImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(systemName: "arrowshape.turn.up.right")
+        $0.tintColor = .black
+                           
+    }
+    
+    var joinButton: UIButton = UIButton().then {
+        $0.setTitle("참여하기", for: .normal)
+        $0.setTitleColor(UIColor(hexCode: "834205"), for: .normal)
+        $0.titleLabel?.font = captionText01
+        $0.layer.borderWidth = 0.7
+        $0.layer.borderColor = UIColor(hexCode: "834205").cgColor
+        $0.layer.cornerRadius = 14
+         $0.addTarget(self, action: #selector(didJoinButtonTapped), for: .touchUpInside)
     }
     
     override init(frame: CGRect) {
@@ -68,35 +83,60 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     
     func setUpLayout() {
         [
-            bookImageView,
+            activityImageView,
             titleLabel,
-            authorLabel,
-            publisherLabel
+            starImageView,
+            ratingLabel,
+            heartImageView,
+            shareImageView,
+            joinButton
         ].forEach { self.addSubview($0) }
     }
     
     // MARK: Constraint
     
     func setUpConstraint() {
-        bookImageView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+        activityImageView.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.height.width.equalTo(150)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(bookImageView.snp.bottom).offset(25)
+            $0.top.equalTo(activityImageView.snp.bottom).offset(10)
             $0.leading.equalToSuperview()
         }
         
-        authorLabel.snp.makeConstraints {
+        starImageView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(titleLabel.snp.leading)
+            $0.leading.equalToSuperview()
         }
         
-        publisherLabel.snp.makeConstraints {
-            $0.top.equalTo(authorLabel.snp.top)
-            $0.leading.equalTo(authorLabel.snp.trailing).offset(10)
+        ratingLabel.snp.makeConstraints {
+            $0.centerY.equalTo(starImageView)
+            $0.leading.equalTo(starImageView.snp.trailing).offset(2)
         }
+        
+        heartImageView.snp.makeConstraints {
+            $0.top.equalTo(starImageView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+        }
+        
+        shareImageView.snp.makeConstraints {
+            $0.centerY.equalTo(heartImageView)
+            $0.leading.equalTo(heartImageView.snp.trailing).offset(5)
+        }
+        
+        joinButton.snp.makeConstraints {
+            $0.top.equalTo(heartImageView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(activityImageView)
+        }
+    }
+    
+    // MARK: Functions
+    
+    @objc func didJoinButtonTapped() {
+        
     }
 }
 

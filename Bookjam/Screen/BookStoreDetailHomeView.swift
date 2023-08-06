@@ -123,8 +123,7 @@ class BookStoreDetailHomeView: UIView {
         $0.minimumInteritemSpacing = 5
     }).then {
         $0.showsHorizontalScrollIndicator = false
-        $0.backgroundColor = .black
-        // $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.cellID)
+        $0.register(BookActivityCollectionViewCell.self, forCellWithReuseIdentifier: BookActivityCollectionViewCell.cellID)
     }
     
     var reviewView: UIView = UIView().then {
@@ -184,6 +183,8 @@ class BookStoreDetailHomeView: UIView {
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
         
+        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
+        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
         reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
     }
     
@@ -320,7 +321,7 @@ class BookStoreDetailHomeView: UIView {
         bookActivityView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(650)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.height.equalTo(380)
         }
 
         bookActivityLabel.snp.makeConstraints {
@@ -339,16 +340,17 @@ class BookStoreDetailHomeView: UIView {
         }
 
         bookActivityCollectionView.snp.makeConstraints {
-            $0.top.equalTo(bookActivityCountLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview()
+            $0.top.equalTo(bookActivityCountLabel.snp.bottom).offset(25)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview()
+            $0.bottom.equalTo(bookActivityView.snp.bottom).offset(-20)
         }
         
         //
         
         reviewView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(950)
+            $0.top.equalToSuperview().offset(1080)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
             $0.bottom.equalToSuperview()
         }
         
@@ -395,7 +397,7 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
             return books.count
         }
         
-        return 1
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
