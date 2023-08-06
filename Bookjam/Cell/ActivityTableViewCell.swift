@@ -24,8 +24,9 @@ class ActivityTableViewCell: UITableViewCell {
     
     var activityImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
-        $0.contentMode = .redraw
-        $0.layer.cornerRadius = 4
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 8
+        $0.clipsToBounds = true
     }
     
     var activityLabel: UILabel = UILabel().then {
@@ -80,19 +81,13 @@ class ActivityTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 16, bottom: 10, right: 16))
     }
     
     // MARK: View
     
     func setUpView() {
-        self.contentMode = .scaleAspectFit
         
-        // TODO: 배경 회색으로 바꾸고 
-//        self.backgroundColor = gray01
-//        self.layer.borderColor = gray03?.cgColor
-//        self.layer.borderWidth = 1
-//        self.layer.cornerRadius = 8
     }
     
     

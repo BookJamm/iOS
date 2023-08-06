@@ -140,10 +140,14 @@ class BookstoreDetailVC: UIViewController {
     var homeView: BookStoreDetailHomeView = BookStoreDetailHomeView().then {
         $0.backgroundColor = gray02
     }
+    
     var newsView: BookStoreDetailNewsView = BookStoreDetailNewsView()
     var activityView: BookStoreDetailActivityView = BookStoreDetailActivityView()
     var bookListView: BookStoreDetailBookListView = BookStoreDetailBookListView()
-    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView()
+    
+    var reviewView: BookStoreDetailReviewView = BookStoreDetailReviewView().then {
+        $0.backgroundColor = gray02
+    }
     
     
     override func viewDidLoad() {
