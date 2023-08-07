@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/30.
 //
 
+// MARK: - 피그마에 나와있는 Color style 대로 수정하기 편하게 미리 컬러 변수 선언한 파일
+
 import Foundation
 import UIKit
 

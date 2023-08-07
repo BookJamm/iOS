@@ -255,7 +255,6 @@
 				DDC445052A80C3FA000FE1C7 /* Extension */,
 				DDC445102A80EA3B000FE1C7 /* Resource */,
 				DD38CFEE2A599F0100D32B00 /* Screen */,
-				DD38CFC72A59993400D32B00 /* LaunchScreen.storyboard */,
 			);
 			path = Bookjam;
 			sourceTree = "<group>";
@@ -289,6 +288,7 @@
 		DD38CFEE2A599F0100D32B00 /* Screen */ = {
 			isa = PBXGroup;
 			children = (
+				DD38CFC72A59993400D32B00 /* LaunchScreen.storyboard */,
 				DD38CFC02A59993400D32B00 /* ViewController.swift */,
 				DDC6EA982A61559C00C4B127 /* Onboarding */,
 				DD38CFEF2A599F0F00D32B00 /* Main */,

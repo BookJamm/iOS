@@ -5,10 +5,12 @@
 //  Created by 장준모 on 2023/08/06.
 //
 
+// MARK: - 
+
 import Foundation
 import UIKit
 
-struct bookStoreMain{
+struct bookStoreMain {
     let bookStoreTitle: String
     let bookStoreAddress: String
     let bookStoreReviewScore: String
@@ -28,5 +30,4 @@ struct bookStoreMain{
             self.image2 = image2
             self.image3 = image3
         }
-    
 }

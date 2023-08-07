@@ -18,8 +18,8 @@ class Onboarding05BottomSheet: UIViewController {
     
     // MARK: Variable
     
-    let searchResult: [friendInfo] = [
-        friendInfo(nickname: "짐깅", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false)
+    let searchResult: [Friend] = [
+        Friend(nickname: "짐깅", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false)
     ]
     
     let searchLabel: UILabel = UILabel().then {
