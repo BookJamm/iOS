@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/28.
 //
 
+// MARK: - 메인 페이지 책방 목록 중 하나를 클릭하면 나오는 해당 책방 디테일 페이지 화면
+
 import SafariServices
 import SwiftUI
 import UIKit
@@ -16,6 +18,7 @@ class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
+    // 디테일 페이지 가장 위에 표시되는 5개 사진 목록
     var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
     
     var scrollView: UIScrollView = UIScrollView().then {
@@ -105,10 +108,10 @@ class BookstoreDetailPageVC: UIViewController {
         $0.backgroundColor = gray02
     }
     
+    // 서점 세부 내용 전환해주는 SegmentedControl
     var segmentController: UISegmentedControl = UISegmentedControl().then {
         $0.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         $0.setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
-        
         $0.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: gray04!,
             NSAttributedString.Key.font: paragraph03
@@ -118,14 +121,17 @@ class BookstoreDetailPageVC: UIViewController {
             NSAttributedString.Key.font: paragraph03
         ], for: .selected)
         
+        // segments 삽입
         $0.insertSegment(withTitle: "홈", at: 0, animated: true)
         $0.insertSegment(withTitle: "소식", at: 1, animated: true)
         $0.insertSegment(withTitle: "참여", at: 2, animated: true)
         $0.insertSegment(withTitle: "리뷰", at: 3, animated: true)
         $0.insertSegment(withTitle: "책 종류", at: 4, animated: true)
 
+        // 기본 탭은 홈으로 설정
         $0.selectedSegmentIndex = 0
         
+        // 값 바뀌면 didSegmentControllerValueChanged 호출
         $0.addTarget(self, action: #selector(didSegmentControllerValueChanged), for: .valueChanged)
     }
     
@@ -197,7 +203,7 @@ class BookstoreDetailPageVC: UIViewController {
             bookListView
         ].forEach { contentView.addSubview($0) }
         
-//         viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
+        // viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
         [
             newsView,
             activityView,
@@ -232,7 +238,7 @@ class BookstoreDetailPageVC: UIViewController {
         photoCollectionView.snp.makeConstraints {
             $0.top.equalTo(contentView.snp.top)
             $0.width.equalToSuperview()
-            $0.height.equalTo(215)
+            $0.height.equalTo(200)
         }
 
         bookstoreLabel.snp.makeConstraints {
@@ -358,8 +364,9 @@ class BookstoreDetailPageVC: UIViewController {
     
     
     // MARK: Functions
-    // TODO: 나중에 연결할 인스타 링크 여기에 연결
     
+    // URL 버튼 클릭되면 호출되는 메소드
+    // 주소에 맞는 SafariViewController를 present
     @objc func didURLTapped() {
         let url = NSURL(string: "https://www.instagram.com/chaegbangyeonhui/")
         let instaView: SFSafariViewController = SFSafariViewController(url: url! as URL)
@@ -367,6 +374,7 @@ class BookstoreDetailPageVC: UIViewController {
         self.present(instaView, animated: true, completion: nil)
     }
     
+    // SegmentedControl에서 세그먼트의 값이 변경되었을 경우 호출되는 메소드
     @objc private func didSegmentControllerValueChanged() {
         let segmentIndex = CGFloat(segmentController.selectedSegmentIndex)
         let segmentWidth = segmentController.frame.width / CGFloat(segmentController.numberOfSegments)
@@ -381,6 +389,7 @@ class BookstoreDetailPageVC: UIViewController {
         })
         
         // segmentIndex 따라서 화면 전환
+        // 홈 탭
         if segmentIndex == 0 {
             homeView.isHidden = false
             [
@@ -390,6 +399,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
+        // 소식 탭
         else if segmentIndex == 1 {
             newsView.isHidden = false
             [
@@ -399,6 +409,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
+        // 참여 탭
         else if segmentIndex == 2 {
             activityView.isHidden = false
             [
@@ -408,6 +419,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
+        // 리뷰 탭
         else if segmentIndex == 3 {
             reviewView.isHidden = false
             [
@@ -417,6 +429,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
+        // 책 종류 탭
         else if segmentIndex == 4 {
             bookListView.isHidden = false
             [
@@ -429,6 +442,8 @@ class BookstoreDetailPageVC: UIViewController {
     }
 }
 
+// 디테일 페이지 가장 위에 표시되는 5개 사진 목록 CollectionView 구현을 위한 Delegate, DataSource extension
+// 셀 별 사이즈 지정을 위한 DelegateFlowLayout extension 추가
 extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
@@ -437,16 +452,20 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath) as! BookStorePhotoCollectionViewCell
         
+        // images 배열 photoImageView의 이미지로 할당
         cell.photoImageView.image = UIImage(named: images[indexPath.row])
         cell.photoImageView.contentMode = .scaleAspectFill
         
         return cell
     }
     
+    // 셀 별 사이즈 지정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // 첫번째 셀일 경우 width와 height를 모두 프레임 높이와 같게 조정
         if indexPath.row == 0 {
             return CGSize(width: photoCollectionView.frame.height - 1, height: photoCollectionView.frame.height - 1)
         }
+        // 아닐 경우 width와 height를 모두 (프레임 높이 / 2)와 같게 조정
         return CGSize(width: photoCollectionView.frame.height / 2 - 1, height: photoCollectionView.frame.height / 2 - 1)
     }
 }

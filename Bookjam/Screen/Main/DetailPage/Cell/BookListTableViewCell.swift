@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/01.
 //
 
+// MARK: BookStoreDetailBookListView에 들어가는 책 설명 cell
+
 import UIKit
 import SwiftUI
 
