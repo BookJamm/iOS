@@ -5,6 +5,8 @@
 //  Created by 장준모 on 2023/07/15.
 //
 
+// MARK: - 회원가입 중 이메일과 비밀번호 설정하는 화면
+
 import SwiftUI
 import UIKit
 

@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/15.
 //
 
+// MARK: - 앱 미리보기 첫번째 화면
+
 import SwiftUI
 import UIKit
 
@@ -75,7 +77,7 @@ class Onboarding07VC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        // 왼쪽으로 View 슬라이드하면 온보딩 08로 이동
+        // 왼쪽으로 View 슬라이드하면 온보딩 08로 이동하도록 구현
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.didToLeftSwiped(_:)))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
@@ -148,6 +150,7 @@ class Onboarding07VC: UIViewController {
     
     // MARK: Functions
     
+    // TODO: 문의한 내용 답변 오면 수정하고 주석 달기
     @objc func didNextButtonTapped() {
         let onboarding08VC = Onboarding08VC()
         onboarding08VC.modalPresentationStyle = .fullScreen
@@ -156,7 +159,7 @@ class Onboarding07VC: UIViewController {
         self.present(onboarding08VC, animated: true)
     } // end of didNextButtonTapped()
     
-    
+    // 왼쪽으로 슬라이드하면 두번째 미리보기 화면 나오도록 구현
     @objc func didToLeftSwiped(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/09.
 //
 
+// MARK: - 앱 시작하자마자 뜨는 로그인 화면
+
 import AuthenticationServices
 import SwiftUI
 import UIKit
@@ -126,10 +128,16 @@ class Onboarding01VC: UIViewController {
     
     // MARK: Functions
     
+    // 회원가입 버튼 누르면 회원가입 화면(Onboarding02VC)로 넘어가게 구현
+    // signUpButton addTarget으로 설정됨
     @objc func didSignUpButtonTapped() {
-        navigationController?.pushViewController(Onboarding09VC(), animated: true)
-    } // end of didSignUpButtonTapped()
+        navigationController?.pushViewController(Onboarding03VC(), animated: true)
+    }
     
+    // 카카오 계정 연동하기 버튼 누르면 카카오 연동하는 화면 뜨게 구현
+    // kakaoButton addTarget으로 설정됨
+    // 기능은 아직 구현 안됨
+    // TODO: 서버랑 연동해서 로그인 기능 연동하기
     @objc func didKakaoButtonTapped() {
         print("loginKakao() called.")
         
@@ -146,7 +154,7 @@ class Onboarding01VC: UIViewController {
                     // _ = oauthToken
                     
                     // ✅ 사용자정보를 성공적으로 가져오면 화면전환 한다.
-//                    self.getUserInfo()
+                    //                    self.getUserInfo()
                 }
             }
         }
@@ -155,13 +163,15 @@ class Onboarding01VC: UIViewController {
             print("카카오톡 미설치")
         }
     }
-    
 }//end of Onboarding01VC
 
 // MARK: Extension
 
+// 애플 로그인 기능 구현을 위한 ASAuthorizationController Delegate와 ContextProviding extension 구현
 extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
 
+    // Apple로 로그인 버튼 누르면 계정 인증되도록 구현
+    // appleButton addTarget으로 설정
     @objc func didAppleButtonTapped() {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
           let request = appleIDProvider.createRequest()
@@ -179,7 +189,7 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
         print("Apple ID Credential Authorization User ID : \(appleIDCredential.user)")
         
         // 일단 화면 전환만 가능하게 설정
-        navigationController?.pushViewController(Onboarding05VC(), animated: true)
+        navigationController?.pushViewController(Onboarding04VC(), animated: true)
         
         // TODO: 서버랑 연결해서 정보 넘기고 메인으로 전환까지 진행
         // 회원이면 로그인 처리하고 메인으로 전환

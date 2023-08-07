@@ -4,6 +4,8 @@
 //  Created by 장준모 on 2023/07/13.
 //
 
+// MARK: - 앱 최초 화면에서 회원가입 버튼을 뜨면 나오는 화면 
+
 import SwiftUI
 import UIKit
 

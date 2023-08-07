@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/15.
 //
 
+// MARK: - 가입 완료 화면
+
 import SwiftUI
 import UIKit
 
@@ -89,6 +91,7 @@ class Onboarding06VC: UIViewController {
     
     // MARK: Functions
     
+    // 북잼 시작하기 버튼 누르면 케러셀 화면으로 넘어가도록 구현
     @objc func didStartButtonTapped() {
         let onboarding07VC = Onboarding07VC()
         onboarding07VC.modalPresentationStyle = .fullScreen

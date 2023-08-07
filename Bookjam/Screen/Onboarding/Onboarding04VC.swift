@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/14.
 //
 
+// MARK: - 회원가입 중 프로필과 닉네임 설정하는 화면
+
 import PhotosUI
 import SwiftUI
 import UIKit
@@ -64,7 +66,8 @@ class Onboarding04VC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
+        // 화면 밖 클릭하면 키보드 내려가게 설정
+        hideKeyboard()
     }
     
     
@@ -117,8 +120,10 @@ class Onboarding04VC: UIViewController {
     
     // MARK: Functions
     
+    // 결정하기 버튼 누르면 다음으로 화면 넘어가게 하는 함수
+    // decisionButton에 addTarget으로 연결됨
     @objc func didDecisionButtonTapped() {
-        navigationController?.pushViewController(Onboarding04VC(), animated: true)
+        navigationController?.pushViewController(Onboarding05VC(), animated: true)
     } // end of didDecisionButtonTapped()
 }
 
@@ -135,7 +140,10 @@ struct Onboarding04VC_Preview: PreviewProvider {
 
 // MARK: Extension
 
+// 프로필 설정 중 갤러리에서 이미지 가져오게 하는 기능 구현을 위한 extension
 extension Onboarding04VC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // 프로필 버튼 누르면 imagePicker present 되도록 구현
+    // profileButton에 addTarget으로 연결됨
     @objc func didProfileButtonTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -143,6 +151,8 @@ extension Onboarding04VC: UIImagePickerControllerDelegate, UINavigationControlle
         present(imagePicker, animated: true)
     } // end of didProfileImageViewTapped()
     
+    // present된 imagePicker에서 이미지를 선택하면 그 이미지가 profileButton의 이미지로 설정되도록 구현
+    // 이후 imagePicker를 dismiss함
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileButton.setImage(image.circularImage(), for: .normal)

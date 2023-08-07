@@ -111,6 +111,8 @@ class FriendInfoTableViewCell: UITableViewCell {
     
     // MARK: Functions
     
+    // 추가 버튼 누르면 isFriend 상태가 toggle되고 이미지 상태도 같이 토글되도록 구현
+    // addFriendButton에 addTarget으로 연결됨
     @objc func didFriendButtonTapped() {
         isFriend.toggle()
         if isFriend == true { addFriendButton.setImage(UIImage(named: "removeButton"), for: .normal) }

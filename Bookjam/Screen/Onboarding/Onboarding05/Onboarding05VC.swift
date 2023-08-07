@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/14.
 //
 
+// MARK: - 가입 완료 전 이메일로 친구 검색하는 화면
+
 import SwiftUI
 import UIKit
 
@@ -140,6 +142,8 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     // MARK: Functions
     
+    // searchButton 누르면 floatingPanel 올라오게 구현
+    // searchButton에 addTarget으로 연결
     @objc func didSearchButtonTapped() {
         floatingPanel.addPanel(toParent: self)
         floatingPanel.set(contentViewController: Onboarding05BottomSheet())
@@ -147,6 +151,9 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         floatingPanel.show(animated: true)
     } // end of didSearchImageViewTapped()
     
+    // 완료하기 버튼 누르면 가입 완료 창으로 넘어가게 구현
+    // 가입 완료 창은 이전으로 못 돌아오도록 Navigation 말고 present로 구현
+    // finishButton에 addTarget으로 구현
     @objc func didFinishButtonTapped() {
         let onboarding06VC = Onboarding06VC()
         onboarding06VC.modalPresentationStyle = .fullScreen

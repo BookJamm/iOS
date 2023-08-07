@@ -83,7 +83,8 @@ class Onboarding05BottomSheet: UIViewController {
         }
         
         searchResultTableView.snp.makeConstraints {
-            $0.width.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.8)
             $0.bottom.equalToSuperview().multipliedBy(0.9)
         }
@@ -107,24 +108,30 @@ class Onboarding05BottomSheet: UIViewController {
     
     // MARK: Function
     
+    // 추가 완료 버튼 누르면 Onboarding05VC에서 내려가도록 설정
     @objc func didAddFinishButtonTapped() {
         self.dismiss(animated: true)
     }
 }
 
+
+// searchResultTableView 구현을 위한 Delegate, DataSource extension 선언
 extension Onboarding05BottomSheet: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResult.count
     }
     
+    // cell 높이 값 80으로 설정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80.0
     }
     
+    // 셀에 데이터 할당해서 return
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = searchResultTableView.dequeueReusableCell(withIdentifier: "friendInfoCell", for: indexPath) as! FriendInfoTableViewCell
         let buttonImage: String = searchResult[indexPath.row].isFriend ? "removeButton" : "addButton"
         
+        // TODO: 나중에 URL로 값 받아오면 image 연결 가능하도록 구현
         // cell.profileImageView.image = searchResult[indexPath.row].photoURL
         cell.nicknameLabel.text = searchResult[indexPath.row].nickname
         cell.emailLabel.text = searchResult[indexPath.row].email
