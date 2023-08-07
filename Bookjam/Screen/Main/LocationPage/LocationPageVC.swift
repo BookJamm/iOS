@@ -1,5 +1,5 @@
 //
-//  LocationVC.swift
+//  LocationPageVC.swift
 //  Bookjam
 //
 //  Created by 장준모 on 2023/07/26.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LocationVC: UIViewController {
+class LocationPageVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

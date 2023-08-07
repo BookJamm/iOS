@@ -275,7 +275,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailPage = BookstoreDetailVC()
+        let detailPage = BookstoreDetailPageVC()
         
         // TODO: 데이터 넣기
         

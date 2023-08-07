@@ -12,7 +12,7 @@ import UIKit
 import SnapKit
 import Then
 
-class BookstoreDetailVC: UIViewController {
+class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
@@ -429,7 +429,7 @@ class BookstoreDetailVC: UIViewController {
     }
 }
 
-extension BookstoreDetailVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
@@ -451,9 +451,9 @@ extension BookstoreDetailVC: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 }
 
-struct BookstoreDetailVC_Preview: PreviewProvider {
+struct BookstoreDetailPageVC_Preview: PreviewProvider {
     static var previews: some View {
-        BookstoreDetailVC().toPreview()
+        BookstoreDetailPageVC().toPreview()
             .previewLayout(.sizeThatFits)
             // .edgesIgnoringSafeArea(.all)
     }

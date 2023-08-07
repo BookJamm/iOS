@@ -20,12 +20,12 @@ class TabBarController: UITabBarController {
         mainVC.tabBarItem.image = UIImage(systemName: "house.fill")
         mainVC.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
         
-        let locationVC = LocationVC()
+        let locationVC = LocationPageVC()
         locationVC.tabBarItem.title = "내 주변"
         locationVC.tabBarItem.image = UIImage(systemName: "map.fill")
         locationVC.tabBarItem.selectedImage = UIImage(systemName: "map.fill")
         
-        let feedVC = FeedVC()
+        let feedVC = FeedPageVC()
         feedVC.tabBarItem.title = "피드"
         feedVC.tabBarItem.image = UIImage(systemName: "ellipsis.message.fill")
         feedVC.tabBarItem.selectedImage = UIImage(systemName: "ellipsis.message.fill")
