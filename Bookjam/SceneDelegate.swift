@@ -9,6 +9,7 @@ import UIKit
 
 import KakaoSDKAuth
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -36,7 +37,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
     }
 
-
     func sceneDidDisconnect(_ scene: UIScene) {
         
     }
@@ -56,7 +56,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         
     }
-
-
 }
 

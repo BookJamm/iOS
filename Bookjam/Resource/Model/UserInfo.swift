@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-struct userModel: Codable {
+struct User: Codable {
    
     var user_id: Int
     var name: String
