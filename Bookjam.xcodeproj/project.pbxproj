@@ -46,6 +46,11 @@
 		DDC090142A790B7F00CDCC8A /* BookListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC090132A790B7F00CDCC8A /* BookListTableViewCell.swift */; };
 		DDC090182A79225300CDCC8A /* NewsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC090172A79225300CDCC8A /* NewsInfo.swift */; };
 		DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC090192A79226F00CDCC8A /* BookInfo.swift */; };
+		DDC445072A80D10B000FE1C7 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC445062A80D10B000FE1C7 /* UIViewController+.swift */; };
+		DDC445092A80D1A5000FE1C7 /* UIScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC445082A80D1A5000FE1C7 /* UIScrollView+.swift */; };
+		DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4450A2A80D231000FE1C7 /* UIImage+.swift */; };
+		DDC4450D2A80E0BE000FE1C7 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4450C2A80E0BE000FE1C7 /* UIColor+.swift */; };
+		DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC4450E2A80E1E0000FE1C7 /* UIView+.swift */; };
 		DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */; };
 		DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */; };
 		DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */; };
@@ -126,6 +131,11 @@
 		DDC090132A790B7F00CDCC8A /* BookListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListTableViewCell.swift; sourceTree = "<group>"; };
 		DDC090172A79225300CDCC8A /* NewsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsInfo.swift; sourceTree = "<group>"; };
 		DDC090192A79226F00CDCC8A /* BookInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookInfo.swift; sourceTree = "<group>"; };
+		DDC445062A80D10B000FE1C7 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		DDC445082A80D1A5000FE1C7 /* UIScrollView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+.swift"; sourceTree = "<group>"; };
+		DDC4450A2A80D231000FE1C7 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		DDC4450C2A80E0BE000FE1C7 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DDC4450E2A80E1E0000FE1C7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		DDC6EA962A6142EB00C4B127 /* Onboarding04VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding04VC.swift; sourceTree = "<group>"; };
 		DDC6EA9B2A61A42600C4B127 /* Onboarding06VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding06VC.swift; sourceTree = "<group>"; };
 		DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding07VC.swift; sourceTree = "<group>"; };
@@ -349,6 +359,11 @@
 		DDC445052A80C3FA000FE1C7 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DDC445062A80D10B000FE1C7 /* UIViewController+.swift */,
+				DDC445082A80D1A5000FE1C7 /* UIScrollView+.swift */,
+				DDC4450A2A80D231000FE1C7 /* UIImage+.swift */,
+				DDC4450C2A80E0BE000FE1C7 /* UIColor+.swift */,
+				DDC4450E2A80E1E0000FE1C7 /* UIView+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -669,12 +684,14 @@
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
+				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				941A30FC2A61913A008152CC /* Onboarding02VC.swift in Sources */,
 				DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */,
 				DD4889412A6FB2C800F878C0 /* FriendInfoTableViewCell.swift in Sources */,
 				DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */,
 				DDB9074C2A73B0A6000A24F0 /* BookstoreDetailVC.swift in Sources */,
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
+				DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */,
 				94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */,
 				94D658FE2A71653A00E7F183 /* LocationVC.swift in Sources */,
 				DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */,
@@ -691,14 +708,17 @@
 				94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */,
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
 				DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */,
+				DDC445092A80D1A5000FE1C7 /* UIScrollView+.swift in Sources */,
 				DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */,
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
 				DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */,
+				DDC445072A80D10B000FE1C7 /* UIViewController+.swift in Sources */,
 				DD3A22132A7CD0E400E7B423 /* NewsTableViewCell.swift in Sources */,
 				DDC090182A79225300CDCC8A /* NewsInfo.swift in Sources */,
 				DD4E84752A7EA2C4004E373E /* BookListCollectionViewCell.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
 				DD58E6142A760A0A0026BEE1 /* ColorData.swift in Sources */,
+				DDC4450D2A80E0BE000FE1C7 /* UIColor+.swift in Sources */,
 				9411770B2A7984A100847F26 /* BookStoreDetailNewsView.swift in Sources */,
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
