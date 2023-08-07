@@ -238,6 +238,7 @@
 		DD38CFBB2A59993400D32B00 /* Bookjam */ = {
 			isa = PBXGroup;
 			children = (
+				DDC445052A80C3FA000FE1C7 /* Extension */,
 				DDA76BFE2A66926200C8129B /* Bookjam.entitlements */,
 				DD38CFF02A599F1500D32B00 /* Utility */,
 				DD38CFEF2A599F0F00D32B00 /* View */,
@@ -343,6 +344,13 @@
 				941177102A7EC81500847F26 /* BookStoreMain.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DDC445052A80C3FA000FE1C7 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		DDC6EA982A61559C00C4B127 /* Onboarding */ = {
