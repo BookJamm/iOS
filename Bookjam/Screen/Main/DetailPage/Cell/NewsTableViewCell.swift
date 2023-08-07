@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/04.
 //
 
+// MARK: - 디테일 페이지 소식 탭에 표시될 소식 셀
+
 import UIKit
 import SwiftUI
 

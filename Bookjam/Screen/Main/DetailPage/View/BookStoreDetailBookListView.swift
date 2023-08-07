@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/30.
 //
 
+// MARK: - 디테일 페이지 책 종류 탭 구현
+
 import SwiftUI
 import UIKit
 
@@ -15,6 +17,7 @@ class BookStoreDetailBookListView: UIView {
 
     // MARK: Variables
     
+    // 책 데이터 삽입을 위한 Book 배열 선언
     var bookList: [Book] = [
         Book(title: "기후변화 시대의 사랑", author: "김기창", publisher: "민음사", content: "폭우, 폭염, 혹한, 백화, 해빙 등 기후 변화를 배경으로 한 다양한 사랑 소설집", photo: "chaekYeonBook1"),
         Book(title: "돈과 나의 일", author: "이원지", publisher: "독립출판물", content: "일하며 살아가는 마음, 우리가 이루고 싶은 꿈과 완성하고 싶은 삶의 태도에 관한 이야기", photo: "chaekYeonBook2"),
@@ -78,11 +81,13 @@ class BookStoreDetailBookListView: UIView {
     }
 }
 
+// 책 종류 탭 TableView 셀 삽입을 위한 Delegate와 DataSource 구현
 extension BookStoreDetailBookListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return bookList.count
     }
     
+    // 셀 데이터 삽입
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = bookListTableView.dequeueReusableCell(withIdentifier: "bookListCell", for: indexPath) as! BookListTableViewCell
         
@@ -95,6 +100,7 @@ extension BookStoreDetailBookListView: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
+    // 높이 220으로 고정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 220
     }

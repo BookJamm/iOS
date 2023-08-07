@@ -35,10 +35,13 @@ class BookListTableViewCell: UITableViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        
+        // 그림자 구현
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowOffset = CGSize(width: 0, height: 7)
         $0.layer.shadowRadius = 3
         $0.layer.masksToBounds = false
+        
         $0.image = UIImage(named: "tempBookImage")
     }
     
@@ -63,7 +66,7 @@ class BookListTableViewCell: UITableViewCell {
     var contentLabel: UILabel = UILabel().then {
         $0.font = paragraph03
         $0.text = "책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다."
-        $0.numberOfLines = 5
+        $0.numberOfLines = 7
     }
     
     // MARK: View
