@@ -152,7 +152,7 @@ class Onboarding09VC: UIViewController {
     // MARK: Functions
     
     @objc func didNextButtonTapped() {
-        let mainPage = MainTabBarController()
+        let mainPage = TabBarController()
         mainPage.modalPresentationStyle = .fullScreen
         mainPage.modalTransitionStyle = .coverVertical
         

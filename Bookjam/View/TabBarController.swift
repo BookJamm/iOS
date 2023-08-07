@@ -1,5 +1,5 @@
 //
-//  MainTabBarController.swift
+//  TabBarController.swift
 //  Bookjam
 //
 //  Created by YOUJIM on 2023/08/05.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()

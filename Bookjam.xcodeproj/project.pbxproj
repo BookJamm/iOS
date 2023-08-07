@@ -38,7 +38,6 @@
 		DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CF02A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift */; };
 		DD58E6142A760A0A0026BEE1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E6132A760A0A0026BEE1 /* ColorData.swift */; };
 		DD58E6162A760CA40026BEE1 /* FontData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E6152A760CA40026BEE1 /* FontData.swift */; };
-		DD63CDBF2A80F8F10068634F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD38CFCA2A59993400D32B00 /* Info.plist */; };
 		DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB5F2A7BC21900E8DD42 /* ReviewInfo.swift */; };
 		DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB612A7BDC8B00E8DD42 /* ActivityInfo.swift */; };
 		DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB632A7BED1600E8DD42 /* ActivityTableViewCell.swift */; };
@@ -57,7 +56,7 @@
 		DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */; };
 		DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */; };
 		DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */; };
-		DDD5DAB62A7DD40D0052C3EB /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB52A7DD40D0052C3EB /* MainTabBarController.swift */; };
+		DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */; };
 		DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
@@ -142,7 +141,7 @@
 		DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding07VC.swift; sourceTree = "<group>"; };
 		DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding08VC.swift; sourceTree = "<group>"; };
 		DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding09VC.swift; sourceTree = "<group>"; };
-		DDD5DAB52A7DD40D0052C3EB /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
@@ -306,7 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				DD38CFC02A59993400D32B00 /* ViewController.swift */,
-				DDD5DAB52A7DD40D0052C3EB /* MainTabBarController.swift */,
+				DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */,
 				94D658FF2A71659A00E7F183 /* MyPage */,
 				94D658FA2A71649700E7F183 /* FeedPage */,
 				94D658F92A7162FD00E7F183 /* LocationPage */,
@@ -525,7 +524,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD63CDBF2A80F8F10068634F /* Info.plist in Resources */,
 				DD38CFC92A59993400D32B00 /* LaunchScreen.storyboard in Resources */,
 				DD38CFC62A59993400D32B00 /* Assets.xcassets in Resources */,
 			);
@@ -712,7 +710,7 @@
 				DD58E6162A760CA40026BEE1 /* FontData.swift in Sources */,
 				941A31012A6A8DCA008152CC /* UserInfo.swift in Sources */,
 				DDC090142A790B7F00CDCC8A /* BookListTableViewCell.swift in Sources */,
-				DDD5DAB62A7DD40D0052C3EB /* MainTabBarController.swift in Sources */,
+				DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */,
 				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,
 				9411770C2A7984A500847F26 /* BookStoreDetailReviewView.swift in Sources */,
 				94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */,
@@ -914,7 +912,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Bookjam/Info.plist;
+				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
@@ -952,7 +950,7 @@
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 2DF5SKQK2R;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Bookjam/Info.plist;
+				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
