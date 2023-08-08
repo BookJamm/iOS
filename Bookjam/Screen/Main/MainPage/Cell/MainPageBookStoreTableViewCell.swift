@@ -5,6 +5,8 @@
 //  Created by 장준모 on 2023/08/02.
 //
 
+// MARK: - 메인 페이지 화면 책방 목록 표시할 때 들어갈 책방 정보 TableView 셀
+
 import UIKit
 import SwiftUI
 
@@ -32,6 +34,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     static let cellID = "bookStoreCell"
     
+    // 책방 이미지들 주소 들어갈 배열
     var images: [String] = ["squareDefaultImage",
                             "squareDefaultImage",
                             "squareDefaultImage",
@@ -179,18 +182,18 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
+        // images 데이터 cell에 할당
         cell.photoImageView.image = UIImage(named: images[indexPath.row])
         cell.photoImageView.layer.cornerRadius = 8
         
         return cell
     }
     
+    // 가로스크롤 구현을 위해 height 사이즈 collectionView 사이즈로 고정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
     }
 }
-
-
 
 #if DEBUG
 

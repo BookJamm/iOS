@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/07/30.
 //
 
+// MARK: - 디테일 페이지 리뷰 탭 구현
+
 import SwiftUI
 import UIKit
 
@@ -15,6 +17,7 @@ class BookStoreDetailReviewView: UIView {
     
     // MARK: Variables
     
+    // 리뷰 데이터 삽입을 위한 Review 배열 선언
     var reviews: [Review] = [
         Review(userName: "독서 장인", visitDate: "2023 / 08 / 03 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["ChaekYeonFive", "ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine"]),
         Review(userName: "짐깅", visitDate: "2023 / 07 / 24 방문", comment: "조용하고 혼자 앉아서 힐링하기 좋아요! 추천합니다 🙌", photos: ["ChaekYeon", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonTwo"]),
@@ -69,6 +72,7 @@ class BookStoreDetailReviewView: UIView {
     func setUpView() {
         self.backgroundColor = .white
         
+        // 스크롤 중첩 방지
         visitReviewTableView.isScrollEnabled = false
         visitReviewTableView.separatorStyle = .none
     }
@@ -143,16 +147,19 @@ class BookStoreDetailReviewView: UIView {
     
     // MARK: Functions
     
+    // TODO: 리뷰 작성 버튼 눌렀을 때 나오는 화면 구현하고 전환 연결
     @objc func didWriteReviewButtonTapped() {
         
     }
 }
 
+// 리뷰 목록 구현을 위한 Delegate와 DataSource 구현
 extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviews.count
     }
     
+    // 데이터 삽입 구현
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = visitReviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         
@@ -167,6 +174,7 @@ extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    // TODO: 사진 유무에 따라 셀 높이 다르게 설정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 260
     }

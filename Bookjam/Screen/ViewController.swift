@@ -14,6 +14,7 @@ import UIKit
 import SnapKit
 import Then
 
+
 class ViewController: UIViewController {
 
     // MARK: Variables
@@ -61,6 +62,3 @@ struct ViewController_Preview: PreviewProvider {
             // .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-

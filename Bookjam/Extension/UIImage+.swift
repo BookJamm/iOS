@@ -31,3 +31,18 @@ extension UIImage {
         return roundedImage
     }
 }
+
+// MARK:
+// TODO: 장모님께 뭔 extension인지 여쭤보고 주석 달아두기
+
+extension UIImage {
+    convenience init(color: UIColor, size: CGSize) {
+        UIGraphicsBeginImageContext(size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(CGRect(origin: .zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: (image?.cgImage)!)
+    }
+}
