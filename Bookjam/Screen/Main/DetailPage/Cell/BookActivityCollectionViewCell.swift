@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/06.
 //
 
+// MARK: - 홈 탭 독서 활동 참여 목록에 표시될 독서 활동 정보 셀
+
 import UIKit
 import SwiftUI
 
@@ -137,6 +139,7 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     
     // MARK: Functions
     
+    // 참여하기 버튼 누르면 실행되는 메소드
     @objc func didJoinButtonTapped() {
         
     }

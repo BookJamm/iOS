@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/06.
 //
 
+// MARK: - 홈 탭에서 책 목록에 표시될 책 정보 셀
+
 import UIKit
 import SwiftUI
 
@@ -20,10 +22,13 @@ class BookListCollectionViewCell: UICollectionViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
+        
+        // 그림자 구현
         $0.layer.shadowOpacity = 0.3
         $0.layer.shadowOffset = CGSize(width: 0, height: 7)
         $0.layer.shadowRadius = 3
         $0.layer.masksToBounds = false
+        
         $0.image = UIImage(named: "tempBookImage")
     }
     

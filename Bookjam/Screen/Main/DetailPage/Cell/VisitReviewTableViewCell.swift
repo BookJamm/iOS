@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/03.
 //
 
+// MARK: - 홈 탭과 참여 탭, 리뷰 탭에 사용되는 리뷰 셀
+
 import UIKit
 import SwiftUI
 
@@ -153,6 +155,7 @@ class VisitReviewTableViewCell: UITableViewCell {
             $0.width.equalToSuperview().offset(-40)
             $0.top.equalTo(userProfileImageView.snp.bottom).offset(20)
             $0.leading.equalTo(userProfileImageView.snp.leading)
+            $0.trailing.equalToSuperview().offset(-20)
         }
 
         imageStackView.snp.makeConstraints {
@@ -181,6 +184,7 @@ class VisitReviewTableViewCell: UITableViewCell {
     
     // MARK: Functions
     
+    // TODO: 친구 추가 버튼 누르면 버튼 바뀌는 부분과 서버에 데이터 전송하는 부분 구현 필요
     @objc func didAddFriendButtonTapped() {
         
     }

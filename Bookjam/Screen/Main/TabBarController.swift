@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - 메인 들어가면 표시되는 탭바 컨트롤러 구현 화면
+
 class TabBarController: UITabBarController {
     
     override func viewDidLoad() {

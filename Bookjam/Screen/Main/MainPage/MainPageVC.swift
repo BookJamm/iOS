@@ -5,6 +5,8 @@
 //  Created by 장준모 on 2023/07/26.
 //
 
+// MARK: - 메인 탭바에서 홈을 눌렀을 때 나오는 메인 페이지 화면
+
 import UIKit
 import SwiftUI
 
@@ -41,7 +43,7 @@ class MainPageVC: UIViewController {
     
    lazy var dummyData: [bookStoreMain] = [bookStore1, bookStore2, bookStore3]
     
-    var searchBar: UISearchBar = UISearchBar().then{
+    var searchBar: UISearchBar = UISearchBar().then {
         $0.placeholder = "상호명 또는 주소 검색"
         $0.layer.cornerRadius = 25
         $0.clipsToBounds = true
@@ -52,7 +54,7 @@ class MainPageVC: UIViewController {
         $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
     }
     
-    var independentBookstoreButton: UIButton = UIButton().then{
+    var independentBookstoreButton: UIButton = UIButton().then {
         $0.setTitle("독립서점", for: .normal)
         $0.tintColor = main03
         $0.titleLabel?.font = paragraph02
@@ -72,7 +74,7 @@ class MainPageVC: UIViewController {
         $0.configuration = configuration
     }
     
-    var bookPlayGroundButton: UIButton = UIButton().then{
+    var bookPlayGroundButton: UIButton = UIButton().then {
         $0.setTitle("책 놀이터", for: .normal)
         $0.tintColor = gray05
         $0.titleLabel?.font = paragraph02
@@ -87,12 +89,10 @@ class MainPageVC: UIViewController {
         configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
-        // Create the button using the configuration
-
         $0.configuration = configuration
     }
     
-    var libraryButton: UIButton = UIButton().then{
+    var libraryButton: UIButton = UIButton().then {
         $0.setTitle("도서관", for: .normal)
         $0.tintColor = gray05
         $0.titleLabel?.font = paragraph02
@@ -102,13 +102,10 @@ class MainPageVC: UIViewController {
         let image = UIImage(systemName: "books.vertical.fill", withConfiguration: config)
         $0.setImage(image, for: .normal)
         
-        // Create the button configuration
         var configuration = UIButton.Configuration.plain()
         configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
-        // Create the button using the configuration
-
         $0.configuration = configuration
     }
     
@@ -120,13 +117,13 @@ class MainPageVC: UIViewController {
         $0.backgroundColor = gray04
     }
     
-    var sortButton: UIButton = UIButton().then{
+    var sortButton: UIButton = UIButton().then {
         $0.setTitle("거리순 ↓", for: .normal)
         $0.setTitleColor(gray05, for: .normal)
         $0.setTitle("거리순", for: .selected)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
     }
-    var infoButton: UIButton = UIButton().then{
+    var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
         $0.tintColor = gray05
     }
@@ -239,6 +236,7 @@ class MainPageVC: UIViewController {
 
 // MARK: Extension
 
+// 거리순 밑으로 보여질 tableView 구현을 위한 Delegate, DataSource extension
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dummyData.count  //임시
@@ -270,7 +268,6 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         }
         cell.images = images
         
-        
         return cell
     }
     
@@ -280,19 +277,6 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         // TODO: 데이터 넣기
         
         navigationController?.pushViewController(detailPage, animated: true)
-    }
-}
-
-extension UIImage {
-    // Create a UIImage with a solid color
-    convenience init(color: UIColor, size: CGSize) {
-        UIGraphicsBeginImageContext(size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(color.cgColor)
-        context?.fill(CGRect(origin: .zero, size: size))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        self.init(cgImage: (image?.cgImage)!)
     }
 }
 
