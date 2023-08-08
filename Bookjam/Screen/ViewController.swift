@@ -62,6 +62,3 @@ struct ViewController_Preview: PreviewProvider {
             // .edgesIgnoringSafeArea(.all)
     }
 }
-
-
-
