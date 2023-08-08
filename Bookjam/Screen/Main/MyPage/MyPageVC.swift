@@ -5,25 +5,59 @@
 //  Created by 장준모 on 2023/07/26.
 //
 
+// MARK: - 메인 탭바에서 마이 누르면 나오는 마이 페이지 화면
+
+import SwiftUI
 import UIKit
+
+import SnapKit
+import Then
+
 
 class MyPageVC: UIViewController {
 
+    // MARK: Variables
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.backgroundColor = .white
+
+        setUpView()
+        setUpLayout()
+        setUpConstraint()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: View
+    
+    func setUpView() {
+        
     }
-    */
+    
+    
+    // MARK: Layout
+    
+    func setUpLayout() {
+        
+    }
+    
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        
+    }
+    
+    
+    // MARK: Constraint
+    
+    func setUpConstraint() {
+        
+    }
+    
+}
 
+struct MyPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        MyPageVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
 }

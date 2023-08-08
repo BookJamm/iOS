@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/03.
 //
 
+// MARK: - 디테일 페이지 참여 탭에 표시될 활동 참여 셀
+
 import UIKit
 import SwiftUI
 
@@ -81,6 +83,7 @@ class ActivityTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        // 배경 회색으로 만들기 위해 contentView 프레임 사이즈 지정
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 16.0, left: 16, bottom: 10, right: 16))
     }
     
@@ -159,6 +162,7 @@ class ActivityTableViewCell: UITableViewCell {
     
     // MARK: Functions
     
+    // TODO: 참여하기 버튼 눌렀을 때 나오는 화면 구현
     @objc func didJoinActivityButtonTapped() {
         
     }

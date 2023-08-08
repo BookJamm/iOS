@@ -5,6 +5,8 @@
 //  Created by YOUJIM on 2023/08/05.
 //
 
+// MARK: - 메인 페이지의 책방별 사진/디테일 페이지 상단에 위치한 사진 5개 구현에 사용되는 셀
+
 import UIKit
 import SwiftUI
 
