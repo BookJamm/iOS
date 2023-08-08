@@ -51,6 +51,7 @@ class UserPageVC: UIViewController {
         $0.titleLabel?.font = paragraph03
         $0.setTitleColor(.black, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didChangeNicknameButtonTapped), for: .touchUpInside)
     }
     
     var changePasswordButton: UIButton = UIButton().then {
@@ -250,6 +251,13 @@ class UserPageVC: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().offset(-20)
         }
+    }
+    
+    // MARK: Function
+    
+    // 프로필/닉네임 변경 버튼 클릭했을 때 프로필 편집 창으로 화면 전환
+    @objc func didChangeNicknameButtonTapped() {
+        navigationController?.pushViewController(ChangeProfileVC(), animated: true)
     }
 }
 
