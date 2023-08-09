@@ -187,7 +187,7 @@ class Onboarding03VC: UIViewController {
         }
         
         idDuplicateLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview().multipliedBy(0.35)
+            $0.leading.equalTo(idLabel.snp.leading)
             $0.centerY.equalToSuperview().multipliedBy(0.69)
         }
         
@@ -286,25 +286,45 @@ class Onboarding03VC: UIViewController {
                 passwordAccordLabel.text = "비밀번호가 일치하지 않습니다."
             }
         }
-
-        
     }//end of T'Fdid'Changed
     
     @objc func didDuplicateButtonTapped(){
         if let email = emailTextField.text, !email.isEmpty {
-                if isValidEmail(email) {
-                    idDuplicateLabel.text = ""
-                    LoginAPI.emailCheckRequest(email: email)
-                } else {
-                    idDuplicateLabel.text = "이메일 형식이 아닙니다."
-                    idDuplicateLabel.textColor = .red
-                    idDuplicateLabel.isHidden = false
-                }
+            if isValidEmail(email) {
+                idDuplicateLabel.text = ""
+                
+                // MARK: 이메일 중복 체크 API 연결
+                APIManager.shared.postData(
+                    urlEndpointString: Constant.postEmailDuplicate,
+                    responseDataType: APIModel<DuplicateResponseModel?>?.self,
+                    requestDataType: DuplictateRequestModel.self,
+                    parameter: DuplictateRequestModel(email: email),
+                    completionHandler: {
+                        response in
+                        if let result = response?.result {
+                            if result?.isEmailTaken == false {
+                                self.idDuplicateLabel.text = "사용할 수 있는 이메일입니다."
+                                self.idDuplicateLabel.textColor = complete
+                                self.idDuplicateLabel.isHidden = false
+                            }
+                            else {
+                                self.idDuplicateLabel.text = "이미 존재하는 이메일입니다."
+                                self.idDuplicateLabel.textColor = alert
+                                self.idDuplicateLabel.isHidden = false
+                            }
+                        }
+                    })
+                
             } else {
-                idDuplicateLabel.text = "이메일을 입력해주세요."
+                idDuplicateLabel.text = "이메일 형식이 아닙니다."
                 idDuplicateLabel.textColor = .red
                 idDuplicateLabel.isHidden = false
             }
+        } else {
+            idDuplicateLabel.text = "이메일을 입력해주세요."
+            idDuplicateLabel.textColor = .red
+            idDuplicateLabel.isHidden = false
+        }
     }
     
     //이메일 형식인지 아닌지 체크하는 함수
@@ -317,17 +337,16 @@ class Onboarding03VC: UIViewController {
     
     //'다음으로'버튼 활성화/비활성화
     func updateNextButton(willActive: Bool) {
-            
             if(willActive == true) {
                 //다음 버튼 색 변경
-                self.nextButton.backgroundColor = UIColor(named: "MainColor")
+                self.nextButton.backgroundColor = main01
                 //다음 페이지 연결
                 print("다음 버튼 활성화")
                 nextButton.isEnabled = true
                 
             } else {
                 //다음 버튼 색 변경
-                self.nextButton.backgroundColor = .gray
+                self.nextButton.backgroundColor = gray01
                 //다음 페이지 연결 해제
                 print("다음 버튼 비활성화")
                 nextButton.isEnabled = false
