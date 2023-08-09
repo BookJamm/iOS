@@ -31,6 +31,7 @@ class Onboarding01VC: UIViewController {
         $0.setTitleColor(main01, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
         $0.layer.cornerRadius = 8
+        $0.addTarget(self, action: #selector(didEmailButtonTapped), for: .touchUpInside)
     }
     
     let kakaoButton: UIButton = UIButton().then {
@@ -127,6 +128,11 @@ class Onboarding01VC: UIViewController {
     
     
     // MARK: Functions
+    
+    // 북잼 로그인 버튼 누르면 로그인 화면으로 넘어가게 구현
+    @objc func didEmailButtonTapped() {
+        navigationController?.pushViewController(LoginVC(), animated: true)
+    }
     
     // 회원가입 버튼 누르면 회원가입 화면(Onboarding02VC)로 넘어가게 구현
     // signUpButton addTarget으로 설정됨
