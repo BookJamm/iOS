@@ -25,6 +25,8 @@
 		DD1022412A82C94000F74CC6 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1022402A82C94000F74CC6 /* APIModel.swift */; };
 		DD2D1A082A81D4D8003AEEA6 /* UserPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A072A81D4D8003AEEA6 /* UserPageVC.swift */; };
 		DD2D1A0A2A81EF8A003AEEA6 /* ChangeProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */; };
+		DD33A2FC2A8373EC00D4D7C3 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */; };
+		DD33A2FF2A83755900D4D7C3 /* EmailDuplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FE2A83755900D4D7C3 /* EmailDuplicate.swift */; };
 		DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBC2A59993400D32B00 /* AppDelegate.swift */; };
 		DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBE2A59993400D32B00 /* SceneDelegate.swift */; };
 		DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFC02A59993400D32B00 /* ViewController.swift */; };
@@ -109,6 +111,8 @@
 		DD112CF02A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05BottomSheet.swift; sourceTree = "<group>"; };
 		DD2D1A072A81D4D8003AEEA6 /* UserPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageVC.swift; sourceTree = "<group>"; };
 		DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileVC.swift; sourceTree = "<group>"; };
+		DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
+		DD33A2FE2A83755900D4D7C3 /* EmailDuplicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailDuplicate.swift; sourceTree = "<group>"; };
 		DD38CFB92A59993400D32B00 /* Bookjam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bookjam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD38CFBC2A59993400D32B00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD38CFBE2A59993400D32B00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -229,6 +233,14 @@
 				DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		DD33A2FD2A83754100D4D7C3 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				DD33A2FE2A83755900D4D7C3 /* EmailDuplicate.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		DD38CFB02A59993400D32B00 = {
@@ -406,9 +418,11 @@
 		DDD5DAB42A7DD36B0052C3EB /* API */ = {
 			isa = PBXGroup;
 			children = (
+				DD33A2FD2A83754100D4D7C3 /* Domain */,
 				941A31032A6AAB3B008152CC /* LoginAPI.swift */,
 				DD52B03F2A829B9400A5E3A3 /* APIManager.swift */,
 				DD1022402A82C94000F74CC6 /* APIModel.swift */,
+				DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -739,6 +753,7 @@
 				941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */,
 				9411770F2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift in Sources */,
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
+				DD33A2FF2A83755900D4D7C3 /* EmailDuplicate.swift in Sources */,
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
@@ -780,6 +795,7 @@
 				DDC4450D2A80E0BE000FE1C7 /* UIColor+.swift in Sources */,
 				DD52B0402A829B9400A5E3A3 /* APIManager.swift in Sources */,
 				DD2D1A082A81D4D8003AEEA6 /* UserPageVC.swift in Sources */,
+				DD33A2FC2A8373EC00D4D7C3 /* APIConstant.swift in Sources */,
 				9411770B2A7984A100847F26 /* BookStoreDetailNewsView.swift in Sources */,
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
