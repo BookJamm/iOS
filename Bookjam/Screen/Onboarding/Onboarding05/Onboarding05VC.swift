@@ -145,6 +145,24 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     // searchButton 누르면 floatingPanel 올라오게 구현
     // searchButton에 addTarget으로 연결
     @objc func didSearchButtonTapped() {
+        // MARK: 서버 API 연결
+        let email = emailTextField.text
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.searchFriend,
+            responseDataType: APIModel<SearchFriendResponseModel>?.self,
+            requestDataType: SearchFriendRequestModel.self,
+            parameter: SearchFriendRequestModel(email: email),
+            completionHandler: {
+                response in
+                // TODO: 서버 api 완성되면 SearchFriendResponseModel 수정해서 연결
+                print(response)
+//                if let result = response?.result {
+//                    print(re)
+//                }
+            })
+        
+        
         floatingPanel.addPanel(toParent: self)
         floatingPanel.set(contentViewController: Onboarding05BottomSheet())
         floatingPanel.hide()
