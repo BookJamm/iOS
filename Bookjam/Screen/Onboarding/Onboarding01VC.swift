@@ -147,7 +147,7 @@ class Onboarding01VC: UIViewController {
     @objc func didKakaoButtonTapped() {
         print("loginKakao() called.")
         
-        // ✅ 카카오톡 설치 여부 확인
+        // 카카오톡 설치 여부 확인
         if (UserApi.isKakaoTalkLoginAvailable()) {
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
@@ -156,17 +156,27 @@ class Onboarding01VC: UIViewController {
                 else {
                     print("loginWithKakaoTalk() success.")
                     
-                    // ✅ 회원가입 성공 시 oauthToken 저장가능하다
+                    // 회원가입 성공 시 oauthToken 저장가능하다
                     // _ = oauthToken
                     
-                    // ✅ 사용자정보를 성공적으로 가져오면 화면전환 한다.
+                    // 사용자정보를 성공적으로 가져오면 화면전환 한다.
                     //                    self.getUserInfo()
                 }
             }
         }
-        // ✅ 카카오톡 미설치
+        // 카카오톡 미설치
         else {
             print("카카오톡 미설치")
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("카카오톡 팝업 웹뷰 띄우기")
+                    
+                    _ = oauthToken
+                }
+            }
         }
     }
 }//end of Onboarding01VC
