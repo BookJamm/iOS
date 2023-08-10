@@ -50,7 +50,10 @@ class MyPageVC: UIViewController {
         $0.font = paragraph01
     }
     
-    var activityFrameView = ActivityFrameView()
+    var activityFrameView = ActivityFrameView().then{
+        $0.backgroundColor = main05
+        
+    }
     
     // 활동 참여 현황뷰
     var activityParticipateView: UIView = UIView().then {
@@ -180,6 +183,9 @@ class MyPageVC: UIViewController {
         setUpLayout()
         setUpConstraint()
         setUpDelegate()
+        
+        myPageSetUpButton.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
+
     }
     
 
@@ -418,6 +424,12 @@ class MyPageVC: UIViewController {
             $0.height.equalTo(160)
             $0.trailing.equalToSuperview().offset(-10)
         }
+    }//end of constraint
+    
+    // MARK: Function
+    //  마이페이지 설정 눌렀을 때 UserPageVC로 전환
+    @objc func didMyPageSetUpButtonTapped() {
+        navigationController?.pushViewController(UserPageVC(), animated: true)
     }
     
 }
@@ -431,7 +443,7 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.contentView.backgroundColor = gray01
+//        cell.contentView.backgroundColor = gray01
         
         return cell
     }

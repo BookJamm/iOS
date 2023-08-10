@@ -89,26 +89,30 @@ class ActivityFrameView: UIView {
       
         recordLabel.snp.makeConstraints{
             $0.centerX.equalTo(underLineView1).multipliedBy(0.5)
+            $0.top.equalToSuperview().offset(10)
         }
         recordNumberLabel.snp.makeConstraints{
             $0.centerX.equalTo(recordLabel)
-            $0.centerY.equalTo(recordLabel).offset(20)
+            $0.bottom.equalToSuperview().inset(20)
         }
         
         visitLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
+            $0.top.equalTo(recordLabel)
         }
         visitNumberLabel.snp.makeConstraints{
             $0.centerX.equalTo(visitLabel)
-            $0.centerY.equalTo(visitLabel).offset(20)
+            $0.bottom.equalTo(recordNumberLabel)
         }
         
         reviewLabel.snp.makeConstraints{
             $0.centerX.equalTo(underLineView2).multipliedBy(1.25)
+            $0.top.equalTo(recordLabel)
+
         }
         reviewNumberLabel.snp.makeConstraints{
             $0.centerX.equalTo(reviewLabel)
-            $0.centerY.equalTo(reviewLabel).offset(20)
+            $0.bottom.equalTo(recordNumberLabel)
         }
         
         underLineView1.snp.makeConstraints{
