@@ -149,7 +149,7 @@ class BookStoreDetailReviewView: UIView {
     
     // TODO: 리뷰 작성 버튼 눌렀을 때 나오는 화면 구현하고 전환 연결
     @objc func didWriteReviewButtonTapped() {
-        
+        print("dmdmddm")
     }
 }
 
