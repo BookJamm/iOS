@@ -1,19 +1,20 @@
 //
-//  MyReviewBookStoreView.swift
+//  LikeActivityBookStoreView.swift
 //  Bookjam
 //
-//  Created by 장준모 on 2023/08/09.
+//  Created by 장준모 on 2023/08/10.
 //
 
 import UIKit
 
-class MyReviewBookStoreView: UIView {
+class LikeActivityBookStoreView: UIView {
 
     // MARK: Variables
     
     var bookStoreName: UILabel = UILabel().then{
         $0.text = "책발전소광교"
-        $0.font = title06
+        $0.font = paragraph05
+        $0.textColor = gray06
         $0.sizeToFit()
     }
     
@@ -29,40 +30,22 @@ class MyReviewBookStoreView: UIView {
         $0.tintColor = gray04
     }
     
-    var bookNameButton: UIButton = UIButton().then{
-        $0.setTitle("책 이름입니다.", for: .normal)
-        $0.titleLabel?.font = paragraph05
-        $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray02?.cgColor
-        $0.layer.cornerRadius = 15
-        $0.layer.borderColor = gray04?.cgColor
-        $0.layer.borderWidth = 1.0
+    var activityNameLabel: UILabel = UILabel().then{
+        $0.text = "북 큐레이팅"
+        $0.font = paragraph01
+        $0.sizeToFit()
+        
+    }
+    var starImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(systemName: "star.fill")
+        $0.tintColor = warning
     }
     
-    var speechBubbleImageView : UIImageView = UIImageView().then{
-        $0.image = UIImage(systemName: "bubble.left")
-        $0.tintColor = .black
+    var starValueLabel: UILabel = UILabel().then {
+        $0.font = paragraph05
+        $0.text = "4.93"
     }
 
-    var speechBubbleLabel: UILabel = UILabel().then{
-        $0.text = "213"
-    }
-    
-    var heartImageView : UIImageView = UIImageView().then{
-        $0.image = UIImage(systemName: "heart")
-        $0.tintColor = .black
-    }
-    
-    var heartLabel: UILabel = UILabel().then{
-        $0.text = "213"
-    }
-    
-    var visitDayLabel: UILabel = UILabel().then{
-        $0.text = "2023 / 06 / 06 방문"
-        $0.font = captionText03
-        $0.textColor = gray05
-        $0.sizeToFit()
-    }
     
     override func draw(_ rect: CGRect) {
 //        setUpView()
@@ -78,8 +61,9 @@ class MyReviewBookStoreView: UIView {
             bookStoreName,
             bookStoreImageView,
             bookMarkImageView,
-            bookNameButton,
-            visitDayLabel,
+            activityNameLabel,
+            starImageView,
+            starValueLabel,
         ].forEach { self.addSubview($0) }
     }
     
@@ -88,7 +72,6 @@ class MyReviewBookStoreView: UIView {
     func setUpConstraint() {
         bookStoreImageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(166)
         }
         bookStoreName.snp.makeConstraints{
             $0.top.equalTo(bookStoreImageView.snp.bottom).offset(10)
@@ -97,14 +80,17 @@ class MyReviewBookStoreView: UIView {
             $0.centerY.equalTo(bookStoreName)
             $0.leading.equalTo(bookStoreName.snp.trailing).offset(10)
         }
-        bookNameButton.snp.makeConstraints{
-            $0.top.equalTo(bookStoreName.snp.bottom).offset(15)
-            $0.width.equalTo(105)
+        activityNameLabel.snp.makeConstraints{
+            $0.top.equalTo(bookStoreName.snp.bottom).offset(10)
         }
-        visitDayLabel.snp.makeConstraints{
-            $0.top.equalTo(bookNameButton.snp.bottom).offset(15)
+        starImageView.snp.makeConstraints{
+            $0.top.equalTo(activityNameLabel.snp.bottom).offset(10)
+            $0.height.width.equalTo(20)
         }
-        
+        starValueLabel.snp.makeConstraints{
+            $0.leading.equalTo(starImageView.snp.trailing).offset(10)
+            $0.centerY.equalTo(starImageView)
+        }
     }
     
 }
@@ -113,10 +99,10 @@ class MyReviewBookStoreView: UIView {
 import SwiftUI
 
 @available(iOS 13.0, *)
-struct MyReviewBookStoreView_Preview: PreviewProvider {
+struct LikeActivityBookStoreView_Preview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
-            let button = MyReviewBookStoreView()
+            let button = LikeActivityBookStoreView()
             return button
         }
         .previewLayout(.sizeThatFits)

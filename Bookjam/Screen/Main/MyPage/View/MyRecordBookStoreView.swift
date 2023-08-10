@@ -82,6 +82,7 @@ class MyRecordBookStoreView: UIView {
     func setUpConstraint() {
         bookStoreImageView.snp.makeConstraints{
             $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(166)
         }
         bookStoreName.snp.makeConstraints{
             $0.top.equalTo(bookStoreImageView.snp.bottom).offset(10)
@@ -91,7 +92,7 @@ class MyRecordBookStoreView: UIView {
             $0.leading.equalTo(bookStoreName.snp.trailing).offset(10)
         }
         speechBubbleImageView.snp.makeConstraints{
-            $0.top.equalTo(bookStoreName.snp.bottom).offset(20)
+            $0.top.equalTo(bookStoreName.snp.bottom).offset(10)
         }
         speechBubbleLabel.snp.makeConstraints{
             $0.centerY.equalTo(speechBubbleImageView)
@@ -106,7 +107,7 @@ class MyRecordBookStoreView: UIView {
             $0.leading.equalTo(heartImageView.snp.trailing).offset(10)
         }
         visitDayLabel.snp.makeConstraints{
-            $0.top.equalTo(speechBubbleImageView.snp.bottom).offset(20)
+            $0.top.equalTo(speechBubbleImageView.snp.bottom).offset(10)
             
         }
     }

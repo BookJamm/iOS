@@ -80,7 +80,6 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
     
     func setUpLayout() {
         
-        self.backgroundColor = gray03
         [
             activityImageView,
             activityNameLabel,
@@ -88,7 +87,7 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
             starValueLabel,
             numOfReviewLabel,
             detailViewButton
-        ].forEach{ self.addSubview($0)}
+        ].forEach{ self.contentView.addSubview($0) }
         
     }
     
@@ -105,14 +104,17 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
         
         activityImageView.snp.makeConstraints{
             $0.top.leading.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().offset(-10)
         }
         activityNameLabel.snp.makeConstraints{
             $0.top.equalTo(activityImageView).offset(10)
             $0.leading.equalTo(activityImageView.snp.trailing).offset(15)
+            $0.height.equalTo(24)
         }
         starImageView.snp.makeConstraints{
             $0.leading.equalTo(activityNameLabel).inset(-1)
-            $0.top.equalTo(activityNameLabel.snp.bottom).offset(20)
+            $0.top.equalTo(activityNameLabel.snp.bottom).offset(10)
+            $0.height.width.equalTo(20)
         }
         starValueLabel.snp.makeConstraints{
             $0.centerY.equalTo(starImageView)
@@ -123,7 +125,7 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(starValueLabel.snp.trailing).offset(10)
         }
         detailViewButton.snp.makeConstraints{
-            $0.top.equalTo(starImageView.snp.bottom).offset(30)
+            $0.top.equalTo(starImageView.snp.bottom).offset(20)
             $0.bottom.equalTo(activityImageView.snp.bottom)
             $0.leading.equalTo(starImageView)
             $0.trailing.equalToSuperview().offset(-20).priority(.high)
