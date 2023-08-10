@@ -32,8 +32,7 @@ extension UIImage {
     }
 }
 
-// MARK:
-// TODO: 장모님께 뭔 extension인지 여쭤보고 주석 달아두기
+// MARK: 이미지 사이즈와 색깔을 설정하는 extension
 
 extension UIImage {
     convenience init(color: UIColor, size: CGSize) {
