@@ -37,12 +37,14 @@ class MyPageVC: UIViewController {
         $0.text = "userName님"
         $0.font = paragraph01
     }
+    
     var myPageSetUpButton: UIButton = UIButton().then {
         $0.setTitle("마이페이지 설정", for: .normal)
         $0.titleLabel?.font = paragraph04
         $0.setTitleColor(gray06, for: .normal)
         $0.layer.backgroundColor = gray03?.cgColor
         $0.layer.cornerRadius = 15
+        $0.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
     }
     
     var userActivityLabel: UILabel = UILabel().then{
@@ -183,16 +185,13 @@ class MyPageVC: UIViewController {
         setUpLayout()
         setUpConstraint()
         setUpDelegate()
-        
-        myPageSetUpButton.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
-
     }
     
 
     // MARK: View
     
     func setUpView() {
-        
+        view.backgroundColor = .white
     }
     
     
