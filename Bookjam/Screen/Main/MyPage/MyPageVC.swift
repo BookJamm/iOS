@@ -192,6 +192,7 @@ class MyPageVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
+        
     }
     
     
