@@ -19,6 +19,7 @@
 		941177192A83826B00847F26 /* MyReviewBookStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941177182A83826B00847F26 /* MyReviewBookStoreView.swift */; };
 		9411771B2A83BFC400847F26 /* ActivityFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411771A2A83BFC400847F26 /* ActivityFrameView.swift */; };
 		9411771D2A84F6C400847F26 /* LikeActivityBookStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9411771C2A84F6C400847F26 /* LikeActivityBookStoreView.swift */; };
+		9411771E2A85298200847F26 /* EmailDuplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FE2A83755900D4D7C3 /* EmailDuplicate.swift */; };
 		941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FD2A6260D0008152CC /* Onboarding03VC.swift */; };
 		941A31012A6A8DCA008152CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31002A6A8DCA008152CC /* UserInfo.swift */; };
 		941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31032A6AAB3B008152CC /* LoginAPI.swift */; };
@@ -31,7 +32,6 @@
 		DD2D1A082A81D4D8003AEEA6 /* UserPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A072A81D4D8003AEEA6 /* UserPageVC.swift */; };
 		DD2D1A0A2A81EF8A003AEEA6 /* ChangeProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */; };
 		DD33A2FC2A8373EC00D4D7C3 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */; };
-		DD33A2FF2A83755900D4D7C3 /* EmailDuplicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FE2A83755900D4D7C3 /* EmailDuplicate.swift */; };
 		DD33A3012A8380D000D4D7C3 /* SearchFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A3002A8380D000D4D7C3 /* SearchFriend.swift */; };
 		DD35407B2A83BC0900B5A9A3 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35407A2A83BC0900B5A9A3 /* LoginVC.swift */; };
 		DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD38CFBC2A59993400D32B00 /* AppDelegate.swift */; };
@@ -837,6 +837,7 @@
 				DD35407B2A83BC0900B5A9A3 /* LoginVC.swift in Sources */,
 				DDC445072A80D10B000FE1C7 /* UIViewController+.swift in Sources */,
 				DD3A22132A7CD0E400E7B423 /* NewsTableViewCell.swift in Sources */,
+				9411771E2A85298200847F26 /* EmailDuplicate.swift in Sources */,
 				DDC090182A79225300CDCC8A /* NewsInfo.swift in Sources */,
 				DD4E84752A7EA2C4004E373E /* BookListCollectionViewCell.swift in Sources */,
 				DD38CFBD2A59993400D32B00 /* AppDelegate.swift in Sources */,
