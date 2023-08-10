@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         navigationController.navigationBar.tintColor = .black
         
-        self.window?.rootViewController = navigationController
+        self.window?.rootViewController = BookStoreReviewDetailVC()
     }
     
     // 카카오 로그인 HadnleOpenUrl() 추가
