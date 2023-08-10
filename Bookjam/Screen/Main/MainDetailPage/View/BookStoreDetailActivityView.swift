@@ -49,6 +49,9 @@ class BookStoreDetailActivityView: UIView {
         activityTableView.isScrollEnabled = false
         activityTableView.separatorStyle = .none
         
+        // 참여하기 버튼 누를 수 있게 상호작용 허용
+        activityTableView.isUserInteractionEnabled = true
+        
         // 참여 목록 수 업데이트
         activityLabel.text = "\(activities.count)개의 참여"
     }
