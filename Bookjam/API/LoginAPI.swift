@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+
 struct LoginAPI {
     
    static func emailCheckRequest(email: String) -> Void{
@@ -79,6 +80,5 @@ struct LoginAPI {
                    break
                }//end switch
            }// end responseDecodable
-        
     }//end
 }//end of LoginAPI
