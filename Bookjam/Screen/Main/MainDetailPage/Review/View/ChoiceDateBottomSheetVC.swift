@@ -10,15 +10,31 @@
 import SwiftUI
 import UIKit
 
-import FloatingPanel
 import SnapKit
 import Then
 
 
-class ChoiceDateBottomSheetVC: FloatingPanelController {
+class ChoiceDateBottomSheetVC: UIViewController {
 
     // MARK: Variables
 
+    var calendarView: UIDatePicker = UIDatePicker().then {
+        $0.datePickerMode = .date
+        $0.preferredDatePickerStyle = .inline
+        $0.maximumDate = .now
+        $0.timeZone = .current
+        $0.tintColor = main03
+    }
+    
+    var choiceButton : UIButton = UIButton().then {
+        $0.backgroundColor = main03
+        $0.setTitle("날짜 선택", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = paragraph01
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
+        $0.addTarget(self, action: #selector(didChoiceButtonTapped), for: .touchUpInside)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +48,19 @@ class ChoiceDateBottomSheetVC: FloatingPanelController {
     // MARK: View
     
     func setUpView() {
-        
+        view.backgroundColor = .white
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 32
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
-        
+        [
+            calendarView,
+            choiceButton
+        ].forEach { view.addSubview($0) }
     }
     
     // MARK: Delegate
@@ -52,7 +73,29 @@ class ChoiceDateBottomSheetVC: FloatingPanelController {
     // MARK: Constraint
     
     func setUpConstraint() {
+        calendarView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.trailing.equalToSuperview()
+        }
         
+        choiceButton.snp.makeConstraints {
+            $0.top.equalTo(calendarView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+        }
+    }
+    
+    
+    // MARK: Function
+    
+    @objc func didChoiceButtonTapped() {
+        var dateForMatter = DateFormatter()
+        dateForMatter.dateFormat = "yyyy.MM.dd"
+        let date = dateForMatter.string(from: calendarView.date)
+        BookStoreChoiceDateVC().selectVisitDateButton.setTitle(date, for: .normal)
+        
+        self.dismiss(animated: true)
     }
     
 }
