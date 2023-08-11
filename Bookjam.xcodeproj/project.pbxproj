@@ -70,6 +70,8 @@
 		DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */; };
 		DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */; };
 		DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */; };
+		DDCBC1202A8638AE00694CBD /* BookStoreChoiceDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCBC11F2A8638AE00694CBD /* BookStoreChoiceDateVC.swift */; };
+		DDCBC1222A8645C700694CBD /* ChoiceDateBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCBC1212A8645C700694CBD /* ChoiceDateBottomSheetVC.swift */; };
 		DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */; };
 		DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */; };
 		DDDBBF632A811CF500B2C2C9 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
@@ -169,6 +171,8 @@
 		DDC6EA9D2A61AA3000C4B127 /* Onboarding07VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding07VC.swift; sourceTree = "<group>"; };
 		DDC6EA9F2A61B0B500C4B127 /* Onboarding08VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding08VC.swift; sourceTree = "<group>"; };
 		DDC6EAA12A61B38E00C4B127 /* Onboarding09VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding09VC.swift; sourceTree = "<group>"; };
+		DDCBC11F2A8638AE00694CBD /* BookStoreChoiceDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreChoiceDateVC.swift; sourceTree = "<group>"; };
+		DDCBC1212A8645C700694CBD /* ChoiceDateBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDateBottomSheetVC.swift; sourceTree = "<group>"; };
 		DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				DD829C4C2A85045E00B22754 /* BookStoreReviewDetailVC.swift */,
+				DDCBC11F2A8638AE00694CBD /* BookStoreChoiceDateVC.swift */,
 				DDCBC1142A86369F00694CBD /* View */,
 				DDCBC1152A8636B400694CBD /* Cell */,
 			);
@@ -495,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				DDF8447D2A765A460035D112 /* BookStoreDetailReviewView.swift */,
+				DDCBC1212A8645C700694CBD /* ChoiceDateBottomSheetVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -916,10 +922,12 @@
 				941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */,
 				DD829C4B2A84D96E00B22754 /* BookStoreActvityDetailVC.swift in Sources */,
 				9411770F2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift in Sources */,
+				DDCBC1202A8638AE00694CBD /* BookStoreChoiceDateVC.swift in Sources */,
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				9411771B2A83BFC400847F26 /* ActivityFrameView.swift in Sources */,
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DD829C4D2A85045E00B22754 /* BookStoreReviewDetailVC.swift in Sources */,
+				DDCBC1222A8645C700694CBD /* ChoiceDateBottomSheetVC.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */,
