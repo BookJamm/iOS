@@ -123,6 +123,7 @@ class MainPageVC: UIViewController {
         $0.setTitle("거리순", for: .selected)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
     }
+    
     var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
         $0.tintColor = gray05

@@ -75,12 +75,11 @@ class MyPageVC: UIViewController {
     }
     
     //활동 참여 현황 콜렉션뷰
-    var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then{
+    var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 1
         $0.minimumInteritemSpacing = 1
-    }).then{
-        
+    }).then {
         $0.register(ActivityParticipateCollectionViewCell.self, forCellWithReuseIdentifier: ActivityParticipateCollectionViewCell.cellID)
     }
     

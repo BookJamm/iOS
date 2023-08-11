@@ -89,11 +89,13 @@ class ChoiceDateBottomSheetVC: UIViewController {
     
     // MARK: Function
     
+    // 날짜 선택 버튼 눌렀을 때 방문 일자 버튼 업데이트되도록 설정
     @objc func didChoiceButtonTapped() {
         var dateForMatter = DateFormatter()
         dateForMatter.dateFormat = "yyyy.MM.dd"
         let date = dateForMatter.string(from: calendarView.date)
-        BookStoreChoiceDateVC().selectVisitDateButton.setTitle(date, for: .normal)
+        
+        // BookStoreChoiceDateVC().selectVisitDateButton.setTitle(date, for: .normal)
         
         self.dismiss(animated: true)
     }
