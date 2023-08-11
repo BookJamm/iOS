@@ -49,9 +49,6 @@ class BookStoreDetailActivityView: UIView {
         activityTableView.isScrollEnabled = false
         activityTableView.separatorStyle = .none
         
-        // 참여하기 버튼 누를 수 있게 상호작용 허용
-        activityTableView.isUserInteractionEnabled = true
-        
         // 참여 목록 수 업데이트
         activityLabel.text = "\(activities.count)개의 참여"
     }
@@ -111,6 +108,9 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
         cell.contentView.backgroundColor = gray02
         cell.contentView.layer.cornerRadius = 20
         cell.clipsToBounds = true
+        
+        // 버튼 선택 구현을 위한 selectionStyle 조건 추가
+        cell.selectionStyle = .none
         
         return cell
     }

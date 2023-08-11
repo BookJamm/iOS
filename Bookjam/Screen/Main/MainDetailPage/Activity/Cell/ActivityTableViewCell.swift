@@ -20,10 +20,6 @@ class ActivityTableViewCell: UITableViewCell {
     
     static let cellID =  "activityCell"
     
-    var activityView: UIView = UIView().then {
-        $0.backgroundColor = gray01
-    }
-    
     var activityImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")
         $0.contentMode = .scaleAspectFill
@@ -65,7 +61,7 @@ class ActivityTableViewCell: UITableViewCell {
         $0.layer.borderWidth = 0.7
         $0.layer.borderColor = UIColor.black.cgColor
         $0.layer.cornerRadius = 20
-         $0.addTarget(self, action: #selector(didJoinActivityButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didJoinActivityButtonTapped), for: .touchUpInside)
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -97,7 +93,6 @@ class ActivityTableViewCell: UITableViewCell {
     // MARK: Layout
     
     func setUpLayout() {
-        contentView.addSubview(activityView)
         [
             activityImageView,
             activityLabel,
@@ -106,20 +101,16 @@ class ActivityTableViewCell: UITableViewCell {
             numOfReviewLabel,
             descriptionLabel,
             joinActivityButton
-        ].forEach { activityView.addSubview($0) }
+        ].forEach { self.contentView.addSubview($0) }
     }
     
     
     // MARK: Constraint
     
     func setUpConstraint() {
-        activityView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-        }
-        
         activityImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
-            $0.leading.equalTo(activityView.snp.leading).offset(20)
+            $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(200)
             $0.width.equalToSuperview().offset(-40)
         }
@@ -155,6 +146,7 @@ class ActivityTableViewCell: UITableViewCell {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(40)
+            $0.width.equalTo(250)
         }
         
     }
@@ -163,6 +155,7 @@ class ActivityTableViewCell: UITableViewCell {
     // MARK: Functions
         
     @objc func didJoinActivityButtonTapped() {
+        print("button tapped")
         BookstoreDetailPageVC().navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
 }
