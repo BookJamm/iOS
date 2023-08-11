@@ -37,12 +37,14 @@ class MyPageVC: UIViewController {
         $0.text = "userName님"
         $0.font = paragraph01
     }
+    
     var myPageSetUpButton: UIButton = UIButton().then {
         $0.setTitle("마이페이지 설정", for: .normal)
         $0.titleLabel?.font = paragraph04
         $0.setTitleColor(gray06, for: .normal)
         $0.layer.backgroundColor = gray03?.cgColor
         $0.layer.cornerRadius = 15
+        $0.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
     }
     
     var userActivityLabel: UILabel = UILabel().then{
@@ -73,12 +75,11 @@ class MyPageVC: UIViewController {
     }
     
     //활동 참여 현황 콜렉션뷰
-    var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then{
+    var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 1
         $0.minimumInteritemSpacing = 1
-    }).then{
-        
+    }).then {
         $0.register(ActivityParticipateCollectionViewCell.self, forCellWithReuseIdentifier: ActivityParticipateCollectionViewCell.cellID)
     }
     
@@ -183,15 +184,13 @@ class MyPageVC: UIViewController {
         setUpLayout()
         setUpConstraint()
         setUpDelegate()
-        
-        myPageSetUpButton.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
-
     }
     
 
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
         
     }
     

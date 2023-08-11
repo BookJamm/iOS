@@ -161,12 +161,10 @@ class ActivityTableViewCell: UITableViewCell {
     
     
     // MARK: Functions
-    
-    // TODO: 참여하기 버튼 눌렀을 때 나오는 화면 구현
-    @objc func didJoinActivityButtonTapped() {
         
+    @objc func didJoinActivityButtonTapped() {
+        BookstoreDetailPageVC().navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
-     
 }
 
 #if DEBUG
