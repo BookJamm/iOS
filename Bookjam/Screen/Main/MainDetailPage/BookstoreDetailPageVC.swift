@@ -155,6 +155,13 @@ class BookstoreDetailPageVC: UIViewController {
         $0.backgroundColor = gray02
     }
     
+    var toastMessageImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(named: "reviewDoneToast")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
+        $0.isHidden = true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,6 +185,7 @@ class BookstoreDetailPageVC: UIViewController {
     
     func setUpLayout() {
         view.addSubview(scrollView)
+        
         scrollView.addSubview(contentView)
         [
             photoCollectionView,
@@ -211,6 +219,8 @@ class BookstoreDetailPageVC: UIViewController {
             reviewView,
             bookListView
         ].forEach { $0.isHidden = true }
+        
+        view.addSubview(toastMessageImageView)
     }
     
     
@@ -225,6 +235,13 @@ class BookstoreDetailPageVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
+        toastMessageImageView.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+        }
+        
         scrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
@@ -450,6 +467,19 @@ class BookstoreDetailPageVC: UIViewController {
     /// 리뷰 작성하고 업로드 버튼 누르면 토스트 메시지 띄우도록 구현
     @objc func makeReviewUploadToast() {
         print("맛있는 토스트 굽굽")
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.toastMessageImageView.alpha = 1.0
+            self.toastMessageImageView.isHidden = false
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                UIView.animate(withDuration: 0.5) {
+                    self.toastMessageImageView.alpha = 0.0
+                } completion: { _ in
+                    self.toastMessageImageView.isHidden = true
+                }
+            }
+        }
     }
     
     /// 참여 탭에서 참여하기 버튼 누르면 화면 전환되도록 구현
