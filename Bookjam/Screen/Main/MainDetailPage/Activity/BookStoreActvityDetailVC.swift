@@ -148,6 +148,7 @@ class BookStoreActvityDetailVC: UIViewController {
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
         reviewTableView.separatorStyle = .none
         
         activities = [
@@ -319,8 +320,6 @@ class BookStoreActvityDetailVC: UIViewController {
             $0.bottom.equalTo(reviewView)
         }
     }
-    
-    
 }
 
 // MARK: Extension

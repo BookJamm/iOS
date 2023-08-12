@@ -155,8 +155,10 @@ class ActivityTableViewCell: UITableViewCell {
     // MARK: Functions
         
     @objc func didJoinActivityButtonTapped() {
-        print("button tapped")
-        BookstoreDetailPageVC().navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
+        print("참여하기 버튼 Tapped")
+        
+        /// 화면 전환을 위해 디테일 페이지로 notification 전송
+        NotificationCenter.default.post(Notification(name: Notification.Name("joinActivityButtonTapped")))
     }
 }
 

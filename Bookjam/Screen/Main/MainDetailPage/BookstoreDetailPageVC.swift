@@ -452,13 +452,22 @@ class BookstoreDetailPageVC: UIViewController {
         print("맛있는 토스트 굽굽")
     }
     
+    /// 참여 탭에서 참여하기 버튼 누르면 화면 전환되도록 구현
+    @objc func pushBookStoreActivityDetailVC() {
+        navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
+    }
+    
     // MARK: Notification
     
     func setUpNotification() {
         /// BookStoreDetailReviewView에서 리뷰 작성하기 버튼 눌렀을 때 전송되는 notification을 수신
         NotificationCenter.default.addObserver(self, selector: #selector(pushReviewDetailVC), name: NSNotification.Name("writeReviewButtonTapped"), object: nil)
+        
         /// BookStoreWriteReviewVC에서 업로드 버튼 눌렀을 때 전송되는 notification을 수신
         NotificationCenter.default.addObserver(self, selector: #selector(makeReviewUploadToast), name: NSNotification.Name("uploadButtonTapped"), object: nil)
+        
+        /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
     }
 }
 
