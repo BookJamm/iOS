@@ -8,12 +8,11 @@
 import SwiftUI
 import UIKit
 
-import FloatingPanel
 import SnapKit
 import Then
 
 
-class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
+class BookStoreChoiceDateVC: UIViewController {
 
     // MARK: Variables
     
@@ -67,20 +66,17 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         $0.font = title06
     }
     
-    var selectVisitDateButton: UIButton = UIButton().then {
-        $0.setTitle("    장소 방문 날짜 선택", for: .normal)
-        $0.setTitleColor(gray06, for: .normal)
-        $0.titleLabel?.font = paragraph01
-        $0.contentHorizontalAlignment = .left
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 8
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = gray04?.cgColor
-        $0.addTarget(self, action: #selector(didVisitDateButtonTapped), for: .touchUpInside)
+    var calendarView: UIDatePicker = UIDatePicker().then {
+        $0.datePickerMode = .date
+        $0.preferredDatePickerStyle = .inline
+        $0.maximumDate = .now
+        $0.timeZone = .current
+        $0.tintColor = main03
+        $0.addTarget(self, action: #selector(didCalendarViewValueChanged), for: .valueChanged)
     }
     
     var nextButton: UIButton = UIButton().then {
-        $0.setTitle("업로드", for: .normal)
+        $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = gray04
         $0.clipsToBounds = true
@@ -127,7 +123,7 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         
         [
             visitDateLabel,
-            selectVisitDateButton,
+            calendarView,
             nextButton
         ].forEach { visitDateView.addSubview($0) }
     }
@@ -194,11 +190,10 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
             $0.top.leading.equalToSuperview().offset(20)
         }
         
-        selectVisitDateButton.snp.makeConstraints {
-            $0.top.equalTo(visitDateLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(visitDateLabel)
-            $0.trailing.equalTo(placeView)
-            $0.height.equalTo(50)
+        calendarView.snp.makeConstraints {
+            $0.top.equalTo(visitDateLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(nextButton.snp.top).offset(-30)
         }
         
         nextButton.snp.makeConstraints {
@@ -212,26 +207,9 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
     
     // MARK: Function
     
-    // TODO: 바텀시트 중간까지만 올라오도록 설정
-    private func setupSheet() {
-        // 밑으로 내려도 dismiss되지 않는 옵션 값
-        isModalInPresentation = true
-
-        if let sheet = sheetPresentationController {
-            sheet.detents = [.medium()]
-            // 초기화 드래그 위치
-            sheet.selectedDetentIdentifier = .medium
-            // sheet아래에 위치하는 ViewController를 흐려지지 않게 하는 경계값 (medium 이상부터 흐려지도록 설정)
-            sheet.largestUndimmedDetentIdentifier = .none
-            // grabber바 보이도록 설정
-            sheet.prefersGrabberVisible = true
-            // corner 값 설정
-            sheet.preferredCornerRadius = 32.0
-        }
-    }
-    
-    @objc func didVisitDateButtonTapped() {
-        present(ChoiceDateBottomSheetVC(), animated: true)
+    @objc func didCalendarViewValueChanged() {
+        nextButton.backgroundColor = main03
+        nextButton.isEnabled = true
     }
     
 }
