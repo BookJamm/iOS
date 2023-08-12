@@ -320,6 +320,7 @@ class BookStoreActvityDetailVC: UIViewController {
         }
     }
     
+    
 }
 
 // MARK: Extension

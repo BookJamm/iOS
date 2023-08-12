@@ -53,7 +53,7 @@ class BookStoreWriteReviewVC: UIViewController {
         $0.textColor = gray05
     }
     
-    // TODO: image size 늘려서 적용
+    // TODO: 아이콘 사이즈 늘려서 적용
     var addPhotoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
         $0.tintColor = gray07
@@ -133,6 +133,7 @@ class BookStoreWriteReviewVC: UIViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(didUploadButtonTapped), for: .touchUpInside)
     }
 
     
@@ -150,6 +151,7 @@ class BookStoreWriteReviewVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = gray01
+        hideKeyboard()
         
         // TODO: 나중에 리팩토링 할 때 함수 하나로 통일하고 sender 설정해서 쓸데없는 코드 줄이기
         /// 각각의 별 선택했을 때 별점 설정하고 별 tintcolor 변경
@@ -300,7 +302,8 @@ class BookStoreWriteReviewVC: UIViewController {
         }
         
         uploadButton.snp.makeConstraints {
-            $0.bottom.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(50)
         }
@@ -401,6 +404,20 @@ class BookStoreWriteReviewVC: UIViewController {
         }
         
         starValue = 5.0
+    }
+    
+    /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
+    @objc func didUploadButtonTapped() {
+        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        
+        /// 디테일 페이지로 다시 복귀
+        for viewController in viewControllerStack {
+            if let detailVC = viewController as? BookstoreDetailPageVC {
+                navigationController?.popToViewController(detailVC, animated: true)
+            }
+        }
+        
+        NotificationCenter.default.post(Notification(name: Notification.Name("uploadButtonTapped")))
     }
     
     /// 리뷰 내용 바뀌면 글자 수 업데이트해주는 함수

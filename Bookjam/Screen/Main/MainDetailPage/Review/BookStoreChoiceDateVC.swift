@@ -75,13 +75,14 @@ class BookStoreChoiceDateVC: UIViewController {
         $0.addTarget(self, action: #selector(didCalendarViewValueChanged), for: .valueChanged)
     }
     
-    var nextButton: UIButton = UIButton().then {
+    var writeReviewButton: UIButton = UIButton().then {
         $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = gray04
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(didReviewButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -124,7 +125,7 @@ class BookStoreChoiceDateVC: UIViewController {
         [
             visitDateLabel,
             calendarView,
-            nextButton
+            writeReviewButton
         ].forEach { visitDateView.addSubview($0) }
     }
     
@@ -141,7 +142,6 @@ class BookStoreChoiceDateVC: UIViewController {
         placeInfoView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            
         }
         
         placeInfoLabel.snp.makeConstraints {
@@ -152,7 +152,6 @@ class BookStoreChoiceDateVC: UIViewController {
             $0.top.equalTo(placeInfoLabel.snp.bottom).offset(20)
             $0.leading.equalTo(placeInfoLabel)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(130)
             $0.bottom.equalTo(placeInfoView.snp.bottom).offset(-20)
         }
         
@@ -169,16 +168,19 @@ class BookStoreChoiceDateVC: UIViewController {
         starImageView.snp.makeConstraints {
             $0.top.equalTo(placeTypeLabel.snp.bottom).offset(15)
             $0.leading.equalTo(placeTypeLabel)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         ratingLabel.snp.makeConstraints {
             $0.centerY.equalTo(starImageView)
             $0.leading.equalTo(starImageView.snp.trailing).offset(5)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         numOfReviewLabel.snp.makeConstraints {
             $0.centerY.equalTo(ratingLabel)
             $0.leading.equalTo(ratingLabel.snp.trailing).offset(10)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         visitDateView.snp.makeConstraints {
@@ -192,15 +194,16 @@ class BookStoreChoiceDateVC: UIViewController {
         
         calendarView.snp.makeConstraints {
             $0.top.equalTo(visitDateLabel.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(nextButton.snp.top).offset(-30)
-        }
-        
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(50)
+            $0.bottom.equalTo(writeReviewButton.snp.top).offset(-10)
+        }
+        
+        writeReviewButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(40)
         }
     }
     
@@ -208,8 +211,12 @@ class BookStoreChoiceDateVC: UIViewController {
     // MARK: Function
     
     @objc func didCalendarViewValueChanged() {
-        nextButton.backgroundColor = main03
-        nextButton.isEnabled = true
+        writeReviewButton.backgroundColor = main03
+        writeReviewButton.isEnabled = true
+    }
+    
+    @objc func didReviewButtonTapped() {
+        navigationController?.pushViewController(BookStoreWriteReviewVC(), animated: true)
     }
     
 }
