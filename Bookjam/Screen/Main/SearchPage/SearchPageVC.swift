@@ -136,6 +136,14 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let resultVC = BookstoreDetailPageVC()
+        
+        // TODO: 데이터 연결
+        
+        navigationController?.pushViewController(resultVC, animated: true)
+    }
 }
 
 struct SearchPageVC_Preview: PreviewProvider {

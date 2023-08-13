@@ -43,15 +43,17 @@ class MainPageVC: UIViewController {
     
    lazy var dummyData: [bookStoreMain] = [bookStore1, bookStore2, bookStore3]
     
-    var searchBar: UISearchBar = UISearchBar().then {
-        $0.placeholder = "상호명 또는 주소 검색"
+    var searchBar: UIButton = UIButton().then {
+        $0.setTitle("  상호명 또는 주소 검색", for: .normal)
+        $0.setTitleColor(gray06, for: .normal)
+        $0.titleLabel?.font = paragraph02
         $0.layer.cornerRadius = 25
         $0.clipsToBounds = true
-        $0.searchBarStyle = .minimal
+        $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        $0.tintColor = main03
 
         $0.layer.borderColor = main02?.cgColor
         $0.layer.borderWidth = 1
-        $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
     }
     
     var independentBookstoreButton: UIButton = UIButton().then {
