@@ -130,9 +130,7 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(starImageView)
             $0.trailing.equalToSuperview().offset(-20).priority(.high)
             $0.height.equalTo(40)
-            
         }
-        
     }
 }
 

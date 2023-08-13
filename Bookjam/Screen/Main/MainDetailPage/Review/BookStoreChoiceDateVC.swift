@@ -8,12 +8,11 @@
 import SwiftUI
 import UIKit
 
-import FloatingPanel
 import SnapKit
 import Then
 
 
-class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
+class BookStoreChoiceDateVC: UIViewController {
 
     // MARK: Variables
     
@@ -67,25 +66,23 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         $0.font = title06
     }
     
-    var selectVisitDateButton: UIButton = UIButton().then {
-        $0.setTitle("    장소 방문 날짜 선택", for: .normal)
-        $0.setTitleColor(gray06, for: .normal)
-        $0.titleLabel?.font = paragraph01
-        $0.contentHorizontalAlignment = .left
-        $0.clipsToBounds = true
-        $0.layer.cornerRadius = 8
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = gray04?.cgColor
-        $0.addTarget(self, action: #selector(didVisitDateButtonTapped), for: .touchUpInside)
+    var calendarView: UIDatePicker = UIDatePicker().then {
+        $0.datePickerMode = .date
+        $0.preferredDatePickerStyle = .inline
+        $0.maximumDate = .now
+        $0.timeZone = .current
+        $0.tintColor = main03
+        $0.addTarget(self, action: #selector(didCalendarViewValueChanged), for: .valueChanged)
     }
     
-    var nextButton: UIButton = UIButton().then {
-        $0.setTitle("업로드", for: .normal)
+    var writeReviewButton: UIButton = UIButton().then {
+        $0.setTitle("다음으로", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = gray04
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(didReviewButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -127,8 +124,8 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         
         [
             visitDateLabel,
-            selectVisitDateButton,
-            nextButton
+            calendarView,
+            writeReviewButton
         ].forEach { visitDateView.addSubview($0) }
     }
     
@@ -145,7 +142,6 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         placeInfoView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
-            
         }
         
         placeInfoLabel.snp.makeConstraints {
@@ -156,7 +152,6 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
             $0.top.equalTo(placeInfoLabel.snp.bottom).offset(20)
             $0.leading.equalTo(placeInfoLabel)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(130)
             $0.bottom.equalTo(placeInfoView.snp.bottom).offset(-20)
         }
         
@@ -173,16 +168,19 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
         starImageView.snp.makeConstraints {
             $0.top.equalTo(placeTypeLabel.snp.bottom).offset(15)
             $0.leading.equalTo(placeTypeLabel)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         ratingLabel.snp.makeConstraints {
             $0.centerY.equalTo(starImageView)
             $0.leading.equalTo(starImageView.snp.trailing).offset(5)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         numOfReviewLabel.snp.makeConstraints {
             $0.centerY.equalTo(ratingLabel)
             $0.leading.equalTo(ratingLabel.snp.trailing).offset(10)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         visitDateView.snp.makeConstraints {
@@ -194,44 +192,31 @@ class BookStoreChoiceDateVC: UIViewController, FloatingPanelControllerDelegate {
             $0.top.leading.equalToSuperview().offset(20)
         }
         
-        selectVisitDateButton.snp.makeConstraints {
-            $0.top.equalTo(visitDateLabel.snp.bottom).offset(20)
-            $0.leading.equalTo(visitDateLabel)
-            $0.trailing.equalTo(placeView)
-            $0.height.equalTo(50)
-        }
-        
-        nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+        calendarView.snp.makeConstraints {
+            $0.top.equalTo(visitDateLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(50)
+            $0.bottom.equalTo(writeReviewButton.snp.top).offset(-10)
+        }
+        
+        writeReviewButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(40)
         }
     }
     
     
     // MARK: Function
     
-    // TODO: 바텀시트 중간까지만 올라오도록 설정
-    private func setupSheet() {
-        // 밑으로 내려도 dismiss되지 않는 옵션 값
-        isModalInPresentation = true
-
-        if let sheet = sheetPresentationController {
-            sheet.detents = [.medium()]
-            // 초기화 드래그 위치
-            sheet.selectedDetentIdentifier = .medium
-            // sheet아래에 위치하는 ViewController를 흐려지지 않게 하는 경계값 (medium 이상부터 흐려지도록 설정)
-            sheet.largestUndimmedDetentIdentifier = .none
-            // grabber바 보이도록 설정
-            sheet.prefersGrabberVisible = true
-            // corner 값 설정
-            sheet.preferredCornerRadius = 32.0
-        }
+    @objc func didCalendarViewValueChanged() {
+        writeReviewButton.backgroundColor = main03
+        writeReviewButton.isEnabled = true
     }
     
-    @objc func didVisitDateButtonTapped() {
-        present(ChoiceDateBottomSheetVC(), animated: true)
+    @objc func didReviewButtonTapped() {
+        navigationController?.pushViewController(BookStoreWriteReviewVC(), animated: true)
     }
     
 }

@@ -91,6 +91,7 @@ class BookStoreReviewDetailVC: UIViewController {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(didVisitDateButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -173,7 +174,12 @@ class BookStoreReviewDetailVC: UIViewController {
         }
     }
     
+    
     // MARK: Function
+    
+    @objc func didVisitDateButtonTapped() {
+        navigationController?.pushViewController(BookStoreChoiceDateVC(), animated: true)
+    }
 }
 
 // MARK: Extension
