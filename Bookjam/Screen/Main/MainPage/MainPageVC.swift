@@ -122,6 +122,17 @@ class MainPageVC: UIViewController {
         $0.setTitleColor(gray05, for: .normal)
         $0.setTitle("거리순", for: .selected)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        // TODO: 정렬 API 나오면 연결
+        $0.menu = UIMenu(children: [
+            UIAction(title: "거리순", state: .on, handler: { _ in print("거리순")}),
+            UIAction(title: "리뷰순", handler: { _ in print("리뷰순")}),
+            UIAction(title: "평점순", handler: { _ in print("평점순")}),
+        ])
+        /// 터치하면 바로 메뉴 나오도록 설정
+        $0.showsMenuAsPrimaryAction = true
+        /// 체크 표시 하나만 할 수 있도록 설정
+        $0.changesSelectionAsPrimaryAction = true
     }
     
     var infoButton: UIButton = UIButton().then {
