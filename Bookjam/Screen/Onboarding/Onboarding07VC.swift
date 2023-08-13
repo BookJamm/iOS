@@ -48,12 +48,6 @@ class Onboarding07VC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
-    let skipButton: UIButton = UIButton().then {
-        $0.setTitle("건너뛰기", for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "A5A5A5"), for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-    }
-    
     let nextButton: UIButton = UIButton().then {
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
@@ -92,7 +86,6 @@ class Onboarding07VC: UIViewController {
         view.addSubview(rightBarView)
         view.addSubview(informationLabel)
         view.addSubview(characterImageView)
-        view.addSubview(skipButton)
         view.addSubview(nextButton)
     }
     
@@ -130,13 +123,6 @@ class Onboarding07VC: UIViewController {
             $0.size.equalToSuperview().multipliedBy(0.9)
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview()
-        }
-        
-        skipButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.03)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.86)
         }
         
         nextButton.snp.makeConstraints {
