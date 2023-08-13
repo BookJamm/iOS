@@ -43,7 +43,7 @@ class MainPageVC: UIViewController {
     
    lazy var dummyData: [bookStoreMain] = [bookStore1, bookStore2, bookStore3]
     
-    var searchBar: UIButton = UIButton().then {
+    var searchBarButton: UIButton = UIButton().then {
         $0.setTitle("  상호명 또는 주소 검색", for: .normal)
         $0.setTitleColor(gray06, for: .normal)
         $0.titleLabel?.font = paragraph02
@@ -51,9 +51,9 @@ class MainPageVC: UIViewController {
         $0.clipsToBounds = true
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = main03
-
         $0.layer.borderColor = main02?.cgColor
         $0.layer.borderWidth = 1
+        $0.addTarget(self, action: #selector(didSearchBarButtonTapped), for: .touchUpInside)
     }
     
     var independentBookstoreButton: UIButton = UIButton().then {
@@ -172,7 +172,7 @@ class MainPageVC: UIViewController {
     // TODO: 데모데이 이후 주석 풀기
     func setUpLayout(){
         [
-            searchBar,
+            searchBarButton,
             // independentBookstoreButton,
             // bookPlayGroundButton,
             // libraryButton,
@@ -190,7 +190,7 @@ class MainPageVC: UIViewController {
 
     // TODO: 데모데이 이후 버튼 주석 풀기
     func setUpConstraint(){
-        searchBar.snp.makeConstraints {
+        searchBarButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             $0.trailing.equalToSuperview().offset(-20)
@@ -198,7 +198,7 @@ class MainPageVC: UIViewController {
         }
         
 //        independentBookstoreButton.snp.makeConstraints {
-//            $0.top.equalTo(searchBar.snp.bottom).offset(25)
+//            $0.top.equalTo(searchBarButton.snp.bottom).offset(25)
 //            $0.leading.equalToSuperview().offset(30)
 //        }
 //
@@ -213,7 +213,7 @@ class MainPageVC: UIViewController {
 //        }
         
         sortView.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(20)
+            $0.top.equalTo(searchBarButton.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(50)
         }
@@ -242,11 +242,19 @@ class MainPageVC: UIViewController {
         }
     }//end of setUpConstraint
     
+    
     // MARK: Delegate
     
     func setUpDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    
+    // MARK: Function
+    
+    @objc func didSearchBarButtonTapped() {
+        navigationController?.pushViewController(SearchPageVC(), animated: true)
     }
 }//end of MainPageVC
 

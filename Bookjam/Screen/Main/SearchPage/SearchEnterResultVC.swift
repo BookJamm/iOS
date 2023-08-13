@@ -14,7 +14,7 @@ import SnapKit
 import Then
 
 
-class SeachEnterResultVC: UIViewController {
+class SearchEnterResultVC: UIViewController {
 
     // MARK: Variables
     
@@ -136,7 +136,7 @@ class SeachEnterResultVC: UIViewController {
 
 // MARK: Extension
 
-extension SeachEnterResultVC: UITableViewDelegate, UITableViewDataSource {
+extension SearchEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -160,9 +160,9 @@ extension SeachEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct SeachEnterResultVC_Preview: PreviewProvider {
+struct SearchEnterResultVC_Preview: PreviewProvider {
     static var previews: some View {
-        SeachEnterResultVC().toPreview()
+        SearchEnterResultVC().toPreview()
             // .edgesIgnoringSafeArea(.all)
     }
 }

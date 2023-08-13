@@ -82,6 +82,8 @@ class SearchPageVC: UIViewController {
     func setUpDelegate() {
         resultTableView.dataSource = self
         resultTableView.delegate = self
+        
+        searchBar.delegate = self
     }
     
     
@@ -121,6 +123,16 @@ class SearchPageVC: UIViewController {
 
 
 // MARK: Extension
+
+extension SearchPageVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // TODO: 검색 값 불러오는 서버 api 연결
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        navigationController?.pushViewController(SearchEnterResultVC(), animated: true)
+    }
+}
 
 extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
