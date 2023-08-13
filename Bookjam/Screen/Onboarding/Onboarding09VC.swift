@@ -151,15 +151,16 @@ class Onboarding09VC: UIViewController {
     
     // MARK: Functions
     
+    /// 로그인 페이지로 이동
     @objc func didNextButtonTapped() {
-        let mainPage = TabBarController()
-        mainPage.modalPresentationStyle = .fullScreen
-        mainPage.modalTransitionStyle = .coverVertical
+        let Onboarding = Onboarding01VC()
+        Onboarding.modalPresentationStyle = .fullScreen
+        Onboarding.modalTransitionStyle = .coverVertical
         
-        self.present(mainPage, animated: true, completion: nil)
+        self.present(Onboarding, animated: true, completion: nil)
     } // end of didNextButtonTapped()
     
-    
+    /// 오른쪽으로 스와이프하면 두번째 캐러셀 화면으로 전환
     @objc func didToRightSwiped(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
