@@ -109,6 +109,9 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
         cell.contentView.layer.cornerRadius = 20
         cell.clipsToBounds = true
         
+        // 버튼 선택 구현을 위한 selectionStyle 조건 추가
+        cell.selectionStyle = .none
+        
         return cell
     }
     

@@ -123,6 +123,7 @@ class MainPageVC: UIViewController {
         $0.setTitle("거리순", for: .selected)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
     }
+    
     var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
         $0.tintColor = gray05
@@ -155,12 +156,13 @@ class MainPageVC: UIViewController {
 
     // MARK: Layout
     
+    // TODO: 데모데이 이후 주석 풀기
     func setUpLayout(){
         [
             searchBar,
-            independentBookstoreButton,
-            bookPlayGroundButton,
-            libraryButton,
+            // independentBookstoreButton,
+            // bookPlayGroundButton,
+            // libraryButton,
             tableView,
             sortView
         ].forEach {
@@ -173,6 +175,7 @@ class MainPageVC: UIViewController {
     
     // MARK: Constraints
 
+    // TODO: 데모데이 이후 버튼 주석 풀기
     func setUpConstraint(){
         searchBar.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
@@ -181,23 +184,23 @@ class MainPageVC: UIViewController {
             $0.height.equalTo(45)
         }
         
-        independentBookstoreButton.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(25)
-            $0.leading.equalToSuperview().offset(30)
-        }
-        
-        bookPlayGroundButton.snp.makeConstraints {
-            $0.centerY.equalTo(independentBookstoreButton)
-            $0.centerX.equalToSuperview()
-        }
-        
-        libraryButton.snp.makeConstraints {
-            $0.centerY.equalTo(independentBookstoreButton)
-            $0.trailing.equalToSuperview().offset(-30)
-        }
+//        independentBookstoreButton.snp.makeConstraints {
+//            $0.top.equalTo(searchBar.snp.bottom).offset(25)
+//            $0.leading.equalToSuperview().offset(30)
+//        }
+//
+//        bookPlayGroundButton.snp.makeConstraints {
+//            $0.centerY.equalTo(independentBookstoreButton)
+//            $0.centerX.equalToSuperview()
+//        }
+//
+//        libraryButton.snp.makeConstraints {
+//            $0.centerY.equalTo(independentBookstoreButton)
+//            $0.trailing.equalToSuperview().offset(-30)
+//        }
         
         sortView.snp.makeConstraints {
-            $0.top.equalTo(independentBookstoreButton.snp.bottom).offset(20)
+            $0.top.equalTo(searchBar.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(50)
         }

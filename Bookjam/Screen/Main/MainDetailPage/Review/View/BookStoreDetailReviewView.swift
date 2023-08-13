@@ -147,19 +147,21 @@ class BookStoreDetailReviewView: UIView {
     
     // MARK: Functions
     
-    // TODO: 리뷰 작성 버튼 눌렀을 때 나오는 화면 구현하고 전환 연결
     @objc func didWriteReviewButtonTapped() {
+        print("reviewButton Tapped")
         
+        /// 화면 전환을 위해 BookStoreDetailPageVC로 notification 전송
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "writeReviewButtonTapped")))
     }
 }
 
-// 리뷰 목록 구현을 위한 Delegate와 DataSource 구현
+/// 리뷰 목록 구현을 위한 Delegate와 DataSource 구현
 extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reviews.count
     }
     
-    // 데이터 삽입 구현
+    /// 데이터 삽입 구현
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = visitReviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         

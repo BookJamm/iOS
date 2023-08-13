@@ -8,6 +8,8 @@
 import SwiftUI
 import UIKit
 
+import KakaoSDKCommon
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -23,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tabBar.standardAppearance = appearance;
             UITabBar.appearance().scrollEdgeAppearance = appearance
         }
+        
+        // Kakao
+        KakaoSDK.initSDK(appKey: "e71c9521872b70f64acf3a7139889342")
         
         return true
     }

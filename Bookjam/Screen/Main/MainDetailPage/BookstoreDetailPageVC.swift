@@ -18,7 +18,7 @@ class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
-    // 디테일 페이지 가장 위에 표시되는 5개 사진 목록
+    /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록
     var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
     
     var scrollView: UIScrollView = UIScrollView().then {
@@ -108,7 +108,7 @@ class BookstoreDetailPageVC: UIViewController {
         $0.backgroundColor = gray02
     }
     
-    // 서점 세부 내용 전환해주는 SegmentedControl
+    /// 서점 세부 내용 전환해주는 SegmentedControl
     var segmentController: UISegmentedControl = UISegmentedControl().then {
         $0.setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         $0.setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
@@ -121,17 +121,17 @@ class BookstoreDetailPageVC: UIViewController {
             NSAttributedString.Key.font: paragraph03
         ], for: .selected)
         
-        // segments 삽입
+        /// segments 삽입
         $0.insertSegment(withTitle: "홈", at: 0, animated: true)
         $0.insertSegment(withTitle: "소식", at: 1, animated: true)
         $0.insertSegment(withTitle: "참여", at: 2, animated: true)
         $0.insertSegment(withTitle: "리뷰", at: 3, animated: true)
         $0.insertSegment(withTitle: "책 종류", at: 4, animated: true)
 
-        // 기본 탭은 홈으로 설정
+        /// 기본 탭은 홈으로 설정
         $0.selectedSegmentIndex = 0
         
-        // 값 바뀌면 didSegmentControllerValueChanged 호출
+        /// 값 바뀌면 didSegmentControllerValueChanged 호출
         $0.addTarget(self, action: #selector(didSegmentControllerValueChanged), for: .valueChanged)
     }
     
@@ -155,6 +155,13 @@ class BookstoreDetailPageVC: UIViewController {
         $0.backgroundColor = gray02
     }
     
+    var toastMessageImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(named: "reviewDoneToast")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
+        $0.isHidden = true
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -163,6 +170,7 @@ class BookstoreDetailPageVC: UIViewController {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        setUpNotification()
     }
     
 
@@ -177,6 +185,7 @@ class BookstoreDetailPageVC: UIViewController {
     
     func setUpLayout() {
         view.addSubview(scrollView)
+        
         scrollView.addSubview(contentView)
         [
             photoCollectionView,
@@ -203,13 +212,15 @@ class BookstoreDetailPageVC: UIViewController {
             bookListView
         ].forEach { contentView.addSubview($0) }
         
-        // viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
+        /// viewDidLoad()에서 homeView 제외한 4개의 탭은 숨김 처리
         [
             newsView,
             activityView,
             reviewView,
             bookListView
         ].forEach { $0.isHidden = true }
+        
+        view.addSubview(toastMessageImageView)
     }
     
     
@@ -224,6 +235,13 @@ class BookstoreDetailPageVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
+        toastMessageImageView.snp.makeConstraints {
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide).offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+        }
+        
         scrollView.snp.makeConstraints {
             $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
@@ -365,8 +383,8 @@ class BookstoreDetailPageVC: UIViewController {
     
     // MARK: Functions
     
-    // URL 버튼 클릭되면 호출되는 메소드
-    // 주소에 맞는 SafariViewController를 present
+    /// URL 버튼 클릭되면 호출되는 메소드
+    /// 주소에 맞는 SafariViewController를 present
     @objc func didURLTapped() {
         let url = NSURL(string: "https://www.instagram.com/chaegbangyeonhui/")
         let instaView: SFSafariViewController = SFSafariViewController(url: url! as URL)
@@ -374,13 +392,13 @@ class BookstoreDetailPageVC: UIViewController {
         self.present(instaView, animated: true, completion: nil)
     }
     
-    // SegmentedControl에서 세그먼트의 값이 변경되었을 경우 호출되는 메소드
+    /// SegmentedControl에서 세그먼트의 값이 변경되었을 경우 호출되는 메소드
     @objc private func didSegmentControllerValueChanged() {
         let segmentIndex = CGFloat(segmentController.selectedSegmentIndex)
         let segmentWidth = segmentController.frame.width / CGFloat(segmentController.numberOfSegments)
         let leadingDistance = segmentWidth * segmentIndex
         
-        // segmentIndex 따라서 segmentControlSelectedUnderLineView 위치 업데이트
+        /// segmentIndex 따라서 segmentControlSelectedUnderLineView 위치 업데이트
         UIView.animate(withDuration: 1.0, animations: { [weak self] in
             guard let self = self else { return }
             self.segmentControlSelectedUnderLineView.snp.updateConstraints {
@@ -388,8 +406,8 @@ class BookstoreDetailPageVC: UIViewController {
             }
         })
         
-        // segmentIndex 따라서 화면 전환
-        // 홈 탭
+        /// segmentIndex 따라서 화면 전환
+        /// 홈 탭
         if segmentIndex == 0 {
             homeView.isHidden = false
             [
@@ -399,7 +417,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
-        // 소식 탭
+        /// 소식 탭
         else if segmentIndex == 1 {
             newsView.isHidden = false
             [
@@ -409,7 +427,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
-        // 참여 탭
+        /// 참여 탭
         else if segmentIndex == 2 {
             activityView.isHidden = false
             [
@@ -419,7 +437,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
-        // 리뷰 탭
+        /// 리뷰 탭
         else if segmentIndex == 3 {
             reviewView.isHidden = false
             [
@@ -429,7 +447,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
         }
-        // 책 종류 탭
+        /// 책 종류 탭
         else if segmentIndex == 4 {
             bookListView.isHidden = false
             [
@@ -440,10 +458,51 @@ class BookstoreDetailPageVC: UIViewController {
             ].forEach { $0.isHidden = true }
         }
     }
+    
+    /// 리뷰 탭에서 인증 후 리뷰 작성하기 버튼 누르면 화면 전환되도록 구현
+    @objc func pushReviewDetailVC() {
+        navigationController?.pushViewController(BookStoreReviewDetailVC(), animated: true)
+    }
+    
+    /// 리뷰 작성하고 업로드 버튼 누르면 토스트 메시지 띄우도록 구현
+    @objc func makeReviewUploadToast() {
+        print("맛있는 토스트 굽굽")
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.toastMessageImageView.alpha = 1.0
+            self.toastMessageImageView.isHidden = false
+        }) { _ in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                UIView.animate(withDuration: 0.5) {
+                    self.toastMessageImageView.alpha = 0.0
+                } completion: { _ in
+                    self.toastMessageImageView.isHidden = true
+                }
+            }
+        }
+    }
+    
+    /// 참여 탭에서 참여하기 버튼 누르면 화면 전환되도록 구현
+    @objc func pushBookStoreActivityDetailVC() {
+        navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
+    }
+    
+    // MARK: Notification
+    
+    func setUpNotification() {
+        /// BookStoreDetailReviewView에서 리뷰 작성하기 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(pushReviewDetailVC), name: NSNotification.Name("writeReviewButtonTapped"), object: nil)
+        
+        /// BookStoreWriteReviewVC에서 업로드 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(makeReviewUploadToast), name: NSNotification.Name("uploadButtonTapped"), object: nil)
+        
+        /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
+    }
 }
 
-// 디테일 페이지 가장 위에 표시되는 5개 사진 목록 CollectionView 구현을 위한 Delegate, DataSource extension
-// 셀 별 사이즈 지정을 위한 DelegateFlowLayout extension 추가
+/// 디테일 페이지 가장 위에 표시되는 5개 사진 목록 CollectionView 구현을 위한 Delegate, DataSource extension
+/// 셀 별 사이즈 지정을 위한 DelegateFlowLayout extension 추가
 extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
@@ -452,20 +511,20 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath) as! BookStorePhotoCollectionViewCell
         
-        // images 배열 photoImageView의 이미지로 할당
+        /// images 배열 photoImageView의 이미지로 할당
         cell.photoImageView.image = UIImage(named: images[indexPath.row])
         cell.photoImageView.contentMode = .scaleAspectFill
         
         return cell
     }
     
-    // 셀 별 사이즈 지정
+    /// 셀 별 사이즈 지정
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // 첫번째 셀일 경우 width와 height를 모두 프레임 높이와 같게 조정
+        /// 첫번째 셀일 경우 width와 height를 모두 프레임 높이와 같게 조정
         if indexPath.row == 0 {
             return CGSize(width: photoCollectionView.frame.height - 1, height: photoCollectionView.frame.height - 1)
         }
-        // 아닐 경우 width와 height를 모두 (프레임 높이 / 2)와 같게 조정
+        /// 아닐 경우 width와 height를 모두 (프레임 높이 / 2)와 같게 조정
         return CGSize(width: photoCollectionView.frame.height / 2 - 1, height: photoCollectionView.frame.height / 2 - 1)
     }
 }

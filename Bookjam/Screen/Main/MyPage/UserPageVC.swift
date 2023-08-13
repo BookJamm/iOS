@@ -120,6 +120,7 @@ class UserPageVC: UIViewController {
     // MARK: View
     
     func setUpView() {
+        view.backgroundColor = .white
     }
     
     
