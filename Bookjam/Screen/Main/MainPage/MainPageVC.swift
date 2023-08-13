@@ -61,18 +61,15 @@ class MainPageVC: UIViewController {
         $0.tintColor = main03
         $0.titleLabel?.font = paragraph02
         
-        //이미지 크기 쉽게 조절
         let config = UIImage.SymbolConfiguration(
             pointSize: 30, weight: .regular, scale: .default)
         let image = UIImage(systemName: "book.fill", withConfiguration: config)
         $0.setImage(image, for: .normal)
         
-        // Create the button configuration
         var configuration = UIButton.Configuration.plain()
         configuration.imagePadding = 20
         configuration.imagePlacement = .top
         
-        // Create the button using the configuration
         $0.configuration = configuration
     }
     
@@ -86,7 +83,6 @@ class MainPageVC: UIViewController {
         let image = UIImage(systemName: "cup.and.saucer.fill", withConfiguration: config)
         $0.setImage(image, for: .normal)
         
-        // Create the button configuration
         var configuration = UIButton.Configuration.plain()
         configuration.imagePadding = 20
         configuration.imagePlacement = .top
@@ -120,16 +116,25 @@ class MainPageVC: UIViewController {
     }
     
     var sortButton: UIButton = UIButton().then {
-        $0.setTitle("거리순 ↓", for: .normal)
+        $0.setTitle("거리순   ", for: .normal)
         $0.setTitleColor(gray05, for: .normal)
-        $0.setTitle("거리순", for: .selected)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 17, weight: .light, scale: .small)
+        $0.setImage(UIImage(systemName: "chevron.down", withConfiguration: config), for: .normal)
+        $0.tintColor = .black
+        $0.semanticContentAttribute = .forceRightToLeft
+        
         
         // TODO: 정렬 API 나오면 연결
         $0.menu = UIMenu(children: [
-            UIAction(title: "거리순", state: .on, handler: { _ in print("거리순")}),
-            UIAction(title: "리뷰순", handler: { _ in print("리뷰순")}),
-            UIAction(title: "평점순", handler: { _ in print("평점순")}),
+            UIAction(title: "거리순   ", state: .on, handler: {
+                _ in
+                
+            }),
+            UIAction(title: "리뷰순   ", handler: { _ in print("리뷰순")}),
+            UIAction(title: "평점순   ", handler: { _ in print("평점순")}),
         ])
         /// 터치하면 바로 메뉴 나오도록 설정
         $0.showsMenuAsPrimaryAction = true
@@ -162,9 +167,6 @@ class MainPageVC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         tableView.separatorStyle = .singleLine
-        
-        // hideKeyboard 적용하면 tableViewCell 터치가 안되는 이슈가 있어서 일단 주석처리함
-        // hideKeyboard()
     }
 
     // MARK: Layout
@@ -219,13 +221,13 @@ class MainPageVC: UIViewController {
         }
         
         sortButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(8)
-            $0.leading.equalToSuperview().offset(20)
+            $0.top.equalTo(lineView.snp.bottom).offset(15)
+            $0.leading.equalToSuperview().offset(30)
         }
         
         infoButton.snp.makeConstraints {
             $0.centerY.equalTo(sortButton)
-            $0.trailing.equalToSuperview().offset(-15)
+            $0.trailing.equalToSuperview().offset(-30)
         }
         
         lineView.snp.makeConstraints {
@@ -260,7 +262,7 @@ class MainPageVC: UIViewController {
 
 // MARK: Extension
 
-// 거리순 밑으로 보여질 tableView 구현을 위한 Delegate, DataSource extension
+/// 거리순 밑으로 보여질 tableView 구현을 위한 Delegate, DataSource extension
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dummyData.count  //임시
