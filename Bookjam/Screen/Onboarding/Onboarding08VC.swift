@@ -46,14 +46,6 @@ class Onboarding08VC: UIViewController {
         $0.contentMode = .scaleAspectFit
     }
     
-    // TODO: 건너뛰기 버튼 누르면 메인으로 넘어가게 구현 필요
-    
-    let skipButton: UIButton = UIButton().then {
-        $0.setTitle("건너뛰기", for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "A5A5A5"), for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-    }
-    
     let nextButton: UIButton = UIButton().then {
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
@@ -78,12 +70,12 @@ class Onboarding08VC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        // 오른쪽으로 View 슬라이드하면 온보딩 07로 이동
+        /// 오른쪽으로 스와이프하면 첫번째 캐러셀 화면으로 전환
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.didToRightSwiped(_:)))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
         
-        // 왼쪽으로 View 슬라이드하면 온보딩 09로 이동
+        /// 왼쪽으로 스와이프하면 세번째 캐러셀 화면으로 전환
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.didToLeftSwiped(_:)))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         self.view.addGestureRecognizer(swipeLeft)
@@ -98,7 +90,6 @@ class Onboarding08VC: UIViewController {
         view.addSubview(rightBarView)
         view.addSubview(informationLabel)
         view.addSubview(characterImageView)
-        view.addSubview(skipButton)
         view.addSubview(nextButton)
     }
     
@@ -138,13 +129,6 @@ class Onboarding08VC: UIViewController {
             $0.centerY.equalToSuperview()
         }
         
-        skipButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.03)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.86)
-        }
-        
         nextButton.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
@@ -156,15 +140,16 @@ class Onboarding08VC: UIViewController {
     
     // MARK: Functions
     
+    /// 메인으로 버튼 누르면 온보딩 페이지로 이동
     @objc func didNextButtonTapped() {
-        let onboarding09VC = Onboarding09VC()
-        onboarding09VC.modalPresentationStyle = .fullScreen
-        onboarding09VC.modalTransitionStyle = .crossDissolve
+        let Onboarding = Onboarding01VC()
+        Onboarding.modalPresentationStyle = .fullScreen
+        Onboarding.modalTransitionStyle = .coverVertical
         
-        self.present(onboarding09VC, animated: true)
+        self.present(Onboarding, animated: true, completion: nil)
     } // end of didNextButtonTapped()
     
-    
+    /// 오른쪽으로 스와이프하면 첫번째 캐러셀 화면으로 전환
     @objc func didToRightSwiped(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {
@@ -179,7 +164,7 @@ class Onboarding08VC: UIViewController {
         }
     } // end of didToRightSwiped()
     
-    
+    /// 왼쪽으로 스와이프하면 세번째 캐러셀 화면으로 전환
     @objc func didToLeftSwiped(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             switch swipeGesture.direction {

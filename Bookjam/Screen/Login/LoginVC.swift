@@ -56,7 +56,7 @@ class LoginVC: UIViewController {
     }
     
     var checkLabel: UILabel = UILabel().then {
-        $0.text = "아이디와 비밀번호가 일치하지 않습니다."
+        $0.text = "사용자가 없거나 비밀번호가 일치하지 않습니다."
         $0.font = captionText03
         $0.textColor = alert
         $0.isHidden = true
@@ -128,6 +128,7 @@ class LoginVC: UIViewController {
     // MARK: Delegate
     
     func setUpDelegate() {
+        
     }
     
     
@@ -211,7 +212,38 @@ class LoginVC: UIViewController {
     }
     
     @objc func didLoginButtonTapped() {
-        // TODO: 서버 API 연결해서 checkLabel 상태 업데이트
+        var email = emailTextField.text ?? ""
+        var password = passwordTextField.text ?? ""
+        
+        // MARK: 로그인 API 연결
+        APIManager.shared.postData(
+            urlEndpointString: Constant.userLogin,
+            responseDataType: APIModel<userLoginResponseModel>?.self,
+            requestDataType: userLoginRequestModel.self,
+            parameter: userLoginRequestModel(email: email, password: password),
+            completionHandler: {
+                response in
+                if let code = response?.code {
+                    /// 로그인 성공하면
+                    if code == 1000 {
+                        /// 유저 정보 담는 싱글톤 객체에 이메일 저장
+                        /// ID 저장해야 하는 것 같은데 ... ID 반환을 안해줌
+                        let userInfo = UserInfo.shared
+                        userInfo.user.email = email
+                        
+                        /// 메인으로 화면 전환
+                        let mainPage = TabBarController()
+                        mainPage.modalPresentationStyle = .fullScreen
+                        mainPage.modalTransitionStyle = .coverVertical
+                        
+                        self.present(mainPage, animated: true, completion: nil)
+                    }
+                    /// 로그인 실패하면 로그인 실패 라벨 숨김 상태 해제
+                    else {
+                        self.checkLabel.isHidden = false
+                    }
+                }
+            })
     }
     
 }
