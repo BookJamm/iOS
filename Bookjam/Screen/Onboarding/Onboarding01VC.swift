@@ -59,6 +59,13 @@ class Onboarding01VC: UIViewController {
         $0.addTarget(self, action: #selector(didAppleButtonTapped), for: .touchUpInside)
     }
     
+    /// 임시로 메인 바로 넘어갈 수 있게 만들어 둔 버튼입니다.
+    /// 데모데이 이전에 개발 완료하면 삭제할 예정입니다.
+    let skipButton: UIButton = UIButton().then {
+        $0.setTitle("메인으로 넘어가기", for: .normal)
+        $0.addTarget(self, action: #selector(didSkipButtonTapped), for: .touchUpInside)
+    }
+    
     
     // MARK: ViewDidLoad
     
@@ -86,6 +93,7 @@ class Onboarding01VC: UIViewController {
         view.addSubview(emailButton)
         view.addSubview(kakaoButton)
         view.addSubview(appleButton)
+        view.addSubview(skipButton)
     }
     
     
@@ -123,6 +131,11 @@ class Onboarding01VC: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.065)
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.85)
+        }
+        
+        skipButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -178,6 +191,14 @@ class Onboarding01VC: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc func didSkipButtonTapped() {
+        let mainPage = TabBarController()
+        mainPage.modalPresentationStyle = .fullScreen
+        mainPage.modalTransitionStyle = .coverVertical
+        
+        self.present(mainPage, animated: true, completion: nil)
     }
 }//end of Onboarding01VC
 
