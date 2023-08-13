@@ -1,9 +1,11 @@
 //
-//  SearchPageVC.swift
+//  SeachEnterResultVC.swift
 //  Bookjam
 //
 //  Created by YOUJIM on 2023/08/13.
 //
+
+// MARK: - 검색 창에서 검색어를 입력하고 엔터를 누르면 이동하는 화면
 
 import SwiftUI
 import UIKit
@@ -12,20 +14,9 @@ import SnapKit
 import Then
 
 
-class SearchPageVC: UIViewController {
+class SeachEnterResultVC: UIViewController {
 
     // MARK: Variables
-    
-    var searchBar: UISearchBar = UISearchBar().then {
-        $0.placeholder = "상호명 또는 주소 검색"
-        $0.layer.cornerRadius = 25
-        $0.clipsToBounds = true
-        $0.searchBarStyle = .minimal
-
-        $0.layer.borderColor = main02?.cgColor
-        $0.layer.borderWidth = 1
-        $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
-    }
     
     var searchResultLabel: UILabel = UILabel().then {
         $0.text = "가게 검색 결과"
@@ -40,6 +31,32 @@ class SearchPageVC: UIViewController {
     
     var underLineView: UIView = UIView().then {
         $0.backgroundColor = gray03
+    }
+    
+    var menuButton: UIButton = UIButton().then {
+        $0.setTitle("거리순", for: .normal)
+        $0.titleLabel?.font = paragraph05
+        $0.setTitleColor(gray07, for: .normal)
+        $0.tintColor = .black
+        $0.semanticContentAttribute = .forceRightToLeft
+        
+        /// 타이틀과 이미지 사이 간격 부여
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: "chevron.down")
+        config.buttonSize = .small
+        config.imagePadding = 4
+        $0.configuration = config
+        
+        /// 터치했을 때 나오는 메뉴 선언
+        $0.menu = UIMenu(children: [
+            UIAction(title: "거리순", state: .on, handler: { _ in print("거리순")}),
+            UIAction(title: "리뷰순", handler: { _ in print("리뷰순")}),
+            UIAction(title: "평점순", handler: { _ in print("평점순")}),
+        ])
+        /// 터치하면 바로 메뉴 나오도록 설정
+        $0.showsMenuAsPrimaryAction = true
+        /// 체크 표시 하나만 할 수 있도록 설정
+        $0.changesSelectionAsPrimaryAction = true
     }
     
     var resultTableView: UITableView = UITableView().then {
@@ -60,8 +77,6 @@ class SearchPageVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
-        
-        hideKeyboard()
     }
     
     
@@ -69,10 +84,10 @@ class SearchPageVC: UIViewController {
     
     func setUpLayout() {
         [
-            searchBar,
             searchResultLabel,
             numOfResultLabel,
             underLineView,
+            menuButton,
             resultTableView
         ].forEach { view.addSubview($0) }
     }
@@ -88,16 +103,9 @@ class SearchPageVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        searchBar.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(45)
-        }
-        
         searchResultLabel.snp.makeConstraints {
-            $0.top.equalTo(searchBar.snp.bottom).offset(20)
-            $0.leading.equalTo(searchBar).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            $0.leading.equalToSuperview().offset(20)
         }
         
         numOfResultLabel.snp.makeConstraints {
@@ -111,18 +119,24 @@ class SearchPageVC: UIViewController {
             $0.height.equalTo(0.7)
         }
         
+        menuButton.snp.makeConstraints {
+            $0.centerY.equalTo(numOfResultLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
         resultTableView.snp.makeConstraints {
             $0.top.equalTo(searchResultLabel.snp.bottom).offset(11)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
 }
 
 
 // MARK: Extension
 
-extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
+extension SeachEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
@@ -138,9 +152,9 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct SearchPageVC_Preview: PreviewProvider {
+struct SeachEnterResultVC_Preview: PreviewProvider {
     static var previews: some View {
-        SearchPageVC().toPreview()
+        SeachEnterResultVC().toPreview()
             // .edgesIgnoringSafeArea(.all)
     }
 }
