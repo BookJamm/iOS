@@ -1,12 +1,9 @@
 //
-//  ViewController.swift
+//  PostDetailVC.swift
 //  Bookjam
 //
-//  Created by YOUJIM on 2023/07/08.
+//  Created by YOUJIM on 2023/08/14.
 //
-
-// MARK: - ViewController 만들 때마다 템플릿으로 사용할 파일
-// 아래 내용 복붙해서 사용
 
 import SwiftUI
 import UIKit
@@ -15,7 +12,7 @@ import SnapKit
 import Then
 
 
-class ViewController: UIViewController {
+class PostDetailVC: UIViewController {
 
     // MARK: Variables
 
@@ -59,9 +56,9 @@ class ViewController: UIViewController {
     
 }
 
-struct ViewController_Preview: PreviewProvider {
+struct PostDetailVC_Preview: PreviewProvider {
     static var previews: some View {
-        ViewController().toPreview()
+        PostDetailVC().toPreview()
             // .edgesIgnoringSafeArea(.all)
     }
 }
