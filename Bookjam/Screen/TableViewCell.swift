@@ -15,6 +15,10 @@ import Then
 
 
 class TableViewCell: UITableViewCell {
+    
+    // MARK: Variables
+    
+    var cellID = ""
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

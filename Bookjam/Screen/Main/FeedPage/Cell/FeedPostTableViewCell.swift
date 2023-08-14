@@ -1,5 +1,5 @@
 //
-//  FeedBookTableViewCell.swift
+//  FeedPostTableViewCell.swift
 //  Bookjam
 //
 //  Created by YOUJIM on 2023/08/14.
@@ -12,11 +12,11 @@ import SnapKit
 import Then
 
 
-class FeedBookTableViewCell: UITableViewCell {
+class FeedPostTableViewCell: UITableViewCell {
     
     // MARK: Variables
     
-    var cellID = "feedBookCell"
+    var cellID = "feedViewCell"
     
     var profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")?.circularImage()
@@ -212,7 +212,7 @@ class FeedBookTableViewCell: UITableViewCell {
 
 // MARK: Extension
 
-extension FeedBookTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension FeedPostTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -235,7 +235,7 @@ extension FeedBookTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
 struct FeedBookTableViewCell_Preview: PreviewProvider {
     static var previews: some View {
         UIViewPreview {
-            let cell = FeedBookTableViewCell()
+            let cell = FeedPostTableViewCell()
             return cell
         }
         .previewLayout(.sizeThatFits)

@@ -260,6 +260,7 @@ class MainPageVC: UIViewController {
     }
 }//end of MainPageVC
 
+
 // MARK: Extension
 
 /// 거리순 밑으로 보여질 tableView 구현을 위한 Delegate, DataSource extension

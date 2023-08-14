@@ -35,7 +35,7 @@ class FeedPageVC: UIViewController {
     }
     
     var feedTableView: UITableView = UITableView().then {
-        $0.register(FeedBookTableViewCell.self, forCellReuseIdentifier: FeedBookTableViewCell().cellID)
+        $0.register(FeedPostTableViewCell.self, forCellReuseIdentifier: FeedPostTableViewCell().cellID)
     }
     
     var writePostButton: UIButton = UIButton().then {
@@ -114,7 +114,11 @@ class FeedPageVC: UIViewController {
     // MARK: Function
     
     @objc func didUserSearchButtonTapped() {
-        // TODO: 검색 화면으로 전환
+        let searchPage = UserSearchPageVC()
+        searchPage.modalPresentationStyle = .fullScreen
+        searchPage.modalTransitionStyle = .coverVertical
+        
+        self.present(searchPage, animated: true)
     }
     
     @objc func didWritePostButtonTapped() {
@@ -131,7 +135,9 @@ extension FeedPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.dequeueReusableCell(withIdentifier: FeedBookTableViewCell().cellID, for: indexPath) as! FeedBookTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: FeedPostTableViewCell().cellID, for: indexPath) as! FeedPostTableViewCell
+        
+        return cell
     }
 }
 
