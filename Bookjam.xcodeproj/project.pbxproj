@@ -54,7 +54,8 @@
 		DD79942A2A89F4850066CFB7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7994292A89F4850066CFB7 /* TableViewCell.swift */; };
 		DD79942C2A8A0C770066CFB7 /* UserSearchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */; };
 		DD79942E2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */; };
-		DD7994302A8A2EEF0066CFB7 /* PostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942F2A8A2EEF0066CFB7 /* PostDetailVC.swift */; };
+		DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */; };
+		DD7994322A8A36AF0066CFB7 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */; };
 		DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB5F2A7BC21900E8DD42 /* ReviewInfo.swift */; };
 		DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB612A7BDC8B00E8DD42 /* ActivityInfo.swift */; };
 		DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB632A7BED1600E8DD42 /* ActivityTableViewCell.swift */; };
@@ -164,7 +165,8 @@
 		DD7994292A89F4850066CFB7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchPageVC.swift; sourceTree = "<group>"; };
 		DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUserTableViewCell.swift; sourceTree = "<group>"; };
-		DD79942F2A8A2EEF0066CFB7 /* PostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailVC.swift; sourceTree = "<group>"; };
+		DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPostDetailVC.swift; sourceTree = "<group>"; };
+		DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DD81DB5F2A7BC21900E8DD42 /* ReviewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfo.swift; sourceTree = "<group>"; };
 		DD81DB612A7BDC8B00E8DD42 /* ActivityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfo.swift; sourceTree = "<group>"; };
 		DD81DB632A7BED1600E8DD42 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -283,7 +285,7 @@
 			children = (
 				94D659042A76BFE800E7F183 /* FeedPageVC.swift */,
 				DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */,
-				DD79942F2A8A2EEF0066CFB7 /* PostDetailVC.swift */,
+				DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */,
 				DD7994262A89F40A0066CFB7 /* Cell */,
 			);
 			path = FeedPage;
@@ -435,6 +437,7 @@
 			children = (
 				DD7994272A89F4610066CFB7 /* FeedPostTableViewCell.swift */,
 				DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */,
+				DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -995,6 +998,7 @@
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */,
 				94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */,
+				DD7994322A8A36AF0066CFB7 /* ReviewTableViewCell.swift in Sources */,
 				94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */,
 				DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */,
 				DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */,
@@ -1040,7 +1044,7 @@
 				9411770B2A7984A100847F26 /* BookStoreDetailNewsView.swift in Sources */,
 				941177192A83826B00847F26 /* MyReviewBookStoreView.swift in Sources */,
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
-				DD7994302A8A2EEF0066CFB7 /* PostDetailVC.swift in Sources */,
+				DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 				9411771D2A84F6C400847F26 /* LikeActivityBookStoreView.swift in Sources */,
 				DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */,

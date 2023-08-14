@@ -221,6 +221,16 @@ extension UserSearchPageVC: UITableViewDelegate, UITableViewDataSource {
         else if tableView == postTableView { return 400 }
         return 200
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == postTableView {
+            let detailVC = BookPostDetailVC()
+            detailVC.modalPresentationStyle = .fullScreen
+            detailVC.modalTransitionStyle = .coverVertical
+            
+            self.present(detailVC, animated: true)
+        }
+    }
 }
 
 struct UserSearchPageVC_Preview: PreviewProvider {
