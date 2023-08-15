@@ -44,6 +44,7 @@ class FeedPageVC: UIViewController {
             pointSize: 20, weight: .black, scale: .large)),for: .normal)
         $0.tintColor = .white
         $0.layer.cornerRadius = 32
+        $0.addTarget(self, action: #selector(didWritePostButtonTapped), for: .touchUpInside)
     }
 
     override func viewDidLoad() {
@@ -122,7 +123,11 @@ class FeedPageVC: UIViewController {
     }
     
     @objc func didWritePostButtonTapped() {
-        // TODO: 글쓰기 화면으로 전환
+        let postPage = FeedPostPageVC()
+        postPage.modalPresentationStyle = .fullScreen
+        postPage.modalTransitionStyle = .coverVertical
+        
+        self.present(postPage, animated: true)
     }
 }
 
