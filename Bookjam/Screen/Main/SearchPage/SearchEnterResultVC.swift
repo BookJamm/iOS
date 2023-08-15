@@ -93,7 +93,7 @@ class SearchEnterResultVC: UIViewController {
             searchResultLabel,
             numOfResultLabel,
             underLineView,
-            menuButton,
+//            menuButton,
             resultTableView
         ].forEach { view.addSubview($0) }
     }
@@ -125,10 +125,10 @@ class SearchEnterResultVC: UIViewController {
             $0.height.equalTo(0.7)
         }
         
-        menuButton.snp.makeConstraints {
-            $0.centerY.equalTo(numOfResultLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        menuButton.snp.makeConstraints {
+//            $0.centerY.equalTo(numOfResultLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         resultTableView.snp.makeConstraints {
             $0.top.equalTo(searchResultLabel.snp.bottom).offset(11)

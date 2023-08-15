@@ -25,8 +25,8 @@
 		941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A30FD2A6260D0008152CC /* Onboarding03VC.swift */; };
 		941A31012A6A8DCA008152CC /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31002A6A8DCA008152CC /* UserInfo.swift */; };
 		941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31032A6AAB3B008152CC /* LoginAPI.swift */; };
-		9423934D2A8B5802000E46BF /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423934C2A8B5802000E46BF /* Token.swift */; };
 		9423934F2A8B61DC000E46BF /* KeywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423934E2A8B61DC000E46BF /* KeywordSearch.swift */; };
+		942393542A8BB56C000E46BF /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942393532A8BB56C000E46BF /* Token.swift */; };
 		94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658F72A712FF300E7F183 /* MainPageVC.swift */; };
 		94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FD2A71653A00E7F183 /* LocationPageVC.swift */; };
 		94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659002A7165AB00E7F183 /* MyPageVC.swift */; };
@@ -135,8 +135,8 @@
 		941A30FD2A6260D0008152CC /* Onboarding03VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding03VC.swift; sourceTree = "<group>"; };
 		941A31002A6A8DCA008152CC /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		941A31032A6AAB3B008152CC /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
-		9423934C2A8B5802000E46BF /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		9423934E2A8B61DC000E46BF /* KeywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSearch.swift; sourceTree = "<group>"; };
+		942393532A8BB56C000E46BF /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		94D658F72A712FF300E7F183 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		94D658FD2A71653A00E7F183 /* LocationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPageVC.swift; sourceTree = "<group>"; };
 		94D659002A7165AB00E7F183 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -282,10 +282,10 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		9423934B2A8B57C5000E46BF /* Token */ = {
+		942393522A8BB55F000E46BF /* Token */ = {
 			isa = PBXGroup;
 			children = (
-				9423934C2A8B5802000E46BF /* Token.swift */,
+				942393532A8BB56C000E46BF /* Token.swift */,
 			);
 			path = Token;
 			sourceTree = "<group>";
@@ -379,7 +379,7 @@
 		DD38CFBB2A59993400D32B00 /* Bookjam */ = {
 			isa = PBXGroup;
 			children = (
-				9423934B2A8B57C5000E46BF /* Token */,
+				942393522A8BB55F000E46BF /* Token */,
 				DDA76BFE2A66926200C8129B /* Bookjam.entitlements */,
 				DD38CFBC2A59993400D32B00 /* AppDelegate.swift */,
 				DD38CFBE2A59993400D32B00 /* SceneDelegate.swift */,
@@ -1019,6 +1019,7 @@
 				DDCBC1202A8638AE00694CBD /* BookStoreChoiceDateVC.swift in Sources */,
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				9411771B2A83BFC400847F26 /* ActivityFrameView.swift in Sources */,
+				942393542A8BB56C000E46BF /* Token.swift in Sources */,
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DD829C4D2A85045E00B22754 /* BookStoreReviewDetailVC.swift in Sources */,
 				DD7994282A89F4610066CFB7 /* FeedPostTableViewCell.swift in Sources */,
@@ -1081,7 +1082,6 @@
 				DD33A2FC2A8373EC00D4D7C3 /* APIConstant.swift in Sources */,
 				DDB0F2D62A8899E8005A8316 /* SearchResultTableViewCell.swift in Sources */,
 				9411770B2A7984A100847F26 /* BookStoreDetailNewsView.swift in Sources */,
-				9423934D2A8B5802000E46BF /* Token.swift in Sources */,
 				941177192A83826B00847F26 /* MyReviewBookStoreView.swift in Sources */,
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
 				DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */,
