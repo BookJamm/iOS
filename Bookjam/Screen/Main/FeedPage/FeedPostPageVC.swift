@@ -848,8 +848,8 @@ class FeedPostPageVC: UIViewController {
         self.dismiss(animated: true)
     }
     
-    /// 활동 선택 버튼 누르면 팝업창 present
-    @objc func didActivitySelectButtonTapped() {
+    /// 책 검색 버튼 누르면 팝업창 present
+    @objc func didBookSearchButtonTapped() {
         let searchBookPopUpVC = SearchBookPopUpVC()
         
         searchBookPopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
@@ -857,6 +857,17 @@ class FeedPostPageVC: UIViewController {
         searchBookPopUpVC.modalPresentationStyle = .overFullScreen
         
         self.present(searchBookPopUpVC, animated: true)
+    }
+    
+    /// 활동 선택 버튼 누르면 팝업창 present
+    @objc func didActivitySelectButtonTapped() {
+        let searchActivityPopUpVC = SearchActivityPopUpVC()
+        
+        searchActivityPopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
+        searchActivityPopUpVC.modalTransitionStyle = .crossDissolve
+        searchActivityPopUpVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(searchActivityPopUpVC, animated: true)
     }
     
     /// 장소 탭 버튼 3개 선택된 버튼과 아닌 버튼 구분해서 색상 변경
@@ -940,10 +951,6 @@ class FeedPostPageVC: UIViewController {
         selectVisitDatePopUpVC.modalPresentationStyle = .overFullScreen
         
         self.present(selectVisitDatePopUpVC, animated: true)
-    }
-    
-    @objc func didBookSearchButtonTapped() {
-        
     }
     
     /// 선택된 장소 도로명 주소 notification으로 받아와서 장소 탭 업데이트

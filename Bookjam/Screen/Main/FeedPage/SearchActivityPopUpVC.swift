@@ -1,5 +1,5 @@
 //
-//  SearchBookPopUpVC.swift
+//  SearchActivityPopUpVC.swift
 //  Bookjam
 //
 //  Created by YOUJIM on 2023/08/16.
@@ -12,7 +12,7 @@ import SnapKit
 import Then
 
 
-class SearchBookPopUpVC: UIViewController {
+class SearchActivityPopUpVC: UIViewController {
 
     // MARK: Variables
     
@@ -36,7 +36,7 @@ class SearchBookPopUpVC: UIViewController {
     var searchButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = gray07
-        $0.addTarget(self, action: #selector(didBookNameSearchButtonTapped), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(didActivityNameSearchButtonTapped), for: .touchUpInside)
     }
     
     var resultLabel: UILabel = UILabel().then {
@@ -45,6 +45,7 @@ class SearchBookPopUpVC: UIViewController {
         $0.isHidden = true
     }
     
+    // TODO: 활동 셀 디자인 완료되면 register해서 구현
     var resultTableView: UITableView = UITableView()
 
     override func viewDidLoad() {
@@ -60,7 +61,7 @@ class SearchBookPopUpVC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        view.backgroundColor = .clear
+        
     }
     
     
@@ -126,16 +127,16 @@ class SearchBookPopUpVC: UIViewController {
     // MARK: Function
     
     /// 검색 버튼 눌렀을 때 텍스트필드 값 바탕으로 검색해서 테이블뷰 결과 로드
-    @objc func didBookNameSearchButtonTapped() {
+    @objc func didActivityNameSearchButtonTapped() {
         let searchKeyword = searchTextField.text
         
         resultLabel.isHidden = false
     }
 }
 
-struct SearchBookPopUpVC_Preview: PreviewProvider {
+struct SearchActivityPopUpVC_Preview: PreviewProvider {
     static var previews: some View {
-        SearchBookPopUpVC().toPreview()
+        SearchActivityPopUpVC().toPreview()
             // .edgesIgnoringSafeArea(.all)
     }
 }
