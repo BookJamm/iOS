@@ -85,7 +85,7 @@
 		DDCBC1242A865A7000694CBD /* BookStoreWriteReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDCBC1232A865A7000694CBD /* BookStoreWriteReviewVC.swift */; };
 		DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */; };
 		DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */; };
-		DDD74A8A2A8B41EF008C999F /* SearchPostPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A892A8B41EF008C999F /* SearchPostPageVC.swift */; };
+		DDD74A8A2A8B41EF008C999F /* FeedPostPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A892A8B41EF008C999F /* FeedPostPageVC.swift */; };
 		DDDBBF632A811CF500B2C2C9 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
@@ -198,7 +198,7 @@
 		DDCBC1232A865A7000694CBD /* BookStoreWriteReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreWriteReviewVC.swift; sourceTree = "<group>"; };
 		DDD5DAB52A7DD40D0052C3EB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		DDD5DAB72A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStorePhotoCollectionViewCell.swift; sourceTree = "<group>"; };
-		DDD74A892A8B41EF008C999F /* SearchPostPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPostPageVC.swift; sourceTree = "<group>"; };
+		DDD74A892A8B41EF008C999F /* FeedPostPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostPageVC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
 		DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailNewsView.swift; sourceTree = "<group>"; };
@@ -287,6 +287,8 @@
 			children = (
 				94D659042A76BFE800E7F183 /* FeedPageVC.swift */,
 				DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */,
+				DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */,
+				DDD74A892A8B41EF008C999F /* FeedPostPageVC.swift */,
 				DD7994262A89F40A0066CFB7 /* Cell */,
 			);
 			path = FeedPage;
@@ -462,8 +464,6 @@
 			children = (
 				DDB0F2D22A8897E3005A8316 /* SearchPageVC.swift */,
 				DD9212A72A88A41D00EE6863 /* SearchEnterResultVC.swift */,
-				DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */,
-				DDD74A892A8B41EF008C999F /* SearchPostPageVC.swift */,
 				DDB0F2D42A8899CF005A8316 /* Cell */,
 			);
 			path = SearchPage;
@@ -998,7 +998,7 @@
 				DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */,
 				DDB0F2CB2A8801D7005A8316 /* VisitReviewPhotoCollectionViewCell.swift in Sources */,
 				DDB9074C2A73B0A6000A24F0 /* BookstoreDetailPageVC.swift in Sources */,
-				DDD74A8A2A8B41EF008C999F /* SearchPostPageVC.swift in Sources */,
+				DDD74A8A2A8B41EF008C999F /* FeedPostPageVC.swift in Sources */,
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */,
 				94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */,
