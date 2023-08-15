@@ -176,7 +176,7 @@ extension SearchPlacePopUpVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         print("셀 선택됨")
         
-        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "feedPlaceSearchResultCellTapped")))
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "feedPlaceSearchResultCellTapped"), object: address))
     
         self.dismiss(animated: true)
     }

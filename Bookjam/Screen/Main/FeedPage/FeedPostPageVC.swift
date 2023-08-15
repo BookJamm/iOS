@@ -934,16 +934,13 @@ class FeedPostPageVC: UIViewController {
         
     }
     
-    @objc func feedPostPageUpdate() {
-        print("알림 수신")
-        
-        /// 원래 있던 장소 선택 버튼은 숨김 처리
-        addressSearchButton.isHidden = true
-        addressSearchView.isHidden = true
+    /// 선택된 장소 도로명 주소 notification으로 받아와서 장소 탭 업데이트
+    @objc func feedPostPageUpdate(_ notification: Notification) {
+        print("장소 선택 notification 수신")
         
         /// 장소 정보 뷰 추가해줌
         bookStoreView.snp.makeConstraints {
-            $0.top.equalTo(bookStorebutton.snp.bottom).offset(20)
+            $0.top.equalTo(addressSearchView.snp.bottom).offset(20)
             $0.leading.trailing.equalTo(addressSearchView)
             $0.height.equalTo(120)
             $0.bottom.equalTo(placeView.snp.bottom).offset(-20)
@@ -985,13 +982,15 @@ class FeedPostPageVC: UIViewController {
             $0.leading.equalTo(bookStoreRatingLabel.snp.trailing).offset(5)
         }
         
+        /// 주소 notification으로 받아와서 장소 탭 주소 업데이트
+        if let address = notification.object as? String {
+            bookStoreAddressLabel.text = "\(address)"
+        }
         
         // TODO: 받아온 주소 API 연결해서 장소 정보 업데이트
-        // TODO: notification에 object 넣어 보내면 알림 수신 못하는 이슈 해결해서 address에 도로명 주소 넣기
         
         // bookStoreImageView.image = UIImage()
         // bookStoreLabel.text = ""
-        bookStoreAddressLabel.text = "\(address)"
         // bookStoreRatingLabel.text = ""
         // bookStoreNumOfReviewLabel.text = "리뷰 \()"
         
@@ -1022,7 +1021,7 @@ class FeedPostPageVC: UIViewController {
     
     func setUpNotification() {
         /// SearchPlacePopUpVC에서 장소 선택 마쳤을 때 장소 탭 업데이트를 위한 notification 수신
-        NotificationCenter.default.addObserver(self, selector: #selector(feedPostPageUpdate), name: NSNotification.Name("feedPlaceSearchResultCellTapped"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(feedPostPageUpdate(_:)), name: NSNotification.Name("feedPlaceSearchResultCellTapped"), object: nil)
         
         ///  SelectVisitDatePopUpVC에서 날짜 선택 마쳤을 때 버튼 날짜 업데이트를 위한 notification 수신
         NotificationCenter.default.addObserver(self, selector: #selector(visitDateUpdate(_:)), name: NSNotification.Name("feedVisitDateButtonTapped"), object: nil)
