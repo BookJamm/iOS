@@ -1037,6 +1037,35 @@ class FeedPostPageVC: UIViewController {
     @objc func postData() {
         print("작성 완료 notification 수신")
         
+        let content = reviewContentTextView.text
+        var isSecret = 0
+        var isCommentAllowed = 0
+        var date = selectDateButton.titleLabel?.text?.replacingOccurrences(of: " / ", with: "-")
+        
+        if secretPostToggleButton.isOn { isSecret = 1 }
+        if allowCommentToggleButton.isOn { isCommentAllowed = 1 }
+        
+        
+        
+        APIManager.shared.postData(
+            urlEndpointString: Constant.postRecord,
+            responseDataType: APIModel<RecordResponseModel>?.self,
+            requestDataType: RecordRequestModel.self,
+            parameter: RecordRequestModel(
+                // TODO: userID랑 place 번호 어떻게 알아내는지 물어보기
+                // TODO: 책 셀 구현하면 isbn API 연결해서 삽입
+                userId: 0,
+                place: 0,
+                isbn: 0,
+                date: date,
+                emotions: 0,
+                activity: 0,
+                contents: content,
+                isNotPublic: isSecret,
+                commentNotAllowed: isCommentAllowed)) { response in
+                    print(response)
+                }
+        
         self.dismiss(animated: true)
     }
     
