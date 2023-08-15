@@ -524,12 +524,14 @@ class FeedPostPageVC: UIViewController {
         
         scrollView.snp.makeConstraints {
             $0.top.equalTo(customNavigationView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         contentView.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.bottom.equalTo(uploadView.snp.bottom)
         }
         
         photoView.snp.makeConstraints {
@@ -855,7 +857,6 @@ class FeedPostPageVC: UIViewController {
         print("사진 추가 버튼 선택됨")
     }
     
-    // TODO: 버튼 안눌리는 문제 해결하기
     /// 선택된 버튼과 아닌 버튼 구분해서 색상 변경
     @objc func didBookStoreButtonTapped() {
         print("독립서점 선택됨")
