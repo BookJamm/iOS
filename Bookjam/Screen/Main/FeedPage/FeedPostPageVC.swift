@@ -16,11 +16,21 @@ class FeedPostPageVC: UIViewController {
     
     // MARK: Variables
     
-    /// 활동 선택 section에서 활동을 선택했는지 나타내는 변수 선언
+    /// 업로드 버튼 활성화를 위해 활동 선택 section에서 활동을 선택했는지 판별하는 변수 선언
     var isActivitySelected: Bool = false
     
-    /// 장소 section에서 장소를 검색했는지 나타내는 변수 선언
+    /// 업로드 버튼 활성화를 위해 장소 section에서 장소와 종류를 선택했는지 판별하는 변수 선언
+    var isPlaceTypeSelected: Bool = false
     var isplaceSelected: Bool = false
+    
+    /// 업로드 버튼 활성화를 위해 날짜 section에서 방문 날짜를 선택했는지 판별하는 변수 선언
+    var isVisitDateSelected: Bool = false
+    
+    /// 업로드 버튼 활성화를 위해 책 제목 section에서 책을 선택했는지 판별하는 변수 선언
+    var isBookSelected: Bool = false
+    
+    /// 업로드 버튼 활성화를 위해 내용 section에서 내용을 채웠는지 판별하는 변수 선언
+    var isContentFilled: Bool = false
     
     /// 장소 검색해 선택했을 때 전달되는 notification object를 통해 도로명 주소를 받아올 변수 선언
     var address: String = ""
@@ -382,9 +392,11 @@ class FeedPostPageVC: UIViewController {
         $0.setTitle("업로드", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = paragraph01
-        $0.backgroundColor = main03
+        $0.backgroundColor = gray04
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
+        $0.isEnabled = false
+        $0.addTarget(self, action: #selector(didFeedUploadButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -817,11 +829,25 @@ class FeedPostPageVC: UIViewController {
     
     // MARK: Function
     
+    /// 업로드 버튼 활성화 가능 여부 판단하는 함수
+    /// 방문날짜, 장소, 책제목, 내용 모두 선택하고 채워야 업로드 함수 활성화
+    func checkUploadPossible() {
+        if isActivitySelected && isPlaceTypeSelected && isplaceSelected && isVisitDateSelected && isBookSelected && isContentFilled {
+            uploadButton.backgroundColor = main03
+            uploadButton.isEnabled = true
+        }
+        else {
+            uploadButton.backgroundColor = gray03
+            uploadButton.isEnabled = false
+        }
+    }
+    
+    /// 네비게이션 바에 있는 뒤로가기 버튼 누르면 현재 뷰 dismiss
     @objc func didPostCustomBackButtonTapped() {
         self.dismiss(animated: true)
     }
     
-    /// 선택된 버튼과 아닌 버튼 구분해서 색상 변경
+    /// 장소 탭 버튼 3개 선택된 버튼과 아닌 버튼 구분해서 색상 변경
     @objc func didBookStoreButtonTapped() {
         print("독립서점 선택됨")
         
@@ -836,6 +862,10 @@ class FeedPostPageVC: UIViewController {
         bookStorebutton.isSelected = true
         bookStorebutton.backgroundColor = main01
         bookStorebutton.layer.borderColor = main03?.cgColor
+        
+        // 업로드 가능한지 판별
+        isPlaceTypeSelected = true
+        checkUploadPossible()
     }
     
     @objc func didPlayGroundButtonTapped() {
@@ -852,6 +882,11 @@ class FeedPostPageVC: UIViewController {
         playGroundButton.isSelected = true
         playGroundButton.backgroundColor = main01
         playGroundButton.layer.borderColor = main03?.cgColor
+       
+        
+        // 업로드 가능한지 판별
+        isPlaceTypeSelected = true
+        checkUploadPossible()
     }
     
     @objc func didLibraryButtonTapped() {
@@ -869,6 +904,10 @@ class FeedPostPageVC: UIViewController {
         libraryButton.isSelected = true
         libraryButton.backgroundColor = main01
         libraryButton.layer.borderColor = main03?.cgColor
+        
+        // 업로드 가능한지 판별
+        isPlaceTypeSelected = true
+        checkUploadPossible()
     }
     
     /// 장소 탭에 있는 검색 바 누르면 발생하는 이벤트
@@ -955,6 +994,10 @@ class FeedPostPageVC: UIViewController {
         bookStoreAddressLabel.text = "\(address)"
         // bookStoreRatingLabel.text = ""
         // bookStoreNumOfReviewLabel.text = "리뷰 \()"
+        
+        /// 업로드 버튼 활성화 가능한지 체크
+        isplaceSelected = true
+        checkUploadPossible()
     }
     
     /// 선택한 날짜 데이터 notification으로 받아와서 버튼 날짜 업데이트
@@ -964,8 +1007,16 @@ class FeedPostPageVC: UIViewController {
         if let date = notification.object as? Date {
             selectDateButton.setTitle(dateFormat.string(from: date), for: .normal)
         }
+        
+        /// 업로드 버튼 활성화 가능한지 체크
+        isVisitDateSelected = true
+        checkUploadPossible()
     }
     
+    /// 업로드 버튼 누르면 정보 넘기고 화면 dismiss
+    @objc func didFeedUploadButtonTapped() {
+        
+    }
     
     // MARK: Notification
     
@@ -1008,6 +1059,10 @@ extension FeedPostPageVC: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
+        
+        /// 업로드 가능 여부 판별
+        isContentFilled = true
+        checkUploadPossible()
     }
 
     /// placeholder 글자 수 0일 때 나타나도록 설정
@@ -1016,6 +1071,10 @@ extension FeedPostPageVC: UITextViewDelegate {
             textView.text = "당신의 한마디를 입력해주세요."
             textView.textColor = .lightGray
         }
+        
+        /// 업로드 가능 여부 판별
+        isContentFilled = false
+        checkUploadPossible()
     }
 }
 
