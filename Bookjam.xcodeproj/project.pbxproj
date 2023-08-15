@@ -50,6 +50,12 @@
 		DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD112CF02A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift */; };
 		DD58E6142A760A0A0026BEE1 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E6132A760A0A0026BEE1 /* ColorData.swift */; };
 		DD58E6162A760CA40026BEE1 /* FontData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD58E6152A760CA40026BEE1 /* FontData.swift */; };
+		DD7994282A89F4610066CFB7 /* FeedPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7994272A89F4610066CFB7 /* FeedPostTableViewCell.swift */; };
+		DD79942A2A89F4850066CFB7 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7994292A89F4850066CFB7 /* TableViewCell.swift */; };
+		DD79942C2A8A0C770066CFB7 /* UserSearchPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */; };
+		DD79942E2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */; };
+		DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */; };
+		DD7994322A8A36AF0066CFB7 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */; };
 		DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB5F2A7BC21900E8DD42 /* ReviewInfo.swift */; };
 		DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB612A7BDC8B00E8DD42 /* ActivityInfo.swift */; };
 		DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81DB632A7BED1600E8DD42 /* ActivityTableViewCell.swift */; };
@@ -155,6 +161,12 @@
 		DD52B03F2A829B9400A5E3A3 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DD58E6132A760A0A0026BEE1 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 		DD58E6152A760CA40026BEE1 /* FontData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontData.swift; sourceTree = "<group>"; };
+		DD7994272A89F4610066CFB7 /* FeedPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostTableViewCell.swift; sourceTree = "<group>"; };
+		DD7994292A89F4850066CFB7 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchPageVC.swift; sourceTree = "<group>"; };
+		DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUserTableViewCell.swift; sourceTree = "<group>"; };
+		DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPostDetailVC.swift; sourceTree = "<group>"; };
+		DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DD81DB5F2A7BC21900E8DD42 /* ReviewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewInfo.swift; sourceTree = "<group>"; };
 		DD81DB612A7BDC8B00E8DD42 /* ActivityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityInfo.swift; sourceTree = "<group>"; };
 		DD81DB632A7BED1600E8DD42 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -163,8 +175,8 @@
 		DD9212A72A88A41D00EE6863 /* SearchEnterResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEnterResultVC.swift; sourceTree = "<group>"; };
 		DD98D56E2A7AE44E002CCD4F /* VisitReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitReviewTableViewCell.swift; sourceTree = "<group>"; };
 		DDA76BFE2A66926200C8129B /* Bookjam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bookjam.entitlements; sourceTree = "<group>"; };
-		DDB0F2CC2A88751A005A8316 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		DDB0F2CA2A8801D7005A8316 /* VisitReviewPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitReviewPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		DDB0F2CC2A88751A005A8316 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		DDB0F2D22A8897E3005A8316 /* SearchPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageVC.swift; sourceTree = "<group>"; };
 		DDB0F2D52A8899E8005A8316 /* SearchResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewCell.swift; sourceTree = "<group>"; };
 		DDB9074B2A73B0A6000A24F0 /* BookstoreDetailPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookstoreDetailPageVC.swift; sourceTree = "<group>"; };
@@ -272,6 +284,9 @@
 			isa = PBXGroup;
 			children = (
 				94D659042A76BFE800E7F183 /* FeedPageVC.swift */,
+				DD79942B2A8A0C770066CFB7 /* UserSearchPageVC.swift */,
+				DD79942F2A8A2EEF0066CFB7 /* BookPostDetailVC.swift */,
+				DD7994262A89F40A0066CFB7 /* Cell */,
 			);
 			path = FeedPage;
 			sourceTree = "<group>";
@@ -373,6 +388,7 @@
 			children = (
 				DD38CFC72A59993400D32B00 /* LaunchScreen.storyboard */,
 				DD38CFC02A59993400D32B00 /* ViewController.swift */,
+				DD7994292A89F4850066CFB7 /* TableViewCell.swift */,
 				DD3540792A83BBFB00B5A9A3 /* Login */,
 				DDC6EA982A61559C00C4B127 /* Onboarding */,
 				DD38CFEF2A599F0F00D32B00 /* Main */,
@@ -414,6 +430,16 @@
 				941177102A7EC81500847F26 /* BookStoreMain.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DD7994262A89F40A0066CFB7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DD7994272A89F4610066CFB7 /* FeedPostTableViewCell.swift */,
+				DD79942D2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift */,
+				DD7994312A8A36AF0066CFB7 /* ReviewTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		DDA757402A81062100AF0E3B /* MainDetailPage */ = {
@@ -953,12 +979,14 @@
 				941A30FE2A6260D0008152CC /* Onboarding03VC.swift in Sources */,
 				DD9212A82A88A41D00EE6863 /* SearchEnterResultVC.swift in Sources */,
 				DD829C4B2A84D96E00B22754 /* BookStoreActvityDetailVC.swift in Sources */,
+				DD79942E2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift in Sources */,
 				9411770F2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift in Sources */,
 				DDCBC1202A8638AE00694CBD /* BookStoreChoiceDateVC.swift in Sources */,
 				DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */,
 				9411771B2A83BFC400847F26 /* ActivityFrameView.swift in Sources */,
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DD829C4D2A85045E00B22754 /* BookStoreReviewDetailVC.swift in Sources */,
+				DD7994282A89F4610066CFB7 /* FeedPostTableViewCell.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */,
@@ -970,6 +998,7 @@
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */,
 				94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */,
+				DD7994322A8A36AF0066CFB7 /* ReviewTableViewCell.swift in Sources */,
 				94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */,
 				DDC6EAA02A61B0B500C4B127 /* Onboarding08VC.swift in Sources */,
 				DDC6EA972A6142EB00C4B127 /* Onboarding04VC.swift in Sources */,
@@ -990,8 +1019,10 @@
 				DDC6EA9C2A61A42600C4B127 /* Onboarding06VC.swift in Sources */,
 				DD81DB642A7BED1600E8DD42 /* ActivityTableViewCell.swift in Sources */,
 				DDB0F2CD2A88751A005A8316 /* Login.swift in Sources */,
+				DD79942A2A89F4850066CFB7 /* TableViewCell.swift in Sources */,
 				DDDBBF632A811CF500B2C2C9 /* BookStoreDetailActivityView.swift in Sources */,
 				DD2D1A0A2A81EF8A003AEEA6 /* ChangeProfileVC.swift in Sources */,
+				DD79942C2A8A0C770066CFB7 /* UserSearchPageVC.swift in Sources */,
 				DDC445092A80D1A5000FE1C7 /* UIScrollView+.swift in Sources */,
 				DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */,
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
@@ -1013,6 +1044,7 @@
 				9411770B2A7984A100847F26 /* BookStoreDetailNewsView.swift in Sources */,
 				941177192A83826B00847F26 /* MyReviewBookStoreView.swift in Sources */,
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
+				DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
 				9411771D2A84F6C400847F26 /* LikeActivityBookStoreView.swift in Sources */,
 				DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */,
