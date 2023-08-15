@@ -22,6 +22,9 @@ class FeedPostPageVC: UIViewController {
     /// 장소 section에서 장소를 검색했는지 나타내는 변수 선언
     var isplaceSelected: Bool = false
     
+    /// 장소 검색해 선택했을 때 전달되는 notification object를 통해 도로명 주소를 받아올 변수 선언
+    var address: String = ""
+    
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -381,6 +384,7 @@ class FeedPostPageVC: UIViewController {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        setUpNotification()
     }
     
     
@@ -593,58 +597,55 @@ class FeedPostPageVC: UIViewController {
             $0.top.leading.equalToSuperview().offset(20)
         }
         
-        /// 활동 선택됐으면 활동 정보 표시
-        if isActivitySelected == true {
-            activityInfoView.snp.makeConstraints {
-                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
-                $0.leading.equalTo(activityLabel)
-                $0.trailing.equalToSuperview().offset(-20)
-                $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().offset(-20)
-            }
-            
-            activityImageView.snp.makeConstraints {
-                $0.top.leading.equalToSuperview().offset(12)
-                $0.width.height.equalTo(128)
-            }
-            
-            activityInfoLabel.snp.makeConstraints {
-                $0.top.equalTo(activityImageView).offset(5)
-                $0.leading.equalTo(activityImageView.snp.trailing).offset(14)
-                $0.trailing.equalToSuperview().offset(-10)
-            }
-            
-            activityStarImageView.snp.makeConstraints {
-                $0.top.equalTo(activityInfoLabel.snp.bottom).offset(10)
-                $0.leading.equalTo(activityInfoLabel)
-            }
-            
-            activityRatingLabel.snp.makeConstraints {
-                $0.centerY.equalTo(activityStarImageView)
-                $0.leading.equalTo(activityStarImageView.snp.trailing).offset(5)
-            }
-            
-            activityNumOfReviewLabel.snp.makeConstraints {
-                $0.centerY.equalTo(activityStarImageView)
-                $0.leading.equalTo(activityRatingLabel.snp.trailing).offset(5)
-            }
-            
-            cancelButton.snp.makeConstraints {
-                $0.top.equalTo(activityStarImageView.snp.bottom).offset(25)
-                $0.leading.equalTo(activityStarImageView)
-                $0.trailing.equalToSuperview().offset(-10)
-                $0.bottom.equalTo(activityImageView.snp.bottom).offset(-5)
-            }
-        }
-        // 선택 안됐으면 활동 선택 버튼만 추가
-        else {
-            activitySelectButton.snp.makeConstraints {
-                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
-                $0.leading.equalTo(activityLabel)
-                $0.trailing.equalToSuperview().offset(-20)
-                $0.height.equalTo(150)
-                $0.bottom.equalToSuperview().offset(-20)
-            }
+//        /// 활동 선택됐으면 활동 정보 표시
+//        if isActivitySelected == true {
+//            activityInfoView.snp.makeConstraints {
+//                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
+//                $0.leading.equalTo(activityLabel)
+//                $0.trailing.equalToSuperview().offset(-20)
+//                $0.height.equalTo(150)
+//                $0.bottom.equalToSuperview().offset(-20)
+//            }
+//
+//            activityImageView.snp.makeConstraints {
+//                $0.top.leading.equalToSuperview().offset(12)
+//                $0.width.height.equalTo(128)
+//            }
+//
+//            activityInfoLabel.snp.makeConstraints {
+//                $0.top.equalTo(activityImageView).offset(5)
+//                $0.leading.equalTo(activityImageView.snp.trailing).offset(14)
+//                $0.trailing.equalToSuperview().offset(-10)
+//            }
+//
+//            activityStarImageView.snp.makeConstraints {
+//                $0.top.equalTo(activityInfoLabel.snp.bottom).offset(10)
+//                $0.leading.equalTo(activityInfoLabel)
+//            }
+//
+//            activityRatingLabel.snp.makeConstraints {
+//                $0.centerY.equalTo(activityStarImageView)
+//                $0.leading.equalTo(activityStarImageView.snp.trailing).offset(5)
+//            }
+//
+//            activityNumOfReviewLabel.snp.makeConstraints {
+//                $0.centerY.equalTo(activityStarImageView)
+//                $0.leading.equalTo(activityRatingLabel.snp.trailing).offset(5)
+//            }
+//
+//            cancelButton.snp.makeConstraints {
+//                $0.top.equalTo(activityStarImageView.snp.bottom).offset(25)
+//                $0.leading.equalTo(activityStarImageView)
+//                $0.trailing.equalToSuperview().offset(-10)
+//                $0.bottom.equalTo(activityImageView.snp.bottom).offset(-5)
+//            }
+//        }
+        activitySelectButton.snp.makeConstraints {
+            $0.top.equalTo(activityLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(activityLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         placeView.snp.makeConstraints {
@@ -689,57 +690,10 @@ class FeedPostPageVC: UIViewController {
             $0.leading.equalTo(addressSearchView).offset(20)
         }
         
-        /// 장소 검색 됐으면 장소 정보 view에 추가
-        if isplaceSelected == true {
-            bookStoreView.snp.makeConstraints {
-                $0.top.equalTo(addressSearchView.snp.bottom).offset(20)
-                $0.leading.trailing.equalTo(addressSearchView)
-                $0.height.equalTo(120)
-                $0.bottom.equalTo(placeView.snp.bottom).offset(-20)
-            }
-            
-            bookStoreImageView.snp.makeConstraints {
-                $0.top.leading.bottom.equalToSuperview()
-                $0.width.equalTo(bookStoreView.snp.height)
-            }
-            
-            bookStoreLabel.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(5)
-                $0.leading.equalTo(bookStoreImageView.snp.trailing).offset(20)
-            }
-            
-            bookStoreTypeImageView.snp.makeConstraints {
-                $0.centerY.equalTo(bookStoreLabel)
-                $0.leading.equalTo(bookStoreLabel.snp.trailing).offset(5)
-            }
-            
-            bookStoreAddressLabel.snp.makeConstraints {
-                $0.top.equalTo(bookStoreLabel.snp.bottom).offset(10)
-                $0.leading.equalTo(bookStoreLabel)
-                $0.trailing.equalToSuperview()
-            }
-            
-            bookStoreStarImageView.snp.makeConstraints {
-                $0.top.equalTo(bookStoreAddressLabel.snp.bottom).offset(10)
-                $0.leading.equalTo(bookStoreAddressLabel)
-            }
-            
-            bookStoreRatingLabel.snp.makeConstraints {
-                $0.centerY.equalTo(bookStoreStarImageView)
-                $0.leading.equalTo(bookStoreStarImageView.snp.trailing).offset(5)
-            }
-            
-            bookStoreNumOfReviewLabel.snp.makeConstraints {
-                $0.centerY.equalTo(bookStoreStarImageView)
-                $0.leading.equalTo(bookStoreRatingLabel.snp.trailing).offset(5)
-            }
+        addressSearchButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-30)
         }
-        /// 장소 검색 안됐으면 view에 추가 안하고 placeView 높이만 재설정
-        else {
-            addressSearchButton.snp.makeConstraints {
-                $0.bottom.equalToSuperview().offset(-30)
-            }
-        }
+        
         
         bookView.snp.makeConstraints {
             $0.top.equalTo(placeView.snp.bottom).offset(10)
@@ -914,6 +868,76 @@ class FeedPostPageVC: UIViewController {
     
     @objc func didBookSearchButtonTapped() {
         
+    }
+    
+    @objc func feedPostPageUpdate() {
+        print("알림 수신")
+        
+        /// 원래 있던 장소 선택 버튼은 숨김 처리
+        addressSearchButton.isHidden = true
+        addressSearchView.isHidden = true
+        
+        /// 장소 정보 뷰 추가해줌
+        bookStoreView.snp.makeConstraints {
+            $0.top.equalTo(bookStorebutton.snp.bottom).offset(20)
+            $0.leading.trailing.equalTo(addressSearchView)
+            $0.height.equalTo(120)
+            $0.bottom.equalTo(placeView.snp.bottom).offset(-20)
+        }
+        
+        bookStoreImageView.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.width.equalTo(bookStoreView.snp.height)
+        }
+        
+        bookStoreLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(5)
+            $0.leading.equalTo(bookStoreImageView.snp.trailing).offset(20)
+        }
+        
+        bookStoreTypeImageView.snp.makeConstraints {
+            $0.centerY.equalTo(bookStoreLabel)
+            $0.leading.equalTo(bookStoreLabel.snp.trailing).offset(5)
+        }
+        
+        bookStoreAddressLabel.snp.makeConstraints {
+            $0.top.equalTo(bookStoreLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(bookStoreLabel)
+            $0.trailing.equalToSuperview()
+        }
+        
+        bookStoreStarImageView.snp.makeConstraints {
+            $0.top.equalTo(bookStoreAddressLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(bookStoreAddressLabel)
+        }
+        
+        bookStoreRatingLabel.snp.makeConstraints {
+            $0.centerY.equalTo(bookStoreStarImageView)
+            $0.leading.equalTo(bookStoreStarImageView.snp.trailing).offset(5)
+        }
+        
+        bookStoreNumOfReviewLabel.snp.makeConstraints {
+            $0.centerY.equalTo(bookStoreStarImageView)
+            $0.leading.equalTo(bookStoreRatingLabel.snp.trailing).offset(5)
+        }
+        
+        
+        // TODO: 받아온 주소 API 연결해서 장소 정보 업데이트
+        // TODO: notification에 object 넣어 보내면 알림 수신 못하는 이슈 해결해서 address에 도로명 주소 넣기
+        
+        // bookStoreImageView.image = UIImage()
+        // bookStoreLabel.text = ""
+        bookStoreAddressLabel.text = "\(address)"
+        // bookStoreRatingLabel.text = ""
+        // bookStoreNumOfReviewLabel.text = "리뷰 \()"
+    }
+    
+    
+    // MARK: Notification
+    
+    func setUpNotification() {
+        /// SearchPlacePopUpVC에서 장소 선택 마쳤을 때 장소 탭 업데이트를 위한 notification 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(feedPostPageUpdate), name: NSNotification.Name("feedPlaceSearchResultCellTapped"), object: nil)
     }
 }
 

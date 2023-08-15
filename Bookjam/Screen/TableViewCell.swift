@@ -44,7 +44,9 @@ class TableViewCell: UITableViewCell {
     // MARK: Layout
     
     func setUpLayout() {
-        
+        [
+            
+        ].forEach { self.contentView.addSubview($0) }
     }
     
     // MARK: Delegate
