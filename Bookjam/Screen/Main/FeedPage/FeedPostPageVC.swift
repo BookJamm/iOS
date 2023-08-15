@@ -185,6 +185,7 @@ class FeedPostPageVC: UIViewController {
     
     var activitySelectButton: UIButton = UIButton().then {
         $0.setImage(UIImage(named: "emptyActivity"), for: .normal)
+        $0.addTarget(self, action: #selector(didActivitySelectButtonTapped), for: .touchUpInside)
     }
     
     var placeView: UIView = UIView().then {
@@ -845,6 +846,17 @@ class FeedPostPageVC: UIViewController {
     /// 네비게이션 바에 있는 뒤로가기 버튼 누르면 현재 뷰 dismiss
     @objc func didPostCustomBackButtonTapped() {
         self.dismiss(animated: true)
+    }
+    
+    /// 활동 선택 버튼 누르면 팝업창 present
+    @objc func didActivitySelectButtonTapped() {
+        let searchBookPopUpVC = SearchBookPopUpVC()
+        
+        searchBookPopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
+        searchBookPopUpVC.modalTransitionStyle = .crossDissolve
+        searchBookPopUpVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(searchBookPopUpVC, animated: true)
     }
     
     /// 장소 탭 버튼 3개 선택된 버튼과 아닌 버튼 구분해서 색상 변경
