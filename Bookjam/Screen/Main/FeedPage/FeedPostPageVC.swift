@@ -16,6 +16,12 @@ class FeedPostPageVC: UIViewController {
     
     // MARK: Variables
     
+    /// 활동 선택 section에서 활동을 선택했는지 나타내는 변수 선언
+    var isActivitySelected: Bool = false
+    
+    /// 장소 section에서 장소를 검색했는지 나타내는 변수 선언
+    var isplaceSelected: Bool = false
+    
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -49,7 +55,8 @@ class FeedPostPageVC: UIViewController {
     }
     
     var addPhotoButton: UIButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
+        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill", withConfiguration: UIImage.SymbolConfiguration(
+            pointSize: 40, weight: .regular, scale: .default)), for: .normal)
         $0.tintColor = gray07
         $0.backgroundColor = gray03
         $0.clipsToBounds = true
@@ -145,7 +152,7 @@ class FeedPostPageVC: UIViewController {
     
     var cancelButton: UIButton = UIButton().then {
         $0.setTitle("선택 취소", for: .normal)
-        $0.setTitleColor(main03, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = main01
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 24
@@ -153,8 +160,8 @@ class FeedPostPageVC: UIViewController {
         $0.layer.borderWidth = 0.7
     }
     
-    var activityEmptyImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(named: "emptyActivity")
+    var activitySelectButton: UIButton = UIButton().then {
+        $0.setImage(UIImage(named: "emptyActivity"), for: .normal)
     }
     
     var placeView: UIView = UIView().then {
@@ -175,6 +182,7 @@ class FeedPostPageVC: UIViewController {
         $0.clipsToBounds = true
         $0.layer.borderWidth = 1
         $0.layer.borderColor = gray03?.cgColor
+        $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didBookStoreButtonTapped), for: .touchUpInside)
     }
     
@@ -187,11 +195,12 @@ class FeedPostPageVC: UIViewController {
         $0.clipsToBounds = true
         $0.layer.borderWidth = 1
         $0.layer.borderColor = gray03?.cgColor
+        $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didPlayGroundButtonTapped), for: .touchUpInside)
     }
     
     var libraryButton: UIButton = UIButton().then {
-        $0.setTitle("독립서점", for: .normal)
+        $0.setTitle("도서관", for: .normal)
         $0.setTitleColor(gray06, for: .normal)
         $0.setTitleColor(.white, for: .selected)
         $0.titleLabel?.font = paragraph02
@@ -199,6 +208,7 @@ class FeedPostPageVC: UIViewController {
         $0.clipsToBounds = true
         $0.layer.borderWidth = 1
         $0.layer.borderColor = gray03?.cgColor
+        $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didLibraryButtonTapped), for: .touchUpInside)
     }
     
@@ -214,7 +224,7 @@ class FeedPostPageVC: UIViewController {
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        $0.tintColor = main03
+        $0.tintColor = gray06
         $0.addTarget(self, action: #selector(didAddressSearchButtonTapped), for: .touchUpInside)
     }
     
@@ -243,6 +253,7 @@ class FeedPostPageVC: UIViewController {
         $0.text = "책방주소책방주소책방주소책방주소책방주소책방주소책방주소"
         $0.font = paragraph03
         $0.textColor = gray06
+        $0.numberOfLines = 2
     }
     
     var bookStoreStarImageView: UIImageView = UIImageView().then {
@@ -281,6 +292,7 @@ class FeedPostPageVC: UIViewController {
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+        $0.tintColor = gray06
         $0.addTarget(self, action: #selector(didBookSearchButtonTapped), for: .touchUpInside)
     }
     
@@ -295,8 +307,8 @@ class FeedPostPageVC: UIViewController {
         $0.font = paragraph02
     }
     
-    var bookSearchResultAddressLabel: UILabel = UILabel().then {
-        $0.text = "장소"
+    var bookSearchResultAuthorLabel: UILabel = UILabel().then {
+        $0.text = "작가"
         $0.font = captionText02
         $0.textColor = gray06
     }
@@ -314,6 +326,14 @@ class FeedPostPageVC: UIViewController {
     var reviewContentInfoLabel: UILabel = UILabel().then {
         $0.text = "내용"
         $0.font = title06
+    }
+    
+    var reviewContentBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = gray02
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
     }
     
     var reviewContentTextView: UITextView = UITextView().then {
@@ -367,7 +387,8 @@ class FeedPostPageVC: UIViewController {
     // MARK: View
     
     func setUpView() {
-        
+        view.backgroundColor = gray02
+        hideKeyboard()
     }
     
     
@@ -412,7 +433,7 @@ class FeedPostPageVC: UIViewController {
         [
             activityLabel,
             activityInfoView,
-            activityEmptyImageView
+            activitySelectButton
         ].forEach { activityView.addSubview($0) }
         
         [
@@ -447,18 +468,18 @@ class FeedPostPageVC: UIViewController {
         [
             bookSearchLabel,
             bookSearchView,
-            bookStorebutton,
+            bookSearchButton,
             bookSearchResultImageView,
             bookSearchResultNameLabel,
-            bookSearchResultAddressLabel,
+            bookSearchResultAuthorLabel,
             bookSearchResultPublisherLabel
         ].forEach { bookView.addSubview($0) }
         
         [
             reviewContentInfoLabel,
+            reviewContentBackgroundView,
             reviewContentTextView
         ].forEach { reviewContentView.addSubview($0) }
-        
        
         [
             secretPostLabel,
@@ -472,29 +493,373 @@ class FeedPostPageVC: UIViewController {
     // MARK: Delegate
     
     func setUpDelegate() {
-        
+        photoCollectionView.dataSource = self
+        photoCollectionView.delegate = self
     }
     
     
     // MARK: Constraint
     
     func setUpConstraint() {
+        customNavigationView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(50)
+        }
         
+        backButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+        }
+        
+        postLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        underLineView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(customNavigationView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        photoView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        photoLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        addPhotoButton.snp.makeConstraints {
+            $0.top.equalTo(photoLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(photoLabel)
+            $0.height.width.equalTo(140)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
+        
+        photoCollectionView.snp.makeConstraints {
+            $0.top.equalTo(addPhotoButton.snp.top)
+            $0.leading.equalTo(addPhotoButton.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(addPhotoButton.snp.bottom)
+        }
+        
+        selectDateView.snp.makeConstraints {
+            $0.top.equalTo(photoView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        selectDateLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        selectDateInfoButton.snp.makeConstraints {
+            $0.top.equalTo(selectDateLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(selectDateLabel)
+            $0.width.equalTo(120)
+            $0.height.equalTo(44)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
+        
+        selectDateButton.snp.makeConstraints {
+            $0.top.equalTo(selectDateInfoButton)
+            $0.leading.equalTo(selectDateInfoButton.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalTo(selectDateInfoButton.snp.bottom)
+        }
+        
+        activityView.snp.makeConstraints {
+            $0.top.equalTo(selectDateView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        activityLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        /// 활동 선택됐으면 활동 정보 표시
+        if isActivitySelected == true {
+            activityInfoView.snp.makeConstraints {
+                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
+                $0.leading.equalTo(activityLabel)
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.height.equalTo(150)
+                $0.bottom.equalToSuperview().offset(-20)
+            }
+            
+            activityImageView.snp.makeConstraints {
+                $0.top.leading.equalToSuperview().offset(12)
+                $0.width.height.equalTo(128)
+            }
+            
+            activityInfoLabel.snp.makeConstraints {
+                $0.top.equalTo(activityImageView).offset(5)
+                $0.leading.equalTo(activityImageView.snp.trailing).offset(14)
+                $0.trailing.equalToSuperview().offset(-10)
+            }
+            
+            activityStarImageView.snp.makeConstraints {
+                $0.top.equalTo(activityInfoLabel.snp.bottom).offset(10)
+                $0.leading.equalTo(activityInfoLabel)
+            }
+            
+            activityRatingLabel.snp.makeConstraints {
+                $0.centerY.equalTo(activityStarImageView)
+                $0.leading.equalTo(activityStarImageView.snp.trailing).offset(5)
+            }
+            
+            activityNumOfReviewLabel.snp.makeConstraints {
+                $0.centerY.equalTo(activityStarImageView)
+                $0.leading.equalTo(activityRatingLabel.snp.trailing).offset(5)
+            }
+            
+            cancelButton.snp.makeConstraints {
+                $0.top.equalTo(activityStarImageView.snp.bottom).offset(25)
+                $0.leading.equalTo(activityStarImageView)
+                $0.trailing.equalToSuperview().offset(-10)
+                $0.bottom.equalTo(activityImageView.snp.bottom).offset(-5)
+            }
+        }
+        // 선택 안됐으면 활동 선택 버튼만 추가
+        else {
+            activitySelectButton.snp.makeConstraints {
+                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
+                $0.leading.equalTo(activityLabel)
+                $0.trailing.equalToSuperview().offset(-20)
+                $0.height.equalTo(150)
+                $0.bottom.equalToSuperview().offset(-20)
+            }
+        }
+        
+        placeView.snp.makeConstraints {
+            $0.top.equalTo(activityView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        placeLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        bookStorebutton.snp.makeConstraints {
+            $0.top.equalTo(placeLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(placeLabel)
+            $0.width.equalTo(120)
+            $0.height.equalTo(45)
+        }
+        
+        playGroundButton.snp.makeConstraints {
+            $0.top.bottom.equalTo(bookStorebutton)
+            $0.leading.equalTo(bookStorebutton.snp.trailing).offset(5)
+            $0.width.equalTo(bookStorebutton)
+        }
+        
+        libraryButton.snp.makeConstraints {
+            $0.top.bottom.equalTo(bookStorebutton)
+            $0.leading.equalTo(playGroundButton.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.width.equalTo(bookStorebutton)
+        }
+        
+        addressSearchView.snp.makeConstraints {
+            $0.top.equalTo(bookStorebutton.snp.bottom).offset(20)
+            $0.leading.equalTo(bookStorebutton)
+            $0.trailing.equalTo(libraryButton)
+            $0.height.equalTo(45)
+        }
+        
+        addressSearchButton.snp.makeConstraints {
+            $0.centerY.equalTo(addressSearchView)
+            $0.leading.equalTo(addressSearchView).offset(20)
+        }
+        
+        /// 장소 검색 됐으면 장소 정보 view에 추가
+        if isplaceSelected == true {
+            bookStoreView.snp.makeConstraints {
+                $0.top.equalTo(addressSearchView.snp.bottom).offset(20)
+                $0.leading.trailing.equalTo(addressSearchView)
+                $0.height.equalTo(120)
+                $0.bottom.equalTo(placeView.snp.bottom).offset(-20)
+            }
+            
+            bookStoreImageView.snp.makeConstraints {
+                $0.top.leading.bottom.equalToSuperview()
+                $0.width.equalTo(bookStoreView.snp.height)
+            }
+            
+            bookStoreLabel.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(5)
+                $0.leading.equalTo(bookStoreImageView.snp.trailing).offset(20)
+            }
+            
+            bookStoreTypeImageView.snp.makeConstraints {
+                $0.centerY.equalTo(bookStoreLabel)
+                $0.leading.equalTo(bookStoreLabel.snp.trailing).offset(5)
+            }
+            
+            bookStoreAddressLabel.snp.makeConstraints {
+                $0.top.equalTo(bookStoreLabel.snp.bottom).offset(10)
+                $0.leading.equalTo(bookStoreLabel)
+                $0.trailing.equalToSuperview()
+            }
+            
+            bookStoreStarImageView.snp.makeConstraints {
+                $0.top.equalTo(bookStoreAddressLabel.snp.bottom).offset(10)
+                $0.leading.equalTo(bookStoreAddressLabel)
+            }
+            
+            bookStoreRatingLabel.snp.makeConstraints {
+                $0.centerY.equalTo(bookStoreStarImageView)
+                $0.leading.equalTo(bookStoreStarImageView.snp.trailing).offset(5)
+            }
+            
+            bookStoreNumOfReviewLabel.snp.makeConstraints {
+                $0.centerY.equalTo(bookStoreStarImageView)
+                $0.leading.equalTo(bookStoreRatingLabel.snp.trailing).offset(5)
+            }
+        }
+        /// 장소 검색 안됐으면 view에 추가 안하고 placeView 높이만 재설정
+        else {
+            addressSearchButton.snp.makeConstraints {
+                $0.bottom.equalToSuperview().offset(-30)
+            }
+        }
+        
+        bookView.snp.makeConstraints {
+            $0.top.equalTo(placeView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        bookSearchLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        bookSearchView.snp.makeConstraints {
+            $0.top.equalTo(bookSearchLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(45)
+        }
+        
+        bookSearchButton.snp.makeConstraints {
+            $0.centerY.equalTo(bookSearchView.snp.centerY)
+            $0.leading.equalTo(bookSearchView.snp.leading).offset(20)
+        }
+        
+        bookSearchResultImageView.snp.makeConstraints {
+            $0.top.equalTo(bookSearchView.snp.bottom).offset(20)
+            $0.leading.equalTo(bookSearchView).offset(20)
+            $0.width.equalTo(110)
+            $0.height.equalTo(150)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
+        
+        bookSearchResultNameLabel.snp.makeConstraints {
+            $0.top.equalTo(bookSearchResultImageView).offset(5)
+            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+        }
+        
+        bookSearchResultAuthorLabel.snp.makeConstraints {
+            $0.top.equalTo(bookSearchResultNameLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+        }
+        
+        bookSearchResultPublisherLabel.snp.makeConstraints {
+            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+        }
+        
+        reviewContentView.snp.makeConstraints {
+            $0.top.equalTo(bookView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        reviewContentInfoLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+
+        reviewContentBackgroundView.snp.makeConstraints {
+            $0.top.equalTo(reviewContentInfoLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(reviewContentInfoLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(220)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
+
+        reviewContentTextView.snp.makeConstraints {
+            $0.top.equalTo(reviewContentBackgroundView).offset(20)
+            $0.leading.equalTo(reviewContentBackgroundView).offset(20)
+            $0.trailing.equalTo(reviewContentView).offset(-20)
+            $0.bottom.equalTo(reviewContentBackgroundView.snp.bottom).offset(-20)
+        }
+        
+        uploadView.snp.makeConstraints {
+            $0.top.equalTo(reviewContentView.snp.bottom).offset(10)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+        }
+        
+        secretPostLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(20)
+        }
+        
+        secretPostToggleButton.snp.makeConstraints {
+            $0.centerY.equalTo(secretPostLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        allowCommentLabel.snp.makeConstraints {
+            $0.top.equalTo(secretPostLabel.snp.bottom).offset(30)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        
+        allowCommentToggleButton.snp.makeConstraints {
+            $0.centerY.equalTo(allowCommentLabel)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        uploadButton.snp.makeConstraints {
+            $0.top.equalTo(allowCommentLabel.snp.bottom).offset(60)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(45)
+            $0.bottom.equalToSuperview().offset(-20)
+        }
     }
     
     
     // MARK: Function
     
     @objc func didPostCustomBackButtonTapped() {
-        
+        self.dismiss(animated: true)
     }
     
     @objc func didAddPostPhotoButtonTapped() {
-        
+        print("사진 추가 버튼 선택됨")
     }
     
+    // TODO: 버튼 안눌리는 문제 해결하기
     /// 선택된 버튼과 아닌 버튼 구분해서 색상 변경
     @objc func didBookStoreButtonTapped() {
+        print("독립서점 선택됨")
+        
         libraryButton.backgroundColor = gray02
         libraryButton.layer.borderColor = gray03?.cgColor
         libraryButton.isSelected = false
@@ -508,6 +873,8 @@ class FeedPostPageVC: UIViewController {
     }
     
     @objc func didPlayGroundButtonTapped() {
+        print("책 놀이터 선택됨")
+        
         bookStorebutton.backgroundColor = gray02
         bookStorebutton.layer.borderColor = gray03?.cgColor
         bookStorebutton.isSelected = false
@@ -521,6 +888,8 @@ class FeedPostPageVC: UIViewController {
     }
     
     @objc func didLibraryButtonTapped() {
+        print("도서관 선택됨")
+        
         bookStorebutton.backgroundColor = gray02
         bookStorebutton.layer.borderColor = gray03?.cgColor
         bookStorebutton.isSelected = false
@@ -544,6 +913,25 @@ class FeedPostPageVC: UIViewController {
 
 
 // MARK: Extension
+
+extension FeedPostPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
+        
+        // cell.photoImageView.image = images[indexPath.row]
+        
+        return cell
+    }
+    
+    /// 셀 별 사이즈 지정
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: photoCollectionView.frame.height - 1, height: photoCollectionView.frame.height - 1)
+    }
+}
 
 /// placeholder를 위한 TextView extension
 extension FeedPostPageVC: UITextViewDelegate {
