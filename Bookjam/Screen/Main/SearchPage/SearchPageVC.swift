@@ -16,6 +16,8 @@ class SearchPageVC: UIViewController {
 
     // MARK: Variables
     
+    var searchResult: [KeywordSearchResponseModel]?
+    
     var searchBar: UISearchBar = UISearchBar().then {
         $0.placeholder = "상호명 또는 주소 검색"
         $0.layer.cornerRadius = 25
@@ -119,6 +121,16 @@ class SearchPageVC: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    // MARK: Func
+    
+    func updateTable(with results: [KeywordSearchResponseModel]) {
+    
+        searchResult = results
+        
+        resultTableView.reloadData()
+    }
+    
 }
 
 
@@ -126,17 +138,46 @@ class SearchPageVC: UIViewController {
 
 extension SearchPageVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         // TODO: 검색 값 불러오는 서버 api 연결
+        
+        guard !searchText.isEmpty else {
+                updateTable(with: [])
+                return
+            }
+        
+        let requestModel = KeywordSearchRequestModel(keyword: searchText, sortBy: "distance", lat: 37.270225, lon: 127.048789)
+            //임시 위경도 
+        
+        APIManager.shared.getData(
+                urlEndpointString: Constant.keywordSearch,
+                responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
+                requestDataType: KeywordSearchRequestModel.self,
+                parameter: requestModel,
+                completionHandler: { [weak self] response in
+                    guard let self = self, let results = response?.result else { return }
+                    
+                    DispatchQueue.main.async {
+                        self.updateTable(with: results)
+                        self.numOfResultLabel.text = String(results.count)
+                    }
+                })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        navigationController?.pushViewController(SearchEnterResultVC(), animated: true)
+        
+        let searchEnterResultVC = SearchEnterResultVC()
+        
+        searchEnterResultVC.searchResults = self.searchResult
+        
+        navigationController?.pushViewController(searchEnterResultVC, animated: true)
+        
     }
 }
 
 extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return searchResult?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -146,6 +187,12 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.cellID, for: indexPath) as! SearchResultTableViewCell
         
+        if let searchResult = searchResult, indexPath.row < searchResult.count {
+                let result = searchResult[indexPath.row]
+                
+            cell.storeNameLabel.text = result.name
+            cell.locationLabel.text = result.address?.road
+            }
         return cell
     }
     

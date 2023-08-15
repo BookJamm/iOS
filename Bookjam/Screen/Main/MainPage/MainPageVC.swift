@@ -17,31 +17,8 @@ import Then
 class MainPageVC: UIViewController {
 
     // MARK: Variables
-
-    //임시 더미데이터
-    let bookStore1 = bookStoreMain(title: "책방연희",
-                                   address: "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층",
-                                   reviewScore: "3.75",
-                                   reviewNumber: "리뷰 5",
-                                   image1: "ChaekYeon",
-                                   image2: "ChaekYeonTwo",
-                                   image3: "ChaekYeonThree")
     
-    let bookStore2 = bookStoreMain(title: "1984store",
-                                   address: "서울특별시 마포구 동교로 194 (동교동, 혜원빌딩) 1층",
-                                   reviewScore: "4.78",
-                                   reviewNumber: "리뷰 110",
-                                   image1: "1984Store",
-                                   image2: "1984StoreTwo")
-    let bookStore3 = bookStoreMain(title: "공상온도",
-                                   address: "서울특별시 마포구 동교로23길 40 (동교동) 지하1층",
-                                   reviewScore: "4.96",
-                                   reviewNumber: "리뷰 98",
-                                   image1: "Gongsang",
-                                   image2: "GongsangTwo",
-                                   image3: "GongsangThree")
-    
-   lazy var dummyData: [bookStoreMain] = [bookStore1, bookStore2, bookStore3]
+    var bookStoreList: [GetPlaceResponseModel]?
     
     var searchBarButton: UIButton = UIButton().then {
         $0.setTitle("  상호명 또는 주소 검색", for: .normal)
@@ -115,32 +92,33 @@ class MainPageVC: UIViewController {
         $0.backgroundColor = gray04
     }
     
-    var sortButton: UIButton = UIButton().then {
-        $0.setTitle("거리순   ", for: .normal)
-        $0.setTitleColor(gray05, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        
-        let config = UIImage.SymbolConfiguration(
-            pointSize: 17, weight: .light, scale: .small)
-        $0.setImage(UIImage(systemName: "chevron.down", withConfiguration: config), for: .normal)
-        $0.tintColor = .black
-        $0.semanticContentAttribute = .forceRightToLeft
-        
-        
-        // TODO: 정렬 API 나오면 연결
-        $0.menu = UIMenu(children: [
-            UIAction(title: "거리순   ", state: .on, handler: {
-                _ in
-                
-            }),
-            UIAction(title: "리뷰순   ", handler: { _ in print("리뷰순")}),
-            UIAction(title: "평점순   ", handler: { _ in print("평점순")}),
-        ])
-        /// 터치하면 바로 메뉴 나오도록 설정
-        $0.showsMenuAsPrimaryAction = true
-        /// 체크 표시 하나만 할 수 있도록 설정
-        $0.changesSelectionAsPrimaryAction = true
-    }
+    var sortButton: UIButton = UIButton()
+    
+//    var sortButton: UIButton = UIButton().then {
+//        $0.setTitle("거리순   ", for: .normal)
+//        $0.setTitleColor(gray05, for: .normal)
+//        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+//
+//        let config = UIImage.SymbolConfiguration(
+//            pointSize: 17, weight: .light, scale: .small)
+//        $0.setImage(UIImage(systemName: "chevron.down", withConfiguration: config), for: .normal)
+//        $0.tintColor = .black
+//        $0.semanticContentAttribute = .forceRightToLeft
+//
+//
+//        // TODO: 정렬 API 나오면 연결
+//        $0.menu = UIMenu(children: [
+//            UIAction(title: "거리순   ", state: .on, handler: {
+//                _ in
+//            }),
+//            UIAction(title: "리뷰순   ", handler: { _ in print("리뷰순")}),
+//            UIAction(title: "평점순   ", handler: { _ in print("평점순")}),
+//        ])
+//        /// 터치하면 바로 메뉴 나오도록 설정
+//        $0.showsMenuAsPrimaryAction = true
+//        /// 체크 표시 하나만 할 수 있도록 설정
+//        $0.changesSelectionAsPrimaryAction = true
+//    }
     
     var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
@@ -160,6 +138,9 @@ class MainPageVC: UIViewController {
         setUpLayout()
         setUpConstraint()
         setUpDelegate()
+        
+        setUpSortButtons()
+        getIndependantBookStorePlaces(category: 0, sortBy: "distance", lat: 37.270225, long: 127.048789)  //임시 테스트
     }
     
     // MARK: View
@@ -258,6 +239,63 @@ class MainPageVC: UIViewController {
     @objc func didSearchBarButtonTapped() {
         navigationController?.pushViewController(SearchPageVC(), animated: true)
     }
+    
+    //
+    func getIndependantBookStorePlaces(category: Int, sortBy: String?, lat: Float? = nil, long: Float? = nil){
+        
+        var requestParameter: getPlaceRequestModel
+            
+            if let latitude = lat, let longitude = long {
+                requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy, lat: latitude, lon: longitude)
+            } else {
+                requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy)
+            }
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaces,
+            responseDataType: APIModel<[GetPlaceResponseModel]>?.self,
+            requestDataType: getPlaceRequestModel.self,
+            parameter: requestParameter,
+            completionHandler: { [self]
+                response in
+                    print(response)
+                self.bookStoreList = response?.result
+                self.tableView.reloadData()
+            })
+    }//end of getIndependantBookStorePlaces
+    
+    //  정렬 버튼 셋업 함수
+    func setUpSortButtons() {
+            sortButton.setTitle("거리순", for: .normal)
+            sortButton.setTitleColor(gray05, for: .normal)
+            sortButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+            
+            let config = UIImage.SymbolConfiguration(
+                pointSize: 17, weight: .light, scale: .small)
+            sortButton.setImage(UIImage(systemName: "chevron.down", withConfiguration: config), for: .normal)
+            sortButton.tintColor = .black
+            sortButton.semanticContentAttribute = .forceRightToLeft
+            
+            sortButton.menu = UIMenu(children: [
+                UIAction(title: "거리순", state: .on, handler: { _ in
+                    self.getIndependantBookStorePlaces(category: 0, sortBy: "distance", lat: 37.270225, long: 127.048789)
+                }),
+                UIAction(title: "리뷰순", handler: { _ in
+                    print("리뷰순")
+                    self.getIndependantBookStorePlaces(category: 0, sortBy: "review")
+                }),
+                UIAction(title: "평점순", handler: { _ in
+                    print("평점순")
+                    self.getIndependantBookStorePlaces(category: 0, sortBy: "rating")
+                }),
+            ])
+            
+            sortButton.showsMenuAsPrimaryAction = true
+            sortButton.changesSelectionAsPrimaryAction = true
+            
+        }
+    
+    
 }//end of MainPageVC
 
 
@@ -266,7 +304,11 @@ class MainPageVC: UIViewController {
 /// 거리순 밑으로 보여질 tableView 구현을 위한 Delegate, DataSource extension
 extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dummyData.count  //임시
+        if let count = bookStoreList?.count{
+            return count
+        }
+        return 0
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -276,24 +318,18 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "bookStoreCell", for: indexPath) as! MainPageBookStoreTableViewCell
         
-        //임시 더미데이터 추가
-        let book = dummyData[indexPath.row]
-        cell.bookstoreLabel.text = book.bookStoreTitle
-        cell.locationLabel.text = book.bookStoreAddress
-        cell.starLabel.text = book.bookStoreReviewScore
-        cell.reviewCountLabel.text = book.bookStoreReviewNumber
-        
-        var images: [String] = []
-        if let image1 = book.image1 {
-            images.append(image1)
+        if let bookStoreList = bookStoreList {
+            let book = bookStoreList[indexPath.row]
+            cell.bookstoreLabel.text = book.name
+            cell.locationLabel.text = book.address?.road
+            if let rating = bookStoreList[indexPath.row].rating {
+                cell.starLabel.text = String(rating)
+            }
+            
+            if let reviewCount = bookStoreList[indexPath.row].reviewCount {
+                cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
+            }
         }
-        if let image2 = book.image2 {
-            images.append(image2)
-        }
-        if let image3 = book.image3 {
-            images.append(image3)
-        }
-        cell.images = images
         
         return cell
     }
