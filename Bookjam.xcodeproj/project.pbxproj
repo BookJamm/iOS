@@ -95,6 +95,7 @@
 		DDD74A922A8BF3B8008C999F /* SelectVisitDatePopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A912A8BF3B8008C999F /* SelectVisitDatePopUpVC.swift */; };
 		DDD74A942A8C0AA7008C999F /* SearchBookPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A932A8C0AA7008C999F /* SearchBookPopUpVC.swift */; };
 		DDD74A962A8C156D008C999F /* SearchActivityPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A952A8C156D008C999F /* SearchActivityPopUpVC.swift */; };
+		DDD74A982A8C1814008C999F /* FeedPostCheckPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A972A8C1814008C999F /* FeedPostCheckPopUpVC.swift */; };
 		DDDBBF632A811CF500B2C2C9 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
@@ -217,6 +218,7 @@
 		DDD74A912A8BF3B8008C999F /* SelectVisitDatePopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVisitDatePopUpVC.swift; sourceTree = "<group>"; };
 		DDD74A932A8C0AA7008C999F /* SearchBookPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookPopUpVC.swift; sourceTree = "<group>"; };
 		DDD74A952A8C156D008C999F /* SearchActivityPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActivityPopUpVC.swift; sourceTree = "<group>"; };
+		DDD74A972A8C1814008C999F /* FeedPostCheckPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostCheckPopUpVC.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
 		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
 		DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailNewsView.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				DDD74A912A8BF3B8008C999F /* SelectVisitDatePopUpVC.swift */,
 				DDD74A932A8C0AA7008C999F /* SearchBookPopUpVC.swift */,
 				DDD74A952A8C156D008C999F /* SearchActivityPopUpVC.swift */,
+				DDD74A972A8C1814008C999F /* FeedPostCheckPopUpVC.swift */,
 				DD7994262A89F40A0066CFB7 /* Cell */,
 			);
 			path = FeedPage;
@@ -1026,6 +1029,7 @@
 				9423934F2A8B61DC000E46BF /* KeywordSearch.swift in Sources */,
 				DD9212A82A88A41D00EE6863 /* SearchEnterResultVC.swift in Sources */,
 				DD829C4B2A84D96E00B22754 /* BookStoreActvityDetailVC.swift in Sources */,
+				DDD74A982A8C1814008C999F /* FeedPostCheckPopUpVC.swift in Sources */,
 				DDD74A922A8BF3B8008C999F /* SelectVisitDatePopUpVC.swift in Sources */,
 				DD79942E2A8A0E8C0066CFB7 /* FeedUserTableViewCell.swift in Sources */,
 				9411770F2A7A939D00847F26 /* MainPageBookStoreTableViewCell.swift in Sources */,

@@ -526,6 +526,8 @@ class FeedPostPageVC: UIViewController {
     func setUpDelegate() {
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
+        
+        reviewContentTextView.delegate = self
     }
     
     
@@ -1031,9 +1033,22 @@ class FeedPostPageVC: UIViewController {
         checkUploadPossible()
     }
     
+    /// 작성 데이터 서버에 넘기고 화면 dismiss
+    @objc func postData() {
+        print("작성 완료 notification 수신")
+        
+        self.dismiss(animated: true)
+    }
+    
     /// 업로드 버튼 누르면 정보 넘기고 화면 dismiss
     @objc func didFeedUploadButtonTapped() {
+        let feedPostCheckPopUpVC = FeedPostCheckPopUpVC()
         
+        feedPostCheckPopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
+        feedPostCheckPopUpVC.modalTransitionStyle = .crossDissolve
+        feedPostCheckPopUpVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(feedPostCheckPopUpVC, animated: true)
     }
     
     // MARK: Notification
@@ -1044,6 +1059,9 @@ class FeedPostPageVC: UIViewController {
         
         ///  SelectVisitDatePopUpVC에서 날짜 선택 마쳤을 때 버튼 날짜 업데이트를 위한 notification 수신
         NotificationCenter.default.addObserver(self, selector: #selector(visitDateUpdate(_:)), name: NSNotification.Name("feedVisitDateButtonTapped"), object: nil)
+        
+        /// FeedPostPopUpVC에서 기록 작성을 완료했을 때 데이터를 서버에 post하고 화면을 dismiss하기 위한 notification 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(postData), name: NSNotification.Name("feedPostCheckButtonTapped"), object: nil)
     }
 }
 
