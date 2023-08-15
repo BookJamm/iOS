@@ -20,6 +20,9 @@ class SearchPlacePopUpVC: UIViewController, WKUIDelegate {
     /// 주소찾기 API에서 반환받은 도로명 주소를 저장할 변수 선언
     var address = ""
     
+    /// API로 불러온 검색결과를 저장할 변수 선언
+    var responseData: [KeywordSearchResponseModel] = []
+    
     var searchView: UIView = UIView().then {
         $0.backgroundColor = .white
         $0.clipsToBounds = true
@@ -33,6 +36,8 @@ class SearchPlacePopUpVC: UIViewController, WKUIDelegate {
     
     var searchButton: UIButton = UIButton().then {
         $0.setTitle("주소 검색 결과", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.contentHorizontalAlignment = .left
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
         $0.layer.borderColor = gray05?.cgColor
@@ -159,7 +164,7 @@ class SearchPlacePopUpVC: UIViewController, WKUIDelegate {
 
 extension SearchPlacePopUpVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return responseData.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -167,7 +172,12 @@ extension SearchPlacePopUpVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PlaceSearchTableViewCell().cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PlaceSearchTableViewCell().cellID, for: indexPath) as! PlaceSearchTableViewCell
+        
+        cell.bookStoreAddressLabel.text = responseData[indexPath.row].address?.road
+        cell.bookStoreLabel.text = responseData[indexPath.row].name
+        
+        // TODO: placeid로 사진이랑 별점, 리뷰 개수 불러오기
         
         return cell
     }
@@ -191,13 +201,23 @@ extension SearchPlacePopUpVC: WKScriptMessageHandler {
             address = data["roadAddress"] as? String ?? ""
         }
         
-        print(address)
+        searchButton.setTitle("   \(address)", for: .normal)
         
-        /// 주소찾기 끝나면 결과 화면 나오게 설정
-        // TODO: 데이터 연결
-        
-        searchButton.setTitle("\(address)", for: .normal)
-        // numOfResultLabel.text = "\()개의 검색결과"
+        APIManager.shared.getData(
+            urlEndpointString: Constant.keywordSearch,
+            responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
+            requestDataType: KeywordSearchRequestModel.self,
+            parameter: KeywordSearchRequestModel(
+                keyword: address,
+                sortBy: "distance",
+                lat: 37.270225,
+                lon: 127.048789)) { response in
+                    let result = response?.result
+                    
+                    self.numOfResultLabel.text = "\(result?.count ?? 0)개의 검색결과"
+                    
+                    self.responseData = result ?? []
+                }
         
         searchPlaceWebView.isHidden = true
         [
