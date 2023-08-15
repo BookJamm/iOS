@@ -25,6 +25,12 @@ class FeedPostPageVC: UIViewController {
     /// 장소 검색해 선택했을 때 전달되는 notification object를 통해 도로명 주소를 받아올 변수 선언
     var address: String = ""
     
+    /// 방문 날짜 업데이트를 위한 날짜 표시 포맷 선언
+    let dateFormat = DateFormatter().then {
+        $0.dateFormat = "yyyy / MM / dd"
+        $0.locale = Locale(identifier:"ko_KR")
+    }
+    
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -106,6 +112,7 @@ class FeedPostPageVC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.layer.borderColor = gray03?.cgColor
         $0.layer.borderWidth = 0.7
+        $0.addTarget(self, action: #selector(didSelectDateButtonTapped), for: .touchUpInside)
     }
     
     var activityView: UIView = UIView().then {
@@ -393,6 +400,10 @@ class FeedPostPageVC: UIViewController {
     func setUpView() {
         view.backgroundColor = gray02
         hideKeyboard()
+        
+        /// 방문 날짜 현재 날짜로 설정
+        let now = Date()
+        selectDateButton.setTitle(dateFormat.string(from: now), for: .normal)
     }
     
     
@@ -857,6 +868,7 @@ class FeedPostPageVC: UIViewController {
         libraryButton.layer.borderColor = main03?.cgColor
     }
     
+    /// 장소 탭에 있는 검색 바 누르면 발생하는 이벤트
     @objc func didAddressSearchButtonTapped() {
         let searchPlacePopUpVC = SearchPlacePopUpVC()
         searchPlacePopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
@@ -864,6 +876,16 @@ class FeedPostPageVC: UIViewController {
         searchPlacePopUpVC.modalPresentationStyle = .overFullScreen
         
         self.present(searchPlacePopUpVC, animated: true)
+    }
+    
+    /// 현재 날짜 적혀있는 버튼 눌렀을 때 발생되는 이벤트
+    @objc func didSelectDateButtonTapped() {
+        let selectVisitDatePopUpVC = SelectVisitDatePopUpVC()
+        selectVisitDatePopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
+        selectVisitDatePopUpVC.modalTransitionStyle = .crossDissolve
+        selectVisitDatePopUpVC.modalPresentationStyle = .overFullScreen
+        
+        self.present(selectVisitDatePopUpVC, animated: true)
     }
     
     @objc func didBookSearchButtonTapped() {
@@ -932,12 +954,24 @@ class FeedPostPageVC: UIViewController {
         // bookStoreNumOfReviewLabel.text = "리뷰 \()"
     }
     
+    /// 선택한 날짜 데이터 notification으로 받아와서 버튼 날짜 업데이트
+    @objc func visitDateUpdate(_ notification: Notification) {
+        print("방문 날짜 notification 수신")
+        
+        if let date = notification.object as? Date {
+            selectDateButton.setTitle(dateFormat.string(from: date), for: .normal)
+        }
+    }
+    
     
     // MARK: Notification
     
     func setUpNotification() {
         /// SearchPlacePopUpVC에서 장소 선택 마쳤을 때 장소 탭 업데이트를 위한 notification 수신
         NotificationCenter.default.addObserver(self, selector: #selector(feedPostPageUpdate), name: NSNotification.Name("feedPlaceSearchResultCellTapped"), object: nil)
+        
+        ///  SelectVisitDatePopUpVC에서 날짜 선택 마쳤을 때 버튼 날짜 업데이트를 위한 notification 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(visitDateUpdate(_:)), name: NSNotification.Name("feedVisitDateButtonTapped"), object: nil)
     }
 }
 

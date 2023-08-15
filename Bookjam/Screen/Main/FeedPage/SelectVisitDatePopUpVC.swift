@@ -114,6 +114,7 @@ class SelectVisitDatePopUpVC: UIViewController {
     }
     
     @objc func didSelectButtonTapped() {
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "feedVisitDateButtonTapped"), object: calendarView.date))
         self.dismiss(animated: true)
     }
 }
