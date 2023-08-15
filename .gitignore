@@ -2,7 +2,9 @@
 ios/.DS_Store
 */UserInterfaceState.xcuserstate
 # Podfile.lock
-*.pbxproj binary merge=union
+
+Token/
+
 
 # Created by https://www.gitignore.io/api/xcode,swift,cocoapods
 # Edit at https://www.gitignore.io/?templates=xcode,swift,cocoapods

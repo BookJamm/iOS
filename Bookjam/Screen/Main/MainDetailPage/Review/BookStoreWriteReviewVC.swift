@@ -153,6 +153,10 @@ class BookStoreWriteReviewVC: UIViewController {
         view.backgroundColor = gray01
         hideKeyboard()
         
+        images.append(UIImage(named: "squareDefaultImage")!)
+        images.append(UIImage(named: "squareDefaultImage")!)
+        images.append(UIImage(named: "squareDefaultImage")!)
+        
         // TODO: 나중에 리팩토링 할 때 함수 하나로 통일하고 sender 설정해서 쓸데없는 코드 줄이기
         /// 각각의 별 선택했을 때 별점 설정하고 별 tintcolor 변경
         firstStarImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didFirstStarTapped)))

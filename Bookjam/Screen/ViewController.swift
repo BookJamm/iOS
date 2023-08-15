@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 
         setUpView()
         setUpLayout()
+        setUpDelegate()
         setUpConstraint()
     }
     
@@ -38,7 +39,9 @@ class ViewController: UIViewController {
     // MARK: Layout
     
     func setUpLayout() {
-        
+        [
+            
+        ].forEach { view.addSubview($0) }
     }
     
     // MARK: Delegate
