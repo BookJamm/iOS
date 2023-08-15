@@ -31,6 +31,9 @@ class FeedPostPageVC: UIViewController {
         $0.locale = Locale(identifier:"ko_KR")
     }
     
+    /// 글 작성할 때 사진 추가하면 저장할 이미지 배열 선언
+    var images: [UIImage] = []
+    
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -818,10 +821,6 @@ class FeedPostPageVC: UIViewController {
         self.dismiss(animated: true)
     }
     
-    @objc func didAddPostPhotoButtonTapped() {
-        print("사진 추가 버튼 선택됨")
-    }
-    
     /// 선택된 버튼과 아닌 버튼 구분해서 색상 변경
     @objc func didBookStoreButtonTapped() {
         print("독립서점 선택됨")
@@ -830,10 +829,11 @@ class FeedPostPageVC: UIViewController {
         libraryButton.layer.borderColor = gray03?.cgColor
         libraryButton.isSelected = false
         
-        playGroundButton.backgroundColor = gray03
+        playGroundButton.backgroundColor = gray02
         playGroundButton.layer.borderColor = gray03?.cgColor
         playGroundButton.isSelected = false
         
+        bookStorebutton.isSelected = true
         bookStorebutton.backgroundColor = main01
         bookStorebutton.layer.borderColor = main03?.cgColor
     }
@@ -845,10 +845,11 @@ class FeedPostPageVC: UIViewController {
         bookStorebutton.layer.borderColor = gray03?.cgColor
         bookStorebutton.isSelected = false
         
-        libraryButton.backgroundColor = gray03
+        libraryButton.backgroundColor = gray02
         libraryButton.layer.borderColor = gray03?.cgColor
         libraryButton.isSelected = false
         
+        playGroundButton.isSelected = true
         playGroundButton.backgroundColor = main01
         playGroundButton.layer.borderColor = main03?.cgColor
     }
@@ -857,13 +858,15 @@ class FeedPostPageVC: UIViewController {
         print("도서관 선택됨")
         
         bookStorebutton.backgroundColor = gray02
+        bookStorebutton.setTitleColor(.gray, for: .normal)
         bookStorebutton.layer.borderColor = gray03?.cgColor
         bookStorebutton.isSelected = false
         
-        playGroundButton.backgroundColor = gray03
+        playGroundButton.backgroundColor = gray02
         playGroundButton.layer.borderColor = gray03?.cgColor
         playGroundButton.isSelected = false
         
+        libraryButton.isSelected = true
         libraryButton.backgroundColor = main01
         libraryButton.layer.borderColor = main03?.cgColor
     }
@@ -980,13 +983,13 @@ class FeedPostPageVC: UIViewController {
 
 extension FeedPostPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
         
-        // cell.photoImageView.image = images[indexPath.row]
+        cell.photoImageView.image = images[indexPath.row]
         
         return cell
     }
@@ -1013,6 +1016,28 @@ extension FeedPostPageVC: UITextViewDelegate {
             textView.text = "당신의 한마디를 입력해주세요."
             textView.textColor = .lightGray
         }
+    }
+}
+
+/// 갤러리에서 이미지 가져오게 하는 기능 구현
+extension FeedPostPageVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @objc func didAddPostPhotoButtonTapped() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
+    
+    /// present된 imagePicker에서 이미지를 선택하면 그 이미지가 profileButton의 이미지로 설정되도록 구현
+    /// 이후 imagePicker를 dismiss함
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            /// 선택된 이미지를 images 배열에 추가해 화면에 표시되도록 구현
+            images.append(image)
+            photoCollectionView.reloadData()
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
 
