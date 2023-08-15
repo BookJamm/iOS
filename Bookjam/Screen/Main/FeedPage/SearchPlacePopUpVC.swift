@@ -173,7 +173,7 @@ extension SearchPlacePopUpVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     /// 셀 선택되면 창 닫히고 FeedPostPageVC에서 장소 탭 업데이트되도록 설정
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("셀 선택됨")
         
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "feedPlaceSearchResultCellTapped"), object: address))
