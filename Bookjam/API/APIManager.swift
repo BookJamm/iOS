@@ -11,19 +11,23 @@ import Foundation
 
 import Alamofire
 
-
 class APIManager: ObservableObject  {
     static let shared = APIManager()
-    private var headers: HTTPHeaders?
+    private var headers: HTTPHeaders = [    //임시 슈퍼 jwt 토큰
+        "Authorization": "Bearer \(jwtToken)"
+    ]
+
 }
 
 // MARK: T에는 요청값 데이터의 모델, U에는 응닶값 데이터의 모델 적기
 extension APIManager {
+    
     func getData<T: Codable, U: Decodable>(urlEndpointString: String,
                                            responseDataType: U.Type,
                                            requestDataType: T.Type,
                                            parameter: T?,
-                                           completionHandler: @escaping (U)->Void) {
+                                           completionHandler: @escaping (U)->Void
+    ) {
         
         guard let url = URL(string: Constant.baseURL + urlEndpointString) else { return }
         print("get 요청 URL --> \(url)")

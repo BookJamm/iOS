@@ -14,5 +14,7 @@ struct Constant {
     static let postEmailDuplicate = "/auth/email-check"
     static let searchFriend = "/user/search"
     static let userLogin = "/auth/login"
+    static let getPlaces = "/places"
+    static let keywordSearch = "/places/search"
     
 }

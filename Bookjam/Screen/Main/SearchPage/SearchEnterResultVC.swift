@@ -18,6 +18,12 @@ class SearchEnterResultVC: UIViewController {
 
     // MARK: Variables
     
+    var searchResults: [KeywordSearchResponseModel]? {
+        didSet {
+            resultTableView.reloadData()
+        }
+    }
+    
     var searchResultLabel: UILabel = UILabel().then {
         $0.text = "가게 검색 결과"
         $0.font = paragraph04
@@ -131,6 +137,11 @@ class SearchEnterResultVC: UIViewController {
         }
     }
     
+    // MARK: Func
+    
+    func updateTable(){
+        resultTableView.reloadData()
+    }
 }
 
 
@@ -138,7 +149,7 @@ class SearchEnterResultVC: UIViewController {
 
 extension SearchEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return searchResults?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -148,8 +159,17 @@ extension SearchEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.cellID, for: indexPath) as! SearchResultTableViewCell
         
+        if let searchResults = searchResults, indexPath.row < searchResults.count {
+            let result = searchResults[indexPath.row]
+            
+            cell.storeNameLabel.text = result.name
+            cell.locationLabel.text = result.address?.road
+            self.numOfResultLabel.text = String(searchResults.count)
+            
+        }
         return cell
     }
+        
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let resultVC = BookstoreDetailPageVC()
