@@ -904,7 +904,12 @@ class FeedPostPageVC: UIViewController {
     }
     
     @objc func didAddressSearchButtonTapped() {
+        let searchPlacePopUpVC = SearchPlacePopUpVC()
+        searchPlacePopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
+        searchPlacePopUpVC.modalTransitionStyle = .crossDissolve
+        searchPlacePopUpVC.modalPresentationStyle = .overFullScreen
         
+        self.present(searchPlacePopUpVC, animated: true)
     }
     
     @objc func didBookSearchButtonTapped() {
