@@ -329,6 +329,9 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             if let reviewCount = bookStoreList[indexPath.row].reviewCount {
                 cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
             }
+            if let imageUrls = bookStoreList[indexPath.row].images {
+                cell.images = imageUrls
+            }
         }
         
         return cell

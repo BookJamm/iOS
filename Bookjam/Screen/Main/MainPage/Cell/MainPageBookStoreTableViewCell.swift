@@ -34,12 +34,9 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     static let cellID = "bookStoreCell"
     
-    // 책방 이미지들 주소 들어갈 배열
-    var images: [String] = ["squareDefaultImage",
-                            "squareDefaultImage",
-                            "squareDefaultImage",
-                            "squareDefaultImage",
-                            "squareDefaultImage"]
+    
+    var images: [Image] = []
+    
     
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -176,15 +173,30 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
 
 extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+//        return images.count
+        return images.isEmpty ? 1 : images.count
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
-        // images 데이터 cell에 할당
-        cell.photoImageView.image = UIImage(named: images[indexPath.row])
-        cell.photoImageView.layer.cornerRadius = 8
+        if images.isEmpty {
+                    // 이미지 배열이 비어있으면 기본 이미지 설정
+                    cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+                } else {
+                    // 이미지 데이터가 있을 경우 해당 이미지 설정
+                    if let imageUrlString = images[indexPath.row].image_url,
+                       let imageUrl = URL(string: imageUrlString),
+                       let imageData = try? Data(contentsOf: imageUrl),
+                       let image = UIImage(data: imageData) {
+                        cell.photoImageView.image = image
+                    } else {
+                        cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+                    }
+                }
+                
+                cell.photoImageView.layer.cornerRadius = 8
         
         return cell
     }
