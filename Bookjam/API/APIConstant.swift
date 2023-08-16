@@ -15,5 +15,5 @@ struct Constant {
     static let userLogin = "/auth/login"
     static let getPlaces = "/places"
     static let keywordSearch = "/places/search"
-    
+    static let postRecord = "/records"
 }

@@ -62,8 +62,6 @@ class SearchPageVC: UIViewController {
     
     func setUpView() {
         view.backgroundColor = .white
-        
-        hideKeyboard()
     }
     
     
@@ -105,7 +103,7 @@ class SearchPageVC: UIViewController {
         }
         
         numOfResultLabel.snp.makeConstraints {
-            $0.top.equalTo(searchResultLabel)
+            $0.centerY.equalTo(searchResultLabel)
             $0.leading.equalTo(searchResultLabel.snp.trailing).offset(5)
         }
         
@@ -116,9 +114,10 @@ class SearchPageVC: UIViewController {
         }
         
         resultTableView.snp.makeConstraints {
-            $0.top.equalTo(searchResultLabel.snp.bottom).offset(11)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(underLineView.snp.bottom)
+            $0.leading.equalToSuperview()
+            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
         }
     }
     
@@ -130,7 +129,6 @@ class SearchPageVC: UIViewController {
         
         resultTableView.reloadData()
     }
-    
 }
 
 
@@ -142,36 +140,34 @@ extension SearchPageVC: UISearchBarDelegate {
         // TODO: 검색 값 불러오는 서버 api 연결
         
         guard !searchText.isEmpty else {
-                updateTable(with: [])
-                return
-            }
+            updateTable(with: [])
+            return
+        }
         
         let requestModel = KeywordSearchRequestModel(keyword: searchText, sortBy: "distance", lat: 37.270225, lon: 127.048789)
-            //임시 위경도 
+        //임시 위경도
         
         APIManager.shared.getData(
-                urlEndpointString: Constant.keywordSearch,
-                responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
-                requestDataType: KeywordSearchRequestModel.self,
-                parameter: requestModel,
-                completionHandler: { [weak self] response in
-                    guard let self = self, let results = response?.result else { return }
-                    
-                    DispatchQueue.main.async {
-                        self.updateTable(with: results)
-                        self.numOfResultLabel.text = String(results.count)
-                    }
-                })
+            urlEndpointString: Constant.keywordSearch,
+            responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
+            requestDataType: KeywordSearchRequestModel.self,
+            parameter: requestModel,
+            completionHandler: { [weak self] response in
+                guard let self = self, let results = response?.result else { return }
+                
+                DispatchQueue.main.async {
+                    self.updateTable(with: results)
+                    self.numOfResultLabel.text = String(results.count)
+                }
+            })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         let searchEnterResultVC = SearchEnterResultVC()
         
         searchEnterResultVC.searchResults = self.searchResult
         
         navigationController?.pushViewController(searchEnterResultVC, animated: true)
-        
     }
 }
 
@@ -188,15 +184,17 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultTableViewCell.cellID, for: indexPath) as! SearchResultTableViewCell
         
         if let searchResult = searchResult, indexPath.row < searchResult.count {
-                let result = searchResult[indexPath.row]
-                
+            let result = searchResult[indexPath.row]
+            
             cell.storeNameLabel.text = result.name
             cell.locationLabel.text = result.address?.road
-            }
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("셀 클릭됨")
         let resultVC = BookstoreDetailPageVC()
         
         // TODO: 데이터 연결
