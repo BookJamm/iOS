@@ -53,6 +53,16 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         $0.backgroundColor = gray04
     }
     
+    let recommendLabel: UILabel = UILabel().then {
+        $0.font = title03
+        $0.textColor = gray07
+        $0.text = "추천 친구"
+    }
+    
+    let recommendTableView: UITableView = UITableView().then {
+        $0.register(FriendInfoTableViewCell.self, forCellReuseIdentifier: FriendInfoTableViewCell().cellID)
+    }
+    
     let finishButton: UIButton = UIButton().then {
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
@@ -79,19 +89,40 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     func setUpView() {
         view.backgroundColor = .white
         
-        hideKeyboard() // 화면 밖 클릭하면 키보드 내려가게 설정
+        /// 추천 친구 테이블 뷰 구분 선 없애고 스크롤 안되게 설정
+        recommendTableView.separatorStyle = .none
+        recommendTableView.isScrollEnabled = false
+        
+        /// 화면 밖 클릭하면 키보드 내려가게 설정
+        hideKeyboard()
+        
+        /// 추천 친구 테이블 뷰에 할당할 친구 데이터 불러오는 부분
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
-        view.addSubview(informationLabel)
-        view.addSubview(searchIDLabel)
-        view.addSubview(emailTextField)
-        view.addSubview(searchButton)
-        view.addSubview(bottomLineView)
-        view.addSubview(finishButton)
+        [
+            informationLabel,
+            searchIDLabel,
+            emailTextField,
+            searchButton,
+            bottomLineView,
+            recommendLabel,
+            recommendTableView,
+            finishButton
+        ].forEach { view.addSubview($0) }
+    }
+    
+    
+    // MARK: Delegate
+    
+    func setUpDelegate() {
+        floatingPanel.delegate = self
+        
+        recommendTableView.dataSource = self
+        recommendTableView.delegate = self
     }
     
     
@@ -106,13 +137,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         searchIDLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview().multipliedBy(0.47)
             $0.centerY.equalToSuperview().multipliedBy(0.5)
-        }
-        
-        finishButton.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.94)
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.06)
         }
         
         searchButton.snp.makeConstraints {
@@ -131,19 +155,32 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
             $0.centerX.equalToSuperview()
             $0.centerY.equalToSuperview().multipliedBy(0.72)
         }
-    }
-    
-    // MARK: Delegate
-    
-    func setUpDelegate() {
-        floatingPanel.delegate = self
+        
+        recommendLabel.snp.makeConstraints {
+            $0.top.equalTo(bottomLineView.snp.bottom).offset(40)
+            $0.leading.equalTo(searchIDLabel)
+        }
+        
+        recommendTableView.snp.makeConstraints {
+            $0.top.equalTo(recommendLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(recommendLabel)
+            $0.trailing.equalTo(bottomLineView)
+            $0.height.equalTo(300)
+        }
+        
+        finishButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().multipliedBy(0.94)
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalToSuperview().multipliedBy(0.06)
+        }
     }
     
     
     // MARK: Functions
     
-    // searchButton 누르면 floatingPanel 올라오게 구현
-    // searchButton에 addTarget으로 연결
+    /// searchButton 누르면 floatingPanel 올라오게 구현
+    /// searchButton에 addTarget으로 연결
     @objc func didSearchButtonTapped() {
         // MARK: 서버 API 연결
         let email = emailTextField.text
@@ -167,17 +204,41 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         floatingPanel.set(contentViewController: Onboarding05BottomSheet())
         floatingPanel.hide()
         floatingPanel.show(animated: true)
-    } // end of didSearchImageViewTapped()
+    }
     
-    // 완료하기 버튼 누르면 가입 완료 창으로 넘어가게 구현
-    // 가입 완료 창은 이전으로 못 돌아오도록 Navigation 말고 present로 구현
-    // finishButton에 addTarget으로 구현
+    /// 완료하기 버튼 누르면 가입 완료 창으로 넘어가게 구현
+    /// 가입 완료 창은 이전으로 못 돌아오도록 Navigation 말고 present로 구현
+    /// finishButton에 addTarget으로 구현
     @objc func didFinishButtonTapped() {
         let onboarding06VC = Onboarding06VC()
         onboarding06VC.modalPresentationStyle = .fullScreen
         
         self.present(onboarding06VC, animated: true)
-    } // end of didFinishButtonTapped()
+    }
+    
+    /// 추천 친구 테이블 뷰에 할당할 친구 데이터 api로 불러오는 함수
+    func callRecommendFriendData() {
+        
+    }
+}
+
+
+// MARK: Extension
+
+extension Onboarding05VC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: FriendInfoTableViewCell().cellID, for: indexPath)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
+    }
 }
 
 struct Onboarding05VC_Preview: PreviewProvider {
