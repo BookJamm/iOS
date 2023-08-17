@@ -29,12 +29,15 @@ class FriendInfoTableViewCell: UITableViewCell {
     
     // MARK: Variable
     
-    static let cellID =  "friendInfoCell"
+    let cellID =  "friendInfoCell"
+    
     var isFriend: Bool = false
     
     let profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "defaultProfile")
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 30
     }
     
     let nicknameLabel: UILabel = UILabel().then {
@@ -63,7 +66,6 @@ class FriendInfoTableViewCell: UITableViewCell {
     // MARK: View
     
     func setUpView() {
-        self.backgroundColor = gray02
         self.contentMode = .scaleAspectFit
     }
     
@@ -84,27 +86,28 @@ class FriendInfoTableViewCell: UITableViewCell {
     
     func setUpConstraint() {
         profileImageView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            
             $0.width.equalTo(60)
             $0.height.equalTo(60)
         }
         
         nicknameLabel.snp.makeConstraints {
+            $0.bottom.equalTo(profileImageView.snp.centerY).offset(-5)
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(15)
             $0.width.equalToSuperview().multipliedBy(0.6)
-            $0.height.equalTo(30)
-            $0.right.equalToSuperview().multipliedBy(0.8)
-            $0.top.equalTo(profileImageView).offset(5)
         }
         
         emailLabel.snp.makeConstraints {
+            $0.leading.equalTo(nicknameLabel)
+            $0.top.equalTo(profileImageView.snp.centerY).offset(5)
             $0.width.equalToSuperview().multipliedBy(0.6)
-            $0.height.equalTo(30)
-            $0.right.equalToSuperview().multipliedBy(0.8)
-            $0.top.equalTo(nicknameLabel).offset(30)
         }
         
         addFriendButton.snp.makeConstraints {
+            $0.centerY.equalTo(profileImageView)
             $0.right.equalToSuperview().multipliedBy(0.98)
-            $0.top.equalTo(nicknameLabel).offset(8)
+            
         }
     }
     

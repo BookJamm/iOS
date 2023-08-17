@@ -41,14 +41,16 @@ class Onboarding04VC: UIViewController {
         $0.placeholder = "책먹는 두루미"
         $0.textColor = .black
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
     }
     
     let decisionButton: UIButton = UIButton().then {
-        $0.backgroundColor = main01
+        $0.backgroundColor = gray04
         $0.layer.cornerRadius = 8
         $0.setTitle("결정하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didDecisionButtonTapped), for: .touchUpInside)
+        $0.isEnabled = false
     }
 
     
@@ -66,7 +68,7 @@ class Onboarding04VC: UIViewController {
     func setUpView() {
         view.backgroundColor = .white
         
-        // 화면 밖 클릭하면 키보드 내려가게 설정
+        /// 화면 밖 클릭하면 키보드 내려가게 설정
         hideKeyboard()
     }
     
@@ -120,11 +122,23 @@ class Onboarding04VC: UIViewController {
     
     // MARK: Functions
     
-    // 결정하기 버튼 누르면 다음으로 화면 넘어가게 하는 함수
-    // decisionButton에 addTarget으로 연결됨
+    /// 결정하기 버튼 누르면 다음으로 화면 넘어가게 하는 함수
+    /// decisionButton에 addTarget으로 연결됨
     @objc func didDecisionButtonTapped() {
         navigationController?.pushViewController(Onboarding05VC(), animated: true)
-    } // end of didDecisionButtonTapped()
+    }
+    
+    /// 닉네임 설정 안하면 결정하기 버튼 활성화되지 않도록 설정
+    @objc func didTextFieldChanged() {
+        if nicknameTextField.text?.count == 0 {
+            decisionButton.backgroundColor = gray04
+            decisionButton.isEnabled = false
+        }
+        else {
+            decisionButton.backgroundColor = main01
+            decisionButton.isEnabled = true
+        }
+    }
 }
 
 
@@ -140,10 +154,10 @@ struct Onboarding04VC_Preview: PreviewProvider {
 
 // MARK: Extension
 
-// 프로필 설정 중 갤러리에서 이미지 가져오게 하는 기능 구현을 위한 extension
+/// 프로필 설정 중 갤러리에서 이미지 가져오게 하는 기능 구현을 위한 extension
 extension Onboarding04VC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    // 프로필 버튼 누르면 imagePicker present 되도록 구현
-    // profileButton에 addTarget으로 연결됨
+    /// 프로필 버튼 누르면 imagePicker present 되도록 구현
+    /// profileButton에 addTarget으로 연결됨
     @objc func didProfileButtonTapped() {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -151,8 +165,8 @@ extension Onboarding04VC: UIImagePickerControllerDelegate, UINavigationControlle
         present(imagePicker, animated: true)
     } // end of didProfileImageViewTapped()
     
-    // present된 imagePicker에서 이미지를 선택하면 그 이미지가 profileButton의 이미지로 설정되도록 구현
-    // 이후 imagePicker를 dismiss함
+    /// present된 imagePicker에서 이미지를 선택하면 그 이미지가 profileButton의 이미지로 설정되도록 구현
+    /// 이후 imagePicker를 dismiss함
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileButton.setImage(image.circularImage(), for: .normal)

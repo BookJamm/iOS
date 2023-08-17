@@ -16,6 +16,12 @@ class SelectVisitDatePopUpVC: UIViewController {
 
     // MARK: Variables
     
+    /// 화면 여백을 클릭했을 때 팝업창 dismiss를 위한 view 선언
+    var outsideView: UIView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideViewTapped)))
+    }
+    
     var popUpView: UIView = UIView().then {
         $0.backgroundColor = .white
         $0.clipsToBounds = true
@@ -56,6 +62,11 @@ class SelectVisitDatePopUpVC: UIViewController {
         setUpConstraint()
     }
     
+    /// 뒷쪽 뷰 클릭하면 화면 dismiss되도록 설정
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dismiss(animated: true)
+    }
+    
 
     // MARK: View
     
@@ -67,6 +78,7 @@ class SelectVisitDatePopUpVC: UIViewController {
     // MARK: Layout
     
     func setUpLayout() {
+        view.addSubview(outsideView)
         view.addSubview(popUpView)
         [
             visitDateLabel,
@@ -85,6 +97,10 @@ class SelectVisitDatePopUpVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
+        outsideView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         popUpView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -94,14 +110,14 @@ class SelectVisitDatePopUpVC: UIViewController {
         calendarView.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-60)
+            $0.bottom.equalToSuperview().offset(-70)
         }
         
         selectButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.bottom.equalToSuperview().offset(-20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(45)
+            $0.height.equalTo(50)
         }
     }
     
@@ -116,6 +132,12 @@ class SelectVisitDatePopUpVC: UIViewController {
     @objc func didSelectButtonTapped() {
         NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "feedVisitDateButtonTapped"), object: calendarView.date))
         self.dismiss(animated: true)
+    }
+    
+    /// 팝업 뷰를 제외한 나머지 바깥 부분을 클릭했을 때 화면 dismiss
+    @objc func outsideViewTapped() {
+        print("바깥 뷰 클릭됨")
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

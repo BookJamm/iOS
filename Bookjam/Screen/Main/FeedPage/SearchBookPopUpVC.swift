@@ -16,6 +16,12 @@ class SearchBookPopUpVC: UIViewController {
 
     // MARK: Variables
     
+    /// 화면 여백을 클릭했을 때 팝업창 dismiss를 위한 view 선언
+    var outsideView: UIView = UIView().then {
+        $0.backgroundColor = .clear
+        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideViewTapped)))
+    }
+    
     var searchView: UIView = UIView().then {
         $0.backgroundColor = .white
         $0.clipsToBounds = true
@@ -63,10 +69,16 @@ class SearchBookPopUpVC: UIViewController {
         view.backgroundColor = .clear
     }
     
+    /// 뒷쪽 뷰 클릭하면 화면 dismiss되도록 설정
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dismiss(animated: true)
+    }
+    
     
     // MARK: Layout
     
     func setUpLayout() {
+        view.addSubview(outsideView)
         view.addSubview(searchView)
         [
             searchBarBackgroundView,
@@ -87,6 +99,10 @@ class SearchBookPopUpVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
+        outsideView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         searchView.snp.makeConstraints {
             $0.centerX.centerY.equalToSuperview()
             $0.width.equalTo(350)
@@ -130,6 +146,11 @@ class SearchBookPopUpVC: UIViewController {
         let searchKeyword = searchTextField.text
         
         resultLabel.isHidden = false
+    }
+    
+    /// 팝업 뷰를 제외한 나머지 바깥 부분을 클릭했을 때 화면 dismiss
+    @objc func outsideViewTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

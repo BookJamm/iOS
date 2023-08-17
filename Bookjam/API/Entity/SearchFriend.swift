@@ -12,5 +12,5 @@ struct SearchFriendRequestModel: Codable {
 }
 
 struct SearchFriendResponseModel: Codable {
-    let result: String?
+    
 }

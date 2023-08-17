@@ -86,7 +86,7 @@ class Onboarding03VC: UIViewController {
         $0.setTitle("다음으로", for: .normal)
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
-        $0.backgroundColor = .gray
+        $0.backgroundColor = gray04
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
