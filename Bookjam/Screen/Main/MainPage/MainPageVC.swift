@@ -340,7 +340,20 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailPage = BookstoreDetailPageVC()
         
-        // TODO: 데이터 넣기
+        
+        let selectedPlaceId = bookStoreList![indexPath.row].placeId!
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceId,
+            responseDataType: APIModel<PlaceIdResponseModel>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: PlaceIdRequestModel(placeId: selectedPlaceId),
+            completionHandler: { [self]
+                response in
+                    print(response)
+                detailPage.bookStoreDetail = response?.result ?? nil
+                
+            })
         
         navigationController?.pushViewController(detailPage, animated: true)
     }

@@ -16,4 +16,5 @@ struct Constant {
     static let getPlaces = "/places"
     static let keywordSearch = "/places/search"
     static let postRecord = "/records"
+    static let getPlaceId = "/places/:placeId"
 }

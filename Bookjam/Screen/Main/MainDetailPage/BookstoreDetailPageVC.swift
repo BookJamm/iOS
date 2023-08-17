@@ -18,6 +18,8 @@ class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
+    var bookStoreDetail: PlaceIdResponseModel?
+    
     /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록
     var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
     

@@ -184,7 +184,7 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
                     cell.photoImageView.image = UIImage(named: "squareDefaultImage")
                 } else {
                     // 이미지 데이터가 있을 경우 해당 이미지 설정
-                    if let imageUrlString = images[indexPath.row].image_url,
+                    if let imageUrlString = images[indexPath.row].url,
                        let imageUrl = URL(string: imageUrlString),
                        let imageData = try? Data(contentsOf: imageUrl),
                        let image = UIImage(data: imageData) {
