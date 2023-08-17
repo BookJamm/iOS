@@ -18,6 +18,8 @@ class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
+    var bookStoreDetail: PlaceIdResponseModel?
+    
     /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록
     var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
     
@@ -383,6 +385,14 @@ class BookstoreDetailPageVC: UIViewController {
     
     // MARK: Functions
     
+    func setUpContentviewConstraint(height: Int){
+        contentView.snp.makeConstraints{
+            $0.edges.equalTo(scrollView.contentLayoutGuide)
+            $0.width.equalTo(scrollView.frameLayoutGuide)
+            $0.height.equalToSuperview().multipliedBy(0.7).offset(height)
+        }
+    }
+    
     /// URL 버튼 클릭되면 호출되는 메소드
     /// 주소에 맞는 SafariViewController를 present
     @objc func didURLTapped() {
@@ -416,6 +426,11 @@ class BookstoreDetailPageVC: UIViewController {
                 reviewView,
                 bookListView
             ].forEach { $0.isHidden = true }
+            
+            contentView.snp.removeConstraints()
+
+            setUpContentviewConstraint(height: 2000)
+            
         }
         /// 소식 탭
         else if segmentIndex == 1 {
@@ -426,6 +441,12 @@ class BookstoreDetailPageVC: UIViewController {
                 reviewView,
                 bookListView
             ].forEach { $0.isHidden = true }
+            
+            contentView.snp.removeConstraints()
+            
+            let newsViewHeight = newsView.getNewsViewHeight() + 100
+            
+            setUpContentviewConstraint(height: Int(newsViewHeight))
         }
         /// 참여 탭
         else if segmentIndex == 2 {
@@ -436,6 +457,13 @@ class BookstoreDetailPageVC: UIViewController {
                 reviewView,
                 bookListView
             ].forEach { $0.isHidden = true }
+            
+            let activityViewHeight = activityView.activities.count * 480 + 100
+            
+            contentView.snp.removeConstraints()
+
+            setUpContentviewConstraint(height: activityViewHeight)
+            
         }
         /// 리뷰 탭
         else if segmentIndex == 3 {
@@ -446,6 +474,12 @@ class BookstoreDetailPageVC: UIViewController {
                 activityView,
                 bookListView
             ].forEach { $0.isHidden = true }
+            
+            let reviewViewHeight = reviewView.reviews.count * 260 + 250
+            
+            contentView.snp.removeConstraints()
+
+            setUpContentviewConstraint(height: reviewViewHeight)
         }
         /// 책 종류 탭
         else if segmentIndex == 4 {
@@ -456,8 +490,14 @@ class BookstoreDetailPageVC: UIViewController {
                 reviewView,
                 newsView
             ].forEach { $0.isHidden = true }
+            
+            let bookListViewHeight = bookListView.bookList.count * 220 + 100
+            
+            contentView.snp.removeConstraints()
+
+            setUpContentviewConstraint(height: bookListViewHeight)
         }
-    }
+    }//end of didSegmentControllerValueChanged()
     
     /// 리뷰 탭에서 인증 후 리뷰 작성하기 버튼 누르면 화면 전환되도록 구현
     @objc func pushReviewDetailVC() {
@@ -486,6 +526,7 @@ class BookstoreDetailPageVC: UIViewController {
     @objc func pushBookStoreActivityDetailVC() {
         navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
+    
     
     // MARK: Notification
     

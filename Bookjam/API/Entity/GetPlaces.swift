@@ -37,7 +37,7 @@ struct GetPlaceResponseModel: Codable {
 
 struct Image: Codable {
     let id: Int?
-    let image_url: String?
+    let url: String?
 }
 
 struct Address: Codable {
