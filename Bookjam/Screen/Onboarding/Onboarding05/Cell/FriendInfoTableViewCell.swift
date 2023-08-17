@@ -36,6 +36,8 @@ class FriendInfoTableViewCell: UITableViewCell {
     let profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "defaultProfile")
         $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 30
     }
     
     let nicknameLabel: UILabel = UILabel().then {
