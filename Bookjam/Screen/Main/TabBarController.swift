@@ -59,6 +59,14 @@ class TabBarController: UITabBarController {
         
         
         // MARK: Navigation Bar 커스텀
+        [
+            mainNavigationController,
+            locationNavigationController,
+            feedNavigationController,
+            mypageNavigationController
+        ].forEach {
+            $0.navigationBar.tintColor = .black
+        }
         
         [
             mainVC,
@@ -72,7 +80,6 @@ class TabBarController: UITabBarController {
             $0.navigationItem.setRightBarButtonItems([alertButton, settingButton], animated: true)
             $0.navigationItem.rightBarButtonItems![0].tintColor = .black
             $0.navigationItem.rightBarButtonItems![1].tintColor = .black
-            
         }
         
         // TODO: 데모데이 이후 위치 기반 페이지 개발할 때 주석 풀기

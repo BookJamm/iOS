@@ -32,6 +32,7 @@
 		94D659052A76BFE800E7F183 /* FeedPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659042A76BFE800E7F183 /* FeedPageVC.swift */; };
 		A850162687B812BE16F67757 /* Pods_Bookjam_BookjamUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA7E41F969523A177659D68 /* Pods_Bookjam_BookjamUITests.framework */; };
 		DD1022412A82C94000F74CC6 /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1022402A82C94000F74CC6 /* APIModel.swift */; };
+		DD2A4E032A8E1B7200D7A6B8 /* RecommendFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */; };
 		DD2D1A082A81D4D8003AEEA6 /* UserPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A072A81D4D8003AEEA6 /* UserPageVC.swift */; };
 		DD2D1A0A2A81EF8A003AEEA6 /* ChangeProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */; };
 		DD33A2FC2A8373EC00D4D7C3 /* APIConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */; };
@@ -151,6 +152,7 @@
 		CAEDA6440DB30BEB7BAF980E /* Pods-Bookjam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam.debug.xcconfig"; path = "Target Support Files/Pods-Bookjam/Pods-Bookjam.debug.xcconfig"; sourceTree = "<group>"; };
 		DD1022402A82C94000F74CC6 /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
 		DD112CF02A6DA31A00F9A5DA /* Onboarding05BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05BottomSheet.swift; sourceTree = "<group>"; };
+		DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendFriend.swift; sourceTree = "<group>"; };
 		DD2D1A072A81D4D8003AEEA6 /* UserPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPageVC.swift; sourceTree = "<group>"; };
 		DD2D1A092A81EF8A003AEEA6 /* ChangeProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeProfileVC.swift; sourceTree = "<group>"; };
 		DD33A2FB2A8373EC00D4D7C3 /* APIConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstant.swift; sourceTree = "<group>"; };
@@ -287,13 +289,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		9411771F2A8A113100847F26 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		942393522A8BB55F000E46BF /* Token */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,7 +300,6 @@
 		94D658F62A712FC000E7F183 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
-				9411771F2A8A113100847F26 /* API */,
 				94D658F72A712FF300E7F183 /* MainPageVC.swift */,
 				DDDBBF622A8107AA00B2C2C9 /* Cell */,
 			);
@@ -359,6 +353,7 @@
 				941177242A8A295000847F26 /* SingUp.swift */,
 				9423934E2A8B61DC000E46BF /* KeywordSearch.swift */,
 				DDD74A992A8C1F1B008C999F /* Record.swift */,
+				DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1070,6 +1065,7 @@
 				941A31012A6A8DCA008152CC /* UserInfo.swift in Sources */,
 				DDD74A8C2A8B9FA2008C999F /* SearchPlacePopUpVC.swift in Sources */,
 				DDC090142A790B7F00CDCC8A /* BookListTableViewCell.swift in Sources */,
+				DD2A4E032A8E1B7200D7A6B8 /* RecommendFriend.swift in Sources */,
 				DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */,
 				DD1022412A82C94000F74CC6 /* APIModel.swift in Sources */,
 				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,

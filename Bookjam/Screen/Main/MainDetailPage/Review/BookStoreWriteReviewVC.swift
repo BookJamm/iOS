@@ -19,7 +19,7 @@ class BookStoreWriteReviewVC: UIViewController {
 
     // MARK: Variables
     
-    var starValue = Float()
+    var starValue = 0.0
     
     var images = [UIImage]()
     
@@ -325,12 +325,9 @@ class BookStoreWriteReviewVC: UIViewController {
             fifthStarImageView
         ].forEach { $0.tintColor = gray03 }
         
-        if uploadButton.isEnabled == false {
-            uploadButton.isEnabled = true
-            uploadButton.backgroundColor = main03
-        }
-        
         starValue = 1.0
+        
+        checkUploadPossible()
     }
     
     @objc func didSecondStarTapped() {
@@ -345,12 +342,9 @@ class BookStoreWriteReviewVC: UIViewController {
             fifthStarImageView
         ].forEach { $0.tintColor = gray03 }
         
-        if uploadButton.isEnabled == false {
-            uploadButton.isEnabled = true
-            uploadButton.backgroundColor = main03
-        }
-        
         starValue = 2.0
+        
+        checkUploadPossible()
     }
     
     @objc func didThirdStarTapped() {
@@ -365,12 +359,9 @@ class BookStoreWriteReviewVC: UIViewController {
             fifthStarImageView
         ].forEach { $0.tintColor = gray03 }
         
-        if uploadButton.isEnabled == false {
-            uploadButton.isEnabled = true
-            uploadButton.backgroundColor = main03
-        }
-        
         starValue = 3.0
+        
+        checkUploadPossible()
     }
     
     @objc func didFourthStarTapped() {
@@ -385,12 +376,9 @@ class BookStoreWriteReviewVC: UIViewController {
             fifthStarImageView
         ].forEach { $0.tintColor = gray03 }
         
-        if uploadButton.isEnabled == false {
-            uploadButton.isEnabled = true
-            uploadButton.backgroundColor = main03
-        }
-        
         starValue = 4.0
+        
+        checkUploadPossible()
     }
     
     @objc func didFifthStarTapped() {
@@ -402,12 +390,9 @@ class BookStoreWriteReviewVC: UIViewController {
             fifthStarImageView
         ].forEach { $0.tintColor = warning }
         
-        if uploadButton.isEnabled == false {
-            uploadButton.isEnabled = true
-            uploadButton.backgroundColor = main03
-        }
-        
         starValue = 5.0
+        
+        checkUploadPossible()
     }
     
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
@@ -427,6 +412,18 @@ class BookStoreWriteReviewVC: UIViewController {
     /// 리뷰 내용 바뀌면 글자 수 업데이트해주는 함수
     private func updateCountLabel(characterCount: Int) {
         limitLabel.text = "\(characterCount)/300"
+    }
+    
+    /// 리뷰 업로드 조건 확인 함수
+    func checkUploadPossible() {
+        if reviewTextView.text != "당신의 한마디를 입력해주세요." && starValue != 0 {
+            uploadButton.backgroundColor = main03
+            uploadButton.isEnabled = true
+        }
+        else {
+            uploadButton.backgroundColor = gray04
+            uploadButton.isEnabled = false
+        }
     }
 }
 
@@ -458,6 +455,8 @@ extension BookStoreWriteReviewVC: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
+        
+        checkUploadPossible()
     }
 
     /// placeholder 글자 수 0일 때 나타나도록 설정
@@ -467,6 +466,8 @@ extension BookStoreWriteReviewVC: UITextViewDelegate {
             textView.textColor = .lightGray
             updateCountLabel(characterCount: 0)
         }
+        
+        checkUploadPossible()
     }
 
     /// 글자 수 입력은 300자까지만 가능하도록 설정

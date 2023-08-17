@@ -115,16 +115,41 @@ class BookPostDetailVC: UIViewController {
     var commentTableView: UITableView = UITableView().then {
         $0.register(ReviewTableViewCell.self, forCellReuseIdentifier: ReviewTableViewCell().cellID)
     }
+    
+    var writeCommentView: UIView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    var headerLineView: UIView = UIView().then {
+        $0.backgroundColor = gray03
+    }
+    
+    var commentBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = gray02
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 16
+    }
+    
+    var postButton: UIButton = UIButton().then {
+        $0.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
+        $0.tintColor = main03
+    }
+    
+    var commentTextField: UITextField = UITextField().then {
+        $0.placeholder = "댓글을 입력하세요."
+        $0.font = paragraph03
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setKeyboardObserver()
+        hideKeyboard()
 
         setUpView()
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
     }
-    
 
     // MARK: View
     
@@ -138,7 +163,8 @@ class BookPostDetailVC: UIViewController {
     func setUpLayout() {
         [
             customNavigationView,
-            scrollView
+            scrollView,
+            writeCommentView
         ].forEach { view.addSubview($0) }
         
         [
@@ -170,6 +196,13 @@ class BookPostDetailVC: UIViewController {
             commentLabel,
             commentTableView
         ].forEach { commentView.addSubview($0) }
+        
+        [
+            headerLineView,
+            commentBackgroundView,
+            postButton,
+            commentTextField
+        ].forEach { writeCommentView.addSubview($0) }
     }
     
     // MARK: Delegate
@@ -290,13 +323,36 @@ class BookPostDetailVC: UIViewController {
             $0.height.equalTo(500)
             $0.bottom.equalToSuperview()
         }
+        
+        writeCommentView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalToSuperview()
+            $0.height.equalTo(70)
+        }
+        
+        commentBackgroundView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(40)
+        }
+        
+        postButton.snp.makeConstraints {
+            $0.centerY.equalTo(commentBackgroundView)
+            $0.trailing.equalTo(commentBackgroundView).offset(-10)
+        }
+        
+        commentTextField.snp.makeConstraints {
+            $0.centerY.equalTo(commentBackgroundView)
+            $0.leading.equalTo(commentBackgroundView).offset(10)
+            $0.width.equalTo(300)
+        }
     }
     
     
     // MARK: Function
     
     @objc func didCustomBackButtonTapped() {
-        
+        self.dismiss(animated: true)
     }
 }
 

@@ -131,6 +131,7 @@ extension Onboarding05BottomSheet: UITableViewDelegate, UITableViewDataSource {
         let cell = searchResultTableView.dequeueReusableCell(withIdentifier: "friendInfoCell", for: indexPath) as! FriendInfoTableViewCell
         let buttonImage: String = searchResult[indexPath.row].isFriend ? "removeButton" : "addButton"
         
+        cell.contentView.backgroundColor = gray02
         // TODO: 나중에 URL로 값 받아오면 image 연결 가능하도록 구현
         // cell.profileImageView.image = searchResult[indexPath.row].photoURL
         cell.nicknameLabel.text = searchResult[indexPath.row].nickname
