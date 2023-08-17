@@ -142,17 +142,14 @@ class BookPostDetailVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setKeyboardObserver()
+        hideKeyboard()
 
         setUpView()
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
 
     // MARK: View
     
@@ -328,9 +325,7 @@ class BookPostDetailVC: UIViewController {
         }
         
         writeCommentView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.leading.trailing.equalToSuperview()
             $0.height.equalTo(70)
         }
         
