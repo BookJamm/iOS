@@ -149,6 +149,10 @@ class BookPostDetailVC: UIViewController {
         setUpConstraint()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
 
     // MARK: View
     
@@ -353,7 +357,7 @@ class BookPostDetailVC: UIViewController {
     // MARK: Function
     
     @objc func didCustomBackButtonTapped() {
-        
+        self.dismiss(animated: true)
     }
 }
 
