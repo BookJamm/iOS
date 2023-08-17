@@ -87,6 +87,33 @@ class BookStoreDetailNewsView: UIView {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: Func
+    func getNewsViewHeight() -> CGFloat {
+        var totalHeight: CGFloat = 0
+        
+        for news in newsList {
+            let contentHeight = calculateContentHeight(news.content)
+            // 셀 간의 여백 등을 고려한 추가적인 여백 값을 더해줄 수도 있음
+            
+            totalHeight += ( contentHeight )
+        }
+        
+        // 최종 높이에 뷰의 여백 등을 더해줄 수도 있음
+        return totalHeight 
+    }
+            
+    func calculateContentHeight(_ content: String) -> CGFloat {
+        // 콘텐츠의 길이에 따라 높이를 계산하여 반환하는 로직을 구현
+        // 예를 들어 content의 길이에 따라 적절한 높이 값을 계산하는 방식
+        // 여기서는 예시로 임의의 값을 반환하도록 했습니다.
+        
+        if content.count < 30 { return 100 }
+        else if content.count >= 18 && content.count < 36 { return 150 }
+        else if content.count >= 30 && content.count < 36 { return 170 }
+        else { return 170 }
+    }
+    
 }
 
 // 소식 탭에 들어갈 소식 셀 삽입을 위한 Delegate, DataSource extension

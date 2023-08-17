@@ -34,9 +34,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     static let cellID = "bookStoreCell"
     
-    
     var images: [Image] = []
-    
     
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
