@@ -20,6 +20,11 @@ struct Constant {
     static let postRecord = "/records"
     static func getPlaceId(placeId: Int) -> String {
         return "/places/\(placeId)"}
-    
+    static func getPlaceNewsURL(placeId: Int) -> String {
+        return "\(getPlaceId(placeId: placeId))/news"}
+    static func getPlaceBooksURL(placeId: Int) -> String {
+        return "\(getPlaceId(placeId: placeId))/books"}
+    static func getPlaceActivitiesURL(placeId: Int) -> String {
+        return "\(getPlaceId(placeId: placeId))/activities"}
     
 }

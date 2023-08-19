@@ -22,9 +22,6 @@ class BookstoreDetailPageVC: UIViewController {
     var bookStoreDetail: PlaceIdResponseModel?
     var bookStoreNewsList: [PlaceIdNewsResponseModel]?
     
-    /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록
-    var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
-    
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = .white
     }
@@ -177,6 +174,8 @@ class BookstoreDetailPageVC: UIViewController {
         setUpNotification()
         
         viewUpdate()
+        getPlaceIdNews()
+        getPlaceIdBooks()
     }
     
 
@@ -531,25 +530,12 @@ class BookstoreDetailPageVC: UIViewController {
         navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
     
-    
-    // MARK: Notification
-    
-    func setUpNotification() {
-        /// BookStoreDetailReviewView에서 리뷰 작성하기 버튼 눌렀을 때 전송되는 notification을 수신
-        NotificationCenter.default.addObserver(self, selector: #selector(pushReviewDetailVC), name: NSNotification.Name("writeReviewButtonTapped"), object: nil)
-        
-        /// BookStoreWriteReviewVC에서 업로드 버튼 눌렀을 때 전송되는 notification을 수신
-        NotificationCenter.default.addObserver(self, selector: #selector(makeReviewUploadToast), name: NSNotification.Name("uploadButtonTapped"), object: nil)
-        
-        /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
-        NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
-    }
-    
     // MainPageVC에서 받아온 BookStoreDetail로 뷰 업데이트하는 함수
     func viewUpdate(){
         if let bookStoreDetail = bookStoreDetail{
             
             bookstoreLabel.text = bookStoreDetail.name
+            newsView.bookStoreName = bookStoreDetail.name!
             
             switch bookStoreDetail.category{//카테고리에 따른 카테고리 이미지, label 설정.
             case 0:
@@ -578,8 +564,6 @@ class BookstoreDetailPageVC: UIViewController {
                 timeLabel.textColor = alert
             }
             
-            
-            
         }
     }//end of viewUpdate()
     
@@ -587,16 +571,50 @@ class BookstoreDetailPageVC: UIViewController {
     func getPlaceIdNews(){
         
         APIManager.shared.getData(
-            urlEndpointString: Constant.getPlaceId(placeId: (bookStoreDetail?.placeId)!) + "\news",
+            urlEndpointString: Constant.getPlaceNewsURL(placeId: (self.bookStoreDetail?.placeId)!),
             responseDataType: APIModel<[PlaceIdNewsResponseModel]>?.self,
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: { response in
                 print(response)
                 if let result = response?.result {
-                    self.bookStoreNewsList = result
+
+                    self.newsView.newsList = result
+                    self.newsView.newsTableView.reloadData()
                 }
             })
+    }
+    
+    //PlaceIdBooks api (책목록) 호출 후 뷰 업데이트 함수
+    func getPlaceIdBooks(){
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceBooksURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdBooksResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+                    self.bookListView.bookList = result
+                    self.bookListView.bookListTableView.reloadData()
+                }
+            })
+    }
+    
+    
+    
+    // MARK: Notification
+    
+    func setUpNotification() {
+        /// BookStoreDetailReviewView에서 리뷰 작성하기 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(pushReviewDetailVC), name: NSNotification.Name("writeReviewButtonTapped"), object: nil)
+        
+        /// BookStoreWriteReviewVC에서 업로드 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(makeReviewUploadToast), name: NSNotification.Name("uploadButtonTapped"), object: nil)
+        
+        /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
     }
     
 }//end of BookStoreDetailPageVC
@@ -611,10 +629,6 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath) as! BookStorePhotoCollectionViewCell
         
-        /// images 배열 photoImageView의 이미지로 할당
-//        cell.photoImageView.image = UIImage(named: images[indexPath.row])
-//        cell.photoImageView.contentMode = .scaleAspectFill
-        
         // 컬렉션뷰 셀 이미지에 api에서 받아온 이미지 연결, 없다면 기본 이미지로
         if let images = bookStoreDetail?.images, indexPath.row < images.count {
                 let imageUrlString = images[indexPath.row].url
@@ -624,7 +638,6 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
                         if let imageData = try? Data(contentsOf: imageUrl),
                            let image = UIImage(data: imageData) {
                             DispatchQueue.main.async {
-                                
                                 cell.photoImageView.image = image
                             }
                         }
