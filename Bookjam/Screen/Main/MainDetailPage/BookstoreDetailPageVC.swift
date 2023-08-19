@@ -18,10 +18,9 @@ class BookstoreDetailPageVC: UIViewController {
 
     // MARK: Variables
     
+    //api 모델 변수 - 이 변수에 api 호출 결과를 저장하여 뷰 업데이트 등에 사용
     var bookStoreDetail: PlaceIdResponseModel?
-    
-    /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록
-    var images = ["ChaekYeon", "ChaekYeonTwo", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonFive"]
+    var bookStoreNewsList: [PlaceIdNewsResponseModel]?
     
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = .white
@@ -173,6 +172,10 @@ class BookstoreDetailPageVC: UIViewController {
         setUpDelegate()
         setUpConstraint()
         setUpNotification()
+        
+        viewUpdate()
+        getPlaceIdNews()
+        getPlaceIdBooks()
     }
     
 
@@ -527,6 +530,94 @@ class BookstoreDetailPageVC: UIViewController {
         navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
     
+    // MainPageVC에서 받아온 BookStoreDetail로 뷰 업데이트하는 함수
+    func viewUpdate(){
+        if let bookStoreDetail = bookStoreDetail{
+            
+            bookstoreLabel.text = bookStoreDetail.name
+            newsView.bookStoreName = bookStoreDetail.name!
+            
+            switch bookStoreDetail.category{//카테고리에 따른 카테고리 이미지, label 설정.
+            case 0:
+                bookMarkImageView.image = UIImage(systemName: "book.fill")
+                storeTypeLabel.text = "독립서점"
+            case 1:
+                bookMarkImageView.image = UIImage(systemName: "cup.and.saucer.fill")
+                storeTypeLabel.text = "책 놀이터"
+            case 2:
+                bookMarkImageView.image = UIImage(systemName: "books.vertical.fill")
+                storeTypeLabel.text = "도서관"
+            default:
+                bookMarkImageView.isHidden = true
+            }
+            starLabel.text = String(bookStoreDetail.rating!)
+            reviewCountLabel.text = "리뷰 " + String(bookStoreDetail.reviewCount!)
+            locationLabel.text = bookStoreDetail.address?.road
+            siteURL.setTitle(bookStoreDetail.website, for: .normal)
+            
+            if let open = bookStoreDetail.open{ // open 여부에 따른 ui 변경
+                timeLabel.text = open ? "영업 중" : "영업 종료"
+                timeLabel.textColor = open ? complete : alert
+            }
+            else{
+                timeLabel.text = "영업 종료"
+                timeLabel.textColor = alert
+            }
+            
+        }
+    }//end of viewUpdate()
+    
+    //placeIdNews api (소식) 호출 후 뷰 업데이트 함수
+    func getPlaceIdNews(){
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceNewsURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdNewsResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+
+                    self.newsView.newsList = result
+                    self.newsView.newsTableView.reloadData()
+                }
+            })
+    }
+    
+    //PlaceIdBooks api (책목록) 호출 후 뷰 업데이트 함수
+    func getPlaceIdBooks(){
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceBooksURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdBooksResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+                    self.bookListView.bookList = result
+                    self.bookListView.bookListTableView.reloadData()
+                }
+            })
+    }
+    
+    func getPlaceIdActivities(){
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceActivitiesURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdBooksResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+                    self.bookListView.bookList = result
+                    self.bookListView.bookListTableView.reloadData()
+                }
+            })
+    }
+    
+    
     
     // MARK: Notification
     
@@ -540,7 +631,8 @@ class BookstoreDetailPageVC: UIViewController {
         /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
         NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
     }
-}
+    
+}//end of BookStoreDetailPageVC
 
 /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록 CollectionView 구현을 위한 Delegate, DataSource extension
 /// 셀 별 사이즈 지정을 위한 DelegateFlowLayout extension 추가
@@ -552,10 +644,24 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStorePhotoCollectionViewCell.cellID, for: indexPath) as! BookStorePhotoCollectionViewCell
         
-        /// images 배열 photoImageView의 이미지로 할당
-        cell.photoImageView.image = UIImage(named: images[indexPath.row])
-        cell.photoImageView.contentMode = .scaleAspectFill
-        
+        // 컬렉션뷰 셀 이미지에 api에서 받아온 이미지 연결, 없다면 기본 이미지로
+        if let images = bookStoreDetail?.images, indexPath.row < images.count {
+                let imageUrlString = images[indexPath.row].url
+            if let imageUrl = URL(string: imageUrlString!) {
+                    
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.photoImageView.image = image
+                            }
+                        }
+                    }
+                }
+            } else {
+                
+                cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+            }
         return cell
     }
     

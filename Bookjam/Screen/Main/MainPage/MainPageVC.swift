@@ -18,6 +18,7 @@ class MainPageVC: UIViewController {
 
     // MARK: Variables
     
+    //api 모델 변수 - 이 변수에 api 호출 결과를 저장하여 뷰 업데이트 등에 사용
     var bookStoreList: [GetPlaceResponseModel]?
     
     var searchBarButton: UIButton = UIButton().then {
@@ -329,7 +330,7 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             if let reviewCount = bookStoreList[indexPath.row].reviewCount {
                 cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
             }
-            if let imageUrls = bookStoreList[indexPath.row].images {
+            if let imageUrls = bookStoreList[indexPath.row].images {    //이미지 url을 이미지로
                 cell.images = imageUrls
             }
         }
@@ -337,25 +338,23 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환
         let detailPage = BookstoreDetailPageVC()
-        
         
         let selectedPlaceId = bookStoreList![indexPath.row].placeId!
         
         APIManager.shared.getData(
-            urlEndpointString: Constant.getPlaceId,
+            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
             responseDataType: APIModel<PlaceIdResponseModel>?.self,
             requestDataType: PlaceIdRequestModel.self,
-            parameter: PlaceIdRequestModel(placeId: selectedPlaceId),
+            parameter: nil,
             completionHandler: { [self]
                 response in
                     print(response)
                 detailPage.bookStoreDetail = response?.result ?? nil
-                
+                navigationController?.pushViewController(detailPage, animated: true)
             })
         
-        navigationController?.pushViewController(detailPage, animated: true)
     }
 }
 

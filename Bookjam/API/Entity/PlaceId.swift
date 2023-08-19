@@ -23,3 +23,4 @@ struct PlaceIdResponseModel: Codable {
     let open : Bool?
     let bookmarked: Bool?
 }
+
