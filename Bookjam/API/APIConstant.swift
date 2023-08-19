@@ -18,5 +18,8 @@ struct Constant {
     static let getPlaces = "/places"
     static let keywordSearch = "/places/search"
     static let postRecord = "/records"
-    static let getPlaceId = "/places/:placeId"
+    static func getPlaceId(placeId: Int) -> String {
+        return "/places/\(placeId)"}
+    
+    
 }
