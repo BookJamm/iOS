@@ -53,9 +53,9 @@ class BookStoreWriteReviewVC: UIViewController {
         $0.textColor = gray05
     }
     
-    // TODO: 아이콘 사이즈 늘려서 적용
     var addPhotoButton: UIButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
+        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill", withConfiguration: UIImage.SymbolConfiguration(
+            pointSize: 40, weight: .regular, scale: .default)), for: .normal)
         $0.tintColor = gray07
         $0.backgroundColor = gray03
         $0.clipsToBounds = true
@@ -152,10 +152,6 @@ class BookStoreWriteReviewVC: UIViewController {
     func setUpView() {
         view.backgroundColor = gray01
         hideKeyboard()
-        
-        images.append(UIImage(named: "squareDefaultImage")!)
-        images.append(UIImage(named: "squareDefaultImage")!)
-        images.append(UIImage(named: "squareDefaultImage")!)
         
         // TODO: 나중에 리팩토링 할 때 함수 하나로 통일하고 sender 설정해서 쓸데없는 코드 줄이기
         /// 각각의 별 선택했을 때 별점 설정하고 별 tintcolor 변경
@@ -397,15 +393,26 @@ class BookStoreWriteReviewVC: UIViewController {
     
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
     @objc func didUploadButtonTapped() {
-        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        
+        /// 장소 리뷰 게시 API 연결
+//        APIManager.shared.postData(
+//            urlEndpointString: Constant(placeId: 2),
+//            responseDataType: APIModel<ReviewContentResponseModel>?.self,
+//            requestDataType: ReviewContentRequestModel.self,
+//            parameter: nil) { response in
+//                print(response)
+//            }
         
         /// 디테일 페이지로 다시 복귀
+        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        
         for viewController in viewControllerStack {
             if let detailVC = viewController as? BookstoreDetailPageVC {
                 navigationController?.popToViewController(detailVC, animated: true)
             }
         }
         
+        /// 토스트 메시지를 띄우기 위한 notification 전송
         NotificationCenter.default.post(Notification(name: Notification.Name("uploadButtonTapped")))
     }
     

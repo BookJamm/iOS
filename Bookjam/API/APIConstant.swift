@@ -19,4 +19,9 @@ struct Constant {
     static let keywordSearch = "/places/search"
     static let postRecord = "/records"
     static let getPlaceId = "/places/:placeId"
+    var postReviewContent = "places/:placeId/reviews"
+    
+    init(placeId: Int) {
+        self.postReviewContent = "places/\(placeId)/reviews"
+    }
 }
