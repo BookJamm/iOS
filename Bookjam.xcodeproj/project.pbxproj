@@ -364,8 +364,8 @@
 				947ED65E2A8E44250037FB38 /* PlaceId.swift */,
 				947ED6602A8F8D030037FB38 /* PlaceIdNews.swift */,
 				947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */,
-				DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */,
 				947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */,
+				DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";

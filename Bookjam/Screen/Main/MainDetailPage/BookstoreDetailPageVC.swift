@@ -602,6 +602,21 @@ class BookstoreDetailPageVC: UIViewController {
             })
     }
     
+    func getPlaceIdActivities(){
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceActivitiesURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdBooksResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+                    self.bookListView.bookList = result
+                    self.bookListView.bookListTableView.reloadData()
+                }
+            })
+    }
+    
     
     
     // MARK: Notification
