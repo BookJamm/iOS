@@ -18,11 +18,13 @@ class BookStoreDetailBookListView: UIView {
     // MARK: Variables
     
     // 책 데이터 삽입을 위한 Book 배열 선언
-    var bookList: [Book] = [
+    var bookList1: [Book] = [
         Book(title: "기후변화 시대의 사랑", author: "김기창", publisher: "민음사", content: "폭우, 폭염, 혹한, 백화, 해빙 등 기후 변화를 배경으로 한 다양한 사랑 소설집", photo: "chaekYeonBook1"),
         Book(title: "돈과 나의 일", author: "이원지", publisher: "독립출판물", content: "일하며 살아가는 마음, 우리가 이루고 싶은 꿈과 완성하고 싶은 삶의 태도에 관한 이야기", photo: "chaekYeonBook2"),
         Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "환상적 욕망과 가난한 현실 사이 달콤한 선택지.", photo: "tempBookImage")
     ]
+    
+    var bookList: [PlaceIdBooksResponseModel] = []
     
     var bookListLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -93,9 +95,23 @@ extension BookStoreDetailBookListView: UITableViewDelegate, UITableViewDataSourc
         
         cell.titleLabel.text = bookList[indexPath.row].title
         cell.authorLabel.text = bookList[indexPath.row].author
-        cell.publisherLabel.text = bookList[indexPath.row].publisher
-        cell.bookImageView.image = UIImage(named: bookList[indexPath.row].photo)
-        cell.contentLabel.text = bookList[indexPath.row].content
+//        cell.publisherLabel.text = bookList[indexPath.row].
+        if let imageUrlString = bookList[indexPath.row].cover {
+            if let imageUrl = URL(string: imageUrlString) {
+                    
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.bookImageView.image = image
+                            }
+                        }
+                    }
+                }
+            } else {
+                cell.bookImageView.image = UIImage(named: "squareDefaultImage")
+            }
+        cell.contentLabel.text = bookList[indexPath.row].description
         
         return cell
     }

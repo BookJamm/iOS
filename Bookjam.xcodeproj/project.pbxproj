@@ -27,6 +27,9 @@
 		941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941A31032A6AAB3B008152CC /* LoginAPI.swift */; };
 		9423934F2A8B61DC000E46BF /* KeywordSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9423934E2A8B61DC000E46BF /* KeywordSearch.swift */; };
 		947ED65F2A8E44250037FB38 /* PlaceId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED65E2A8E44250037FB38 /* PlaceId.swift */; };
+		947ED6612A8F8D030037FB38 /* PlaceIdNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6602A8F8D030037FB38 /* PlaceIdNews.swift */; };
+		947ED6632A90DA970037FB38 /* PlaceIdBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */; };
+		947ED6652A90DCC10037FB38 /* PlaceIdActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */; };
 		94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658F72A712FF300E7F183 /* MainPageVC.swift */; };
 		94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FD2A71653A00E7F183 /* LocationPageVC.swift */; };
 		94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659002A7165AB00E7F183 /* MyPageVC.swift */; };
@@ -145,6 +148,9 @@
 		941A31032A6AAB3B008152CC /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
 		9423934E2A8B61DC000E46BF /* KeywordSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordSearch.swift; sourceTree = "<group>"; };
 		947ED65E2A8E44250037FB38 /* PlaceId.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceId.swift; sourceTree = "<group>"; };
+		947ED6602A8F8D030037FB38 /* PlaceIdNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdNews.swift; sourceTree = "<group>"; };
+		947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdBooks.swift; sourceTree = "<group>"; };
+		947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdActivities.swift; sourceTree = "<group>"; };
 		94D658F72A712FF300E7F183 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		94D658FD2A71653A00E7F183 /* LocationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPageVC.swift; sourceTree = "<group>"; };
 		94D659002A7165AB00E7F183 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -356,6 +362,9 @@
 				9423934E2A8B61DC000E46BF /* KeywordSearch.swift */,
 				DDD74A992A8C1F1B008C999F /* Record.swift */,
 				947ED65E2A8E44250037FB38 /* PlaceId.swift */,
+				947ED6602A8F8D030037FB38 /* PlaceIdNews.swift */,
+				947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */,
+				947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */,
 				DD2A4E022A8E1B7200D7A6B8 /* RecommendFriend.swift */,
 			);
 			path = Entity;
@@ -1041,6 +1050,7 @@
 				941A31042A6AAB3B008152CC /* LoginAPI.swift in Sources */,
 				DD829C4D2A85045E00B22754 /* BookStoreReviewDetailVC.swift in Sources */,
 				DD7994282A89F4610066CFB7 /* FeedPostTableViewCell.swift in Sources */,
+				947ED6612A8F8D030037FB38 /* PlaceIdNews.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */,
@@ -1110,7 +1120,9 @@
 				941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */,
 				DD7994302A8A2EEF0066CFB7 /* BookPostDetailVC.swift in Sources */,
 				DD38CFBF2A59993400D32B00 /* SceneDelegate.swift in Sources */,
+				947ED6632A90DA970037FB38 /* PlaceIdBooks.swift in Sources */,
 				9411771D2A84F6C400847F26 /* LikeActivityBookStoreView.swift in Sources */,
+				947ED6652A90DCC10037FB38 /* PlaceIdActivities.swift in Sources */,
 				DD81DB602A7BC21900E8DD42 /* ReviewInfo.swift in Sources */,
 				DDFFD9E32A7F66280095F76A /* BookActivityCollectionViewCell.swift in Sources */,
 				DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */,

@@ -21,11 +21,13 @@ class BookStoreDetailNewsView: UIView {
     var bookStoreName = "책방연희"
     
     // 소식 탭에 들어갈 데이터 News 배열로 구현
-    var newsList: [News] = [
+    var newsList1: [News] = [
         News(storePhoto: "squareDefaultImage", title: "8월 4일 ~ 8월 9일 휴가갑니다!", content: "이번 연휴 기간동안 휴무입니다 :) 좋은 연휴 보내세요", date: "2023. 07. 23", photo: ""),
         News(storePhoto: "squareDefaultImage", title: "<책방 연희> 7기 종강", content: "갑자기 억수가 퍼부었던 7월의 마지막 일요일인 오늘, 『나만의 엽서북 만들기』 with <책방 연희> 7기를 마무리했습니다.", date: "2023. 06. 28", photo: ""),
         News(storePhoto: "squareDefaultImage", title: "새로운 독립 출판물 출판", content: "새로운 독립 출판물이 출판되었습니다! 많은 관심 부탁드립니다", date: "2023. 05. 07", photo: "")
     ]
+    
+    var newsList: [PlaceIdNewsResponseModel] = []
     
     var bookPlaceLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -93,7 +95,9 @@ class BookStoreDetailNewsView: UIView {
         var totalHeight: CGFloat = 0
         
         for news in newsList {
-            let contentHeight = calculateContentHeight(news.content)
+//            let contentHeight = calculateContentHeight(news.content)
+            let contentHeight = calculateContentHeight(news.contents!)
+
             // 셀 간의 여백 등을 고려한 추가적인 여백 값을 더해줄 수도 있음
             
             totalHeight += ( contentHeight )
@@ -126,19 +130,19 @@ extension BookStoreDetailNewsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = newsTableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
         
-        cell.profileImageView.image = UIImage(named: newsList[indexPath.row].storePhoto)?.circularImage()
+        cell.profileImageView.image = UIImage(named: "squareDefaultImage" )?.circularImage()
         cell.newsLabel.text = newsList[indexPath.row].title
-        cell.newsContent.text = newsList[indexPath.row].content
-        cell.newsDate.text = newsList[indexPath.row].date
+        cell.newsContent.text = newsList[indexPath.row].contents
+        cell.newsDate.text = newsList[indexPath.row].createdAt
         
         return cell
     }
     
     // 글 길이에 맞게 뷰 높이 조절
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if newsList[indexPath.row].content.count < 30 { return 100 }
-        else if newsList[indexPath.row].content.count >= 18 && newsList[indexPath.row].content.count < 36 { return 150 }
-        else if newsList[indexPath.row].content.count >= 30 && newsList[indexPath.row].content.count < 36 { return 170 }
+        if newsList[indexPath.row].contents!.count < 30 { return 100 }
+        else if newsList[indexPath.row].contents!.count >= 18 && newsList[indexPath.row].contents!.count < 36 { return 150 }
+        else if newsList[indexPath.row].contents!.count >= 30 && newsList[indexPath.row].contents!.count < 36 { return 170 }
         else { return 170 }
     }
 }
