@@ -26,5 +26,8 @@ struct Constant {
         return "\(getPlaceId(placeId: placeId))/books"}
     static func getPlaceActivitiesURL(placeId: Int) -> String {
         return "\(getPlaceId(placeId: placeId))/activities"}
+    static func getPlaceReviewsURL(placeId: Int) -> String {
+        return "\(getPlaceId(placeId: placeId))/reviews"}
     
 }
+

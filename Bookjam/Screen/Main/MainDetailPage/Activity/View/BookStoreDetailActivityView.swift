@@ -18,11 +18,13 @@ class BookStoreDetailActivityView: UIView {
     // MARK: Variables
     
     // 참여 목록 데이터 Activity 배열로 구현
-    var activities: [Activity] = [
+    var activities1: [Activity] = [
         Activity(photo: "ChaekYeonEight", name: "박정미 작가 북토크", starValue: 4.92, numOfReview: 265, description: "시골에 살아 본 적 없는 저자가 여행 가방 하나 들고 실골에 살러 간 이유와 7년 간 시골에 살며 책방을 운영하고 글을 쓰고 사진을 찍고 농사를 지으며 알게 된 것에 관한 이야기"),
         Activity(photo: "ChaekYeonNine", name: "책방 창업 워크숍, 나는 왜 책방인가", starValue: 3.38, numOfReview: 150, description: "책방 창업에 대한 정보와 경험을 공유하고, 책방 창업에 대한 진솔한 이야기를 나누는 자리"),
         Activity(photo: "ChaekYeonThree", name: "스마트폰으로 사진 작가되기", starValue: 4.32, numOfReview: 130, description: "1주차 - 스마트폰 카메라 이해하기\n2주차 - 실전 촬영 테크닉 및 후보정")
     ]
+    
+    var activities: [Activities] = []
     
     var activityLabel: UILabel = UILabel().then {
         $0.font = title06
@@ -98,12 +100,33 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = activityTableView.dequeueReusableCell(withIdentifier: "activityCell", for: indexPath) as! ActivityTableViewCell
         
-        cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
-        cell.descriptionLabel.text = activities[indexPath.row].description
-        cell.activityLabel.text = activities[indexPath.row].name
-        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].numOfReview))"
-        cell.starValueLabel.text = String(activities[indexPath.row].starValue)
+//        cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
+//        cell.descriptionLabel.text = activities[indexPath.row].description
+//        cell.activityLabel.text = activities[indexPath.row].name
+//        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].numOfReview))"
+//        cell.starValueLabel.text = String(activities[indexPath.row].starValue)
         
+        if let imageUrlString = activities[indexPath.row].image_url {
+            if let imageUrl = URL(string: imageUrlString) {
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.activityImageView.image = image
+                            }
+                        }
+                    }
+                }
+            } else {
+                
+                cell.activityImageView.image = UIImage(named: "squareDefaultImage")
+            }
+        
+        cell.descriptionLabel.text = activities[indexPath.row].info
+        cell.activityLabel.text = activities[indexPath.row].title
+        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].review_count!))"
+        cell.starValueLabel.text = String(activities[indexPath.row].total_rating!)
+//        
         // 배경 회색으로 구현하고 cornerRadius 적용
         cell.contentView.backgroundColor = gray02
         cell.contentView.layer.cornerRadius = 20

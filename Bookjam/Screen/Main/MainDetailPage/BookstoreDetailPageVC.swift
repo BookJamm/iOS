@@ -166,7 +166,7 @@ class BookstoreDetailPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
         setUpLayout()
         setUpDelegate()
@@ -174,8 +174,12 @@ class BookstoreDetailPageVC: UIViewController {
         setUpNotification()
         
         viewUpdate()
-        getPlaceIdNews()
-        getPlaceIdBooks()
+        if bookStoreDetail != nil{
+            getPlaceIdNews()
+            getPlaceIdBooks()
+            getPlaceIdActivities()
+            getPlaceIdReviews()
+        }
     }
     
 
@@ -605,18 +609,33 @@ class BookstoreDetailPageVC: UIViewController {
     func getPlaceIdActivities(){
         APIManager.shared.getData(
             urlEndpointString: Constant.getPlaceActivitiesURL(placeId: (self.bookStoreDetail?.placeId)!),
-            responseDataType: APIModel<[PlaceIdBooksResponseModel]>?.self,
+            responseDataType: APIModel<PlaceIdActivitiesResponseModel>?.self,
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: { response in
                 print(response)
                 if let result = response?.result {
-                    self.bookListView.bookList = result
-                    self.bookListView.bookListTableView.reloadData()
+                    self.activityView.activities = result.result
+                    self.activityView.activityTableView.reloadData()
                 }
             })
     }
     
+    func getPlaceIdReviews(){
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceReviewsURL(placeId: (self.bookStoreDetail?.placeId)!),
+            responseDataType: APIModel<[PlaceIdReviewsResponseModel]>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { response in
+                print(response)
+                if let result = response?.result {
+                    self.reviewView.reviews = result
+                    self.reviewView.setUpConstraint()
+                    self.reviewView.visitReviewTableView.reloadData()
+                }
+            })
+    }
     
     
     // MARK: Notification
@@ -684,3 +703,11 @@ struct BookstoreDetailPageVC_Preview: PreviewProvider {
     }
 }
 
+// url string을 이미지로 바꿔주는 함수. 임시로 여기에 설정
+func imageFromURLString(_ urlString: String) -> UIImage {
+    if let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+        return image
+    } else {
+        return UIImage(named: "squareDefaultImage")!
+    }
+}

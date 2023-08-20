@@ -8,16 +8,22 @@
 import Foundation
 
 struct PlaceIdActivitiesResponseModel: Codable {
-    let activityId: Int?
-    let createdAt: String?
-    let updatedAt: String?
-    let placeId: Int?
+    let error: Bool?
+    
+    let result: [Activities]
+}
+
+struct Activities: Codable{
+    let activity_id: Int?
+    let created_at: String?
+    let updated_at: String?
+    let place_id: Int?
     let title: String
     let info: String
     let capacity: Int?
     let headcount: Int?
-    let totalRating: Int?
-    let reviewCount: Int?
-    let imageUrl: String?
-    
+    let total_rating: Int?
+    let review_count: Int?
+    let image_url: String?
+    let like_count: Int?
 }
