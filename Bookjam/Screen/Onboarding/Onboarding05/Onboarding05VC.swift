@@ -190,7 +190,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         let email = emailTextField.text
         
         APIManager.shared.getData(
-            urlEndpointString: Constant.searchFriend,
+            urlEndpointString: Constant.getSearchUser,
             responseDataType: APIModel<[SearchFriendResponseModel]>?.self,
             requestDataType: SearchFriendRequestModel.self,
             parameter: SearchFriendRequestModel(email: email),
@@ -223,7 +223,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     /// 추천 친구 테이블 뷰에 할당할 친구 데이터 api로 불러오는 함수
     func callRecommendFriendData() {
         APIManager.shared.getData(
-            urlEndpointString: Constant.recommendFriend,
+            urlEndpointString: Constant.getAuthFriends,
             responseDataType: APIModel<RecommendFriendResponseModel>?.self,
             requestDataType: RecommendFriendRequestModel.self,
             parameter: nil) { response in

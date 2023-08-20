@@ -19,9 +19,17 @@ class BookStoreWriteReviewVC: UIViewController {
 
     // MARK: Variables
     
-    var starValue = 0.0
+    /// 이전 VC에서 넘어올 변수들 선언 및 초기화
+    var date: String = "2000-01-01"
     
-    var images = [UIImage]()
+    /// 서버에 post할 때 필요한 placeID 값 선언
+    var placeID = 2
+    
+    /// 서버에 넘길 별점 값 저장할 변수 선언
+    var starValue: Float = 0.0
+    
+    /// 추가 버튼 눌러서 추가하는 이미지 담을 이미지 배열 선언
+    var images = [Data]()
     
     var reviewContentView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -53,9 +61,9 @@ class BookStoreWriteReviewVC: UIViewController {
         $0.textColor = gray05
     }
     
-    // TODO: 아이콘 사이즈 늘려서 적용
     var addPhotoButton: UIButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill"), for: .normal)
+        $0.setImage(UIImage(systemName: "plus.square.fill.on.square.fill", withConfiguration: UIImage.SymbolConfiguration(
+            pointSize: 40, weight: .regular, scale: .default)), for: .normal)
         $0.tintColor = gray07
         $0.backgroundColor = gray03
         $0.clipsToBounds = true
@@ -152,10 +160,6 @@ class BookStoreWriteReviewVC: UIViewController {
     func setUpView() {
         view.backgroundColor = gray01
         hideKeyboard()
-        
-        images.append(UIImage(named: "squareDefaultImage")!)
-        images.append(UIImage(named: "squareDefaultImage")!)
-        images.append(UIImage(named: "squareDefaultImage")!)
         
         // TODO: 나중에 리팩토링 할 때 함수 하나로 통일하고 sender 설정해서 쓸데없는 코드 줄이기
         /// 각각의 별 선택했을 때 별점 설정하고 별 tintcolor 변경
@@ -397,15 +401,38 @@ class BookStoreWriteReviewVC: UIViewController {
     
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
     @objc func didUploadButtonTapped() {
-        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        /// 장소 리뷰 게시 API 호출
+        APIManager.shared.postData(
+            urlEndpointString: Constant.postPlacesReviews(placeId: placeID),
+            responseDataType: APIModel<ReviewContentResponseModel>?.self,
+            requestDataType: ReviewContentRequestModel.self,
+            parameter: ReviewContentRequestModel(
+                visitedAt: date,
+                contents: reviewTextView.text,
+                rating: starValue
+            )) { response in
+                /// 리뷰 게시 성공하면 reviewID 반환받아서 이미지 업로드 API 호출
+                if response?.message! == "성공" && response?.result?.reviewId != nil {
+                    /// 장소 사진 게시 API 연결
+                    APIManager.shared.postImage(
+                        urlEndpointString: Constant.postReviewsImages(reviewId: (response?.result?.reviewId)!),
+                        responseDataType: APIModel<ReviewImageResponseModel>?.self,
+                        images: self.images) { response in
+                            print(response)
+                        }
+                }
+            }
         
         /// 디테일 페이지로 다시 복귀
+        guard let viewControllerStack = self.navigationController?.viewControllers else { return }
+        
         for viewController in viewControllerStack {
             if let detailVC = viewController as? BookstoreDetailPageVC {
                 navigationController?.popToViewController(detailVC, animated: true)
             }
         }
         
+        /// 토스트 메시지를 띄우기 위한 notification 전송
         NotificationCenter.default.post(Notification(name: Notification.Name("uploadButtonTapped")))
     }
     
@@ -435,7 +462,7 @@ extension BookStoreWriteReviewVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
         
-        cell.photoImageView.image = images[indexPath.row]
+        cell.photoImageView.image = UIImage(data: images[indexPath.row])
         
         return cell
     }
@@ -499,7 +526,7 @@ extension BookStoreWriteReviewVC: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             /// 선택된 이미지를 images 배열에 추가해 화면에 표시되도록 구현
-            images.append(image)
+            images.append((image.jpegData(compressionQuality: 0.5))!)
             photoCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)

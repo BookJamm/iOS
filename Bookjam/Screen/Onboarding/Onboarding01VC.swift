@@ -246,6 +246,6 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
 struct Onboarding01VC_Preview: PreviewProvider {
     static var previews: some View {
         Onboarding01VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
+            
     }
 }

@@ -207,7 +207,7 @@ extension SearchPlacePopUpVC: WKScriptMessageHandler {
         searchButton.setTitle("   \(address)", for: .normal)
         
         APIManager.shared.getData(
-            urlEndpointString: Constant.keywordSearch,
+            urlEndpointString: Constant.getPlacesSearch,
             responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
             requestDataType: KeywordSearchRequestModel.self,
             parameter: KeywordSearchRequestModel(
