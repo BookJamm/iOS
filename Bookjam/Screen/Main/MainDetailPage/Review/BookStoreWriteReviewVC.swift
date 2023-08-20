@@ -19,8 +19,17 @@ class BookStoreWriteReviewVC: UIViewController {
 
     // MARK: Variables
     
+    /// 이전 VC에서 넘어올 변수들 선언 및 초기화
+    var photos: [UIImage] = []
+    var date: String = "2000-01-01"
+    
+    /// 서버에 post할 때 필요한 placeID 값 선언
+    var placeID = 1
+    
+    /// 서버에 넘길 별점 값 저장할 변수 선언
     var starValue = 0.0
     
+    /// 추가 버튼 눌러서 추가하는 이미지 담을 이미지 배열 선언
     var images = [UIImage]()
     
     var reviewContentView: UIView = UIView().then {
@@ -395,13 +404,13 @@ class BookStoreWriteReviewVC: UIViewController {
     @objc func didUploadButtonTapped() {
         
         /// 장소 리뷰 게시 API 연결
-//        APIManager.shared.postData(
-//            urlEndpointString: Constant(placeId: 2),
-//            responseDataType: APIModel<ReviewContentResponseModel>?.self,
-//            requestDataType: ReviewContentRequestModel.self,
-//            parameter: nil) { response in
-//                print(response)
-//            }
+        APIManager.shared.postData(
+            urlEndpointString: Constant.postPlacesReviews(placeId: placeID),
+            responseDataType: APIModel<ReviewContentResponseModel>?.self,
+            requestDataType: ReviewContentRequestModel.self,
+            parameter: nil) { response in
+                print(response)
+            }
         
         /// 디테일 페이지로 다시 복귀
         guard let viewControllerStack = self.navigationController?.viewControllers else { return }

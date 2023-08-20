@@ -166,7 +166,7 @@ class BookstoreDetailPageVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
         setUpLayout()
         setUpDelegate()
@@ -174,8 +174,11 @@ class BookstoreDetailPageVC: UIViewController {
         setUpNotification()
         
         viewUpdate()
-        getPlaceIdNews()
-        getPlaceIdBooks()
+        
+        if bookStoreDetail != nil {
+            getPlaceIdNews()
+            getPlaceIdBooks()
+        }
     }
     
 

@@ -295,7 +295,7 @@ class Onboarding03VC: UIViewController {
                 
                 // MARK: 이메일 중복 체크 API 연결
                 APIManager.shared.postData(
-                    urlEndpointString: Constant.postEmailDuplicate,
+                    urlEndpointString: Constant.postAuthEmailCheck,
                     responseDataType: APIModel<DuplicateResponseModel?>?.self,
                     requestDataType: DuplictateRequestModel.self,
                     parameter: DuplictateRequestModel(email: email),

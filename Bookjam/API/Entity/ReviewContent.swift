@@ -8,7 +8,9 @@
 import Foundation
 
 struct ReviewContentRequestModel: Codable {
-    
+    let visitedAt: String?
+    let contents: String?
+    let rating: Float?
 }
 
 struct ReviewContentResponseModel: Codable {

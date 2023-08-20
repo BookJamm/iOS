@@ -148,7 +148,7 @@ extension SearchPageVC: UISearchBarDelegate {
         //임시 위경도
         
         APIManager.shared.getData(
-            urlEndpointString: Constant.keywordSearch,
+            urlEndpointString: Constant.getPlacesSearch,
             responseDataType: APIModel<[KeywordSearchResponseModel]>?.self,
             requestDataType: KeywordSearchRequestModel.self,
             parameter: requestModel,

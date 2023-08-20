@@ -11,6 +11,7 @@ import Foundation
 
 import Alamofire
 
+
 class APIManager: ObservableObject  {
     static let shared = APIManager()
     private var headers: HTTPHeaders = [    //임시 슈퍼 jwt 토큰
