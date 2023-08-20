@@ -91,7 +91,7 @@ class BookStoreChoiceDateVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // updatePlaceInfo()
+        updatePlaceInfo()
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -239,7 +239,7 @@ class BookStoreChoiceDateVC: UIViewController {
             parameter: nil) { response in
                 self.placeNameLabel.text = response?.result?.name!
                 self.ratingLabel.text = String((response?.result?.rating!)!)
-                self.numOfReviewLabel.text = String((response?.result?.reviewCount!)!)
+                self.numOfReviewLabel.text = "리뷰 \(String((response?.result?.reviewCount!)!))"
                 
                 if response?.result?.category! == 0 { self.placeTypeLabel.text = "독립서점" }
                 else if response?.result?.category! == 1 { self.placeTypeLabel.text = "책 놀이터" }
