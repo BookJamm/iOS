@@ -402,8 +402,6 @@ class BookStoreWriteReviewVC: UIViewController {
     
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
     @objc func didUploadButtonTapped() {
-        
-        
         /// 장소 리뷰 게시 API 연결
         APIManager.shared.postData(
             urlEndpointString: Constant.postPlacesReviews(placeId: placeID),
@@ -414,8 +412,17 @@ class BookStoreWriteReviewVC: UIViewController {
                 contents: reviewTextView.text,
                 rating: starValue
             )) { response in
-                print(response)
+                /// 장소 사진 게시 API 연결
+                APIManager.shared.postData(
+                    urlEndpointString: Constant.postReviewsImages(reviewId: (response?.result?.reviewId)!),
+                    responseDataType: APIModel<ReviewImageResponseModel>?.self,
+                    requestDataType: ReviewImageRequestModel.self,
+                    parameter: nil) { response in
+                        print(response!)
+                    }
             }
+        
+        
         
         /// 디테일 페이지로 다시 복귀
         guard let viewControllerStack = self.navigationController?.viewControllers else { return }

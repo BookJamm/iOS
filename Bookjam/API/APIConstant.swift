@@ -19,15 +19,22 @@ struct Constant {
     static let getPlacesSearch = "/places/search"
     static let postRecord = "/records"
     static func getPlaceId(placeId: Int) -> String {
-        return "/places/\(placeId)"}
+        return "/places/\(placeId)"
+    }
     static func getPlaceNewsURL(placeId: Int) -> String {
-        return "\(getPlaceId(placeId: placeId))/news"}
+        return "\(getPlaceId(placeId: placeId))/news"
+    }
     static func getPlaceBooksURL(placeId: Int) -> String {
-        return "\(getPlaceId(placeId: placeId))/books"}
+        return "\(getPlaceId(placeId: placeId))/books"
+    }
     static func getPlaceActivitiesURL(placeId: Int) -> String {
-        return "\(getPlaceId(placeId: placeId))/activities"}
+        return "\(getPlaceId(placeId: placeId))/activities"
+    }
     static let getPlaceId = "/places/:placeId"
     static func postPlacesReviews(placeId: Int) -> String {
         return "/places/\(placeId)/reviews"
+    }
+    static func postReviewsImages(reviewId: Int) -> String {
+        return "/reviews/\(reviewId)/images"
     }
 }
