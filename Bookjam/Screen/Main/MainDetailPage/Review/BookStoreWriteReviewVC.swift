@@ -20,17 +20,16 @@ class BookStoreWriteReviewVC: UIViewController {
     // MARK: Variables
     
     /// 이전 VC에서 넘어올 변수들 선언 및 초기화
-    var photos: [UIImage] = []
     var date: String = "2000-01-01"
     
     /// 서버에 post할 때 필요한 placeID 값 선언
-    var placeID = 1
+    var placeID = 2
     
     /// 서버에 넘길 별점 값 저장할 변수 선언
     var starValue: Float = 0.0
     
     /// 추가 버튼 눌러서 추가하는 이미지 담을 이미지 배열 선언
-    var images = [UIImage]()
+    var images = [Data]()
     
     var reviewContentView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -402,7 +401,7 @@ class BookStoreWriteReviewVC: UIViewController {
     
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
     @objc func didUploadButtonTapped() {
-        /// 장소 리뷰 게시 API 연결
+        /// 장소 리뷰 게시 API 호출
         APIManager.shared.postData(
             urlEndpointString: Constant.postPlacesReviews(placeId: placeID),
             responseDataType: APIModel<ReviewContentResponseModel>?.self,
@@ -412,17 +411,17 @@ class BookStoreWriteReviewVC: UIViewController {
                 contents: reviewTextView.text,
                 rating: starValue
             )) { response in
-                /// 장소 사진 게시 API 연결
-                APIManager.shared.postData(
-                    urlEndpointString: Constant.postReviewsImages(reviewId: (response?.result?.reviewId)!),
-                    responseDataType: APIModel<ReviewImageResponseModel>?.self,
-                    requestDataType: ReviewImageRequestModel.self,
-                    parameter: nil) { response in
-                        print(response!)
-                    }
+                /// 리뷰 게시 성공하면 reviewID 반환받아서 이미지 업로드 API 호출
+                if response?.message! == "성공" && response?.result?.reviewId != nil {
+                    /// 장소 사진 게시 API 연결
+                    APIManager.shared.postImage(
+                        urlEndpointString: Constant.postReviewsImages(reviewId: (response?.result?.reviewId)!),
+                        responseDataType: APIModel<ReviewImageResponseModel>?.self,
+                        images: self.images) { response in
+                            print(response)
+                        }
+                }
             }
-        
-        
         
         /// 디테일 페이지로 다시 복귀
         guard let viewControllerStack = self.navigationController?.viewControllers else { return }
@@ -463,7 +462,7 @@ extension BookStoreWriteReviewVC: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
         
-        cell.photoImageView.image = images[indexPath.row]
+        cell.photoImageView.image = UIImage(data: images[indexPath.row])
         
         return cell
     }
@@ -527,7 +526,7 @@ extension BookStoreWriteReviewVC: UIImagePickerControllerDelegate, UINavigationC
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             /// 선택된 이미지를 images 배열에 추가해 화면에 표시되도록 구현
-            images.append(image)
+            images.append((image.jpegData(compressionQuality: 0.5))!)
             photoCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)

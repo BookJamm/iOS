@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct ReviewImageRequestModel: Codable {
-    
-}
-
 struct ReviewImageResponseModel: Codable {
-    var uploaded: Bool
+    var uploaded: Bool?
 }
