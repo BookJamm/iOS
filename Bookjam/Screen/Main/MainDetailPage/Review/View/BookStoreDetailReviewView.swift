@@ -18,12 +18,14 @@ class BookStoreDetailReviewView: UIView {
     // MARK: Variables
     
     // 리뷰 데이터 삽입을 위한 Review 배열 선언
-    var reviews: [Review] = [
+    var reviews1: [Review] = [
         Review(userName: "독서 장인", visitDate: "2023 / 08 / 03 방문", comment: "주말이라 사람들이 많아서 커피를 마시지는 못했지만, 독립서점에서 볼법한 책들도 판매하고 있어 구경하는 재미가 있었어요!", photos: ["ChaekYeonFive", "ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine"]),
         Review(userName: "짐깅", visitDate: "2023 / 07 / 24 방문", comment: "조용하고 혼자 앉아서 힐링하기 좋아요! 추천합니다 🙌", photos: ["ChaekYeon", "ChaekYeonThree", "ChaekYeonFour", "ChaekYeonTwo"]),
         Review(userName: "장모", visitDate: "2023 / 07 / 22 방문", comment: "분위기가 정말 좋아요! 친구에게 추천해주고 싶습니다", photos: ["ChaekYeonFive", "ChaekYeonSeven", "ChaekYeonNine", "ChaekYeonFour"]),
         Review(userName: "모아", visitDate: "2023 / 06 / 08 방문", comment: "ㅠㅠ 오늘 휴무인줄 몰랐어요 다음에 또 올게요!", photos: ["ChaekYeonNine", "ChaekYeonEight", "ChaekYeon", "squareDefaultImage"])
     ]
+    
+    var reviews: [PlaceIdReviewsResponseModel] = []
     
     var writeReviewView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -128,7 +130,7 @@ class BookStoreDetailReviewView: UIView {
         visitReviewView.snp.makeConstraints {
             $0.top.equalTo(writeReviewView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(reviews.count * 500 + 20)
+            $0.height.equalTo(2 * 500 + 20)
         }
         
         visitReviewLabel.snp.makeConstraints {
@@ -165,14 +167,34 @@ extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = visitReviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         
-        cell.userNameLabel.text = reviews[indexPath.row].userName
-        cell.userVisitDateLabel.text = reviews[indexPath.row].visitDate
-        cell.commentLabel.text = reviews[indexPath.row].comment
-        cell.firstImage.image = UIImage(named: reviews[indexPath.row].photos[0])
-        cell.secondImage.image = UIImage(named: reviews[indexPath.row].photos[1])
-        cell.thirdImage.image = UIImage(named: reviews[indexPath.row].photos[2])
-        cell.fourthImage.image = UIImage(named: reviews[indexPath.row].photos[3])
+        cell.userNameLabel.text = reviews[indexPath.row].author.username
+        cell.userVisitDateLabel.text = reviews[indexPath.row].visitedAt
+        cell.commentLabel.text = reviews[indexPath.row].contents
         
+        let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]
+
+        if let images = reviews[indexPath.row].images {
+            for index in 0..<imageArray.count {
+                let imageView = imageArray[index]
+                
+                if index < images.count, let imageUrlString = images[index].url {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        DispatchQueue.global().async {
+                            if let imageData = try? Data(contentsOf: imageUrl),
+                               let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async {
+                                    imageView.image = image
+                                }
+                            }
+                        }
+                    } else {
+                        imageView.image = UIImage(named: "squareDefaultImage")
+                    }
+                } else {
+                    imageView.image = UIImage(named: "squareDefaultImage")
+                }
+            }
+        }
         return cell
     }
     

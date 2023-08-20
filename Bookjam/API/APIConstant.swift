@@ -30,6 +30,9 @@ struct Constant {
     static func getPlaceActivitiesURL(placeId: Int) -> String {
         return "\(getPlaceId(placeId: placeId))/activities"
     }
+    static func getPlaceReviewsURL(placeId: Int) -> String {
+        return "\(getPlaceId(placeId: placeId))/reviews"
+    }
     static let getPlaceId = "/places/:placeId"
     static func postPlacesReviews(placeId: Int) -> String {
         return "/places/\(placeId)/reviews"
@@ -37,4 +40,6 @@ struct Constant {
     static func postReviewsImages(reviewId: Int) -> String {
         return "/reviews/\(reviewId)/images"
     }
+    
 }
+

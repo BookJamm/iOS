@@ -44,3 +44,9 @@ struct Address: Codable {
     let road: String
     let jibun: String?
 }
+
+struct Author: Codable{
+    let userId: Int?
+    let username: String?
+    let profileImage: String?
+}
