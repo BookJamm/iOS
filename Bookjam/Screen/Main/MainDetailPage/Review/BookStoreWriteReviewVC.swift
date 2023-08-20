@@ -27,7 +27,7 @@ class BookStoreWriteReviewVC: UIViewController {
     var placeID = 1
     
     /// 서버에 넘길 별점 값 저장할 변수 선언
-    var starValue = 0.0
+    var starValue: Float = 0.0
     
     /// 추가 버튼 눌러서 추가하는 이미지 담을 이미지 배열 선언
     var images = [UIImage]()
@@ -403,12 +403,17 @@ class BookStoreWriteReviewVC: UIViewController {
     /// 업로드 버튼 누르면 화면 닫고 디테일 페이지로 글 작성 완료 토스트 메시지를 띄우기 위한 notification 전송
     @objc func didUploadButtonTapped() {
         
+        
         /// 장소 리뷰 게시 API 연결
         APIManager.shared.postData(
             urlEndpointString: Constant.postPlacesReviews(placeId: placeID),
             responseDataType: APIModel<ReviewContentResponseModel>?.self,
             requestDataType: ReviewContentRequestModel.self,
-            parameter: nil) { response in
+            parameter: ReviewContentRequestModel(
+                visitedAt: date,
+                contents: reviewTextView.text,
+                rating: starValue
+            )) { response in
                 print(response)
             }
         

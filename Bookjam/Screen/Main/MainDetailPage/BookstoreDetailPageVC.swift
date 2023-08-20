@@ -507,7 +507,10 @@ class BookstoreDetailPageVC: UIViewController {
     
     /// 리뷰 탭에서 인증 후 리뷰 작성하기 버튼 누르면 화면 전환되도록 구현
     @objc func pushReviewDetailVC() {
-        navigationController?.pushViewController(BookStoreReviewDetailVC(), animated: true)
+        let reviewVC = BookStoreReviewDetailVC()
+        reviewVC.placeID = (self.bookStoreDetail?.placeId)!
+        
+        navigationController?.pushViewController(reviewVC, animated: true)
     }
     
     /// 리뷰 작성하고 업로드 버튼 누르면 토스트 메시지 띄우도록 구현
@@ -566,7 +569,6 @@ class BookstoreDetailPageVC: UIViewController {
                 timeLabel.text = "영업 종료"
                 timeLabel.textColor = alert
             }
-            
         }
     }//end of viewUpdate()
     

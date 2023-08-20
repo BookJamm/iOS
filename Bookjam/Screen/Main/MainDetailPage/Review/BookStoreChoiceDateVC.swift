@@ -16,6 +16,9 @@ class BookStoreChoiceDateVC: UIViewController {
 
     // MARK: Variables
     
+    /// 디테일 페이지에서 넘어올 placeID 받을 변수 구현
+    var placeID: Int = 2
+    
     var placeInfoView: UIView = UIView().then {
         $0.backgroundColor = .white
     }
@@ -88,6 +91,7 @@ class BookStoreChoiceDateVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // updatePlaceInfo()
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -218,12 +222,30 @@ class BookStoreChoiceDateVC: UIViewController {
     @objc func didReviewButtonTapped() {
         /// 넘겨줄 변수 할당
         var nextVC = BookStoreWriteReviewVC()
-        nextVC.placeID = 1
+        nextVC.placeID = self.placeID
         let dateFormat: DateFormatter = DateFormatter().then { $0.dateFormat = "yyyy-MM-dd" }
         nextVC.date = dateFormat.string(from: calendarView.date)
         
         /// 화면 전환
         navigationController?.pushViewController(BookStoreWriteReviewVC(), animated: true)
+    }
+    
+    /// placeID에 맞는 장소 정보 받아와서 view 업데이트
+    func updatePlaceInfo() {
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceId(placeId: placeID),
+            responseDataType: APIModel<PlaceIdResponseModel>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil) { response in
+                self.placeNameLabel.text = response?.result?.name!
+                self.ratingLabel.text = String((response?.result?.rating!)!)
+                self.numOfReviewLabel.text = String((response?.result?.reviewCount!)!)
+                
+                if response?.result?.category! == 0 { self.placeTypeLabel.text = "독립서점" }
+                else if response?.result?.category! == 1 { self.placeTypeLabel.text = "책 놀이터" }
+                else if response?.result?.category! == 2 { self.placeTypeLabel.text = "도서관" }
+            
+            }
     }
     
 }

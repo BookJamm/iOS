@@ -17,6 +17,9 @@ class BookStoreReviewDetailVC: UIViewController {
 
     // MARK: Variables
     
+    /// 디테일 페이지에서 넘어올 placeID 받을 변수 구현
+    var placeID: Int = 1
+    
     var selectedButton = -1
     
     var selectLabel: UILabel = UILabel().then {
@@ -178,7 +181,10 @@ class BookStoreReviewDetailVC: UIViewController {
     // MARK: Function
     
     @objc func didVisitDateButtonTapped() {
-        navigationController?.pushViewController(BookStoreChoiceDateVC(), animated: true)
+        let dateVC = BookStoreChoiceDateVC()
+        dateVC.placeID = self.placeID
+        
+        navigationController?.pushViewController(dateVC, animated: true)
     }
 }
 
