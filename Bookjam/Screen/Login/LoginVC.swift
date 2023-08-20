@@ -217,7 +217,7 @@ class LoginVC: UIViewController {
         
         // MARK: 로그인 API 연결
         APIManager.shared.postData(
-            urlEndpointString: Constant.userLogin,
+            urlEndpointString: Constant.postAuthLogin,
             responseDataType: APIModel<userLoginResponseModel>?.self,
             requestDataType: userLoginRequestModel.self,
             parameter: userLoginRequestModel(email: email, password: password),
