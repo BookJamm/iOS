@@ -142,11 +142,12 @@ class Onboarding08VC: UIViewController {
     
     /// 메인으로 버튼 누르면 온보딩 페이지로 이동
     @objc func didNextButtonTapped() {
-        let Onboarding = Onboarding01VC()
-        Onboarding.modalPresentationStyle = .fullScreen
-        Onboarding.modalTransitionStyle = .coverVertical
+        let navigationController = UINavigationController(rootViewController: Onboarding01VC())
+        navigationController.navigationBar.tintColor = .black
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.modalTransitionStyle = .coverVertical
         
-        self.present(Onboarding, animated: true, completion: nil)
+        self.present(navigationController, animated: true)
     } // end of didNextButtonTapped()
     
     /// 오른쪽으로 스와이프하면 첫번째 캐러셀 화면으로 전환

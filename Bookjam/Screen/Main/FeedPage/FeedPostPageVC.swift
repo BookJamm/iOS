@@ -42,7 +42,7 @@ class FeedPostPageVC: UIViewController {
     }
     
     /// 글 작성할 때 사진 추가하면 저장할 이미지 배열 선언
-    var images: [UIImage] = []
+    var images: [Data] = []
     
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -1045,16 +1045,14 @@ class FeedPostPageVC: UIViewController {
         if secretPostToggleButton.isOn { isSecret = 1 }
         if allowCommentToggleButton.isOn { isCommentAllowed = 1 }
         
+        print(date)
         
-        
+        /// 리뷰 내용 게시 API 호출
         APIManager.shared.postData(
             urlEndpointString: Constant.postRecord,
             responseDataType: APIModel<RecordResponseModel>?.self,
             requestDataType: RecordRequestModel.self,
             parameter: RecordRequestModel(
-                // TODO: userID랑 place 번호 어떻게 알아내는지 물어보기
-                // TODO: 책 셀 구현하면 isbn API 연결해서 삽입
-                userId: 0,
                 place: 0,
                 isbn: 0,
                 date: date,
@@ -1105,7 +1103,7 @@ extension FeedPostPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
         
-        cell.photoImageView.image = images[indexPath.row]
+        cell.photoImageView.image = UIImage(data: images[indexPath.row])
         
         return cell
     }
@@ -1158,7 +1156,7 @@ extension FeedPostPageVC: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             /// 선택된 이미지를 images 배열에 추가해 화면에 표시되도록 구현
-            images.append(image)
+            images.append(image.jpegData(compressionQuality: 0.5)!)
             photoCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)
