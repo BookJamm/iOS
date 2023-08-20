@@ -221,13 +221,13 @@ class BookStoreChoiceDateVC: UIViewController {
     
     @objc func didReviewButtonTapped() {
         /// 넘겨줄 변수 할당
-        var nextVC = BookStoreWriteReviewVC()
+        let nextVC = BookStoreWriteReviewVC()
         nextVC.placeID = self.placeID
         let dateFormat: DateFormatter = DateFormatter().then { $0.dateFormat = "yyyy-MM-dd" }
         nextVC.date = dateFormat.string(from: calendarView.date)
         
         /// 화면 전환
-        navigationController?.pushViewController(BookStoreWriteReviewVC(), animated: true)
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     
     /// placeID에 맞는 장소 정보 받아와서 view 업데이트

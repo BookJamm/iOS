@@ -63,6 +63,7 @@ extension APIManager {
                                             completionHandler: @escaping (U)->Void) {
         guard let url = URL(string: Constant.baseURL + urlEndpointString) else { return }
         print("post 요청 URL --> \(url)")
+        print("Request 쿼리 --> \(parameter)")
 
         AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
