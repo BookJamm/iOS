@@ -171,35 +171,30 @@ extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource 
         cell.userVisitDateLabel.text = reviews[indexPath.row].visitedAt
         cell.commentLabel.text = reviews[indexPath.row].contents
         
-//        cell.firstImage.image = imageFromURLString((reviews[indexPath.row].images?[0].url)!)
-        
-        if let images = reviews[indexPath.row].images, indexPath.row < images.count {
-                let imageUrlString = images[indexPath.row].url
-            if let imageUrl = URL(string: imageUrlString!) {
-                    
-                    DispatchQueue.global().async {
-                        if let imageData = try? Data(contentsOf: imageUrl),
-                           let image = UIImage(data: imageData) {
-                            DispatchQueue.main.async {
-                                cell.firstImage.image = image
+        let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]
+
+        if let images = reviews[indexPath.row].images {
+            for index in 0..<imageArray.count {
+                let imageView = imageArray[index]
+                
+                if index < images.count, let imageUrlString = images[index].url {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        DispatchQueue.global().async {
+                            if let imageData = try? Data(contentsOf: imageUrl),
+                               let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async {
+                                    imageView.image = image
+                                }
                             }
                         }
+                    } else {
+                        imageView.image = UIImage(named: "squareDefaultImage")
                     }
+                } else {
+                    imageView.image = UIImage(named: "squareDefaultImage")
                 }
-            } else {
-                
-                cell.firstImage.image = UIImage(named: "squareDefaultImage")
             }
-        
-//        cell.secondImage.image = imageFromURLString((reviews[indexPath.row].images?[1].url)!)
-//        cell.thirdImage.image = imageFromURLString((reviews[indexPath.row].images?[2].url)!)
-//        cell.fourthImage.image = imageFromURLString((reviews[indexPath.row].images?[3].url)!)
-
-//        cell.firstImage.image = UIImage(named: reviews[indexPath.row].photos[0])
-//        cell.secondImage.image = UIImage(named: reviews[indexPath.row].photos[1])
-//        cell.thirdImage.image = UIImage(named: reviews[indexPath.row].photos[2])
-//        cell.fourthImage.image = UIImage(named: reviews[indexPath.row].photos[3])
-        
+        }
         return cell
     }
     
