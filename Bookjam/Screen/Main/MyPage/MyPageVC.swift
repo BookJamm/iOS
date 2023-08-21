@@ -10,6 +10,7 @@
 import SwiftUI
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -17,6 +18,8 @@ import Then
 class MyPageVC: UIViewController {
 
     // MARK: Variables
+    
+    var activities = [UserActivities]()
 
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = gray02
@@ -31,6 +34,10 @@ class MyPageVC: UIViewController {
     
     var userProfileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "BasicProfile")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 45
+        
     }
     
     var userNameLabel: UILabel = UILabel().then {
@@ -180,6 +187,7 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpAPI()
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -189,9 +197,153 @@ class MyPageVC: UIViewController {
 
     // MARK: View
     
+    func setUpAPI() {
+        /// 마이페이지 정보 요약 API 불러오기
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersOutline,
+            responseDataType: APIModel<UsersOutlineResponseModel>?.self,
+            requestDataType: UsersOutlineRequestModel.self,
+            parameter: nil) { response in
+                if let result = response?.result?.userOutline {
+                    self.userNameLabel.text = "\(result.username!)님"
+                    self.userActivityLabel.text = "\(result.username!)님의 활동"
+                    self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
+                    self.activityFrameView.reviewNumberLabel.text = "\(result.review!)"
+                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile ?? ""), placeholder: UIImage(named: "BasicProfile"))
+                    self.activityFrameView.visitNumberLabel.text = "\(result.reserve!)"
+                }
+            }
+        
+        /// 활동 API 불러오기
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersActivities,
+            responseDataType: APIModel<UsersActivitiesResponseModel>.self,
+            requestDataType: UsersActivitiesRequestModel.self,
+            parameter: nil) { response in
+                if let activities = response.result?.userActivities {
+                    /// 활동 참여 현황 업데이트
+                    self.activities = activities
+                    self.collectionView.reloadData()
+                    
+                    /// 좋아요한 활동 업데이트
+                    if activities.count == 0 {
+                        self.likeActivityBookStoreView.isHidden = true
+                        self.likeActivityBookStoreView2.isHidden = true
+                    }
+                    else if activities.count == 1 {
+                        self.likeActivityBookStoreView2.isHidden = true
+                        
+                        self.likeActivityBookStoreView.activityNameLabel.text = activities[0].title
+                        self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[0].review_count ?? 0)
+                    }
+                    else {
+                        self.likeActivityBookStoreView.activityNameLabel.text = activities[0].title
+                        self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[1].review_count ?? 0)
+                        
+                        self.likeActivityBookStoreView2.activityNameLabel.text = activities[1].title
+                        self.likeActivityBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: activities[1].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView2.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView2.starValueLabel.text = String(activities[1].review_count ?? 0)
+                    }
+                }
+            }
+        
+        /// 기록 API 불러오기
+        /// 일단 데모데이 전까지는 카테고리 0으로 고정
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersRecords(category: 0),
+            responseDataType: APIModel<[UsersRecordsResponseModel]>.self,
+            requestDataType: UsersRecordsRequestModel.self,
+            parameter: nil) { response in
+                if let records = response.result {
+                    if records.count == 0 {
+                        self.myRecordBookStoreView.isHidden = true
+                        self.myRecordBookStoreView2.isHidden = true
+                    }
+                    else if records.count == 1 {
+                        self.myRecordBookStoreView2.isHidden = true
+                        
+                        let date = records[0].date!.components(separatedBy: "T")[0]
+                        
+                        self.myRecordBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: records[0].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView.bookStoreName.text = records[0].name
+                        self.myRecordBookStoreView.speechBubbleLabel.text = String(records[0].comment_count ?? 0)
+                        self.myRecordBookStoreView.heartLabel.text = String(records[0].like_count ?? 0)
+                        self.myRecordBookStoreView.visitDayLabel.text = "\(date) 방문"
+                    }
+                    else {
+                        let firstDate = records[0].date!.components(separatedBy: "T")[0]
+                        let secondDate = records[1].date!.components(separatedBy: "T")[0]
+                        
+                        self.myRecordBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: records[0].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView.bookStoreName.text = records[0].name
+                        self.myRecordBookStoreView.speechBubbleLabel.text = String(records[0].comment_count ?? 0)
+                        self.myRecordBookStoreView.heartLabel.text = String(records[0].like_count ?? 0)
+                        self.myRecordBookStoreView.visitDayLabel.text = "\(firstDate) 방문"
+                        
+                        self.myRecordBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: records[1].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView2.bookStoreName.text = records[1].name
+                        self.myRecordBookStoreView2.speechBubbleLabel.text = String(records[1].comment_count ?? 0)
+                        self.myRecordBookStoreView2.heartLabel.text = String(records[1].like_count ?? 0)
+                        self.myRecordBookStoreView2.visitDayLabel.text = "\(secondDate) 방문"
+                    }
+                }
+            }
+        
+        /// 리뷰 API 불러오기
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersReviews,
+            responseDataType: APIModel<UsersReviewsResponseModel>?.self,
+            requestDataType: UsersReviewsRequestModel.self,
+            parameter: nil) { response in
+                if let reviews = response?.result?.userReviews  {
+                    if reviews.count == 0 {
+                        self.myReviewBookStoreView.isHidden = true
+                        self.myReviewBookStoreView2.isHidden = true
+                    }
+                    else if reviews.count == 1 {
+                        self.myReviewBookStoreView2.isHidden = true
+                        
+                        let date = reviews[0].visited_at!.components(separatedBy: "T")[0]
+                        
+                        self.myReviewBookStoreView.bookStoreName.text = reviews[0].name
+                        self.myReviewBookStoreView.bookNameButton.setTitle("아몬드", for: .normal)
+                        self.myReviewBookStoreView.speechBubbleLabel.text = "2"
+                        self.myReviewBookStoreView.heartLabel.text = "3"
+                        self.myReviewBookStoreView.visitDayLabel.text = "\(date) 방문"
+                        self.myReviewBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: reviews[0].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
+                    }
+                    else {
+                        let firstDate = reviews[0].visited_at!.components(separatedBy: "T")[0]
+                        let secondDate = reviews[1].visited_at!.components(separatedBy: "T")[0]
+                        
+                        self.myReviewBookStoreView.bookStoreName.text = reviews[0].name
+                        self.myReviewBookStoreView.bookNameButton.setTitle("아몬드", for: .normal)
+                        self.myReviewBookStoreView.speechBubbleLabel.text = "2"
+                        self.myReviewBookStoreView.heartLabel.text = "3"
+                        self.myReviewBookStoreView.visitDayLabel.text = "\(firstDate) 방문"
+                        self.myReviewBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: reviews[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        
+                        self.myReviewBookStoreView2.bookStoreName.text = reviews[1].name
+                        self.myReviewBookStoreView2.bookNameButton.setTitle("불편한 편의점", for: .normal)
+                        self.myReviewBookStoreView2.speechBubbleLabel.text = "4"
+                        self.myReviewBookStoreView2.heartLabel.text = "2"
+                        self.myReviewBookStoreView2.visitDayLabel.text = "\(secondDate) 방문"
+                        self.myReviewBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: reviews[1].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                    }
+                }
+            }
+    }
+    
     func setUpView() {
         view.backgroundColor = .white
-        
     }
     
     
@@ -235,17 +387,17 @@ class MyPageVC: UIViewController {
         ].forEach{ myRecordView.addSubview($0) }
         
         [
-        myReviewLabel,
-        myReviewMoreButton,
-        myReviewBookStoreView,
-        myReviewBookStoreView2
+            myReviewLabel,
+            myReviewMoreButton,
+            myReviewBookStoreView,
+            myReviewBookStoreView2
         ].forEach{ myReviewView.addSubview($0) }
         
         [
-        likeActivityLabel,
-        likeActivityMoreButton,
-        likeActivityBookStoreView,
-        likeActivityBookStoreView2
+            likeActivityLabel,
+            likeActivityMoreButton,
+            likeActivityBookStoreView,
+            likeActivityBookStoreView2
         ].forEach{ likeActivityView.addSubview($0) }
     }
     
@@ -404,7 +556,7 @@ class MyPageVC: UIViewController {
             $0.height.equalTo(myReviewView)
         }
         likeActivityLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
         likeActivityMoreButton.snp.makeConstraints{
@@ -435,14 +587,17 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return activities.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
         
-        //        cell.contentView.backgroundColor = gray01
+        cell.activityImageView.kf.setImage(with: URL(string: activities[indexPath.row].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
+        cell.activityNameLabel.text = activities[indexPath.row].title
+        cell.starValueLabel.text = String(activities[indexPath.row].total_rating!)
+        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].review_count!))"
         
         return cell
     }
