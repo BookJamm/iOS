@@ -43,5 +43,8 @@ struct Constant {
     static func getBooksList(title: String) -> String {
         return "/books/list?title=\(title)"
     }
+    static func postRecordsImages(recordId: Int) -> String {
+        return "/records/\(recordId)/images"
+    }
 }
 

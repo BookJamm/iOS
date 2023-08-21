@@ -36,6 +36,9 @@ class FeedPostPageVC: UIViewController {
     /// 장소 검색해 선택했을 때 전달되는 notification object를 통해 도로명 주소를 받아올 변수 선언
     var address: String = ""
     
+    /// 책 선택했을 때 전달되는 notification object를 통해 책 isbn 받아올 변수 선언
+    var isbn: Int = 0
+    
     /// 방문 날짜 업데이트를 위한 날짜 표시 포맷 선언
     let dateFormat = DateFormatter().then {
         $0.dateFormat = "yyyy / MM / dd"
@@ -1047,6 +1050,7 @@ class FeedPostPageVC: UIViewController {
             bookSearchResultImageView.kf.setImage(with: URL(string: data.cover!), placeholder: UIImage(named: "emptyBook"))
             bookSearchResultNameLabel.text = data.title
             bookSearchResultAuthorLabel.text = data.author
+            isbn = Int(data.isbn!)!
         }
         
         /// 업로드 버튼 활성화 가능한지 체크
@@ -1074,15 +1078,21 @@ class FeedPostPageVC: UIViewController {
             responseDataType: APIModel<RecordResponseModel>?.self,
             requestDataType: RecordRequestModel.self,
             parameter: RecordRequestModel(
-                place: 0,
-                isbn: 0,
+                isbn: isbn,
                 date: date,
                 emotions: 0,
                 activity: 0,
                 contents: content,
                 isNotPublic: isSecret,
                 commentNotAllowed: isCommentAllowed)) { response in
-                    print(response)
+                    if let recordID = response?.result?.recordId {
+                        APIManager.shared.postImage(
+                            urlEndpointString: Constant.postRecordsImages(recordId: recordID),
+                            responseDataType: APIModel<RecordImageResponseModel>?.self,
+                            images: self.images) { response in
+                                print(response)
+                            }
+                    }
                 }
         
         self.dismiss(animated: true)
