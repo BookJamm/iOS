@@ -48,7 +48,7 @@ class BookListTableViewCell: UITableViewCell {
     var titleLabel: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.textColor = .black
-        $0.text = "책 이름"
+        $0.text = "책 이름 cococoocoococoococoocococoocococoo"
     }
     
     var authorLabel: UILabel = UILabel().then {
@@ -102,6 +102,7 @@ class BookListTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
             $0.leading.equalTo(bookImageView.snp.trailing).offset(40)
+            $0.trailing.equalToSuperview().offset(-30)
         }
         
         authorLabel.snp.makeConstraints {
@@ -112,6 +113,7 @@ class BookListTableViewCell: UITableViewCell {
         publisherLabel.snp.makeConstraints {
             $0.centerY.equalTo(authorLabel)
             $0.leading.equalTo(authorLabel.snp.trailing).offset(5)
+            $0.trailing.equalToSuperview().offset(-30)
         }
         
         contentLabel.snp.makeConstraints {

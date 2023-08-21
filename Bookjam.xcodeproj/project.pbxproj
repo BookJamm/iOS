@@ -30,6 +30,7 @@
 		947ED6632A90DA970037FB38 /* PlaceIdBooks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */; };
 		947ED6652A90DCC10037FB38 /* PlaceIdActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */; };
 		947ED6672A9162DE0037FB38 /* PlaceIdReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6662A9162DE0037FB38 /* PlaceIdReviews.swift */; };
+		947ED6692A9394310037FB38 /* MainPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6682A9394310037FB38 /* MainPageInfoViewController.swift */; };
 		94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658F72A712FF300E7F183 /* MainPageVC.swift */; };
 		94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FD2A71653A00E7F183 /* LocationPageVC.swift */; };
 		94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659002A7165AB00E7F183 /* MyPageVC.swift */; };
@@ -160,6 +161,7 @@
 		947ED6622A90DA970037FB38 /* PlaceIdBooks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdBooks.swift; sourceTree = "<group>"; };
 		947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdActivities.swift; sourceTree = "<group>"; };
 		947ED6662A9162DE0037FB38 /* PlaceIdReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdReviews.swift; sourceTree = "<group>"; };
+		947ED6682A9394310037FB38 /* MainPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageInfoViewController.swift; sourceTree = "<group>"; };
 		94D658F72A712FF300E7F183 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		94D658FD2A71653A00E7F183 /* LocationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPageVC.swift; sourceTree = "<group>"; };
 		94D659002A7165AB00E7F183 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -328,6 +330,7 @@
 			children = (
 				94D658F72A712FF300E7F183 /* MainPageVC.swift */,
 				DDDBBF622A8107AA00B2C2C9 /* Cell */,
+				947ED6682A9394310037FB38 /* MainPageInfoViewController.swift */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -1083,6 +1086,7 @@
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				DD557D8C2A7DCA25003C762F /* Onboarding05BottomSheet.swift in Sources */,
 				DD4889412A6FB2C800F878C0 /* FriendInfoTableViewCell.swift in Sources */,
+				947ED6692A9394310037FB38 /* MainPageInfoViewController.swift in Sources */,
 				DDB0F2D32A8897E3005A8316 /* SearchPageVC.swift in Sources */,
 				DDC6EA9E2A61AA3000C4B127 /* Onboarding07VC.swift in Sources */,
 				DDB0F2CB2A8801D7005A8316 /* VisitReviewPhotoCollectionViewCell.swift in Sources */,

@@ -106,7 +106,7 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
 //        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].numOfReview))"
 //        cell.starValueLabel.text = String(activities[indexPath.row].starValue)
         
-        if let imageUrlString = activities[indexPath.row].image_url {
+        if let imageUrlString = activities[indexPath.row].imageUrl {
             if let imageUrl = URL(string: imageUrlString) {
                     DispatchQueue.global().async {
                         if let imageData = try? Data(contentsOf: imageUrl),
@@ -124,8 +124,8 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
         
         cell.descriptionLabel.text = activities[indexPath.row].info
         cell.activityLabel.text = activities[indexPath.row].title
-        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].review_count!))"
-        cell.starValueLabel.text = String(activities[indexPath.row].total_rating!)
+        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].reviewCount!))"
+        cell.starValueLabel.text = String(activities[indexPath.row].totalRating!)
 //        
         // 배경 회색으로 구현하고 cornerRadius 적용
         cell.contentView.backgroundColor = gray02

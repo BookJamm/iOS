@@ -21,16 +21,20 @@ class BookStoreDetailHomeView: UIView {
     var bookstoreName = String()
 
     // 대표 소식에 할당할 데이터 변수 News 타입으로 선언
-    var news = News(storePhoto: "", title: "", content: "", date: "", photo: "")
+    var news1 = News(storePhoto: "", title: "", content: "", date: "", photo: "")
+    var news: PlaceIdNewsResponseModel? = nil
     
     // 책 목록에 할당할 데이터 변수 Book 배열로 선언
-    var books = [Book]()
+    var books1 = [Book]()
+    var books: [PlaceIdBooksResponseModel]? = nil
     
     // 리뷰 목록에 들어갈 데이터 변수 Review 배열로 선언
-    var reviews = [Review]()
+    var reviews1 = [Review]()
+    var reviews: [PlaceIdReviewsResponseModel]? = nil
     
     // 독서 활동 참여 목록에 들어갈 데이터 변수 Activity 배열로 선언
-    var activities = [Activity]()
+    var activities1 = [Activity]()
+    var activities: [Activities]? = nil
     
     var contentView: UIView = UIView().then {
         $0.backgroundColor = gray02
@@ -171,39 +175,20 @@ class BookStoreDetailHomeView: UIView {
     // MARK: View
     
     func setUpView() {
-        // TODO: 데이터 받아올 부분
-        bookstoreName = "책방연희"
-        news.title = "<책방 연희> 7기 종강"
-        news.photo = "ChaekYeon"
-        news.content = "갑자기 억수가 퍼부었던 7월의 마지막 일요일인 오늘, 『나만의 엽서북 만들기』 with <책방 연희> 7기를 마무리했습니다."
-        news.date = "2023. 07. 22"
         
         // 소식 Section 업데이트
         newsLabel.text = "\(bookstoreName)의 소식"
-        newsTitle.text = news.title
-        newsContent.text = news.content
-        newsDate.text = news.date
-        newsPhoto.image = UIImage(named: news.photo)
+        newsTitle.text = news?.title
+        newsContent.text = news?.contents
+        newsDate.text = news?.createdAt
+        newsPhoto.image =  UIImage(named: "squareDefaultImage")
         
-        // newsContent 글자 수 일정 이상이면 2줄로 표시
-        if news.content.count >= 18 { newsContent.numberOfLines = 3 }
-        
-        // 책 목록 Section 업데이트
-        books.append(Book(title: "기후변화 시대의 사랑", author: "김기창", publisher: "민음사", content: "", photo: "chaekYeonBook1"))
-        books.append(Book(title: "돈과 나의 일", author: "이원지", publisher: "독립 출판물", content: "", photo: "chaekYeonBook2"))
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
-        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
-        
-        // 리뷰 목록 Section 업데이트
-        reviews.append(Review(userName: "짐깅", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine", ""]))
-        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 08", comment: "짱이예요", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-        
-        // 활동 목록 Section 업데이트
-        activities.append(Activity(photo: "ChaekYeonSix", name: "박정미 작가 북토크", starValue: 4.92, numOfReview: 265, description: "시골에 살아 본 적 없는 저자가 여행 가방 하나 들고 실골에 살러 간 이유와 7년 간 시골에 살며 책방을 운영하고 글을 쓰고 사진을 찍고 농사를 지으며 알게 된 것에 관한 이야기"))
-        
-        // 독서 활동 참여 목록 수 업데이트
-        bookActivityCountLabel.text = String(activities.count)
+        if let contents = news?.contents{
+            if contents.count >= 18{
+                newsContent.numberOfLines = 3
+            }
+        }
+                
     }
     
     
@@ -424,11 +409,11 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 책 목록 셀 수 초기화
         if collectionView == self.bookListCollectionView {
-            return books.count
+            return books?.count ?? 0
         }
         // 독서 활동 참여 목록 셀 수 초기화
         else if collectionView == self.bookActivityCollectionView {
-            return activities.count
+            return activities?.count ?? 0
         }
         return 5
     }
@@ -442,10 +427,26 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         if collectionView == self.bookListCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookListCollectionViewCell
             
-            cell.bookImageView.image = UIImage(named: books[indexPath.row].photo)
-            cell.titleLabel.text = books[indexPath.row].title
-            cell.authorLabel.text = books[indexPath.row].author
-            cell.publisherLabel.text = books[indexPath.row].publisher
+            cell.titleLabel.text = books![indexPath.row].title
+            cell.authorLabel.text = books![indexPath.row].author
+            cell.publisherLabel.text = books![indexPath.row].publisher
+                //api 수정되면 출판사 주석 풀기
+            
+            if let imageUrlString = books![indexPath.row].cover {
+                if let imageUrl = URL(string: imageUrlString) {
+                        
+                        DispatchQueue.global().async {
+                            if let imageData = try? Data(contentsOf: imageUrl),
+                               let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async {
+                                    cell.bookImageView.image = image
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    cell.bookImageView.image = UIImage(named: "squareDefaultImage")
+                }
             
             return cell
         }
@@ -453,9 +454,29 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         else if collectionView == self.bookActivityCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookActivityCollectionViewCell
             
-            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
-            cell.titleLabel.text = activities[indexPath.row].name
-            cell.ratingLabel.text = String(activities[indexPath.row].starValue)
+            
+            self.bookActivityCountLabel.text = String(activities?.count ?? 0)
+
+//            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
+            
+            if let imageUrlString = activities![indexPath.row].imageUrl {
+                if let imageUrl = URL(string: imageUrlString) {
+                        
+                        DispatchQueue.global().async {
+                            if let imageData = try? Data(contentsOf: imageUrl),
+                               let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async {
+                                    cell.activityImageView.image = image
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    cell.activityImageView.image = UIImage(named: "squareDefaultImage")
+                }
+            
+            cell.titleLabel.text = activities![indexPath.row].title
+            cell.ratingLabel.text = String(activities![indexPath.row].totalRating!)
             
             return cell
         }
@@ -471,21 +492,42 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
 // 리뷰 탭 밑에 들어갈 리뷰 목록 구현을 위한 Delegate, DataSource extension
 extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reviews.count
+        return reviews?.count ?? 0
     }
     
     // 리뷰 목록 데이터 삽입
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = reviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         
-        cell.userNameLabel.text = reviews[indexPath.row].userName
-        cell.userVisitDateLabel.text = reviews[indexPath.row].visitDate
-        cell.commentLabel.text = reviews[indexPath.row].comment
-        cell.firstImage.image = UIImage(named: reviews[indexPath.row].photos[0])
-        cell.secondImage.image = UIImage(named: reviews[indexPath.row].photos[1])
-        cell.thirdImage.image = UIImage(named: reviews[indexPath.row].photos[2])
-        cell.fourthImage.image = UIImage(named: reviews[indexPath.row].photos[3])
+        cell.userNameLabel.text = reviews![indexPath.row].author.username
+        cell.userVisitDateLabel.text = reviews![indexPath.row].visitedAt
+        cell.commentLabel.text = reviews![indexPath.row].contents
         
+        
+        let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]
+
+        if let images = reviews![indexPath.row].images {
+            for index in 0..<imageArray.count {
+                let imageView = imageArray[index]
+                
+                if index < images.count, let imageUrlString = images[index].url {
+                    if let imageUrl = URL(string: imageUrlString) {
+                        DispatchQueue.global().async {
+                            if let imageData = try? Data(contentsOf: imageUrl),
+                               let image = UIImage(data: imageData) {
+                                DispatchQueue.main.async {
+                                    imageView.image = image
+                                }
+                            }
+                        }
+                    } else {
+                        imageView.image = UIImage(named: "squareDefaultImage")
+                    }
+                } else {
+                    imageView.image = UIImage(named: "squareDefaultImage")
+                }
+            }
+        }
         return cell
     }
     
