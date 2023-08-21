@@ -32,6 +32,10 @@ class MyPageVC: UIViewController {
     
     var userProfileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "BasicProfile")
+        $0.contentMode = .scaleAspectFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 45
+        
     }
     
     var userNameLabel: UILabel = UILabel().then {
@@ -203,6 +207,7 @@ class MyPageVC: UIViewController {
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
                     self.activityFrameView.recordNumberLabel.text = "\(result.record_count!)"
                     self.activityFrameView.reviewNumberLabel.text = "\(result.review_count!)"
+                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile_image ?? ""), placeholder: UIImage(named: "BasicProfile"))
                     // TODO: 방문 수 더미로 두고 서버 연결되면 수정
                     self.activityFrameView.visitNumberLabel.text = "33"
                 }
