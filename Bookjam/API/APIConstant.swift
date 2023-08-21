@@ -41,5 +41,6 @@ struct Constant {
         return "/reviews/\(reviewId)/images"
     }
     static let getUsersOutline = "/users/outline"
+    static let getUsersActivities = "/users/activities"
 }
 

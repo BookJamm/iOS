@@ -204,9 +204,11 @@ class MyPageVC: UIViewController {
                     self.activityFrameView.reviewNumberLabel.text = "\(result.review_count!)"
                     // TODO: 방문 수 더미로 두고 서버 연결되면 수정
                     self.activityFrameView.visitNumberLabel.text = "33"
-                    
                 }
             }
+        
+        /// 리뷰 API 불러오기
+        
     }
     
     func setUpView() {
@@ -423,7 +425,7 @@ class MyPageVC: UIViewController {
             $0.height.equalTo(myReviewView)
         }
         likeActivityLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
         likeActivityMoreButton.snp.makeConstraints{
