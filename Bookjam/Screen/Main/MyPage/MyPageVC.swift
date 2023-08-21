@@ -221,9 +221,37 @@ class MyPageVC: UIViewController {
             requestDataType: UsersActivitiesRequestModel.self,
             parameter: nil) { response in
                 if let activities = response.result?.userActivities {
+                    /// 활동 참여 현황 업데이트
                     self.activities = activities
-                    
                     self.collectionView.reloadData()
+                    
+                    /// 좋아요한 활동 업데이트
+                    if activities.count == 0 {
+                        self.likeActivityBookStoreView.isHidden = true
+                        self.likeActivityBookStoreView2.isHidden = true
+                    }
+                    else if activities.count == 1 {
+                        self.likeActivityBookStoreView2.isHidden = true
+                        
+                        self.likeActivityBookStoreView.activityNameLabel.text = activities[0].title
+                        self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[0].review_count ?? 0)
+                    }
+                    else {
+                        self.likeActivityBookStoreView.activityNameLabel.text = activities[0].title
+                        self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[1].review_count ?? 0)
+                        
+                        self.likeActivityBookStoreView2.activityNameLabel.text = activities[1].title
+                        self.likeActivityBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: activities[1].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
+                        self.likeActivityBookStoreView2.bookStoreName.text = "서른책방"
+                        self.likeActivityBookStoreView2.starValueLabel.text = String(activities[1].review_count ?? 0)
+                    }
                 }
             }
         
