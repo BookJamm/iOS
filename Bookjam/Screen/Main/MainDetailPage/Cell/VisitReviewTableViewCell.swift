@@ -166,6 +166,7 @@ class VisitReviewTableViewCell: UITableViewCell {
         
         firstImage.snp.makeConstraints {
             $0.height.width.equalTo(commentLabel.snp.width).dividedBy(4).offset(-1)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         secondImage.snp.makeConstraints {

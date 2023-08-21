@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -35,6 +36,9 @@ class FeedPostPageVC: UIViewController {
     /// 장소 검색해 선택했을 때 전달되는 notification object를 통해 도로명 주소를 받아올 변수 선언
     var address: String = ""
     
+    /// 책 선택했을 때 전달되는 notification object를 통해 책 isbn 받아올 변수 선언
+    var isbn: Int = 0
+    
     /// 방문 날짜 업데이트를 위한 날짜 표시 포맷 선언
     let dateFormat = DateFormatter().then {
         $0.dateFormat = "yyyy / MM / dd"
@@ -42,7 +46,7 @@ class FeedPostPageVC: UIViewController {
     }
     
     /// 글 작성할 때 사진 추가하면 저장할 이미지 배열 선언
-    var images: [UIImage] = []
+    var images: [Data] = []
     
     var customNavigationView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -329,12 +333,14 @@ class FeedPostPageVC: UIViewController {
     var bookSearchResultNameLabel: UILabel = UILabel().then {
         $0.text = "책이름"
         $0.font = paragraph02
+        $0.numberOfLines = 3
     }
     
     var bookSearchResultAuthorLabel: UILabel = UILabel().then {
         $0.text = "작가"
         $0.font = captionText02
         $0.textColor = gray06
+        $0.numberOfLines = 3
     }
     
     var bookSearchResultPublisherLabel: UILabel = UILabel().then {
@@ -757,17 +763,20 @@ class FeedPostPageVC: UIViewController {
         bookSearchResultNameLabel.snp.makeConstraints {
             $0.top.equalTo(bookSearchResultImageView).offset(5)
             $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
         bookSearchResultAuthorLabel.snp.makeConstraints {
             $0.top.equalTo(bookSearchResultNameLabel.snp.bottom).offset(10)
             $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
-        bookSearchResultPublisherLabel.snp.makeConstraints {
-            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
-        }
+        // TODO: 서버 api 나오면 추후 연결
+//        bookSearchResultPublisherLabel.snp.makeConstraints {
+//            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
+//            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+//        }
         
         reviewContentView.snp.makeConstraints {
             $0.top.equalTo(bookView.snp.bottom).offset(10)
@@ -841,7 +850,7 @@ class FeedPostPageVC: UIViewController {
         }
         else {
             uploadButton.backgroundColor = gray03
-            uploadButton.isEnabled = false
+            uploadButton.isEnabled = true
         }
     }
     
@@ -1033,6 +1042,22 @@ class FeedPostPageVC: UIViewController {
         checkUploadPossible()
     }
     
+    /// 선택한 책 데이터 notification으로 받아와서 책 데이터 업데이트
+    @objc func bookDataUpdate(_ notification: Notification) {
+        print("책 선택 notification 수신")
+        
+        if let data = notification.object as? BooksListResponseModel {
+            bookSearchResultImageView.kf.setImage(with: URL(string: data.cover!), placeholder: UIImage(named: "emptyBook"))
+            bookSearchResultNameLabel.text = data.title
+            bookSearchResultAuthorLabel.text = data.author
+            isbn = Int(data.isbn!)!
+        }
+        
+        /// 업로드 버튼 활성화 가능한지 체크
+        isBookSelected = true
+        checkUploadPossible()
+    }
+    
     /// 작성 데이터 서버에 넘기고 화면 dismiss
     @objc func postData() {
         print("작성 완료 notification 수신")
@@ -1045,28 +1070,32 @@ class FeedPostPageVC: UIViewController {
         if secretPostToggleButton.isOn { isSecret = 1 }
         if allowCommentToggleButton.isOn { isCommentAllowed = 1 }
         
+        print(date)
         
-        
+        /// 리뷰 내용 게시 API 호출
         APIManager.shared.postData(
             urlEndpointString: Constant.postRecord,
             responseDataType: APIModel<RecordResponseModel>?.self,
             requestDataType: RecordRequestModel.self,
             parameter: RecordRequestModel(
-                // TODO: userID랑 place 번호 어떻게 알아내는지 물어보기
-                // TODO: 책 셀 구현하면 isbn API 연결해서 삽입
-                userId: 0,
-                place: 0,
-                isbn: 0,
+                isbn: isbn,
                 date: date,
                 emotions: 0,
                 activity: 0,
                 contents: content,
                 isNotPublic: isSecret,
                 commentNotAllowed: isCommentAllowed)) { response in
-                    print(response)
+                    if let recordID = response?.result?.recordId {
+                        APIManager.shared.postImage(
+                            urlEndpointString: Constant.postRecordsImages(recordId: recordID),
+                            responseDataType: APIModel<RecordImageResponseModel>?.self,
+                            images: self.images) { response in
+                                if response?.message == "성공" {
+                                    self.dismiss(animated: true)
+                                }
+                            }
+                    }
                 }
-        
-        self.dismiss(animated: true)
     }
     
     /// 업로드 버튼 누르면 정보 넘기고 화면 dismiss
@@ -1091,6 +1120,9 @@ class FeedPostPageVC: UIViewController {
         
         /// FeedPostPopUpVC에서 기록 작성을 완료했을 때 데이터를 서버에 post하고 화면을 dismiss하기 위한 notification 수신
         NotificationCenter.default.addObserver(self, selector: #selector(postData), name: NSNotification.Name("feedPostCheckButtonTapped"), object: nil)
+        
+        /// SearchBookPopUpVC에서 책 선택 완료했을 때 책 내용 업데이트를 위한 notification 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(bookDataUpdate(_:)), name: NSNotification.Name("didBookSearchCellTapped"), object: nil)
     }
 }
 
@@ -1105,7 +1137,7 @@ extension FeedPostPageVC: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VisitReviewPhotoCollectionViewCell.cellID, for: indexPath) as! VisitReviewPhotoCollectionViewCell
         
-        cell.photoImageView.image = images[indexPath.row]
+        cell.photoImageView.image = UIImage(data: images[indexPath.row])
         
         return cell
     }
@@ -1158,7 +1190,7 @@ extension FeedPostPageVC: UIImagePickerControllerDelegate, UINavigationControlle
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             /// 선택된 이미지를 images 배열에 추가해 화면에 표시되도록 구현
-            images.append(image)
+            images.append(image.jpegData(compressionQuality: 0.5)!)
             photoCollectionView.reloadData()
         }
         dismiss(animated: true, completion: nil)
