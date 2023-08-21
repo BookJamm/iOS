@@ -16,7 +16,7 @@ import SnapKit
 import Then
 
 
-class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
+class Onboarding05VC: UIViewController {
     
     // MARK: Variables
     
@@ -42,7 +42,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     
     let searchButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
-        $0.tintColor = UIColor(named: "MainColor")
+        $0.tintColor = main03
         $0.addTarget(self, action: #selector(didSearchButtonTapped), for: .touchUpInside)
     }
     
@@ -73,8 +73,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didFinishButtonTapped), for: .touchUpInside)
     }
-    
-    let floatingPanel: FloatingPanelController = FloatingPanelController()
 
     
     override func viewDidLoad() {
@@ -123,8 +121,6 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     // MARK: Delegate
     
     func setUpDelegate() {
-        floatingPanel.delegate = self
-        
         recommendTableView.dataSource = self
         recommendTableView.delegate = self
     }
@@ -203,11 +199,11 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
 //                }
             })
         
-        
-        floatingPanel.addPanel(toParent: self)
-        floatingPanel.set(contentViewController: Onboarding05BottomSheet())
-        floatingPanel.hide()
-        floatingPanel.show(animated: true)
+        let popUpView = RecommendFriendPopUpVC()
+        popUpView.view.backgroundColor = .black.withAlphaComponent(0.5)
+        popUpView.modalTransitionStyle = .crossDissolve
+        popUpView.modalPresentationStyle = .overFullScreen
+        self.present(popUpView, animated: true)
     }
     
     /// 완료하기 버튼 누르면 가입 완료 창으로 넘어가게 구현
