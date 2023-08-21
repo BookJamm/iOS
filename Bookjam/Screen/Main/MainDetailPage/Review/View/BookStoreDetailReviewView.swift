@@ -195,6 +195,9 @@ extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource 
                 }
             }
         }
+        
+        cell.selectionStyle = .none
+        
         return cell
     }
     

@@ -40,6 +40,11 @@ struct Constant {
     static func postReviewsImages(reviewId: Int) -> String {
         return "/reviews/\(reviewId)/images"
     }
-    
+    static func getBooksList(title: String) -> String {
+        return "/books/list?title=\(title)"
+    }
+    static func postRecordsImages(recordId: Int) -> String {
+        return "/records/\(recordId)/images"
+    }
 }
 

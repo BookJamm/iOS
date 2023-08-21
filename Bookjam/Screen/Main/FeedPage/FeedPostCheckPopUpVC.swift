@@ -19,7 +19,6 @@ class FeedPostCheckPopUpVC: UIViewController {
     /// 화면 여백을 클릭했을 때 팝업창 dismiss를 위한 view 선언
     var outsideView: UIView = UIView().then {
         $0.backgroundColor = .clear
-        $0.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(outsideViewTapped)))
     }
     
     var checkView: UIView = UIView().then {
@@ -132,19 +131,18 @@ class FeedPostCheckPopUpVC: UIViewController {
     
     /// 기록 작성을 완료하지 않을 경우 팝업 화면만 dismiss
     @objc func didContinueButtonTapped() {
+        print("완료 버튼 선택됨")
+        
         self.dismiss(animated: true)
     }
     
     /// 기록 작성을 완료할 경우 PostPage에서 데이터를 Post하고 화면을 dismiss하기 위한 notification을 전송하고 팝업 화면을 dismiss
     @objc func didDoneButtonTapped() {
+        print("완료 버튼 선택됨")
+        
         NotificationCenter.default.post(name: NSNotification.Name("feedPostCheckButtonTapped"), object: nil)
         
         self.dismiss(animated: true)
-    }
-    
-    /// 팝업 뷰를 제외한 나머지 바깥 부분을 클릭했을 때 화면 dismiss
-    @objc func outsideViewTapped() {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
