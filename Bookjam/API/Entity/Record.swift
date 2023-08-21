@@ -13,8 +13,7 @@ struct RecordResponseModel: Codable {
 }
 
 struct RecordRequestModel: Codable {
-    let userId: Int?
-    let place: Int?
+    // let place: Int?
     let isbn: Int?
     let date: String?
     let emotions: Int?
