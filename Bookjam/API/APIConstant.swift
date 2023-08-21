@@ -45,6 +45,7 @@ struct Constant {
     }
     static func postRecordsImages(recordId: Int) -> String {
         return "/records/\(recordId)/images"
+    }
     static let getUsersOutline = "/users/outline"
     static let getUsersActivities = "/users/activities"
     static let getUsersReviews = "/users/reviews"
