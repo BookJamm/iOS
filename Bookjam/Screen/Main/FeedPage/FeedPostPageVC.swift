@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -329,12 +330,14 @@ class FeedPostPageVC: UIViewController {
     var bookSearchResultNameLabel: UILabel = UILabel().then {
         $0.text = "책이름"
         $0.font = paragraph02
+        $0.numberOfLines = 3
     }
     
     var bookSearchResultAuthorLabel: UILabel = UILabel().then {
         $0.text = "작가"
         $0.font = captionText02
         $0.textColor = gray06
+        $0.numberOfLines = 3
     }
     
     var bookSearchResultPublisherLabel: UILabel = UILabel().then {
@@ -757,17 +760,20 @@ class FeedPostPageVC: UIViewController {
         bookSearchResultNameLabel.snp.makeConstraints {
             $0.top.equalTo(bookSearchResultImageView).offset(5)
             $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
         bookSearchResultAuthorLabel.snp.makeConstraints {
             $0.top.equalTo(bookSearchResultNameLabel.snp.bottom).offset(10)
             $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
-        bookSearchResultPublisherLabel.snp.makeConstraints {
-            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
-            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
-        }
+        // TODO: 서버 api 나오면 추후 연결
+//        bookSearchResultPublisherLabel.snp.makeConstraints {
+//            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
+//            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+//        }
         
         reviewContentView.snp.makeConstraints {
             $0.top.equalTo(bookView.snp.bottom).offset(10)
@@ -841,7 +847,7 @@ class FeedPostPageVC: UIViewController {
         }
         else {
             uploadButton.backgroundColor = gray03
-            uploadButton.isEnabled = false
+            uploadButton.isEnabled = true
         }
     }
     
@@ -1033,6 +1039,21 @@ class FeedPostPageVC: UIViewController {
         checkUploadPossible()
     }
     
+    /// 선택한 책 데이터 notification으로 받아와서 책 데이터 업데이트
+    @objc func bookDataUpdate(_ notification: Notification) {
+        print("책 선택 notification 수신")
+        
+        if let data = notification.object as? BooksListResponseModel {
+            bookSearchResultImageView.kf.setImage(with: URL(string: data.cover!), placeholder: UIImage(named: "emptyBook"))
+            bookSearchResultNameLabel.text = data.title
+            bookSearchResultAuthorLabel.text = data.author
+        }
+        
+        /// 업로드 버튼 활성화 가능한지 체크
+        isBookSelected = true
+        checkUploadPossible()
+    }
+    
     /// 작성 데이터 서버에 넘기고 화면 dismiss
     @objc func postData() {
         print("작성 완료 notification 수신")
@@ -1089,6 +1110,9 @@ class FeedPostPageVC: UIViewController {
         
         /// FeedPostPopUpVC에서 기록 작성을 완료했을 때 데이터를 서버에 post하고 화면을 dismiss하기 위한 notification 수신
         NotificationCenter.default.addObserver(self, selector: #selector(postData), name: NSNotification.Name("feedPostCheckButtonTapped"), object: nil)
+        
+        /// SearchBookPopUpVC에서 책 선택 완료했을 때 책 내용 업데이트를 위한 notification 수신
+        NotificationCenter.default.addObserver(self, selector: #selector(bookDataUpdate(_:)), name: NSNotification.Name("didBookSearchCellTapped"), object: nil)
     }
 }
 
