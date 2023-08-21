@@ -213,6 +213,48 @@ class MyPageVC: UIViewController {
                 }
             }
         
+        /// 기록 API 불러오기
+        /// 일단 데모데이 전까지는 카테고리 0으로 고정
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersRecords(category: 0),
+            responseDataType: APIModel<[UsersRecordsResponseModel]>.self,
+            requestDataType: UsersRecordsRequestModel.self,
+            parameter: nil) { response in
+                if let records = response.result {
+                    if records.count == 0 {
+                        self.myRecordBookStoreView.isHidden = true
+                        self.myRecordBookStoreView2.isHidden = true
+                    }
+                    else if records.count == 1 {
+                        self.myRecordBookStoreView2.isHidden = true
+                        
+                        let date = records[0].date!.components(separatedBy: "T")[0]
+                        
+                        self.myRecordBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: records[0].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView.bookStoreName.text = records[0].name
+                        self.myRecordBookStoreView.speechBubbleLabel.text = String(records[0].comment_count ?? 0)
+                        self.myRecordBookStoreView.heartLabel.text = String(records[0].like_count ?? 0)
+                        self.myRecordBookStoreView.visitDayLabel.text = "\(date) 방문"
+                    }
+                    else {
+                        let firstDate = records[0].date!.components(separatedBy: "T")[0]
+                        let secondDate = records[1].date!.components(separatedBy: "T")[0]
+                        
+                        self.myRecordBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: records[0].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView.bookStoreName.text = records[0].name
+                        self.myRecordBookStoreView.speechBubbleLabel.text = String(records[0].comment_count ?? 0)
+                        self.myRecordBookStoreView.heartLabel.text = String(records[0].like_count ?? 0)
+                        self.myRecordBookStoreView.visitDayLabel.text = "\(firstDate) 방문"
+                        
+                        self.myRecordBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: records[1].images_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        self.myRecordBookStoreView2.bookStoreName.text = records[1].name
+                        self.myRecordBookStoreView2.speechBubbleLabel.text = String(records[1].comment_count ?? 0)
+                        self.myRecordBookStoreView2.heartLabel.text = String(records[1].like_count ?? 0)
+                        self.myRecordBookStoreView2.visitDayLabel.text = "\(secondDate) 방문"
+                    }
+                }
+            }
+        
         /// 리뷰 API 불러오기
         APIManager.shared.getData(
             urlEndpointString: Constant.getUsersReviews,

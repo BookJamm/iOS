@@ -43,5 +43,8 @@ struct Constant {
     static let getUsersOutline = "/users/outline"
     static let getUsersActivities = "/users/activities"
     static let getUsersReviews = "/users/reviews"
+    static func getUsersRecords(category: Int) -> String {
+        return "/users/records?category=\(category)"
+    }
 }
 
