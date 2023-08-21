@@ -21,7 +21,7 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     // MARK: Variables
     
     /// 추천 친구 api로 불러온 친구 정보 할당할 변수 선언
-    var recommendFriends = [RecommendFriend]()
+    var recommendFriends = [RecommendFriendResponseModel]()
     
     let informationLabel: UILabel = UILabel().then {
         $0.textColor = .black
@@ -224,10 +224,10 @@ class Onboarding05VC: UIViewController, FloatingPanelControllerDelegate {
     func callRecommendFriendData() {
         APIManager.shared.getData(
             urlEndpointString: Constant.getAuthFriends,
-            responseDataType: APIModel<RecommendFriendResponseModel>?.self,
+            responseDataType: APIModel<[RecommendFriendResponseModel]>?.self,
             requestDataType: RecommendFriendRequestModel.self,
             parameter: nil) { response in
-                self.recommendFriends = response!.result!.recommendFriends
+                self.recommendFriends = response!.result ?? []
                 
                 self.recommendTableView.reloadData()
             }
@@ -247,7 +247,7 @@ extension Onboarding05VC: UITableViewDelegate, UITableViewDataSource {
         
         cell.nicknameLabel.text = recommendFriends[indexPath.row].username!
         cell.profileImageView.kf.setImage(
-            with: URL(string: recommendFriends[indexPath.row].profile_image ?? "https://github.com/BookJamm/FE/assets/80394340/8a24f8d8-77e4-47da-b171-9dd272bf4530"),
+            with: URL(string: recommendFriends[indexPath.row].profileImage ?? "https://github.com/BookJamm/FE/assets/80394340/8a24f8d8-77e4-47da-b171-9dd272bf4530"),
             placeholder: nil,
             options: [.transition(.fade(0.5))],
             progressBlock: nil)

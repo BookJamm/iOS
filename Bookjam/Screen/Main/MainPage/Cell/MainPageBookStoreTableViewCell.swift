@@ -29,6 +29,12 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        photosCollectionView.reloadData()
+    }
+    
     
     // MARK: Variable
     
@@ -78,7 +84,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }
     
-    lazy var photosCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+    var photosCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 5
         $0.minimumInteritemSpacing = 5
@@ -184,14 +190,7 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
                     cell.photoImageView.image = UIImage(named: "squareDefaultImage")
                 } else {
                     // 이미지 데이터가 있을 경우 해당 이미지 설정
-                    if let imageUrlString = images[indexPath.row].url,
-                       let imageUrl = URL(string: imageUrlString),
-                       let imageData = try? Data(contentsOf: imageUrl),
-                       let image = UIImage(data: imageData) {
-                        cell.photoImageView.image = image
-                    } else {
-                        cell.photoImageView.image = UIImage(named: "squareDefaultImage")
-                    }
+                    cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row].url!), placeholder: UIImage(named: "squareDefaultImage"))
                 }
                 
                 cell.photoImageView.layer.cornerRadius = 8

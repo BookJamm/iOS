@@ -74,7 +74,6 @@ class TabBarController: UITabBarController {
             feedVC,
             mypageVC
         ].forEach {
-            $0.title = ""
             $0.navigationItem.leftBarButtonItem = titleButton
             $0.navigationItem.leftBarButtonItem?.tintColor = main03
             $0.navigationItem.setRightBarButtonItems([alertButton, settingButton], animated: true)
