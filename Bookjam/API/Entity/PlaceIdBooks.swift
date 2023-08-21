@@ -13,4 +13,5 @@ struct PlaceIdBooksResponseModel: Codable {
     let cover: String?  //이미지
     let description: String?
     let isbn: String?
+    let publisher: String?
 }

@@ -435,8 +435,9 @@ class BookstoreDetailPageVC: UIViewController {
             ].forEach { $0.isHidden = true }
             
             contentView.snp.removeConstraints()
-
-            setUpContentviewConstraint(height: 2000)
+            
+            let homeViewHeight = 1000 + reviewView.reviews.count * 300
+            setUpContentviewConstraint(height: homeViewHeight)
             
         }
         /// 소식 탭
@@ -589,6 +590,7 @@ class BookstoreDetailPageVC: UIViewController {
                     self.newsView.newsTableView.reloadData()
                     
                     self.homeView.news = result.first   //홈뷰의 뉴스를 뉴스 리스트의 첫번째로 지정
+                    self.homeView.setUpView()
                 }
             })
     }
@@ -637,7 +639,7 @@ class BookstoreDetailPageVC: UIViewController {
             responseDataType: APIModel<[PlaceIdReviewsResponseModel]>?.self,
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
-            completionHandler: { response in
+            completionHandler: {  response in
                 print(response)
                 if let result = response?.result {
                     self.reviewView.reviews = result
@@ -646,14 +648,15 @@ class BookstoreDetailPageVC: UIViewController {
                     
                     self.homeView.reviews = result  //홈뷰의 reviews 초기화
                     self.homeView.reviewTableView.reloadData()
+                    
+                    self.contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
+                    
+                    let homeViewHeight = 1000 + self.reviewView.reviews.count * 300
+                    self.setUpContentviewConstraint(height: homeViewHeight)
+                    
                 }
             })
     }
-    
-    func setUpHomeView(){
-        
-    }
-    
     
     // MARK: Notification
     
@@ -712,10 +715,10 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-//struct BookstoreDetailPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        BookstoreDetailPageVC().toPreview()
-//            .previewLayout(.sizeThatFits)
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct BookstoreDetailPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        BookstoreDetailPageVC().toPreview()
+            .previewLayout(.sizeThatFits)
+            // .edgesIgnoringSafeArea(.all)
+    }
+}

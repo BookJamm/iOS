@@ -95,7 +95,8 @@ extension BookStoreDetailBookListView: UITableViewDelegate, UITableViewDataSourc
         
         cell.titleLabel.text = bookList[indexPath.row].title
         cell.authorLabel.text = bookList[indexPath.row].author
-//        cell.publisherLabel.text = bookList[indexPath.row].
+        cell.publisherLabel.text = bookList[indexPath.row].publisher
+        
         if let imageUrlString = bookList[indexPath.row].cover {
             if let imageUrl = URL(string: imageUrlString) {
                     

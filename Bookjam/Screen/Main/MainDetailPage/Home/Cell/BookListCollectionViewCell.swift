@@ -93,6 +93,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(bookImageView.snp.bottom).offset(25)
             $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview()
         }
         
         authorLabel.snp.makeConstraints {
@@ -103,6 +104,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
         publisherLabel.snp.makeConstraints {
             $0.top.equalTo(authorLabel.snp.top)
             $0.leading.equalTo(authorLabel.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview()
         }
     }
 }

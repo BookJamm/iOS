@@ -175,13 +175,6 @@ class BookStoreDetailHomeView: UIView {
     // MARK: View
     
     func setUpView() {
-        // TODO: 데이터 받아올 부분
-//        bookstoreName = "책방연희"
-//
-//        news.title = "<책방 연희> 7기 종강"
-//        news.photo = "ChaekYeon"
-//        news.content = "갑자기 억수가 퍼부었던 7월의 마지막 일요일인 오늘, 『나만의 엽서북 만들기』 with <책방 연희> 7기를 마무리했습니다."
-//        news.date = "2023. 07. 22"
         
         // 소식 Section 업데이트
         newsLabel.text = "\(bookstoreName)의 소식"
@@ -190,31 +183,12 @@ class BookStoreDetailHomeView: UIView {
         newsDate.text = news?.createdAt
         newsPhoto.image =  UIImage(named: "squareDefaultImage")
         
-        // newsContent 글자 수 일정 이상이면 2줄로 표시
-//        if (news?.contents!.count)! >= 18 { newsContent.numberOfLines = 3 }
-        
         if let contents = news?.contents{
             if contents.count >= 18{
                 newsContent.numberOfLines = 3
             }
         }
-        
-        // 책 목록 Section 업데이트
-//        books.append(Book(title: "기후변화 시대의 사랑", author: "김기창", publisher: "민음사", content: "", photo: "chaekYeonBook1"))
-//        books.append(Book(title: "돈과 나의 일", author: "이원지", publisher: "독립 출판물", content: "", photo: "chaekYeonBook2"))
-//        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
-//        books.append(Book(title: "우리는 중독을 사랑해", author: "도우리", publisher: "한겨레 출판사", content: "", photo: "tempBookImage"))
-//
-//        // 리뷰 목록 Section 업데이트
-//        reviews.append(Review(userName: "짐깅", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["ChaekYeonSeven", "ChaekYeonEight", "ChaekYeonNine", ""]))
-//        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 08", comment: "짱이예요", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-//        reviews.append(Review(userName: "유짐", visitDate: "2023. 08. 06", comment: "너무 재밌고 좋았어요!", photos: ["squareDefaultImage", "squareDefaultImage", "squareDefaultImage", "squareDefaultImage"]))
-//
-//        // 활동 목록 Section 업데이트
-//        activities.append(Activity(photo: "ChaekYeonSix", name: "박정미 작가 북토크", starValue: 4.92, numOfReview: 265, description: "시골에 살아 본 적 없는 저자가 여행 가방 하나 들고 실골에 살러 간 이유와 7년 간 시골에 살며 책방을 운영하고 글을 쓰고 사진을 찍고 농사를 지으며 알게 된 것에 관한 이야기"))
-//
-//        // 독서 활동 참여 목록 수 업데이트
-//        bookActivityCountLabel.text = String(activities.count)
+                
     }
     
     
@@ -453,10 +427,9 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         if collectionView == self.bookListCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookListCollectionViewCell
             
-//            cell.bookImageView.image = UIImage(named: books[indexPath.row].photo)
             cell.titleLabel.text = books![indexPath.row].title
             cell.authorLabel.text = books![indexPath.row].author
-//            cell.publisherLabel.text = books![indexPath.row].publisher
+            cell.publisherLabel.text = books![indexPath.row].publisher
                 //api 수정되면 출판사 주석 풀기
             
             if let imageUrlString = books![indexPath.row].cover {
@@ -481,9 +454,12 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         else if collectionView == self.bookActivityCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookActivityCollectionViewCell
             
+            
+            self.bookActivityCountLabel.text = String(activities?.count ?? 0)
+
 //            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
             
-            if let imageUrlString = activities![indexPath.row].image_url {
+            if let imageUrlString = activities![indexPath.row].imageUrl {
                 if let imageUrl = URL(string: imageUrlString) {
                         
                         DispatchQueue.global().async {
@@ -500,7 +476,7 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
                 }
             
             cell.titleLabel.text = activities![indexPath.row].title
-            cell.ratingLabel.text = String(activities![indexPath.row].total_rating!)
+            cell.ratingLabel.text = String(activities![indexPath.row].totalRating!)
             
             return cell
         }
@@ -552,12 +528,6 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
-//        cell.firstImage.image = UIImage(named: reviews[indexPath.row].photos[0])
-//        cell.secondImage.image = UIImage(named: reviews[indexPath.row].photos[1])
-//        cell.thirdImage.image = UIImage(named: reviews[indexPath.row].photos[2])
-//        cell.fourthImage.image = UIImage(named: reviews[indexPath.row].photos[3])
-        
         return cell
     }
     
