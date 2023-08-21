@@ -180,6 +180,7 @@ class MyPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpAPI()
         setUpView()
         setUpLayout()
         setUpConstraint()
@@ -189,9 +190,27 @@ class MyPageVC: UIViewController {
 
     // MARK: View
     
+    func setUpAPI() {
+        /// 마이페이지 정보 요약 API 불러오기
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersOutline,
+            responseDataType: APIModel<UsersOutlineResponseModel>?.self,
+            requestDataType: UsersOutlineRequestModel.self,
+            parameter: nil) { response in
+                if let result = response?.result?.userOutline?[0] {
+                    self.userNameLabel.text = "\(result.username!)님"
+                    self.userActivityLabel.text = "\(result.username!)님의 활동"
+                    self.activityFrameView.recordNumberLabel.text = "\(result.record_count!)"
+                    self.activityFrameView.reviewNumberLabel.text = "\(result.review_count!)"
+                    // TODO: 방문 수 더미로 두고 서버 연결되면 수정
+                    self.activityFrameView.visitNumberLabel.text = "33"
+                    
+                }
+            }
+    }
+    
     func setUpView() {
         view.backgroundColor = .white
-        
     }
     
     
@@ -235,17 +254,17 @@ class MyPageVC: UIViewController {
         ].forEach{ myRecordView.addSubview($0) }
         
         [
-        myReviewLabel,
-        myReviewMoreButton,
-        myReviewBookStoreView,
-        myReviewBookStoreView2
+            myReviewLabel,
+            myReviewMoreButton,
+            myReviewBookStoreView,
+            myReviewBookStoreView2
         ].forEach{ myReviewView.addSubview($0) }
         
         [
-        likeActivityLabel,
-        likeActivityMoreButton,
-        likeActivityBookStoreView,
-        likeActivityBookStoreView2
+            likeActivityLabel,
+            likeActivityMoreButton,
+            likeActivityBookStoreView,
+            likeActivityBookStoreView2
         ].forEach{ likeActivityView.addSubview($0) }
     }
     

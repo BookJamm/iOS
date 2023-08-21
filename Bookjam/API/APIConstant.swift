@@ -40,6 +40,6 @@ struct Constant {
     static func postReviewsImages(reviewId: Int) -> String {
         return "/reviews/\(reviewId)/images"
     }
-    
+    static let getUsersOutline = "/users/outline"
 }
 
