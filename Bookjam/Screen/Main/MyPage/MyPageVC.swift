@@ -19,6 +19,10 @@ class MyPageVC: UIViewController {
 
     // MARK: Variables
     
+    /// 설정 페이지에 넘길 유저 이름/프로필 사진 받아오는 변수 선언
+    var userName = ""
+    var userProfileURL = ""
+    
     var activities = [UserActivities]()
 
     var scrollView: UIScrollView = UIScrollView().then {
@@ -205,6 +209,10 @@ class MyPageVC: UIViewController {
             requestDataType: UsersOutlineRequestModel.self,
             parameter: nil) { response in
                 if let result = response?.result?.userOutline {
+                    self.userName = result.username!
+                    self.userProfileURL = result.profile ?? ""
+                    
+                    /// 화면에 데이터 할당
                     self.userNameLabel.text = "\(result.username!)님"
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
                     self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
@@ -578,8 +586,12 @@ class MyPageVC: UIViewController {
     }//end of constraint
     
     // MARK: Function
-    //  마이페이지 설정 눌렀을 때 UserPageVC로 전환
+    ///  마이페이지 설정 눌렀을 때 UserPageVC로 전환
     @objc func didMyPageSetUpButtonTapped() {
+        var userPageVC = UserPageVC()
+        userPageVC.userNameLabel.text = self.userName
+        userPageVC.userProfileImageView.kf.setImage(with: URL(string: self.userProfileURL), placeholder: UIImage(named: "BasicProfile"))
+        
         navigationController?.pushViewController(UserPageVC(), animated: true)
     }
     
