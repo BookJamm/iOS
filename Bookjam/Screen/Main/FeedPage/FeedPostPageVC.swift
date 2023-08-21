@@ -1090,12 +1090,12 @@ class FeedPostPageVC: UIViewController {
                             urlEndpointString: Constant.postRecordsImages(recordId: recordID),
                             responseDataType: APIModel<RecordImageResponseModel>?.self,
                             images: self.images) { response in
-                                print(response)
+                                if response?.message == "성공" {
+                                    self.dismiss(animated: true)
+                                }
                             }
                     }
                 }
-        
-        self.dismiss(animated: true)
     }
     
     /// 업로드 버튼 누르면 정보 넘기고 화면 dismiss
