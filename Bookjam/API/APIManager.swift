@@ -39,9 +39,8 @@ extension APIManager {
         
         guard let url = URL(string: Constant.baseURL + urlEndpointString) else { return }
         print("get 요청 URL --> \(url)")
+        print("Request 쿼리 --> \(parameter)")
 
-        print("Request 쿼리 : \(parameter)")
-        
         AF
             .request(url, method: .get, parameters: parameter, headers: self.headers)
             .responseDecodable(of: U.self) { response in
@@ -117,6 +116,8 @@ extension APIManager {
         
         guard let url = URL(string: Constant.baseURL + urlEndpointString) else { return }
         print("patch 요청 URL --> \(url)")
+        print("Request 쿼리 --> \(parameter)")
+        
         AF
             .request(url, method: .patch, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: U.self) { response in
@@ -139,6 +140,8 @@ extension APIManager {
         
         guard let url = URL(string: Constant.baseURL + urlEndpointString) else { return }
         print("patch 요청 URL --> \(url)")
+        print("Request 쿼리 --> \(parameter)")
+        
         AF
             .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: U.self) { response in
