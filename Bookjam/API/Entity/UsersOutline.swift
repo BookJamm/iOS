@@ -8,15 +8,16 @@
 import Foundation
 
 struct UsersOutlineResponseModel: Codable {
-    let userOutline: [UserOutline]?
+    let userOutline: UserOutline?
 }
 
 struct UserOutline: Codable {
-    let user_id: Int?
-    let profile_image: String?
+    let userId: Int?
+    let profile: String?
     let username: String?
-    let review_count: Int?
-    let record_count: Int?
+    let review: Int?
+    let reserve: Int?
+    let record: Int?
 }
 
 struct UsersOutlineRequestModel: Codable {

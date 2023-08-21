@@ -202,16 +202,17 @@ class MyPageVC: UIViewController {
             responseDataType: APIModel<UsersOutlineResponseModel>?.self,
             requestDataType: UsersOutlineRequestModel.self,
             parameter: nil) { response in
-                if let result = response?.result?.userOutline?[0] {
+                if let result = response?.result?.userOutline {
                     self.userNameLabel.text = "\(result.username!)님"
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
-                    self.activityFrameView.recordNumberLabel.text = "\(result.record_count!)"
-                    self.activityFrameView.reviewNumberLabel.text = "\(result.review_count!)"
-                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile_image ?? ""), placeholder: UIImage(named: "BasicProfile"))
-                    // TODO: 방문 수 더미로 두고 서버 연결되면 수정
-                    self.activityFrameView.visitNumberLabel.text = "33"
+                    self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
+                    self.activityFrameView.reviewNumberLabel.text = "\(result.review!)"
+                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile ?? ""), placeholder: UIImage(named: "BasicProfile"))
+                    self.activityFrameView.visitNumberLabel.text = "\(result.reserve!)"
                 }
             }
+        
+        /// 활동 API 불러오기
         
         /// 기록 API 불러오기
         /// 일단 데모데이 전까지는 카테고리 0으로 고정
