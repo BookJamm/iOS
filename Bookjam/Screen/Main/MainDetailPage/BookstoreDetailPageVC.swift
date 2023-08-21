@@ -435,8 +435,9 @@ class BookstoreDetailPageVC: UIViewController {
             ].forEach { $0.isHidden = true }
             
             contentView.snp.removeConstraints()
-
-            setUpContentviewConstraint(height: 2000)
+            
+            let homeViewHeight = 1000 + reviewView.reviews.count * 300
+            setUpContentviewConstraint(height: homeViewHeight)
             
         }
         /// 소식 탭
@@ -543,6 +544,7 @@ class BookstoreDetailPageVC: UIViewController {
             
             bookstoreLabel.text = bookStoreDetail.name
             newsView.bookStoreName = bookStoreDetail.name!
+            homeView.bookstoreName = bookStoreDetail.name!
             
             switch bookStoreDetail.category{//카테고리에 따른 카테고리 이미지, label 설정.
             case 0:
@@ -584,9 +586,11 @@ class BookstoreDetailPageVC: UIViewController {
             completionHandler: { response in
                 print(response)
                 if let result = response?.result {
-
                     self.newsView.newsList = result
                     self.newsView.newsTableView.reloadData()
+                    
+                    self.homeView.news = result.first   //홈뷰의 뉴스를 뉴스 리스트의 첫번째로 지정
+                    self.homeView.setUpView()
                 }
             })
     }
@@ -604,6 +608,9 @@ class BookstoreDetailPageVC: UIViewController {
                 if let result = response?.result {
                     self.bookListView.bookList = result
                     self.bookListView.bookListTableView.reloadData()
+                    
+                    self.homeView.books = result    // 홈뷰의 books 초기화
+                    self.homeView.bookListCollectionView.reloadData()
                 }
             })
     }
@@ -619,6 +626,9 @@ class BookstoreDetailPageVC: UIViewController {
                 if let result = response?.result {
                     self.activityView.activities = result.result
                     self.activityView.activityTableView.reloadData()
+                    
+                    self.homeView.activities = result.result    //홈뷰의 activities 초기화
+                    self.homeView.bookActivityCollectionView.reloadData()
                 }
             })
     }
@@ -629,16 +639,24 @@ class BookstoreDetailPageVC: UIViewController {
             responseDataType: APIModel<[PlaceIdReviewsResponseModel]>?.self,
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
-            completionHandler: { response in
+            completionHandler: {  response in
                 print(response)
                 if let result = response?.result {
                     self.reviewView.reviews = result
                     self.reviewView.setUpConstraint()
                     self.reviewView.visitReviewTableView.reloadData()
+                    
+                    self.homeView.reviews = result  //홈뷰의 reviews 초기화
+                    self.homeView.reviewTableView.reloadData()
+                    
+                    self.contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
+                    
+                    let homeViewHeight = 1000 + self.reviewView.reviews.count * 300
+                    self.setUpContentviewConstraint(height: homeViewHeight)
+                    
                 }
             })
     }
-    
     
     // MARK: Notification
     
@@ -702,14 +720,5 @@ struct BookstoreDetailPageVC_Preview: PreviewProvider {
         BookstoreDetailPageVC().toPreview()
             .previewLayout(.sizeThatFits)
             // .edgesIgnoringSafeArea(.all)
-    }
-}
-
-// url string을 이미지로 바꿔주는 함수. 임시로 여기에 설정
-func imageFromURLString(_ urlString: String) -> UIImage {
-    if let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-        return image
-    } else {
-        return UIImage(named: "squareDefaultImage")!
     }
 }
