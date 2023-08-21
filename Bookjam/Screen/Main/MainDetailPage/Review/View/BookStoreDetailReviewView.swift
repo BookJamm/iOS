@@ -130,7 +130,7 @@ class BookStoreDetailReviewView: UIView {
         visitReviewView.snp.makeConstraints {
             $0.top.equalTo(writeReviewView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(2 * 500 + 20)
+            $0.height.equalTo(3000)
         }
         
         visitReviewLabel.snp.makeConstraints {

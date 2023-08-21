@@ -135,6 +135,8 @@ extension BookStoreDetailNewsView: UITableViewDelegate, UITableViewDataSource {
         cell.newsContent.text = newsList[indexPath.row].contents
         cell.newsDate.text = newsList[indexPath.row].createdAt
         
+        cell.selectionStyle = .none
+
         return cell
     }
     
@@ -145,6 +147,8 @@ extension BookStoreDetailNewsView: UITableViewDelegate, UITableViewDataSource {
         else if newsList[indexPath.row].contents!.count >= 30 && newsList[indexPath.row].contents!.count < 36 { return 170 }
         else { return 170 }
     }
+    
+    
 }
 
 #if DEBUG
