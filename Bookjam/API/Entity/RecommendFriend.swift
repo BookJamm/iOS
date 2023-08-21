@@ -12,10 +12,6 @@ struct RecommendFriendRequestModel: Codable {
 }
 
 struct RecommendFriendResponseModel: Codable {
-    let recommendFriends: [RecommendFriend]
-}
-
-struct RecommendFriend: Codable {
-    let user_id: Int?
-    let name, email, username, profile_image: String?
+    let userId: Int?
+    let name, email, username, profileImage: String?
 }
