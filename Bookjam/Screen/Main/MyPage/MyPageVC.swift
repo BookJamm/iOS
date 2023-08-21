@@ -10,6 +10,7 @@
 import SwiftUI
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -208,7 +209,48 @@ class MyPageVC: UIViewController {
             }
         
         /// 리뷰 API 불러오기
-        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getUsersReviews,
+            responseDataType: APIModel<UsersReviewsResponseModel>?.self,
+            requestDataType: UsersReviewsRequestModel.self,
+            parameter: nil) { response in
+                if let reviews = response?.result?.userReviews  {
+                    if reviews.count == 0 {
+                        self.myReviewBookStoreView.isHidden = true
+                        self.myReviewBookStoreView2.isHidden = true
+                    }
+                    else if reviews.count == 1 {
+                        self.myReviewBookStoreView2.isHidden = true
+                        
+                        let date = reviews[0].visited_at!.components(separatedBy: "T")[0]
+                        
+                        self.myReviewBookStoreView.bookStoreName.text = reviews[0].name
+                        self.myReviewBookStoreView.bookNameButton.setTitle("아몬드", for: .normal)
+                        self.myReviewBookStoreView.speechBubbleLabel.text = "2"
+                        self.myReviewBookStoreView.heartLabel.text = "3"
+                        self.myReviewBookStoreView.visitDayLabel.text = "\(date) 방문"
+                        self.myReviewBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: reviews[0].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
+                    }
+                    else {
+                        let firstDate = reviews[0].visited_at!.components(separatedBy: "T")[0]
+                        let secondDate = reviews[1].visited_at!.components(separatedBy: "T")[0]
+                        
+                        self.myReviewBookStoreView.bookStoreName.text = reviews[0].name
+                        self.myReviewBookStoreView.bookNameButton.setTitle("아몬드", for: .normal)
+                        self.myReviewBookStoreView.speechBubbleLabel.text = "2"
+                        self.myReviewBookStoreView.heartLabel.text = "3"
+                        self.myReviewBookStoreView.visitDayLabel.text = "\(firstDate) 방문"
+                        self.myReviewBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: reviews[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                        
+                        self.myReviewBookStoreView2.bookStoreName.text = reviews[1].name
+                        self.myReviewBookStoreView2.bookNameButton.setTitle("불편한 편의점", for: .normal)
+                        self.myReviewBookStoreView2.speechBubbleLabel.text = "4"
+                        self.myReviewBookStoreView2.heartLabel.text = "2"
+                        self.myReviewBookStoreView2.visitDayLabel.text = "\(secondDate) 방문"
+                        self.myReviewBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: reviews[1].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                    }
+                }
+            }
     }
     
     func setUpView() {

@@ -42,5 +42,6 @@ struct Constant {
     }
     static let getUsersOutline = "/users/outline"
     static let getUsersActivities = "/users/activities"
+    static let getUsersReviews = "/users/reviews"
 }
 
