@@ -114,6 +114,7 @@
 		DDD74A9A2A8C1F1B008C999F /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD74A992A8C1F1B008C999F /* Record.swift */; };
 		DDDBBF632A811CF500B2C2C9 /* BookStoreDetailActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */; };
 		DDDD436C2A5AD5140093CBD1 /* Onboarding01VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */; };
+		DDE516E52A9486E40023C70C /* RecordFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE516E42A9486E40023C70C /* RecordFriend.swift */; };
 		DDE964252A639D5E00AEF810 /* Onboarding05VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */; };
 		DDF844802A765A610035D112 /* BookStoreDetailBookListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF8447F2A765A610035D112 /* BookStoreDetailBookListView.swift */; };
 		DDFFD9E32A7F66280095F76A /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFFD9E22A7F66280095F76A /* BookActivityCollectionViewCell.swift */; };
@@ -252,6 +253,7 @@
 		DDD74A972A8C1814008C999F /* FeedPostCheckPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPostCheckPopUpVC.swift; sourceTree = "<group>"; };
 		DDD74A992A8C1F1B008C999F /* Record.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		DDDD436B2A5AD5140093CBD1 /* Onboarding01VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding01VC.swift; sourceTree = "<group>"; };
+		DDE516E42A9486E40023C70C /* RecordFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordFriend.swift; sourceTree = "<group>"; };
 		DDE964242A639D5E00AEF810 /* Onboarding05VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding05VC.swift; sourceTree = "<group>"; };
 		DDF844792A7659FA0035D112 /* BookStoreDetailNewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailNewsView.swift; sourceTree = "<group>"; };
 		DDF8447B2A765A320035D112 /* BookStoreDetailActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreDetailActivityView.swift; sourceTree = "<group>"; };
@@ -396,6 +398,7 @@
 				DDAECC2F2A93744800B3D676 /* UsersRecords.swift */,
 				DDAECC252A9321F900B3D676 /* BooksList.swift */,
 				DDAECC272A9334E300B3D676 /* RecordImages.swift */,
+				DDE516E42A9486E40023C70C /* RecordFriend.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -1109,6 +1112,7 @@
 				DD1022412A82C94000F74CC6 /* APIModel.swift in Sources */,
 				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,
 				941177132A82705800847F26 /* ActivityParticipateCollectionViewCell.swift in Sources */,
+				DDE516E52A9486E40023C70C /* RecordFriend.swift in Sources */,
 				9411770C2A7984A500847F26 /* BookStoreDetailReviewView.swift in Sources */,
 				DD33A3012A8380D000D4D7C3 /* SearchFriend.swift in Sources */,
 				94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */,
@@ -1339,6 +1343,7 @@
 				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1377,6 +1382,7 @@
 				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

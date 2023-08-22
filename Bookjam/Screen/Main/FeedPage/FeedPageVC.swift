@@ -50,10 +50,18 @@ class FeedPageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setUpAPI()
         setUpView()
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+    }
+    
+    
+    // MARK: API
+    
+    func setUpAPI() {
+        
     }
     
 
