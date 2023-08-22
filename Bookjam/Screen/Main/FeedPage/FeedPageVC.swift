@@ -163,14 +163,21 @@ extension FeedPageVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: FeedPostTableViewCell().cellID, for: indexPath) as! FeedPostTableViewCell
         
         cell.images = records[indexPath.row].images_url ?? []
-        //        cell.userNameLabel.text = records[indexPath.row].
-        cell.timeLabel.text = records[indexPath.row].date
+        cell.userNameLabel.text = records[indexPath.row].username
+        cell.timeLabel.text = records[indexPath.row].date.components(separatedBy: "T")[0]
         cell.contextLabel.text = records[indexPath.row].contents
-        //        cell.bookNameButton.setTitle(records[indexPath.row]., for: <#T##UIControl.State#>)
+        if let bookLabelText = records[indexPath.row].book{
+            cell.bookLabel.text = bookLabelText
+        }else{
+            cell.bookLabel.text = "책을 선택하지 않았습니다."
+        }
+        
+        
         cell.commentLabel.text = String(records[indexPath.row].comment_count)
         cell.heartLabel.text = String(records[indexPath.row].like_count)
         
-        
+        cell.selectionStyle = .none
+
         return cell
     }
 }

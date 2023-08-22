@@ -65,15 +65,18 @@ class FeedPostTableViewCell: UITableViewCell {
         $0.semanticContentAttribute = .forceRightToLeft
     }
     
-    var bookNameButton: UIButton = UIButton().then {
-        $0.setTitle("책 이름입니다.", for: .normal)
-        $0.setTitleColor(gray05, for: .normal)
-        $0.titleLabel?.font = paragraph05
+    var bookView: UIView = UIView().then {
         $0.backgroundColor = gray02
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 16
         $0.layer.borderColor = gray04?.cgColor
         $0.layer.borderWidth = 0.7
+    }
+    
+    var bookLabel: UILabel = UILabel().then {
+        $0.text = "책 이름"
+        $0.textColor = gray05
+        $0.font = paragraph05
     }
     
     var commentImageView: UIImageView = UIImageView().then {
@@ -130,7 +133,8 @@ class FeedPostTableViewCell: UITableViewCell {
             photoCollectionView,
             contextLabel,
             moreButton,
-            bookNameButton,
+            bookView,
+            bookLabel,
             commentImageView,
             commentLabel,
             heartImageView,
@@ -181,15 +185,19 @@ class FeedPostTableViewCell: UITableViewCell {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        bookNameButton.snp.makeConstraints {
+        bookView.snp.makeConstraints {
             $0.top.equalTo(moreButton.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(30)
-            $0.width.equalTo(110)
+        }
+        
+        bookLabel.snp.makeConstraints {
+            $0.centerX.centerY.equalTo(bookView)
+            $0.leading.trailing.equalTo(bookView).inset(10)
         }
         
         commentImageView.snp.makeConstraints {
-            $0.top.equalTo(bookNameButton.snp.bottom).offset(20)
+            $0.top.equalTo(bookView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
         
@@ -228,11 +236,11 @@ extension FeedPostTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         if images.count == 0 {
             return cell
         }
-            
-            // images 데이터 cell에 할당
-            cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row]))
-            cell.photoImageView.layer.cornerRadius = 8
-
+        
+        // images 데이터 cell에 할당
+        cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row]))
+        cell.photoImageView.layer.cornerRadius = 8
+        
         return cell
     }
 }

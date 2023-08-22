@@ -259,7 +259,7 @@ class BookstoreDetailPageVC: UIViewController {
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(2000)
+            $0.height.equalTo(2500)
         }
         
         photoCollectionView.snp.makeConstraints {
@@ -294,7 +294,7 @@ class BookstoreDetailPageVC: UIViewController {
         }
 
         reviewCountLabel.snp.makeConstraints {
-            $0.left.equalTo(starLabel).offset(45)
+            $0.leading.equalTo(starLabel.snp.trailing).offset(10)
             $0.bottom.equalTo(storeTypeLabel).offset(35)
         }
 
@@ -651,7 +651,7 @@ class BookstoreDetailPageVC: UIViewController {
                     
                     self.contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
                     
-                    let homeViewHeight = 1000 + self.reviewView.reviews.count * 300
+                    let homeViewHeight = 1200 + self.reviewView.reviews.count * 300
                     self.setUpContentviewConstraint(height: homeViewHeight)
                     
                 }

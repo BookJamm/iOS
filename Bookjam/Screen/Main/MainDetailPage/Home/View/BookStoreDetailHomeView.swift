@@ -279,6 +279,7 @@ class BookStoreDetailHomeView: UIView {
         newsTitle.snp.makeConstraints {
             $0.top.equalToSuperview().offset(15)
             $0.leading.equalTo(newsPhoto.snp.trailing).offset(15)
+            $0.trailing.equalToSuperview().offset(-15)
         }
         
         newsContent.snp.makeConstraints {
