@@ -101,9 +101,9 @@ class Onboarding06VC: UIViewController {
     } // end of didStartButtonTapped()
 }
 
-struct Onboarding06VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding06VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct Onboarding06VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding06VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}

@@ -397,25 +397,9 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension MainPageVC: CLLocationManagerDelegate{
-    // 위치 정보 계속 업데이트 -> 위도 경도 받아옴
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print("didUpdateLocations")
-        if let location = locations.first {
-            print("위도: \(location.coordinate.latitude)")
-            print("경도: \(location.coordinate.longitude)")
-        }
-    }
-    
-    // 위도 경도 받아오기 에러
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-}
-
-struct MainPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        MainPageVC().toPreview()
-            //.edgesIgnoringSafeArea(.all)
-    }
-}
+//struct MainPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainPageVC().toPreview()
+//            //.edgesIgnoringSafeArea(.all)
+//    }
+//}

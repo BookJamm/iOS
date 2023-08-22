@@ -203,9 +203,9 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct SearchPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SearchPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SearchPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SearchPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

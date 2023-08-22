@@ -59,9 +59,9 @@ class ViewController: UIViewController {
     
 }
 
-struct ViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        ViewController().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct ViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        ViewController().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

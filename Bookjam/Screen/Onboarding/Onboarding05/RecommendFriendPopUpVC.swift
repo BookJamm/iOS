@@ -153,10 +153,10 @@ extension RecommendFriendPopUpVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
-
-struct RecommendFriendPopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        RecommendFriendPopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//
+//struct RecommendFriendPopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        RecommendFriendPopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

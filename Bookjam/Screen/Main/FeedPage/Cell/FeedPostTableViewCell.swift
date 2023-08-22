@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 
+import Kingfisher
 import SnapKit
 import Then
 
@@ -17,6 +18,7 @@ class FeedPostTableViewCell: UITableViewCell {
     // MARK: Variables
     
     var cellID = "feedViewCell"
+    var images = [String]()
     
     var profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")?.circularImage()
@@ -214,32 +216,40 @@ class FeedPostTableViewCell: UITableViewCell {
 
 extension FeedPostTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        if images.count == 0 {
+            return 1
+        }
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
-        // images 데이터 cell에 할당
-        // cell.photoImageView.image = UIImage(named: images[indexPath.row])
-        cell.photoImageView.layer.cornerRadius = 8
-        
+        if images.count == 0 {
+            return cell
+        }
+            
+            // images 데이터 cell에 할당
+            cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row]))
+            cell.photoImageView.layer.cornerRadius = 8
+
         return cell
     }
 }
 
 
-#if DEBUG
 
-@available(iOS 13.0, *)
-struct FeedBookTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = FeedPostTableViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct FeedBookTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = FeedPostTableViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

@@ -180,11 +180,11 @@ class Onboarding08VC: UIViewController {
         }
     } // end of didToLeftSwiped()
 }
-
-struct Onboarding08VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding08VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-
+//
+//struct Onboarding08VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding08VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}
+//

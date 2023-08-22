@@ -255,9 +255,9 @@ extension BookStoreReviewDetailVC: UIImagePickerControllerDelegate, UINavigation
 }
 
 
-struct BookStoreReviewDetailVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreReviewDetailVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreReviewDetailVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreReviewDetailVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

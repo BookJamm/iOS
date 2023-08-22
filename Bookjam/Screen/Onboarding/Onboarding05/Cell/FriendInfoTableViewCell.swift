@@ -124,18 +124,18 @@ class FriendInfoTableViewCell: UITableViewCell {
     
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct FriendInfoTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = FriendInfoTableViewCell()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct FriendInfoTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = FriendInfoTableViewCell()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

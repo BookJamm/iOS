@@ -146,9 +146,9 @@ class FeedPostCheckPopUpVC: UIViewController {
     }
 }
 
-struct FeedPostCheckPopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        FeedPostCheckPopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct FeedPostCheckPopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        FeedPostCheckPopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

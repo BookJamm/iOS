@@ -167,9 +167,9 @@ extension ChangeProfileVC: UIImagePickerControllerDelegate, UINavigationControll
 }
 
 
-struct ChangeProfileVC_Preview: PreviewProvider {
-    static var previews: some View {
-        ChangeProfileVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct ChangeProfileVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        ChangeProfileVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

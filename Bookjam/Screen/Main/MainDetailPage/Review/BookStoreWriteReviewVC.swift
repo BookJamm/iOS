@@ -533,9 +533,9 @@ extension BookStoreWriteReviewVC: UIImagePickerControllerDelegate, UINavigationC
     }
 }
 
-struct BookStoreWriteReviewVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreWriteReviewVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreWriteReviewVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreWriteReviewVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

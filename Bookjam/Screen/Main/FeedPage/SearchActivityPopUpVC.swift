@@ -155,9 +155,9 @@ class SearchActivityPopUpVC: UIViewController {
     }
 }
 
-struct SearchActivityPopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SearchActivityPopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SearchActivityPopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SearchActivityPopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

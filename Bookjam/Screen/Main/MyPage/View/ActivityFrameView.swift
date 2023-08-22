@@ -130,17 +130,17 @@ class ActivityFrameView: UIView {
     
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ActivityFrameView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = ActivityFrameView()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct ActivityFrameView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = ActivityFrameView()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
+//#endif

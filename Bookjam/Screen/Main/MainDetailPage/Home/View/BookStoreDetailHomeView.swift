@@ -530,17 +530,17 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct BookStoreDetailHomeView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = BookStoreDetailHomeView()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct BookStoreDetailHomeView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = BookStoreDetailHomeView()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
+//#endif
