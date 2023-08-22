@@ -195,11 +195,29 @@ extension SearchPageVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("셀 클릭됨")
-        let resultVC = BookstoreDetailPageVC()
+//        let resultVC = BookstoreDetailPageVC()
+//
+//        // TODO: 데이터 연결
+//
+//        navigationController?.pushViewController(resultVC, animated: true)
         
-        // TODO: 데이터 연결
+        let detailPage = BookstoreDetailPageVC()
         
-        navigationController?.pushViewController(resultVC, animated: true)
+//        let selectedPlaceId = bookStoreList![indexPath.row].placeId!
+        let selectedPlaceId = searchResult![indexPath.row].placeId!
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
+            responseDataType: APIModel<PlaceIdResponseModel>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { [self]
+                response in
+                    print(response)
+                detailPage.bookStoreDetail = response?.result ?? nil
+                navigationController?.pushViewController(detailPage, animated: true)
+            })
+        
     }
 }
 

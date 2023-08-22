@@ -22,7 +22,7 @@ struct Activities: Codable{
     let info: String
     let capacity: Int?
     let headcount: Int?
-    let totalRating: Int?
+    let totalRating: Float?
     let reviewCount: Int?
     let imageUrl: String?
 //    let like_count: Int?

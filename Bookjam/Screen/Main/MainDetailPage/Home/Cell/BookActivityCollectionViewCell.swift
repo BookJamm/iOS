@@ -108,6 +108,7 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(activityImageView.snp.bottom).offset(10)
             $0.leading.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-10)
         }
         
         starImageView.snp.makeConstraints {
