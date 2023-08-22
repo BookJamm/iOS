@@ -20,20 +20,13 @@ class BookStoreDetailHomeView: UIView {
     
     var bookstoreName = String()
 
-    // 대표 소식에 할당할 데이터 변수 News 타입으로 선언
-    var news1 = News(storePhoto: "", title: "", content: "", date: "", photo: "")
     var news: PlaceIdNewsResponseModel? = nil
     
-    // 책 목록에 할당할 데이터 변수 Book 배열로 선언
-    var books1 = [Book]()
     var books: [PlaceIdBooksResponseModel]? = nil
     
-    // 리뷰 목록에 들어갈 데이터 변수 Review 배열로 선언
-    var reviews1 = [Review]()
     var reviews: [PlaceIdReviewsResponseModel]? = nil
     
     // 독서 활동 참여 목록에 들어갈 데이터 변수 Activity 배열로 선언
-    var activities1 = [Activity]()
     var activities: [Activities]? = nil
     
     var contentView: UIView = UIView().then {
@@ -180,7 +173,7 @@ class BookStoreDetailHomeView: UIView {
         newsLabel.text = "\(bookstoreName)의 소식"
         newsTitle.text = news?.title
         newsContent.text = news?.contents
-        newsDate.text = news?.createdAt
+        newsDate.text = news?.createdAt!.components(separatedBy: "T")[0]
         newsPhoto.image =  UIImage(named: "squareDefaultImage")
         
         if let contents = news?.contents{
@@ -500,7 +493,7 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
         let cell = reviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         
         cell.userNameLabel.text = reviews![indexPath.row].author.username
-        cell.userVisitDateLabel.text = reviews![indexPath.row].visitedAt
+        cell.userVisitDateLabel.text = reviews![indexPath.row].visitedAt?.components(separatedBy: "T")[0]
         cell.commentLabel.text = reviews![indexPath.row].contents
         
         

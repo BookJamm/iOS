@@ -12,7 +12,7 @@ import SwiftUI
 
 import SnapKit
 import Then
-
+import CoreLocation
 
 class MainPageVC: UIViewController {
 
@@ -20,6 +20,8 @@ class MainPageVC: UIViewController {
     
     //api 모델 변수 - 이 변수에 api 호출 결과를 저장하여 뷰 업데이트 등에 사용
     var bookStoreList: [GetPlaceResponseModel]?
+    
+    var locationManager = CLLocationManager()
     
     var searchBarButton: UIButton = UIButton().then {
         $0.setTitle("  상호명 또는 주소 검색", for: .normal)
@@ -124,6 +126,7 @@ class MainPageVC: UIViewController {
     var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
         $0.tintColor = gray05
+        $0.addTarget(self, action: #selector(didInfoButtonTapped), for: .touchUpInside)
     }
     
     var tableView: UITableView = UITableView().then {
@@ -139,9 +142,11 @@ class MainPageVC: UIViewController {
         setUpLayout()
         setUpConstraint()
         setUpDelegate()
+        setUpLocationDelegate()
         
         setUpSortButtons()
-        getIndependantBookStorePlaces(category: 0, sortBy: "distance", lat: 37.270225, long: 127.048789)  //임시 테스트
+        
+        getIndependantBookStorePlaces(category: 0, sortBy: "distance")  //임시 테스트
     }
     
     // MARK: View
@@ -232,8 +237,16 @@ class MainPageVC: UIViewController {
     func setUpDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
+
     }
     
+    func setUpLocationDelegate(){
+        locationManager.delegate = self
+        //거리 정확도 설정
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        // 사용자에게 허용 받기 alert 띄우기
+        locationManager.requestWhenInUseAuthorization()
+    }
     
     // MARK: Function
     
@@ -241,16 +254,43 @@ class MainPageVC: UIViewController {
         navigationController?.pushViewController(SearchPageVC(), animated: true)
     }
     
-    //
-    func getIndependantBookStorePlaces(category: Int, sortBy: String?, lat: Float? = nil, long: Float? = nil){
+    @objc func didInfoButtonTapped() {
         
-        var requestParameter: getPlaceRequestModel
-            
-            if let latitude = lat, let longitude = long {
-                requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy, lat: latitude, lon: longitude)
+
+        let popupVC = MainPageInfoViewController()
+        popupVC.modalPresentationStyle = .overFullScreen
+        self.present(popupVC, animated: false, completion: nil)
+    }
+    
+    //독립서점 api 호출
+    func getIndependantBookStorePlaces(category: Int, sortBy: String?){
+        
+        var requestParameter: getPlaceRequestModel?
+        
+        if sortBy == "distance"{    //거리순 정렬이면
+            // 아이폰 설정에서의 위치 서비스가 켜진 상태라면
+            if CLLocationManager.locationServicesEnabled() {
+                print("위치 서비스 On 상태")
+                locationManager.startUpdatingLocation() //위치 정보 받아오기 시작
+                
+                if let latitude = locationManager.location?.coordinate.latitude, let longitude = locationManager.location?.coordinate.longitude{
+                    requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy, lat: Float(latitude), lon: Float(longitude))//위경도 담아서 api 호출
+                }
+                
+                print(locationManager.location?.coordinate)
             } else {
-                requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy)
+                print("위치 서비스 Off 상태")
             }
+        }
+        else{//리뷰순, 평점순 정렬이면
+            requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy)
+        }
+        
+//        if let latitude = lat, let longitude = long {
+//            requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy, lat: latitude, lon: longitude)
+//        } else {
+//            requestParameter = getPlaceRequestModel(category: category, sortBy: sortBy)
+//        }
         
         APIManager.shared.getData(
             urlEndpointString: Constant.getPlaces,
@@ -279,7 +319,7 @@ class MainPageVC: UIViewController {
             
             sortButton.menu = UIMenu(children: [
                 UIAction(title: "거리순", state: .on, handler: { _ in
-                    self.getIndependantBookStorePlaces(category: 0, sortBy: "distance", lat: 37.270225, long: 127.048789)
+                    self.getIndependantBookStorePlaces(category: 0, sortBy: "distance")
                 }),
                 UIAction(title: "리뷰순", handler: { _ in
                     print("리뷰순")
@@ -295,7 +335,6 @@ class MainPageVC: UIViewController {
             sortButton.changesSelectionAsPrimaryAction = true
             
         }
-    
     
 }//end of MainPageVC
 
@@ -355,6 +394,20 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
                 navigationController?.pushViewController(detailPage, animated: true)
             })
         
+    }
+}
+
+extension MainPageVC: CLLocationManagerDelegate{
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            print("위치 업데이트!")
+            print("위도 : \(location.coordinate.latitude)")
+            print("경도 : \(location.coordinate.longitude)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }
 

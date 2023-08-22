@@ -133,7 +133,7 @@ extension BookStoreDetailNewsView: UITableViewDelegate, UITableViewDataSource {
         cell.profileImageView.image = UIImage(named: "squareDefaultImage" )?.circularImage()
         cell.newsLabel.text = newsList[indexPath.row].title
         cell.newsContent.text = newsList[indexPath.row].contents
-        cell.newsDate.text = newsList[indexPath.row].createdAt
+        cell.newsDate.text = newsList[indexPath.row].createdAt!.components(separatedBy: "T")[0]
         
         cell.selectionStyle = .none
 

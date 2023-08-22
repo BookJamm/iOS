@@ -154,8 +154,11 @@ class SearchBookPopUpVC: UIViewController {
     /// 검색 버튼 눌렀을 때 텍스트필드 값 바탕으로 검색해서 테이블뷰 결과 로드
     @objc func didBookNameSearchButtonTapped() {
         print("검색 버튼 눌림")
+        
         if let searchKeyword = searchTextField.text,
            let encodedKeyword = searchKeyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            
+            let urlString = Constant.getBooksList(title: encodedKeyword)
             
             APIManager.shared.getData(
                 urlEndpointString: Constant.getBooksList(title: encodedKeyword),

@@ -37,6 +37,7 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         photoImageView.image = nil
+        photoImageView.image = UIImage(named: "squareDefaultImage")
     }
     
     required init?(coder: NSCoder) {
