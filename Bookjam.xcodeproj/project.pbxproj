@@ -1343,7 +1343,7 @@
 				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1382,7 +1382,7 @@
 				INFOPLIST_FILE = Bookjam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_NSCameraUsageDescription = "카메라 접근 권한";
-				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 상점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 접근 권한";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
