@@ -1,22 +1,27 @@
 //
-//  Onboarding05BottomSheetVC.swift
+//  RecommendFriendPopUpVC.swift
 //  Bookjam
 //
-//  Created by YOUJIM on 2023/07/22.
+//  Created by YOUJIM on 2023/08/22.
 //
 
 import SwiftUI
 import UIKit
 
-import Alamofire
-import FloatingPanel
 import SnapKit
 import Then
 
 
-class Onboarding05BottomSheet: UIViewController {
+class RecommendFriendPopUpVC: UIViewController {
+
+    // MARK: Variables
     
-    // MARK: Variable
+    let popUpView: UIView = UIView().then {
+        $0.backgroundColor = gray02
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 20
+        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
     
     let searchResult: [Friend] = [
         Friend(nickname: "짐깅", email: "kynhun20@gachon.ac.kr", photoURL: "", isFriend: false)
@@ -43,60 +48,35 @@ class Onboarding05BottomSheet: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
          $0.addTarget(self, action: #selector(didAddFinishButtonTapped), for: .touchUpInside)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
         setUpLayout()
-        setUpConstraint()
         setUpDelegate()
+        setUpConstraint()
     }
+    
 
-    
-    
     // MARK: View
     
     func setUpView() {
-        view.backgroundColor = UIColor(hexCode: "F5F4F3")
-        self.searchResultTableView.separatorStyle = .none
+        view.backgroundColor = .clear
+        searchResultTableView.separatorStyle = .none
     }
     
     
     // MARK: Layout
     
     func setUpLayout() {
+        view.addSubview(popUpView)
         [
             searchLabel,
             searchResultTableView,
             addFinishButton
-        ].forEach { view.addSubview($0) }
+        ].forEach { popUpView.addSubview($0) }
     }
-    
-    
-    // MARK: Constraint
-    
-    func setUpConstraint() {
-        searchLabel.snp.makeConstraints {
-            $0.centerX.equalToSuperview().multipliedBy(0.3)
-            $0.centerY.equalToSuperview().multipliedBy(0.1)
-        }
-        
-        searchResultTableView.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.8)
-            $0.bottom.equalToSuperview().multipliedBy(0.9)
-        }
-        
-        addFinishButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.06)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.97)
-        }
-    }
-    
     
     // MARK: Delegate
     
@@ -106,17 +86,49 @@ class Onboarding05BottomSheet: UIViewController {
     }
     
     
+    // MARK: Constraint
+    
+    func setUpConstraint() {
+        popUpView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            $0.height.equalToSuperview().dividedBy(1.6)
+        }
+        
+        searchLabel.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().offset(30)
+        }
+        
+        searchResultTableView.snp.makeConstraints {
+            $0.top.equalTo(searchLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-70)
+        }
+        
+        addFinishButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(45)
+        }
+    }
+    
+    
     // MARK: Function
     
-    // 추가 완료 버튼 누르면 Onboarding05VC에서 내려가도록 설정
+    /// 추가 완료 버튼 누르면 Onboarding05VC에서 내려가도록 설정
     @objc func didAddFinishButtonTapped() {
         self.dismiss(animated: true)
     }
+    
 }
 
 
+// MARK: Extension
+
 // searchResultTableView 구현을 위한 Delegate, DataSource extension 선언
-extension Onboarding05BottomSheet: UITableViewDelegate, UITableViewDataSource {
+extension RecommendFriendPopUpVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchResult.count
     }
@@ -142,9 +154,9 @@ extension Onboarding05BottomSheet: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct Onboarding05BottomSheet_Preview: PreviewProvider {
+struct RecommendFriendPopUpVC_Preview: PreviewProvider {
     static var previews: some View {
-        Onboarding05BottomSheet().toPreview()
-            .edgesIgnoringSafeArea(.all)
+        RecommendFriendPopUpVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
     }
 }

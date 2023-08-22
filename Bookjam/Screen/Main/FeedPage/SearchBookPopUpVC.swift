@@ -161,7 +161,7 @@ class SearchBookPopUpVC: UIViewController {
             let urlString = Constant.getBooksList(title: encodedKeyword)
             
             APIManager.shared.getData(
-                urlEndpointString: urlString,
+                urlEndpointString: Constant.getBooksList(title: encodedKeyword),
                 responseDataType: APIModel<[BooksListResponseModel]>?.self,
                 requestDataType: BooksListRequestModel.self,
                 parameter: nil) { response in

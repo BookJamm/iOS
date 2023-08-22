@@ -268,8 +268,8 @@ class MainPageVC: UIViewController {
             parameter: requestParameter,
             completionHandler: { [self]
                 response in
-                    print(response)
                 self.bookStoreList = response?.result
+                
                 self.tableView.reloadData()
             })
     }//end of getIndependantBookStorePlaces

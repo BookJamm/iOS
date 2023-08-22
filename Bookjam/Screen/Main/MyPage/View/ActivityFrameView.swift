@@ -9,7 +9,6 @@ import UIKit
 
 class ActivityFrameView: UIView {
 
-    
     // MARK: Variables
     
     var recordLabel: UILabel = UILabel().then{
@@ -89,11 +88,11 @@ class ActivityFrameView: UIView {
       
         recordLabel.snp.makeConstraints{
             $0.centerX.equalTo(underLineView1).multipliedBy(0.5)
-            $0.top.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(15)
         }
         recordNumberLabel.snp.makeConstraints{
             $0.centerX.equalTo(recordLabel)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(15)
         }
         
         visitLabel.snp.makeConstraints{

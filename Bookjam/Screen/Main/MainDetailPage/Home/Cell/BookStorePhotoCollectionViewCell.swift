@@ -35,6 +35,7 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        
         photoImageView.image = nil
         photoImageView.image = UIImage(named: "squareDefaultImage")
     }
