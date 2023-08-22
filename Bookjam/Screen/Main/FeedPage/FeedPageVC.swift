@@ -18,6 +18,8 @@ class FeedPageVC: UIViewController {
 
     // MARK: Variables
     
+    var records = [RecordsFriendResponseModel]()
+    
     var searchView: UIView = UIView().then {
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 24
@@ -61,7 +63,17 @@ class FeedPageVC: UIViewController {
     // MARK: API
     
     func setUpAPI() {
-        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getRecordsFriends,
+            responseDataType: APIModel<[RecordsFriendResponseModel]>.self,
+            requestDataType: RecordsFriendRequestModel.self,
+            parameter: nil) { response in
+                if let result = response.result {
+                    self.records = result
+                    
+                    self.feedTableView.reloadData()
+                }
+            }
     }
     
 
@@ -144,11 +156,20 @@ class FeedPageVC: UIViewController {
 
 extension FeedPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return records.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: FeedPostTableViewCell().cellID, for: indexPath) as! FeedPostTableViewCell
+        
+        cell.images = records[indexPath.row].images_url ?? []
+        //        cell.userNameLabel.text = records[indexPath.row].
+        cell.timeLabel.text = records[indexPath.row].date
+        cell.contextLabel.text = records[indexPath.row].contents
+        //        cell.bookNameButton.setTitle(records[indexPath.row]., for: <#T##UIControl.State#>)
+        cell.commentLabel.text = String(records[indexPath.row].comment_count)
+        cell.heartLabel.text = String(records[indexPath.row].like_count)
+        
         
         return cell
     }
