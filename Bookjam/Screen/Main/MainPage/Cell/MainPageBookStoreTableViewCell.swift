@@ -29,6 +29,10 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photosCollectionView.reloadData()
+    }
     
     // MARK: Variable
     
@@ -180,21 +184,21 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
         if images.isEmpty {
-                    // 이미지 배열이 비어있으면 기본 이미지 설정
-                    cell.photoImageView.image = UIImage(named: "squareDefaultImage")
-                } else {
-                    // 이미지 데이터가 있을 경우 해당 이미지 설정
-                    if let imageUrlString = images[indexPath.row].url,
-                       let imageUrl = URL(string: imageUrlString),
-                       let imageData = try? Data(contentsOf: imageUrl),
-                       let image = UIImage(data: imageData) {
-                        cell.photoImageView.image = image
-                    } else {
-                        cell.photoImageView.image = UIImage(named: "squareDefaultImage")
-                    }
-                }
-                
-                cell.photoImageView.layer.cornerRadius = 8
+            // 이미지 배열이 비어있으면 기본 이미지 설정
+            cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+        } else {
+            // 이미지 데이터가 있을 경우 해당 이미지 설정
+            if let imageUrlString = images[indexPath.row].url,
+               let imageUrl = URL(string: imageUrlString),
+               let imageData = try? Data(contentsOf: imageUrl),
+               let image = UIImage(data: imageData) {
+                cell.photoImageView.image = image
+            } else {
+                cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+            }
+        }
+        
+        cell.photoImageView.layer.cornerRadius = 8
         
         return cell
     }

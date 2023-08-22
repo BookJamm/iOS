@@ -168,7 +168,7 @@ extension BookStoreDetailReviewView: UITableViewDelegate, UITableViewDataSource 
         let cell = visitReviewTableView.dequeueReusableCell(withIdentifier: "visitReviewCell", for: indexPath) as! VisitReviewTableViewCell
         
         cell.userNameLabel.text = reviews[indexPath.row].author.username
-        cell.userVisitDateLabel.text = reviews[indexPath.row].visitedAt
+        cell.userVisitDateLabel.text = reviews[indexPath.row].visitedAt!.components(separatedBy: "T")[0]
         cell.commentLabel.text = reviews[indexPath.row].contents
         
         let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]

@@ -124,6 +124,7 @@ class MainPageVC: UIViewController {
     var infoButton: UIButton = UIButton().then {
         $0.setImage(UIImage(systemName: "info.circle"), for: .normal)
         $0.tintColor = gray05
+        $0.addTarget(self, action: #selector(didInfoButtonTapped), for: .touchUpInside)
     }
     
     var tableView: UITableView = UITableView().then {
@@ -241,7 +242,15 @@ class MainPageVC: UIViewController {
         navigationController?.pushViewController(SearchPageVC(), animated: true)
     }
     
-    //
+    @objc func didInfoButtonTapped() {
+        
+
+        let popupVC = MainPageInfoViewController()
+        popupVC.modalPresentationStyle = .overFullScreen
+        self.present(popupVC, animated: false, completion: nil)
+    }
+    
+    //독립서점 api 호출
     func getIndependantBookStorePlaces(category: Int, sortBy: String?, lat: Float? = nil, long: Float? = nil){
         
         var requestParameter: getPlaceRequestModel

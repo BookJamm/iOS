@@ -33,6 +33,12 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
         setUpConstraint()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        photoImageView.image = nil
+        photoImageView.image = UIImage(named: "squareDefaultImage")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
