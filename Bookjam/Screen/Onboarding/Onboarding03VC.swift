@@ -56,20 +56,22 @@ class Onboarding03VC: UIViewController {
     let idDuplicateLabel: UILabel = UILabel().then {
         $0.isHidden = true
         $0.text = "중복된 아이디입니다."
-        $0.textColor = UIColor(hexCode: "F22222")
+        $0.textColor = alert
         $0.font = UIFont.systemFont(ofSize: 12)
     }
     
     let passwordConditionLabel: UILabel = UILabel().then {
         $0.text = "영문자, 숫자, 특수문자 중 3가지 이상 포함 9자 이상 16글자 이하"
-        $0.textColor = UIColor(hexCode: "F22222")
+        $0.textColor = alert
         $0.font = UIFont.systemFont(ofSize: 12)
+        $0.isHidden = true
     }
     
     let passwordAccordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호가 일치하지 않습니다."
-        $0.textColor = UIColor(hexCode: "F22222")
+        $0.textColor = alert
         $0.font = UIFont.systemFont(ofSize: 12)
+        $0.isHidden = true
     }
     
     // 중복확인 버튼
@@ -87,6 +89,7 @@ class Onboarding03VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
         $0.backgroundColor = gray04
+        $0.isEnabled = false
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
@@ -263,6 +266,7 @@ class Onboarding03VC: UIViewController {
         
         print("텍스트 변경 감지")
         print("text :", sender.text ?? "error")
+        passwordConditionLabel.isHidden = false
         
         // 비밀번호 조건문 정규식
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{9,16}$"
@@ -278,10 +282,12 @@ class Onboarding03VC: UIViewController {
             passwordConditionLabel.isHidden = true
             if !(self.passwordTextField.text?.isEmpty ?? true) && isSamePassword(passwordTextField, passwordConfirmTextField) && isPasswordValid {
                 updateNextButton(willActive: true)
+                passwordAccordLabel.isHidden = false
                 passwordAccordLabel.textColor = UIColor(hexCode: "00C950")
                 passwordAccordLabel.text = "비밀번호가 일치합니다."
             } else {
                 updateNextButton(willActive: false)
+                passwordAccordLabel.isHidden = false
                 passwordAccordLabel.textColor = UIColor(hexCode: "F22222")
                 passwordAccordLabel.text = "비밀번호가 일치하지 않습니다."
             }

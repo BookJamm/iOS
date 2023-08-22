@@ -52,5 +52,7 @@ struct Constant {
     static func getUsersRecords(category: Int) -> String {
         return "/users/records?category=\(category)"
     }
+    
+    static let getRecordsFriends = "/records/friends"
 }
 

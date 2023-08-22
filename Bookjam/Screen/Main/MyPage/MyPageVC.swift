@@ -19,6 +19,10 @@ class MyPageVC: UIViewController {
 
     // MARK: Variables
     
+    /// 설정 페이지에 넘길 유저 이름/프로필 사진 받아오는 변수 선언
+    var userName = ""
+    var userProfileURL = ""
+    
     var activities = [UserActivities]()
 
     var scrollView: UIScrollView = UIScrollView().then {
@@ -61,7 +65,8 @@ class MyPageVC: UIViewController {
     
     var activityFrameView = ActivityFrameView().then{
         $0.backgroundColor = main05
-        
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 8
     }
     
     // 활동 참여 현황뷰
@@ -205,6 +210,10 @@ class MyPageVC: UIViewController {
             requestDataType: UsersOutlineRequestModel.self,
             parameter: nil) { response in
                 if let result = response?.result?.userOutline {
+                    self.userName = result.username!
+                    self.userProfileURL = result.profile ?? ""
+                    
+                    /// 화면에 데이터 할당
                     self.userNameLabel.text = "\(result.username!)님"
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
                     self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
@@ -426,26 +435,30 @@ class MyPageVC: UIViewController {
         //유저 프로필뷰
         userProfileView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(280)
+            $0.height.equalTo(270)
         }
+        
         userProfileImageView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.width.height.equalTo(90)
         }
+        
         userNameLabel.snp.makeConstraints{
             $0.leading.equalTo(userProfileImageView.snp.trailing).offset(20)
             $0.centerY.equalTo(userProfileImageView).offset(-10)
         }
+        
         myPageSetUpButton.snp.makeConstraints{
             $0.top.equalTo(userNameLabel.snp.bottom).offset(20)
             $0.leading.equalTo(userNameLabel)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(33)
         }
+        
         userActivityLabel.snp.makeConstraints{
             $0.top.equalTo(myPageSetUpButton.snp.bottom).offset(20)
-            $0.centerX.equalTo(userProfileImageView)
+            $0.leading.equalTo(userProfileImageView)
             
         }
         activityFrameView.snp.makeConstraints{
@@ -456,18 +469,21 @@ class MyPageVC: UIViewController {
         
         // 활동 참여 현황 뷰
         activityParticipateView.snp.makeConstraints{
-            $0.top.equalTo(userProfileView.snp.bottom).offset(10)
+            $0.top.equalTo(userProfileView.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(220)
         }
+        
         activityParticipateLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalTo(activityFrameView)
         }
+        
         activityParticipateMoreButton.snp.makeConstraints{
             $0.centerY.equalTo(activityParticipateLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        
         collectionView.snp.makeConstraints{
             $0.top.equalTo(activityParticipateLabel.snp.bottom).offset(10)
             $0.leading.equalTo(activityParticipateLabel)
@@ -477,34 +493,36 @@ class MyPageVC: UIViewController {
         
         //나의 기록 뷰
         myRecordView.snp.makeConstraints{
-            $0.top.equalTo(activityParticipateView.snp.bottom).offset(10)
+            $0.top.equalTo(activityParticipateView.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(400)
         }
+        
         myRecordLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
+        
         myRecordMoreButton.snp.makeConstraints{
             $0.centerY.equalTo(myRecordLabel)
             $0.trailing.equalToSuperview().offset(-20)
-            
         }
+        
         independantBookStoreButton.snp.makeConstraints{
             $0.top.equalTo(myRecordLabel.snp.bottom).offset(20)
             $0.leading.equalTo(myRecordLabel)
             $0.width.equalTo(100)
         }
+        
         bookPlaygroundButton.snp.makeConstraints{
             $0.top.width.equalTo(independantBookStoreButton)
             $0.leading.equalTo(independantBookStoreButton.snp.trailing).offset(10)
-            
         }
+        
         libraryButton.snp.makeConstraints{
             $0.top.equalTo(independantBookStoreButton)
             $0.leading.equalTo(bookPlaygroundButton.snp.trailing).offset(10)
             $0.width.equalTo(80)
-            
         }
 
         myRecordBookStoreView.snp.makeConstraints{
@@ -512,7 +530,6 @@ class MyPageVC: UIViewController {
             $0.leading.equalTo(independantBookStoreButton)
             $0.trailing.equalToSuperview().multipliedBy(0.5)
             $0.height.equalTo(160)
-            
         }
         
         myRecordBookStoreView2.snp.makeConstraints{
@@ -524,24 +541,28 @@ class MyPageVC: UIViewController {
         
         //나의 리뷰 뷰
         myReviewView.snp.makeConstraints{
-            $0.top.equalTo(myRecordView.snp.bottom).offset(10)
+            $0.top.equalTo(myRecordView.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(myRecordView)
+            $0.height.equalTo(360)
         }
+        
         myReviewLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
+        
         myReviewMoreButton.snp.makeConstraints{
             $0.centerY.equalTo(myReviewLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        
         myReviewBookStoreView.snp.makeConstraints{
             $0.top.equalTo(myReviewLabel.snp.bottom).offset(20)
             $0.leading.equalTo(myReviewLabel)
             $0.trailing.equalToSuperview().multipliedBy(0.5)
             $0.height.equalTo(200)
         }
+        
         myReviewBookStoreView2.snp.makeConstraints{
             $0.top.equalTo(myReviewBookStoreView)
             $0.leading.equalTo(myReviewBookStoreView.snp.trailing).offset(10)
@@ -551,24 +572,28 @@ class MyPageVC: UIViewController {
         
         //좋아요한 활동 뷰
         likeActivityView.snp.makeConstraints{
-            $0.top.equalTo(myReviewView.snp.bottom).offset(10)
+            $0.top.equalTo(myReviewView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(myReviewView)
         }
+        
         likeActivityLabel.snp.makeConstraints{
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
+        
         likeActivityMoreButton.snp.makeConstraints{
             $0.centerY.equalTo(likeActivityLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        
         likeActivityBookStoreView.snp.makeConstraints{
             $0.top.equalTo(likeActivityLabel.snp.bottom).offset(20)
             $0.leading.equalTo(likeActivityLabel)
             $0.height.equalTo(160)
             $0.trailing.equalToSuperview().multipliedBy(0.49)
         }
+        
         likeActivityBookStoreView2.snp.makeConstraints{
             $0.top.equalTo(likeActivityBookStoreView)
             $0.leading.equalTo(likeActivityBookStoreView.snp.trailing).offset(10)
@@ -577,12 +602,17 @@ class MyPageVC: UIViewController {
         }
     }//end of constraint
     
-    // MARK: Function
-    //  마이페이지 설정 눌렀을 때 UserPageVC로 전환
-    @objc func didMyPageSetUpButtonTapped() {
-        navigationController?.pushViewController(UserPageVC(), animated: true)
-    }
     
+    // MARK: Function
+    
+    ///  마이페이지 설정 눌렀을 때 UserPageVC로 전환
+    @objc func didMyPageSetUpButtonTapped() {
+        let userPageVC = UserPageVC()
+        userPageVC.userNameLabel.text = self.userName
+        userPageVC.userProfileImageView.kf.setImage(with: URL(string: self.userProfileURL), placeholder: UIImage(named: "BasicProfile"))
+        
+        navigationController?.pushViewController(userPageVC, animated: true)
+    }
 }
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{

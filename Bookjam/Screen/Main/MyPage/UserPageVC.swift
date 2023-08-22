@@ -30,6 +30,8 @@ class UserPageVC: UIViewController {
     
     var userProfileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "BasicProfile")
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 45
     }
     
     var userNameLabel: UILabel = UILabel().then {

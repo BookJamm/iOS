@@ -129,7 +129,7 @@ class ChangeProfileVC: UIViewController {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalToSuperview().multipliedBy(0.06)
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.94)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.94)
         }
     }
     
@@ -138,7 +138,7 @@ class ChangeProfileVC: UIViewController {
     // 결정하기 버튼 누르면 다음으로 화면 넘어가게 하는 함수
     // decisionButton에 addTarget으로 연결됨
     @objc func didDecisionButtonTapped() {
-        self.dismiss(animated: true)
+        navigationController?.popViewController(animated: true)
     } // end of didDecisionButtonTapped()
     
 }
