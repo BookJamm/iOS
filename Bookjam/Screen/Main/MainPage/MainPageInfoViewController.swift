@@ -72,9 +72,9 @@ class MainPageInfoViewController: UIViewController {
     }
 }
 
-struct MainPageInfoViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        MainPageInfoViewController().toPreview()
-            //.edgesIgnoringSafeArea(.all)
-    }
-}
+//struct MainPageInfoViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainPageInfoViewController().toPreview()
+//            //.edgesIgnoringSafeArea(.all)
+//    }
+//}
