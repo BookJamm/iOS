@@ -9,7 +9,6 @@ import UIKit
 
 class ActivityFrameView: UIView {
 
-    
     // MARK: Variables
     
     var recordLabel: UILabel = UILabel().then{
