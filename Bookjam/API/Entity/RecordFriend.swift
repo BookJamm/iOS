@@ -8,11 +8,11 @@
 import Foundation
 
 
-struct RecordsFriendRequestModel {
+struct RecordsFriendRequestModel: Codable {
     
 }
 
-struct RecordsFriendResponseModel {
+struct RecordsFriendResponseModel: Codable {
     let record_id, user_id: Int
     let created_at: String
     let status: Int
