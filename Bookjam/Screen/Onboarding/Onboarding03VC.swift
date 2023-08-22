@@ -360,9 +360,9 @@ class Onboarding03VC: UIViewController {
         }
 }
 
-struct Onboarding03VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding03VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct Onboarding03VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding03VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}

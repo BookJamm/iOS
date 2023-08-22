@@ -144,18 +144,18 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct BookStoreDetailActivityView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = BookStoreDetailActivityView()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct BookStoreDetailActivityView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = BookStoreDetailActivityView()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

@@ -180,9 +180,9 @@ extension SearchEnterResultVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct SearchEnterResultVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SearchEnterResultVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SearchEnterResultVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SearchEnterResultVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

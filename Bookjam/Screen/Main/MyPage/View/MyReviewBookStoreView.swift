@@ -109,17 +109,17 @@ class MyReviewBookStoreView: UIView {
     
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct MyReviewBookStoreView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = MyReviewBookStoreView()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct MyReviewBookStoreView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = MyReviewBookStoreView()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
+//#endif

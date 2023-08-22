@@ -264,9 +264,9 @@ class UserPageVC: UIViewController {
     }
 }
 
-struct UserPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        UserPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct UserPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UserPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

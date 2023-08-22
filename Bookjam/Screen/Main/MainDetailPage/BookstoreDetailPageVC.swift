@@ -715,10 +715,10 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-struct BookstoreDetailPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookstoreDetailPageVC().toPreview()
-            .previewLayout(.sizeThatFits)
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookstoreDetailPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookstoreDetailPageVC().toPreview()
+//            .previewLayout(.sizeThatFits)
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

@@ -144,12 +144,12 @@ class Onboarding04VC: UIViewController {
 
 // MARK: Preview
 
-struct Onboarding04VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding04VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct Onboarding04VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding04VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}
 
 
 // MARK: Extension

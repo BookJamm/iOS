@@ -256,10 +256,10 @@ extension Onboarding05VC: UITableViewDelegate, UITableViewDataSource {
         return 90
     }
 }
-
-struct Onboarding05VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding05VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//
+//struct Onboarding05VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding05VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}

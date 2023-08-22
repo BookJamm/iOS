@@ -55,9 +55,9 @@ class LocationPageVC: UIViewController {
     
 }
 
-struct LocationPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        LocationPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct LocationPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        LocationPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

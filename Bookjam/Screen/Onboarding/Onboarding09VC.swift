@@ -161,9 +161,9 @@ class Onboarding09VC: UIViewController {
     } // end of didToRightSwiped()
 }
 
-struct Onboarding09VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding09VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct Onboarding09VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding09VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}

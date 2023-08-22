@@ -232,9 +232,9 @@ extension SearchPlacePopUpVC: WKScriptMessageHandler {
     }
 }
 
-struct SearchPlacePopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SearchPlacePopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SearchPlacePopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SearchPlacePopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

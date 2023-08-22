@@ -141,9 +141,9 @@ class SelectVisitDatePopUpVC: UIViewController {
     }
 }
 
-struct SelectVisitDatePopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SelectVisitDatePopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SelectVisitDatePopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SelectVisitDatePopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
