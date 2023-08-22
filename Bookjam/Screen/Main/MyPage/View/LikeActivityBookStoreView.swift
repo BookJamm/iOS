@@ -95,17 +95,17 @@ class LikeActivityBookStoreView: UIView {
     
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct LikeActivityBookStoreView_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = LikeActivityBookStoreView()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct LikeActivityBookStoreView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = LikeActivityBookStoreView()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
+//#endif

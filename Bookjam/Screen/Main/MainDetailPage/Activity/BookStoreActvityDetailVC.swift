@@ -345,9 +345,9 @@ extension BookStoreActvityDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct BookStoreActvityDetailVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreActvityDetailVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreActvityDetailVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreActvityDetailVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

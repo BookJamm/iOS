@@ -250,10 +250,10 @@ class BookStoreChoiceDateVC: UIViewController {
     
 }
 
-struct BookStoreChoiceDateVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreChoiceDateVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreChoiceDateVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreChoiceDateVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
 

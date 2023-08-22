@@ -391,9 +391,9 @@ extension BookPostDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct BookPostDetailVC_Preview: PreviewProvider {
-    static var previews: some View {
-        BookPostDetailVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookPostDetailVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookPostDetailVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

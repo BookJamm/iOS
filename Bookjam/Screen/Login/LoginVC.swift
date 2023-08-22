@@ -248,10 +248,10 @@ class LoginVC: UIViewController {
     
 }
 
-struct LoginVC_Preview: PreviewProvider {
-    static var previews: some View {
-        LoginVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct LoginVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        LoginVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
 

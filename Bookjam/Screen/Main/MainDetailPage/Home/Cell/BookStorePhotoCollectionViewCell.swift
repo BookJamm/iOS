@@ -66,17 +66,17 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
     }
 }
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct BookStorePhotoCollectionViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = BookStorePhotoCollectionViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct BookStorePhotoCollectionViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = BookStorePhotoCollectionViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

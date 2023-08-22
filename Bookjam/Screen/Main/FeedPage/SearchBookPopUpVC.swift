@@ -205,9 +205,9 @@ extension SearchBookPopUpVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-struct SearchBookPopUpVC_Preview: PreviewProvider {
-    static var previews: some View {
-        SearchBookPopUpVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct SearchBookPopUpVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SearchBookPopUpVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

@@ -161,10 +161,10 @@ class Onboarding07VC: UIViewController {
         }
     } // end of didToLeftSwiped()
 }
-
-struct Onboarding07VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding07VC().toPreview()
-            .edgesIgnoringSafeArea(.all)
-    }
-}
+//
+//struct Onboarding07VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding07VC().toPreview()
+//            .edgesIgnoringSafeArea(.all)
+//    }
+//}
