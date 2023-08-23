@@ -57,6 +57,7 @@ class FeedPageVC: UIViewController {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        setUpNotification()
     }
     
     
@@ -148,6 +149,29 @@ class FeedPageVC: UIViewController {
         postPage.modalTransitionStyle = .coverVertical
         
         self.present(postPage, animated: true)
+    }
+    
+    @objc func postData() {
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getRecordsFriends,
+            responseDataType: APIModel<[RecordsFriendResponseModel]>.self,
+            requestDataType: RecordsFriendRequestModel.self,
+            parameter: nil) { response in
+                if let result = response.result {
+                    self.records = result
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                        self.feedTableView.reloadData()
+                    }
+                }
+            }
+    }
+    
+    
+    // MARK: Notification
+    
+    func setUpNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(postData), name: NSNotification.Name("feedPostCheckButtonTapped"), object: nil)
     }
 }
 
