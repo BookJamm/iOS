@@ -844,13 +844,13 @@ class FeedPostPageVC: UIViewController {
     /// 업로드 버튼 활성화 가능 여부 판단하는 함수
     /// 방문날짜, 장소, 책제목, 내용 모두 선택하고 채워야 업로드 함수 활성화
     func checkUploadPossible() {
-        if isActivitySelected && isPlaceTypeSelected && isplaceSelected && isVisitDateSelected && isBookSelected && isContentFilled {
+        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
             uploadButton.backgroundColor = main03
             uploadButton.isEnabled = true
         }
         else {
             uploadButton.backgroundColor = gray03
-            uploadButton.isEnabled = true
+            uploadButton.isEnabled = false
         }
     }
     
