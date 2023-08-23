@@ -30,7 +30,7 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
     static let cellID = "activityCell"
     
     var activityImageView: UIImageView = UIImageView().then {
-        $0.contentMode = .scaleToFill
+        $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 8
         $0.clipsToBounds = true
         $0.image = UIImage(named: "squareDefaultImage")
@@ -105,6 +105,7 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
         activityImageView.snp.makeConstraints{
             $0.top.leading.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview().offset(-10)
+            $0.width.height.equalTo(100)
         }
         activityNameLabel.snp.makeConstraints{
             $0.top.equalTo(activityImageView).offset(10)

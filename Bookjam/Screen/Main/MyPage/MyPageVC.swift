@@ -23,7 +23,7 @@ class MyPageVC: UIViewController {
     var userName = ""
     var userProfileURL = ""
     
-    var activities = [UserActivities]()
+    var userActivities = [UserActivities]()
 
     var scrollView: UIScrollView = UIScrollView().then {
         $0.backgroundColor = gray02
@@ -218,7 +218,7 @@ class MyPageVC: UIViewController {
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
                     self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
                     self.activityFrameView.reviewNumberLabel.text = "\(result.review!)"
-                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile ?? ""), placeholder: UIImage(named: "BasicProfile"))
+                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile! ?? ""), placeholder: UIImage(named: "BasicProfile"))
                     self.activityFrameView.visitNumberLabel.text = "\(result.reserve!)"
                 }
             }
@@ -231,7 +231,7 @@ class MyPageVC: UIViewController {
             parameter: nil) { response in
                 if let activities = response.result?.userActivities {
                     /// 활동 참여 현황 업데이트
-                    self.activities = activities
+                    self.userActivities = activities
                     self.collectionView.reloadData()
                     
                     /// 좋아요한 활동 업데이트
@@ -617,23 +617,36 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return activities.count
+        return 2
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
+
+        if indexPath.row == 0 {
+            cell.activityImageView.image = UIImage(named: "1984StoreTwo")
+            cell.activityNameLabel.text = "즐거운 책 표지 그리기"
+            cell.numOfReviewLabel.text = "10"
+
+        }
+        else if indexPath.row == 1 {
+            cell.activityImageView.image = UIImage(named: "ChaekYeon")
+            cell.activityNameLabel.text = "우하하 신나는 독서토론"
+            cell.numOfReviewLabel.text = "12"
+        }
         
-        cell.activityImageView.kf.setImage(with: URL(string: activities[indexPath.row].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
         
-        cell.activityNameLabel.text = activities[indexPath.row].title
-        cell.starValueLabel.text = String(activities[indexPath.row].total_rating!)
-        cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].review_count!))"
-        
+//        cell.activityImageView.kf.setImage(with: URL(string: userActivities[indexPath.row].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
+//        cell.activityNameLabel.text = userActivities[indexPath.row].title
+//        cell.starValueLabel.text = String(userActivities[indexPath.row].total_rating!)
+//        cell.numOfReviewLabel.text = "리뷰 \(String(userActivities[indexPath.row].review_count!))"
+//
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+    
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
