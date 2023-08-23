@@ -18,7 +18,7 @@ struct UsersActivitiesResponseModel: Codable {
 struct UserActivities: Codable {
     let activity_id: Int?
     let title: String?
-    let total_rating: Int?
+    let total_rating: Float?
     let review_count: Int?
     let image_url: String?
 }

@@ -246,20 +246,20 @@ class MyPageVC: UIViewController {
                         self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
                         // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
                         self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
-                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[0].review_count ?? 0)
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[0].total_rating ?? 0)
                     }
                     else {
                         self.likeActivityBookStoreView.activityNameLabel.text = activities[0].title
                         self.likeActivityBookStoreView.bookStoreImageView.kf.setImage(with: URL(string: activities[0].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
                         // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
                         self.likeActivityBookStoreView.bookStoreName.text = "서른책방"
-                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[1].review_count ?? 0)
+                        self.likeActivityBookStoreView.starValueLabel.text = String(activities[1].total_rating ?? 0)
                         
                         self.likeActivityBookStoreView2.activityNameLabel.text = activities[1].title
                         self.likeActivityBookStoreView2.bookStoreImageView.kf.setImage(with: URL(string: activities[1].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
                         // TODO: 나중에 서버한테 책방 이름 넣어달라고 해야함
                         self.likeActivityBookStoreView2.bookStoreName.text = "서른책방"
-                        self.likeActivityBookStoreView2.starValueLabel.text = String(activities[1].review_count ?? 0)
+                        self.likeActivityBookStoreView2.starValueLabel.text = String(activities[1].total_rating ?? 0)
                     }
                 }
             }
@@ -627,13 +627,13 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
         if indexPath.row == 0 {
             cell.activityImageView.image = UIImage(named: "1984StoreTwo")
             cell.activityNameLabel.text = "즐거운 책 표지 그리기"
-            cell.numOfReviewLabel.text = "10"
+            cell.numOfReviewLabel.text = "리뷰 10"
 
         }
         else if indexPath.row == 1 {
             cell.activityImageView.image = UIImage(named: "ChaekYeon")
             cell.activityNameLabel.text = "우하하 신나는 독서토론"
-            cell.numOfReviewLabel.text = "12"
+            cell.numOfReviewLabel.text = "리뷰 12"
         }
         
         
