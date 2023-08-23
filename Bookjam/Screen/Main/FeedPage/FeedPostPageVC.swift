@@ -849,8 +849,8 @@ class FeedPostPageVC: UIViewController {
             uploadButton.isEnabled = true
         }
         else {
-            uploadButton.backgroundColor = gray03
-            uploadButton.isEnabled = false
+            uploadButton.backgroundColor = main03
+            uploadButton.isEnabled = true
         }
     }
     
