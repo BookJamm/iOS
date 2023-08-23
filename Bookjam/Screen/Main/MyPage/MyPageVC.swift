@@ -618,13 +618,13 @@ class MyPageVC: UIViewController {
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return activities.count
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
         
         cell.activityImageView.kf.setImage(with: URL(string: activities[indexPath.row].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
+        
         cell.activityNameLabel.text = activities[indexPath.row].title
         cell.starValueLabel.text = String(activities[indexPath.row].total_rating!)
         cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].review_count!))"
