@@ -844,14 +844,16 @@ class FeedPostPageVC: UIViewController {
     /// 업로드 버튼 활성화 가능 여부 판단하는 함수
     /// 방문날짜, 장소, 책제목, 내용 모두 선택하고 채워야 업로드 함수 활성화
     func checkUploadPossible() {
-        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
-            uploadButton.backgroundColor = main03
-            uploadButton.isEnabled = true
-        }
-        else {
-            uploadButton.backgroundColor = main03
-            uploadButton.isEnabled = true
-        }
+        uploadButton.backgroundColor = main03
+        uploadButton.isEnabled = true
+//        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
+//            uploadButton.backgroundColor = main03
+//            uploadButton.isEnabled = true
+//        }
+//        else {
+//            uploadButton.backgroundColor = main03
+//            uploadButton.isEnabled = true
+//        }
     }
     
     /// 네비게이션 바에 있는 뒤로가기 버튼 누르면 현재 뷰 dismiss
@@ -1105,7 +1107,7 @@ class FeedPostPageVC: UIViewController {
         feedPostCheckPopUpVC.view.backgroundColor = .black.withAlphaComponent(0.5)
         feedPostCheckPopUpVC.modalTransitionStyle = .crossDissolve
         feedPostCheckPopUpVC.modalPresentationStyle = .overFullScreen
-        
+        print("didFeedUploadButtonTapped() 실행")
         self.present(feedPostCheckPopUpVC, animated: true)
     }
     

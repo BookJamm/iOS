@@ -39,7 +39,6 @@ class FeedPostCheckPopUpVC: UIViewController {
         $0.backgroundColor = gray03
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
-        $0.addTarget(self, action: #selector(didContinueButtonTapped), for: .touchUpInside)
     }
     
     var doneButton: UIButton = UIButton().then {
@@ -49,7 +48,6 @@ class FeedPostCheckPopUpVC: UIViewController {
         $0.backgroundColor = main01
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
-        $0.addTarget(self, action: #selector(didDoneButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidLoad() {
@@ -59,6 +57,9 @@ class FeedPostCheckPopUpVC: UIViewController {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        
+        continueButton.addTarget(self, action: #selector(didContinueButtonTapped), for: .touchUpInside)
+        doneButton.addTarget(self, action: #selector(didDoneButtonTapped), for: .touchUpInside)
     }
     
     
@@ -69,9 +70,9 @@ class FeedPostCheckPopUpVC: UIViewController {
     }
     
     /// 뒷쪽 뷰 클릭하면 화면 dismiss되도록 설정
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.dismiss(animated: true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.dismiss(animated: true)
+//    }
     
     
     // MARK: Layout
