@@ -436,7 +436,7 @@ class BookstoreDetailPageVC: UIViewController {
             
             contentView.snp.removeConstraints()
             
-            let homeViewHeight = 1000 + reviewView.reviews.count * 300
+            let homeViewHeight = 1200 + reviewView.reviews.count * 350
             setUpContentviewConstraint(height: homeViewHeight)
             
         }
