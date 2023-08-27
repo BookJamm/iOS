@@ -155,6 +155,4 @@ extension APIManager {
             }
             .resume()
     }
-    
-    
 }
