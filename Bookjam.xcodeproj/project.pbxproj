@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		411FD826C5A9F974087EAC6B /* Pods_BookjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47ED49659B4E111FDC84ECA9 /* Pods_BookjamTests.framework */; };
 		4F360426894B4364D871ACEA /* Pods_Bookjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */; };
+		88232B2E2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */; };
+		88232B302A9E612200BAC0F5 /* BookStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B2F2A9E612200BAC0F5 /* BookStoreListVC.swift */; };
 		88F41F982A9C98FC00AA376C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F41F972A9C98FC00AA376C /* LocationTableViewCell.swift */; };
 		88F41F9A2A9C99F600AA376C /* BookStoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F41F992A9C99F600AA376C /* BookStoreListView.swift */; };
 		941177052A79727200847F26 /* BookStoreDetailHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941176FF2A79727200847F26 /* BookStoreDetailHomeView.swift */; };
@@ -146,6 +148,8 @@
 		6CF20512EC3BB55ACCE6EF83 /* Pods-Bookjam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam.release.xcconfig"; path = "Target Support Files/Pods-Bookjam/Pods-Bookjam.release.xcconfig"; sourceTree = "<group>"; };
 		6F687D70DC26FAB7B740C979 /* Pods-Bookjam-BookjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam-BookjamUITests.release.xcconfig"; path = "Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetController.swift; sourceTree = "<group>"; };
+		88232B2F2A9E612200BAC0F5 /* BookStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListVC.swift; sourceTree = "<group>"; };
 		88F41F972A9C98FC00AA376C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		88F41F992A9C99F600AA376C /* BookStoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListView.swift; sourceTree = "<group>"; };
 		8D5C2379B29DA2D1BF353C4F /* Pods-BookjamTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookjamTests.debug.xcconfig"; path = "Target Support Files/Pods-BookjamTests/Pods-BookjamTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,6 +369,8 @@
 				88F41F962A9C98D500AA376C /* View */,
 				88F41F952A9C98C200AA376C /* Cell */,
 				94D658FD2A71653A00E7F183 /* LocationPageVC.swift */,
+				88232B2F2A9E612200BAC0F5 /* BookStoreListVC.swift */,
+				88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */,
 			);
 			path = LocationPage;
 			sourceTree = "<group>";
@@ -1113,6 +1119,7 @@
 				DD7994282A89F4610066CFB7 /* FeedPostTableViewCell.swift in Sources */,
 				947ED6612A8F8D030037FB38 /* PlaceIdNews.swift in Sources */,
 				DDC0901A2A79226F00CDCC8A /* BookInfo.swift in Sources */,
+				88232B302A9E612200BAC0F5 /* BookStoreListVC.swift in Sources */,
 				DDC4450B2A80D231000FE1C7 /* UIImage+.swift in Sources */,
 				DD4889412A6FB2C800F878C0 /* FriendInfoTableViewCell.swift in Sources */,
 				947ED6692A9394310037FB38 /* MainPageInfoViewController.swift in Sources */,
@@ -1177,6 +1184,7 @@
 				DD58E6142A760A0A0026BEE1 /* ColorData.swift in Sources */,
 				DDAECC222A924AD600B3D676 /* BookStoreChoiceDateVC.swift in Sources */,
 				941177252A8A295000847F26 /* SingUp.swift in Sources */,
+				88232B2E2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift in Sources */,
 				DDCBC1242A865A7000694CBD /* BookStoreWriteReviewVC.swift in Sources */,
 				DDC4450D2A80E0BE000FE1C7 /* UIColor+.swift in Sources */,
 				DDAECC242A931C2C00B3D676 /* BookSearchTableViewCell.swift in Sources */,
