@@ -23,7 +23,7 @@ class Onboarding06VC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "BOOKJAM에\n가입하신 것을 축하합니다 🎉"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = title01
         $0.numberOfLines = 2
         $0.sizeToFit()
     }
@@ -38,7 +38,7 @@ class Onboarding06VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.setTitle("BOOKJAM 시작하기", for: .normal)
         $0.titleLabel?.textColor = .white
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didStartButtonTapped), for: .touchUpInside)
     }
     

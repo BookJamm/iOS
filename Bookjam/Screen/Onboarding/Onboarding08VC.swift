@@ -36,7 +36,7 @@ class Onboarding08VC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "친구들과 함께 다양한 독서 경험,\n특별한 경험을 공유하고 싶을 때"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = title02
         $0.numberOfLines = 2
         $0.sizeToFit()
     }
@@ -51,7 +51,7 @@ class Onboarding08VC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.setTitle("메인으로", for: .normal)
         $0.titleLabel?.textColor = .white
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
 

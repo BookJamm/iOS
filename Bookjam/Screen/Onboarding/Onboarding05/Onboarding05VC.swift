@@ -28,7 +28,7 @@ class Onboarding05VC: UIViewController {
         $0.textAlignment = .left
         $0.text = "BOOKJAM을 함께 즐길 친구를\n함께 찾아봐요!"
         $0.numberOfLines = 2
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = title01
         $0.sizeToFit()
     }
     
@@ -36,7 +36,7 @@ class Onboarding05VC: UIViewController {
         $0.textColor = UIColor(hexCode: "6F6F6F")
         $0.textAlignment = .left
         $0.text = "아이디로 검색하기"
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.font = title03
         $0.sizeToFit()
     }
     
@@ -49,7 +49,7 @@ class Onboarding05VC: UIViewController {
     let emailTextField: UITextField = UITextField().then {
         $0.placeholder = "bookjam@email.com"
         $0.textColor = .black
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.font = paragraph01
     }
     
     let bottomLineView: UIView = UIView().then {
@@ -70,7 +70,7 @@ class Onboarding05VC: UIViewController {
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.setTitle("완료하기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didFinishButtonTapped), for: .touchUpInside)
     }
 
