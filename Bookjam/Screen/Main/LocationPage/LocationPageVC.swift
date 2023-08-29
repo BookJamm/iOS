@@ -15,6 +15,7 @@ import Then
 
 import CoreLocation
 import MapKit
+import FloatingPanel
 
 
 final class LocationPageVC: BaseBottomSheetController {
@@ -65,6 +66,7 @@ final class LocationPageVC: BaseBottomSheetController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(moveState), name: NSNotification.Name("PanelMove") , object: nil)
     }
 
     override func viewDidLoad() {
@@ -75,6 +77,22 @@ final class LocationPageVC: BaseBottomSheetController {
         setUpConstraint()
         setUpInteraction()
         setUpFloatingPanel()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        NotificationCenter.default
+    }
+    
+    @objc func moveState(_ sender: Notification) {
+        switch self.fpc.state {
+        case .half :
+            self.fpc.move(to: .tip, animated: true)
+        case .full :
+            self.fpc.move(to: .half, animated: true)
+        default :
+           break
+        }
     }
     
     func setUpFloatingPanel() {

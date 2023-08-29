@@ -105,8 +105,6 @@ class BookStoreListViewController: UIViewController {
         self.locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationTableViewCell")
         self.locationTableView.dataSource = self
         self.locationTableView.delegate = self
-        
-        self.locationTableView.isScrollEnabled = false
     }
     
     
@@ -235,7 +233,7 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.locationTableView {
             if scrollView.contentOffset.y < 0 {
-                self.locationTableView.isScrollEnabled = false
+                NotificationCenter.default.post(name: NSNotification.Name("PanelMove"), object: nil)
             }
         }
     }
