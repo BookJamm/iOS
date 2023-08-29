@@ -29,7 +29,7 @@ class Onboarding01VC: UIViewController {
         $0.backgroundColor = UIColor.white
         $0.setTitle("북잼 로그인", for: .normal)
         $0.setTitleColor(main01, for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        $0.titleLabel?.font = paragraph01
         $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didEmailButtonTapped), for: .touchUpInside)
     }
@@ -39,7 +39,7 @@ class Onboarding01VC: UIViewController {
         $0.setImage(UIImage(named: "KakaoLogo"), for: .normal)
         $0.setTitle(" 카카오 계정 연동하기", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "191919"), for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        $0.titleLabel?.font = paragraph01
         $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didKakaoButtonTapped), for: .touchUpInside)
     }
@@ -47,7 +47,7 @@ class Onboarding01VC: UIViewController {
     let signUpButton: UIButton = UIButton().then {
         $0.backgroundColor = main01
         $0.setTitle("회원가입", for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 16.0, weight: .bold)
+        $0.titleLabel?.font = paragraph01
         $0.layer.cornerRadius = 8
         $0.layer.borderWidth = 1.5
         $0.layer.borderColor = UIColor.white.cgColor
@@ -55,7 +55,6 @@ class Onboarding01VC: UIViewController {
     }
     
     let appleButton: ASAuthorizationAppleIDButton = ASAuthorizationAppleIDButton().then {
-        $0.layer.cornerRadius = 0
         $0.addTarget(self, action: #selector(didAppleButtonTapped), for: .touchUpInside)
     }
     
@@ -63,6 +62,7 @@ class Onboarding01VC: UIViewController {
     /// 데모데이 이전에 개발 완료하면 삭제할 예정입니다.
     let skipButton: UIButton = UIButton().then {
         $0.setTitle("메인으로 넘어가기", for: .normal)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didSkipButtonTapped), for: .touchUpInside)
     }
     
@@ -102,35 +102,35 @@ class Onboarding01VC: UIViewController {
     func setUpConstraint() {
         logoImage.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.45)
+            $0.top.equalToSuperview().offset(270)
         }
         
         emailButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalToSuperview().multipliedBy(0.065)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.625)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
+            $0.bottom.equalTo(signUpButton.snp.top).offset(-8)
         }
         
         signUpButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalToSuperview().multipliedBy(0.065)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.7)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
+            $0.bottom.equalTo(kakaoButton.snp.top).offset(-8)
         }
         
         kakaoButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalToSuperview().multipliedBy(0.065)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.775)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
+            $0.bottom.equalTo(appleButton.snp.top).offset(-8)
         }
         
         appleButton.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalToSuperview().multipliedBy(0.065)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().multipliedBy(0.85)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
+            $0.bottom.equalToSuperview().offset(-102)
         }
         
         skipButton.snp.makeConstraints {
@@ -243,9 +243,9 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
     }
 }
 
-struct Onboarding01VC_Preview: PreviewProvider {
-    static var previews: some View {
-        Onboarding01VC().toPreview()
-            
-    }
-}
+//struct Onboarding01VC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        Onboarding01VC().toPreview()
+//            
+//    }
+//}

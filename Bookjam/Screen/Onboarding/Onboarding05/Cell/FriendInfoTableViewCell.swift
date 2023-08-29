@@ -44,7 +44,7 @@ class FriendInfoTableViewCell: UITableViewCell {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "BOOKJAM"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = paragraph01
         $0.sizeToFit()
     }
     
@@ -52,7 +52,7 @@ class FriendInfoTableViewCell: UITableViewCell {
         $0.textColor = UIColor(hexCode: "A5A5A5")
         $0.textAlignment = .left
         $0.text = "bookjam@gmail.com"
-        $0.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        $0.font = paragraph05
         $0.sizeToFit()
     }
     
