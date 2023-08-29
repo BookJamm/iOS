@@ -83,6 +83,7 @@ class LoginVC: UIViewController {
     var loginButton: UIButton = UIButton().then {
         $0.setTitle("로그인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = paragraph01
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.addTarget(self, action: #selector(didLoginButtonTapped), for: .touchUpInside)
