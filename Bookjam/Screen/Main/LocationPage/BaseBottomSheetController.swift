@@ -89,7 +89,7 @@ final class StoreListBottomSheetDelegateController: FloatingPanelControllerDeleg
 
 class FloatingPanelStocksLayout: FloatingPanelLayout {
     let position: FloatingPanelPosition = .bottom
-    let initialState: FloatingPanelState = .tip
+    let initialState: FloatingPanelState = .half
 
     let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
         .full: FloatingPanelLayoutAnchor(absoluteInset: 160, edge: .top, referenceGuide: .safeArea),
