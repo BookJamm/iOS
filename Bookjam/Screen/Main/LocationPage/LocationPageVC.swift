@@ -2,7 +2,7 @@
 //  LocationPageVC.swift
 //  Bookjam
 //
-//  Created by 장준모 on 2023/07/26.
+//  Created by 박민서 on 2023/08/28.
 //
 
 // MARK: - 메인 탭바에서 내 주변 누르면 나오는 위치 기반 검색 화면
@@ -17,13 +17,17 @@ import CoreLocation
 import MapKit
 
 
-class LocationPageVC: UIViewController {
+final class LocationPageVC: BaseBottomSheetController {
 
     // MARK: Variables
     /// 위치 관리 매니저
     private let locationManager = CLLocationManager()
     /// 지도 뷰
     private let mapView = MKMapView()
+    /// 목록 뷰 팬 제스처
+    private let panGesture = UIPanGestureRecognizer()
+    
+    private var listViewCurrentY:CGFloat = 200.0
     
     /// 화면 상단 서치바
     lazy var searchBar: UISearchBar = UISearchBar().then {
@@ -69,6 +73,20 @@ class LocationPageVC: UIViewController {
         setUpView()
         setUpLayout()
         setUpConstraint()
+        setUpInteraction()
+        setUpFloatingPanel()
+    }
+    
+    func setUpFloatingPanel() {
+        var BottomContent = BookStoreListViewController()
+        var BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent)
+        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController)
+        
+        currentLocateBtn.snp.makeConstraints {
+            $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
+            $0.centerX.equalToSuperview()
+        }
+        
     }
     
 
@@ -112,8 +130,6 @@ class LocationPageVC: UIViewController {
     func setUpDelegate() {
         locationManager.delegate = self
         mapView.delegate = self
-        self.locationListView.locationTableView.dataSource = self
-        self.locationListView.locationTableView.delegate = self
     }
     
     
@@ -133,20 +149,106 @@ class LocationPageVC: UIViewController {
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
         
-        // 목록 팝업 테이블 뷰
-        locationListView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.top.equalTo(self.view.snp.centerY)
-            $0.height.equalToSuperview().multipliedBy(0.5)
-        }
+//        // 목록 팝업 테이블 뷰
+//        locationListView.snp.makeConstraints {
+//            $0.horizontalEdges.equalToSuperview()
+//            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(listViewCurrentY)
+//            $0.height.equalToSuperview().multipliedBy(0.5)
+//        }
         
         // 현재 위치 탐색 버튼
-        currentLocateBtn.snp.makeConstraints {
-            $0.bottom.equalTo(locationListView.snp.top).offset(-10)
-            $0.centerX.equalToSuperview()
-        }
+//        currentLocateBtn.snp.makeConstraints {
+//            $0.bottom.equalTo(locationListView.snp.top).offset(-10)
+//            $0.centerX.equalToSuperview()
+//        }
     }
     
+    // MARK: - Interaction
+    func setUpInteraction() {
+        panGesture.addTarget(self, action: #selector(handlePan))
+        locationListView.addGestureRecognizer(self.panGesture) // 목록 뷰에 팬제스처 추가
+        self.locationListView.locationTableView.isScrollEnabled = false // 처음엔 테이블 뷰 스크롤 안되게
+    }
+    
+    /// 목록 뷰가 포함된 뷰의 팬제스처입니다.
+    /// 스크롤을 올리면 목록뷰가 위로 이동하며, 끝까지 올린 경우 하단 탭바에 고정됩니다.
+    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+     
+        guard let contentView = gestureRecognizer.view else { return }
+        guard let tabBarMinY = self.tabBarController?.tabBar.frame.minY else { return }
+        
+        // 스크롤이 끝까지 되었는지 확인하는 조건
+        let isFullyUpScrolled = self.locationListView.frame.maxY <= tabBarMinY
+        let isFullyDownScrolled = self.locationListView.frame.minY + 200 > tabBarMinY
+        
+        // 팬제스처를 통한 변위 값
+        let translation = gestureRecognizer.translation(in: contentView)
+        
+        
+        
+        
+//        print(translation.y)
+        
+//        if gestureRecognizer.state == .changed {
+//            // 목록 뷰에서 포인터가 어디에 위치하는지 표시 - 음수값도 지원된다.
+//            let currentPoint_inContentView = gestureRecognizer.location(in: contentView)
+//            let currentPoint_inEntireView = gestureRecognizer.location(in: self.view)
+////            print(currentPoint_inEntireView.y)
+//            print(currentPoint_inContentView.y)
+//
+//            listViewCurrentY = currentPoint_inEntireView.y + currentPoint_inContentView.y
+//            print(listViewCurrentY)
+//
+//            self.locationListView.snp.updateConstraints{
+////                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
+//                $0.top.equalTo(self.view.snp.top).offset(listViewCurrentY)
+//            }
+//        }
+        
+        
+//        // 다운 스크롤일 때
+//        if translation.y > 0 {
+//            // 끝까지 스크롤 했을 때
+//            if isFullyDownScrolled {
+//                // 하단 탭바에 목록 뷰 고정
+//                locationListView.locationTableView.isScrollEnabled = false
+//
+//                self.locationListView.snp.updateConstraints{
+//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
+//                }
+//            }
+//            // 끝까지 스크롤 되지 않았을 때
+//            else {
+//                locationListView.locationTableView.isScrollEnabled = false
+//                // 변위 값을 통해 offset 변경
+//                self.locationListView.snp.updateConstraints{
+//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
+//                }
+//            }
+//        }
+//        // 업 스크롤일 때
+//        else {
+//            // 끝까지 스크롤 했을 때
+//            if isFullyUpScrolled {
+//                // 하단 탭바에 목록 뷰 고정
+//                self.locationListView.snp.updateConstraints {
+//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height)
+//                }
+////                gestureRecognizer.isEnabled = false
+//                locationListView.locationTableView.isScrollEnabled = true
+//
+//            }
+//            // 끝까지 스크롤 되지 않았을 때
+//            else {
+//                locationListView.locationTableView.isScrollEnabled = false
+//                // 변위 값을 통해 offset 변경
+//                self.locationListView.snp.updateConstraints{
+//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-200 + translation.y)
+//                }
+//            }
+//        }
+    }
+            
 }
 
 // MARK: - LocationManagerDelgete 입니다. 위치를 갖고 오고, 이에 따른 추가 작업을 진행합니다.
@@ -157,7 +259,7 @@ extension LocationPageVC: CLLocationManagerDelegate {
         // location 가져오기 성공했을 때
         if let userLocation = locations.last?.coordinate {
             // region 설정 - 1km * 1km 반경으로 설정
-            let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 5000, longitudinalMeters: 5000)
             mapView.setRegion(region, animated: true)
         }
         // loacation 업데이트 종료 - 일단 안씁니다
@@ -191,62 +293,7 @@ extension LocationPageVC: MKMapViewDelegate {
         
         return annotationView
     }
-}
-
-// MARK: - TableView Extension
-extension LocationPageVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if let count = bookStoreList?.count{
-//            return count
-//        }
-        return 2
-        
-    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableViewCell", for: indexPath) as! LocationTableViewCell
-        
-//        if let bookStoreList = bookStoreList {
-//            let book = bookStoreList[indexPath.row]
-//            cell.bookstoreLabel.text = book.name
-//            cell.locationLabel.text = book.address?.road
-//            if let rating = bookStoreList[indexPath.row].rating {
-//                cell.starLabel.text = String(rating)
-//            }
-//
-//            if let reviewCount = bookStoreList[indexPath.row].reviewCount {
-//                cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
-//            }
-//            if let imageUrls = bookStoreList[indexPath.row].images {    //이미지 url을 이미지로
-//                cell.images = imageUrls
-//            }
-//        }
-        
-        return cell
-    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환
-//        let detailPage = BookstoreDetailPageVC()
-//
-//        let selectedPlaceId = bookStoreList![indexPath.row].placeId!
-//
-//        APIManager.shared.getData(
-//            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
-//            responseDataType: APIModel<PlaceIdResponseModel>?.self,
-//            requestDataType: PlaceIdRequestModel.self,
-//            parameter: nil,
-//            completionHandler: { [self]
-//                response in
-//                    print(response)
-//                detailPage.bookStoreDetail = response?.result ?? nil
-//                navigationController?.pushViewController(detailPage, animated: true)
-//            })
-//
-//    }
 }
 
 // MARK: - preview
@@ -261,13 +308,13 @@ struct LocationPageVC_Preview: PreviewProvider {
     }
 }
 
-//// MARK: 테스트 데이터 모델
+// MARK: 테스트 데이터 모델
 //struct Location {
 //    let location: CLLocationCoordinate2D
 //    let isOnline: Bool
 //}
 //
-//// MARK: 테스트 데이터
+// MARK: 테스트 데이터
 //let test_locations: [Location] = [
 //    Location(location: CLLocationCoordinate2D(latitude: 37.54478472921202, longitude: 126.94673688998076),
 //             isOnline: true),
