@@ -38,7 +38,7 @@ class Onboarding07VC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "색다른 경험, 색다른 공간에서\n책과 함께 힐링하고 싶을 때"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = title02
         $0.numberOfLines = 2
         $0.sizeToFit()
     }
@@ -52,7 +52,7 @@ class Onboarding07VC: UIViewController {
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.setTitle("메인으로", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
 

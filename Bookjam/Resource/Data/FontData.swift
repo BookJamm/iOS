@@ -13,26 +13,26 @@ import UIKit
 
 // MARK: Title
 
-var title01 = UIFont.systemFont(ofSize: 20, weight: .bold)
-var title02 = UIFont.systemFont(ofSize: 20, weight: .medium)
-var title03 = UIFont.systemFont(ofSize: 18, weight: .bold)
-var title05 = UIFont.systemFont(ofSize: 18, weight: .regular)
-var title06 = UIFont.systemFont(ofSize: 20, weight: .semibold)
+var title01 = UIFont(name: "SUITVariable-Bold", size: 20)
+var title02 = UIFont(name: "SUITVariable-Medium", size: 20)
+var title03 = UIFont(name: "SUITVariable-Bold", size: 18)
+var title05 = UIFont(name: "SUITVariable-Regular", size: 18)
+var title06 = UIFont(name: "SUITVariable-SemiBold", size: 18)
 
 
 // MARK: Paragraph
 
-var paragraph01 = UIFont.systemFont(ofSize: 16, weight: .semibold)
-var paragraph02 = UIFont.systemFont(ofSize: 16, weight: .medium)
-var paragraph03 = UIFont.systemFont(ofSize: 16, weight: .regular)
-var paragraph04 = UIFont.systemFont(ofSize: 14, weight: .semibold)
-var paragraph05 = UIFont.systemFont(ofSize: 14, weight: .medium)
-var paragraph06 = UIFont.systemFont(ofSize: 14, weight: .regular)
+var paragraph01 = UIFont(name: "SUITVariable-SemiBold", size: 16)
+var paragraph02 = UIFont(name: "SUITVariable-Medium", size: 16)
+var paragraph03 = UIFont(name: "SUITVariable-Regular", size: 16)
+var paragraph04 = UIFont(name: "SUITVariable-SemiBold", size: 14)
+var paragraph05 = UIFont(name: "SUITVariable-Medium", size: 14)
+var paragraph06 = UIFont(name: "SUITVariable-Regular", size: 14)
 
 
 // MARK: Caption Text
 
-var captionText01 = UIFont.systemFont(ofSize: 12, weight: .semibold)
-var captionText02 = UIFont.systemFont(ofSize: 12, weight: .medium)
-var captionText03 = UIFont.systemFont(ofSize: 12, weight: .regular)
-var captionText04 = UIFont.systemFont(ofSize: 10, weight: .regular)
+var captionText01 = UIFont(name: "SUITVariable-SemiBold", size: 12)
+var captionText02 = UIFont(name: "SUITVariable-Medium", size: 12)
+var captionText03 = UIFont(name: "SUITVariable-Regular", size: 12)
+var captionText04 = UIFont(name: "SUITVariable-Regular", size: 10)

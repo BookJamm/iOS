@@ -21,7 +21,7 @@ class Onboarding03VC: UIViewController {
     
     let registerLabel: UILabel = UILabel().then {
         $0.text = "회원 가입"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        $0.font = title01
         $0.textColor = .black
         $0.textAlignment = .left
         $0.sizeToFit()
@@ -29,27 +29,30 @@ class Onboarding03VC: UIViewController {
     
     let idLabel: UILabel = UILabel().then {
         $0.text = "이메일 입력"
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.font = title03
         $0.textColor = UIColor(hexCode: "6F6F6F")
     }
     
     let passwordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호 입력"
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.font = title03
         $0.textColor = UIColor(hexCode: "6F6F6F")
     }
     
     let emailTextField: UITextField = UITextField().then {
         $0.placeholder = "email@email.com"
+        $0.font = paragraph01
     }
     
     let passwordTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 입력"
+        $0.font = paragraph01
         $0.isSecureTextEntry = true
     }
 
     let passwordConfirmTextField: UITextField = UITextField().then {
         $0.placeholder = "비밀번호 확인"
+        $0.font = paragraph01
         $0.isSecureTextEntry = true
     }
     
@@ -57,27 +60,27 @@ class Onboarding03VC: UIViewController {
         $0.isHidden = true
         $0.text = "중복된 아이디입니다."
         $0.textColor = alert
-        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.font = captionText03
     }
     
     let passwordConditionLabel: UILabel = UILabel().then {
         $0.text = "영문자, 숫자, 특수문자 중 3가지 이상 포함 9자 이상 16글자 이하"
         $0.textColor = alert
-        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.font = captionText03
         $0.isHidden = true
     }
     
     let passwordAccordLabel: UILabel = UILabel().then {
         $0.text = "비밀번호가 일치하지 않습니다."
         $0.textColor = alert
-        $0.font = UIFont.systemFont(ofSize: 12)
+        $0.font = captionText03
         $0.isHidden = true
     }
     
     // 중복확인 버튼
     let duplicateRequestButton: UIButton = UIButton().then {
         $0.setTitle("중복 확인", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+        $0.titleLabel?.font = paragraph04
         $0.backgroundColor = main01
         $0.layer.cornerRadius = 8
         $0.layer.masksToBounds = true
@@ -90,7 +93,7 @@ class Onboarding03VC: UIViewController {
         $0.layer.masksToBounds = true
         $0.backgroundColor = gray04
         $0.isEnabled = false
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.titleLabel?.font = paragraph04
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchDown)
     }
     
