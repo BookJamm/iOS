@@ -242,10 +242,10 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
         return self.view.window!
     }
 }
-//
-//struct Onboarding01VC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        Onboarding01VC().toPreview()
-//            
-//    }
-//}
+
+struct Onboarding01VC_Preview: PreviewProvider {
+    static var previews: some View {
+        Onboarding01VC().toPreview()
+            
+    }
+}
