@@ -42,11 +42,6 @@ final class LocationPageVC: BaseBottomSheetController {
         $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
     }
     
-    /// 화면 하단의 장소 목록 테이블 뷰입니다.
-    lazy var locationListView = BookStoreListView().then {
-        $0.titleLabel.text = "추천 장소"
-    }
-    
     /// 목록뷰 상단의 탐색 버튼입니다.
     lazy var currentLocateBtn: UIButton = UIButton().then {
         
@@ -75,13 +70,13 @@ final class LocationPageVC: BaseBottomSheetController {
         setUpView()
         setUpLayout()
         setUpConstraint()
-        setUpInteraction()
         setUpFloatingPanel()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        NotificationCenter.default
+        // loacation 업데이트 종료
+        locationManager.stopUpdatingLocation()
     }
     
     @objc func moveState(_ sender: Notification) {
@@ -118,19 +113,17 @@ final class LocationPageVC: BaseBottomSheetController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest   // 가장 높은 정확도의 위치 정보를 요청
         
         // 지도 초기화 설정
-        mapView.showsUserLocation = true    // 유저 현재 위치 보이게
+//        mapView.showsUserLocation = true    // 유저 현재 위치 보이게
         mapView.mapType = MKMapType.standard    // 일반적인 지도 스타일
         mapView.setUserTrackingMode(.follow, animated: true)    // 지도가 사용자의 위치를 따라가는 모드로 전환
         
         /// 테스트 데이터를 갖고 핀으로 map에 붙이기
-//        locations.forEach { data in
-//                    let pin = CustomAnnotation(isOnline: data.isOnline, coordinate: data.location)
-//                    mapView.addAnnotation(pin)
-//                }
-        
-        
-        // locationListView의 테이블 뷰 register
-        locationListView.locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationTableViewCell")
+        test_locations.forEach { data in
+                    let pin = MKPointAnnotation()
+            pin.coordinate = data.location
+            pin.title = "TEST"
+                    mapView.addAnnotation(pin)
+                }
     }
     
     
@@ -138,7 +131,6 @@ final class LocationPageVC: BaseBottomSheetController {
     func setUpLayout() {
         [
             mapView,
-            locationListView,
             currentLocateBtn,
             searchBar // 상단 서치바는 가려지면 안됩니다.
         ].forEach { self.view.addSubview($0)}
@@ -166,105 +158,6 @@ final class LocationPageVC: BaseBottomSheetController {
             $0.top.equalTo(self.searchBar.snp.bottom).offset(20)
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
-        
-//        // 목록 팝업 테이블 뷰
-//        locationListView.snp.makeConstraints {
-//            $0.horizontalEdges.equalToSuperview()
-//            $0.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(listViewCurrentY)
-//            $0.height.equalToSuperview().multipliedBy(0.5)
-//        }
-        
-        // 현재 위치 탐색 버튼
-//        currentLocateBtn.snp.makeConstraints {
-//            $0.bottom.equalTo(locationListView.snp.top).offset(-10)
-//            $0.centerX.equalToSuperview()
-//        }
-    }
-    
-    // MARK: - Interaction
-    func setUpInteraction() {
-        panGesture.addTarget(self, action: #selector(handlePan))
-        locationListView.addGestureRecognizer(self.panGesture) // 목록 뷰에 팬제스처 추가
-        self.locationListView.locationTableView.isScrollEnabled = false // 처음엔 테이블 뷰 스크롤 안되게
-    }
-    
-    /// 목록 뷰가 포함된 뷰의 팬제스처입니다.
-    /// 스크롤을 올리면 목록뷰가 위로 이동하며, 끝까지 올린 경우 하단 탭바에 고정됩니다.
-    @objc func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
-     
-        guard let contentView = gestureRecognizer.view else { return }
-        guard let tabBarMinY = self.tabBarController?.tabBar.frame.minY else { return }
-        
-        // 스크롤이 끝까지 되었는지 확인하는 조건
-        let isFullyUpScrolled = self.locationListView.frame.maxY <= tabBarMinY
-        let isFullyDownScrolled = self.locationListView.frame.minY + 200 > tabBarMinY
-        
-        // 팬제스처를 통한 변위 값
-        let translation = gestureRecognizer.translation(in: contentView)
-        
-        
-        
-        
-//        print(translation.y)
-        
-//        if gestureRecognizer.state == .changed {
-//            // 목록 뷰에서 포인터가 어디에 위치하는지 표시 - 음수값도 지원된다.
-//            let currentPoint_inContentView = gestureRecognizer.location(in: contentView)
-//            let currentPoint_inEntireView = gestureRecognizer.location(in: self.view)
-////            print(currentPoint_inEntireView.y)
-//            print(currentPoint_inContentView.y)
-//
-//            listViewCurrentY = currentPoint_inEntireView.y + currentPoint_inContentView.y
-//            print(listViewCurrentY)
-//
-//            self.locationListView.snp.updateConstraints{
-////                $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
-//                $0.top.equalTo(self.view.snp.top).offset(listViewCurrentY)
-//            }
-//        }
-        
-        
-//        // 다운 스크롤일 때
-//        if translation.y > 0 {
-//            // 끝까지 스크롤 했을 때
-//            if isFullyDownScrolled {
-//                // 하단 탭바에 목록 뷰 고정
-//                locationListView.locationTableView.isScrollEnabled = false
-//
-//                self.locationListView.snp.updateConstraints{
-//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
-//                }
-//            }
-//            // 끝까지 스크롤 되지 않았을 때
-//            else {
-//                locationListView.locationTableView.isScrollEnabled = false
-//                // 변위 값을 통해 offset 변경
-//                self.locationListView.snp.updateConstraints{
-//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height + translation.y)
-//                }
-//            }
-//        }
-//        // 업 스크롤일 때
-//        else {
-//            // 끝까지 스크롤 했을 때
-//            if isFullyUpScrolled {
-//                // 하단 탭바에 목록 뷰 고정
-//                self.locationListView.snp.updateConstraints {
-//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-self.locationListView.bounds.height)
-//                }
-////                gestureRecognizer.isEnabled = false
-//                locationListView.locationTableView.isScrollEnabled = true
-//
-//            }
-//            // 끝까지 스크롤 되지 않았을 때
-//            else {
-//                locationListView.locationTableView.isScrollEnabled = false
-//                // 변위 값을 통해 offset 변경
-//                self.locationListView.snp.updateConstraints{
-//                    $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-200 + translation.y)
-//                }
-//            }
-//        }
     }
             
 }
@@ -277,11 +170,9 @@ extension LocationPageVC: CLLocationManagerDelegate {
         // location 가져오기 성공했을 때
         if let userLocation = locations.last?.coordinate {
             // region 설정 - 1km * 1km 반경으로 설정
-            let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 5000, longitudinalMeters: 5000)
+            let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 7000, longitudinalMeters: 7000)
             mapView.setRegion(region, animated: true)
         }
-        // loacation 업데이트 종료 - 일단 안씁니다
-//        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -303,8 +194,13 @@ extension LocationPageVC: MKMapViewDelegate {
         
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            
+            // 핀 탭하면 상세 정보 팝업
             annotationView?.canShowCallout = true
-            annotationView?.pinTintColor = .green
+            // 팝업 정보창 오른쪽 뷰 설정
+//            let infoButton = UIButton(type: .infoLight)
+//            annotationView?.rightCalloutAccessoryView = infoButton
+            annotationView?.pinTintColor = main03
         } else {
             annotationView?.annotation = annotation
         }
@@ -327,34 +223,34 @@ struct LocationPageVC_Preview: PreviewProvider {
 }
 
 // MARK: 테스트 데이터 모델
-//struct Location {
-//    let location: CLLocationCoordinate2D
-//    let isOnline: Bool
-//}
-//
+struct Location {
+    let location: CLLocationCoordinate2D
+    let isOnline: Bool
+}
+
 // MARK: 테스트 데이터
-//let test_locations: [Location] = [
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54478472921202, longitude: 126.94673688998076),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54439820083342, longitude: 126.948773984529),
-//             isOnline: false),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54504947320774, longitude: 126.9550424714841),
-//             isOnline: false),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54272316128486, longitude: 126.95069875049849),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54580371975873, longitude: 126.9486824957686),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54746336131146, longitude: 126.95301543492582),
-//             isOnline: false),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54187695023674, longitude: 126.95247580718593),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.540310515649004, longitude: 126.95583737028332),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54111875425007, longitude: 126.94921751985316),
-//             isOnline: false),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.53979090501977, longitude: 126.94666123767706),
-//             isOnline: true),
-//    Location(location: CLLocationCoordinate2D(latitude: 37.54845995224114, longitude: 126.94993678169008),
-//             isOnline: true)
-//
-//]
+let test_locations: [Location] = [
+    Location(location: CLLocationCoordinate2D(latitude: 37.54478472921202, longitude: 126.94673688998076),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54439820083342, longitude: 126.948773984529),
+             isOnline: false),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54504947320774, longitude: 126.9550424714841),
+             isOnline: false),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54272316128486, longitude: 126.95069875049849),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54580371975873, longitude: 126.9486824957686),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54746336131146, longitude: 126.95301543492582),
+             isOnline: false),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54187695023674, longitude: 126.95247580718593),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.540310515649004, longitude: 126.95583737028332),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54111875425007, longitude: 126.94921751985316),
+             isOnline: false),
+    Location(location: CLLocationCoordinate2D(latitude: 37.53979090501977, longitude: 126.94666123767706),
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.54845995224114, longitude: 126.94993678169008),
+             isOnline: true)
+
+]
