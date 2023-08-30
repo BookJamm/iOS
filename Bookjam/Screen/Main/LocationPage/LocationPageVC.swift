@@ -25,10 +25,6 @@ final class LocationPageVC: BaseBottomSheetController {
     private let locationManager = CLLocationManager()
     /// 지도 뷰
     private let mapView = MKMapView()
-    /// 목록 뷰 팬 제스처
-    private let panGesture = UIPanGestureRecognizer()
-    
-    private var listViewCurrentY:CGFloat = 200.0
     
     /// 화면 상단 서치바
     lazy var searchBar: UISearchBar = UISearchBar().then {
@@ -116,14 +112,21 @@ final class LocationPageVC: BaseBottomSheetController {
 //        mapView.showsUserLocation = true    // 유저 현재 위치 보이게
         mapView.mapType = MKMapType.standard    // 일반적인 지도 스타일
         mapView.setUserTrackingMode(.follow, animated: true)    // 지도가 사용자의 위치를 따라가는 모드로 전환
+        mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: LocationAnnotationView.identifier)  // 지도에 어노테이션 커스텀 뷰 등록
+        mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)   // 지도에 클러스터 커스텀뷰 등록
+        
+        
         
         /// 테스트 데이터를 갖고 핀으로 map에 붙이기
         test_locations.forEach { data in
-                    let pin = MKPointAnnotation()
+            let pin = MKPointAnnotation()
             pin.coordinate = data.location
             pin.title = "TEST"
-                    mapView.addAnnotation(pin)
-                }
+            mapView.addAnnotation(pin)
+        }
+        
+        
+        
     }
     
     
@@ -182,29 +185,50 @@ extension LocationPageVC: CLLocationManagerDelegate {
 
 // MARK: - MKMapViewDelegate 입니다. mapView에서 사용되는 annotation의 기본 내용을 설정합니다.
 extension LocationPageVC: MKMapViewDelegate {
-    // MARK: - 확정 사항이 아니므로, 더미 코드입니다.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+//        switch annotation {
+//        case is MKUserLocation :
+//            return nil
+//        case is MKClusterAnnotation :
+//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationDataMapClusterView.identifier, for: annotation)
+//        default :
+//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationAnnotationView.identifier, for: annotation)
+//        }
+        
+        
+        
         // 사용자 위치 표시는 따로 처리
         if annotation is MKUserLocation {
             return nil
         }
         
+        // 클러스터 뷰인경우
+        if annotation is MKClusterAnnotation {
+            print("되는거 맞냐")
+//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationDataMapClusterView.identifier, for: annotation)
+            return LocationDataMapClusterView(annotation: annotation, reuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+        }
+
+//        return mapView.dequeueReusableAnnotationView(withIdentifier: LocationAnnotationView.identifier, for: annotation)
+        
         let reuseIdentifier = "pin"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
-        
+
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-            
+
             // 핀 탭하면 상세 정보 팝업
             annotationView?.canShowCallout = true
             // 팝업 정보창 오른쪽 뷰 설정
 //            let infoButton = UIButton(type: .infoLight)
 //            annotationView?.rightCalloutAccessoryView = infoButton
             annotationView?.pinTintColor = main03
+            annotationView?.clusteringIdentifier = "test"
         } else {
             annotationView?.annotation = annotation
         }
-        
+
         return annotationView
     }
     
