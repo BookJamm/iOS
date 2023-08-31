@@ -206,9 +206,9 @@ extension FeedPageVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//struct FeedPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        FeedPageVC().toPreview()
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct FeedPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        FeedPageVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
+}

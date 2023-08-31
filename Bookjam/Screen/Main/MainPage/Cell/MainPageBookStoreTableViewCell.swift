@@ -55,7 +55,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     }
     
     var timeButton: UIButton = UIButton().then {
-        $0.setTitle("   영업중   ", for: .normal)
+        $0.setTitle("    영업중    ", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = captionText01
         $0.layer.cornerRadius = 14
@@ -68,18 +68,18 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     }
     
     var starLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "4.53"
     }
     
     var reviewCountLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "리뷰 132"
         $0.sizeToFit()
     }
     
     var locationLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.textColor = gray06
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }
@@ -99,6 +99,7 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
     
     func setUpView() {
         self.selectionStyle = .none
+        self.backgroundColor = .white
     }
     
     
@@ -149,17 +150,17 @@ class MainPageBookStoreTableViewCell: UITableViewCell {
         }
         
         starImageView.snp.makeConstraints {
-            $0.leading.equalTo(timeButton.snp.trailing).offset(5)
+            $0.leading.equalTo(timeButton.snp.trailing).offset(12)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
         
         starLabel.snp.makeConstraints {
-            $0.leading.equalTo(starImageView.snp.trailing).offset(5)
+            $0.leading.equalTo(starImageView.snp.trailing).offset(4)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
         
         reviewCountLabel.snp.makeConstraints {
-            $0.leading.equalTo(starLabel.snp.trailing).offset(10)
+            $0.leading.equalTo(starLabel.snp.trailing).offset(12)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
 
@@ -193,7 +194,7 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
                     cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row].url!), placeholder: UIImage(named: "squareDefaultImage"))
                 }
                 
-                cell.photoImageView.layer.cornerRadius = 8
+                cell.photoImageView.layer.cornerRadius = 4
         
         return cell
     }
@@ -204,17 +205,17 @@ extension MainPageBookStoreTableViewCell: UICollectionViewDelegate, UICollection
     }
 }
 
-//#if DEBUG
-//
-//@available(iOS 13.0, *)
-//struct MainPageBookStoreTableViewCell_Preview: PreviewProvider {
-//    static var previews: some View {
-//        UIViewPreview {
-//            let button = MainPageBookStoreTableViewCell()
-//            return button
-//        }
-//        .previewLayout(.sizeThatFits)
-//        .padding(10)
-//    }
-//}
-//#endif
+#if DEBUG
+
+@available(iOS 13.0, *)
+struct MainPageBookStoreTableViewCell_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let button = MainPageBookStoreTableViewCell()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
+    }
+}
+#endif

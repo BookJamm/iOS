@@ -37,6 +37,9 @@ class TabBarController: UITabBarController {
         mypageVC.tabBarItem.image = UIImage(systemName: "person.fill")
         mypageVC.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
         
+        let leftSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        leftSpacer.width = 10
+        
         let titleButton = UIBarButtonItem(image: UIImage(named: "BookJamLogoMainColor"),
                                           style: .plain,
                                           target: self,
@@ -46,11 +49,6 @@ class TabBarController: UITabBarController {
                                           style: .plain,
                                           target: self,
                                           action: .none)
-        
-        let settingButton = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal"),
-                                            style: .plain,
-                                            target: self,
-                                            action: .none)
         
         let mainNavigationController = UINavigationController(rootViewController: mainVC)
         let locationNavigationController = UINavigationController(rootViewController: locationVC)
@@ -64,9 +62,7 @@ class TabBarController: UITabBarController {
             locationNavigationController,
             feedNavigationController,
             mypageNavigationController
-        ].forEach {
-            $0.navigationBar.tintColor = .black
-        }
+        ].forEach { $0.navigationBar.tintColor = .black}
         
         [
             mainVC,
@@ -74,16 +70,14 @@ class TabBarController: UITabBarController {
             feedVC,
             mypageVC
         ].forEach {
-            $0.navigationItem.leftBarButtonItem = titleButton
-            $0.navigationItem.leftBarButtonItem?.tintColor = main03
-            $0.navigationItem.setRightBarButtonItems([alertButton, settingButton], animated: true)
-            $0.navigationItem.rightBarButtonItems![0].tintColor = .black
-            $0.navigationItem.rightBarButtonItems![1].tintColor = .black
+            $0.navigationItem.setLeftBarButtonItems([leftSpacer, titleButton], animated: true)
+            $0.navigationItem.leftBarButtonItems![1].tintColor = main03
+            $0.navigationItem.rightBarButtonItem = alertButton
+            $0.navigationItem.rightBarButtonItem!.tintColor = .black
         }
         
-        // TODO: 데모데이 이후 위치 기반 페이지 개발할 때 주석 풀기
         setViewControllers([mainNavigationController,
-                            // locationNavigationController,
+                            locationNavigationController,
                             feedNavigationController,
                             mypageNavigationController], animated: true)
     }

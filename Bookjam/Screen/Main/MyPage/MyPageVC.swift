@@ -46,7 +46,7 @@ class MyPageVC: UIViewController {
     
     var userNameLabel: UILabel = UILabel().then {
         $0.text = "userName님"
-        $0.font = paragraph01
+        $0.font = title06
     }
     
     var myPageSetUpButton: UIButton = UIButton().then {
@@ -441,16 +441,16 @@ class MyPageVC: UIViewController {
         userProfileImageView.snp.makeConstraints{
             $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview().offset(20)
-            $0.width.height.equalTo(90)
+            $0.width.height.equalTo(100)
         }
         
         userNameLabel.snp.makeConstraints{
             $0.leading.equalTo(userProfileImageView.snp.trailing).offset(20)
-            $0.centerY.equalTo(userProfileImageView).offset(-10)
+            $0.bottom.equalTo(myPageSetUpButton.snp.top).offset(-16)
         }
         
         myPageSetUpButton.snp.makeConstraints{
-            $0.top.equalTo(userNameLabel.snp.bottom).offset(20)
+            $0.bottom.equalTo(userProfileImageView.snp.bottom)
             $0.leading.equalTo(userNameLabel)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(33)
