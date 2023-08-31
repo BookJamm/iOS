@@ -180,7 +180,7 @@ extension LocationPageVC: CLLocationManagerDelegate {
         if let userLocation = locations.last?.coordinate {
             // region 설정 - 7km * 7km 반경으로 설정
             let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 7000, longitudinalMeters: 7000)
-            mapView.setRegion(region, animated: true)
+            mapView.setRegion(region, animated: false)
         }
         // loacation 업데이트 종료
         locationManager.stopUpdatingLocation()
@@ -288,6 +288,16 @@ let test_locations: [Location] = [
     Location(location: CLLocationCoordinate2D(latitude: 37.53979090501977, longitude: 126.94666123767706),
              isOnline: true),
     Location(location: CLLocationCoordinate2D(latitude: 37.54845995224114, longitude: 126.94993678169008),
-             isOnline: true)
+             isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.494421166348764, longitude: 126.82028764389928), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.488346902267495, longitude: 126.81579203804258), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49504914992981, longitude: 126.81993141424413), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.4908971317027, longitude: 126.80895351558094), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49158859722595, longitude: 126.81273229448066), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49448832262324, longitude: 126.81572773122747), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49521139983187, longitude: 126.81864321432767), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49686821489078, longitude: 126.81099234551315), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.49722714555698, longitude: 126.82161664736311), isOnline: true),
+    Location(location: CLLocationCoordinate2D(latitude: 37.48738974689891, longitude: 126.8222710328802), isOnline: true)
 
 ]
