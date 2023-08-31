@@ -100,7 +100,6 @@ class BookStoreListViewController: UIViewController {
     // MARK: View
     func setUpView() {
         self.view.backgroundColor = .white
-//        self.locationTableView.tableHeaderView = headerView
         self.locationTableView.tableFooterView = footerView
         self.locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationTableViewCell")
         self.locationTableView.dataSource = self
@@ -172,6 +171,7 @@ class BookStoreListViewController: UIViewController {
 }
 
 // MARK: - TableView Extension
+// MARK: - API연결시 변경해주어야 합니다
 extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 // MARK: - 셀 리스트 개수 반환

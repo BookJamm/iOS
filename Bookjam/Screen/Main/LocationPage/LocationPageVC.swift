@@ -17,7 +17,7 @@ import CoreLocation
 import MapKit
 import FloatingPanel
 
-
+// MARK: - 내 주변 탭의 메인 화면입니다
 final class LocationPageVC: BaseBottomSheetController {
 
     // MARK: Variables
@@ -25,6 +25,8 @@ final class LocationPageVC: BaseBottomSheetController {
     private let locationManager = CLLocationManager()
     /// 지도 뷰
     private let mapView = MKMapView()
+    /// 유저 현재 위치
+    private var userLocation: CLLocationCoordinate2D?
     
     /// 화면 상단 서치바
     lazy var searchBar: UISearchBar = UISearchBar().then {
@@ -57,6 +59,7 @@ final class LocationPageVC: BaseBottomSheetController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        // Floating Panel의 위치 설정 관련 함수를 Notification 등록 - Floating Panel의 VC안에서 post함
         NotificationCenter.default.addObserver(self, selector: #selector(moveState), name: NSNotification.Name("PanelMove") , object: nil)
     }
 
@@ -71,10 +74,13 @@ final class LocationPageVC: BaseBottomSheetController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // loacation 업데이트 종료
-        locationManager.stopUpdatingLocation()
+
+        // 본 VC안의 모든 notification 종료
+        NotificationCenter.default.removeObserver(self)
     }
     
+    /// Floating Panel의 스크롤 상태를 이동시키는 함수입니다.
+    /// 서점 목록 tableView에서 스크롤을 끝까지 올린경우, Notification을 호출하여 해당 함수를 호출합니다.
     @objc func moveState(_ sender: Notification) {
         switch self.fpc.state {
         case .half :
@@ -86,11 +92,13 @@ final class LocationPageVC: BaseBottomSheetController {
         }
     }
     
+    // MARK: - Floating Panel - primary setting
     func setUpFloatingPanel() {
-        var BottomContent = BookStoreListViewController()
-        var BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent)
-        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController)
+        let BottomContent = BookStoreListViewController()   // 바텀시트에 들어갈 서점 목록 VC
+        let BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent) // 서점목록VC 전용 바텀시트 DelegateController 등록
+        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController) // 바텀시트 등록
         
+        // 현재위티 버튼 위치는 바텀 시트 윗부분입니다. 해당 부분에서 설정해주어야 합니다.
         currentLocateBtn.snp.makeConstraints {
             $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
@@ -109,24 +117,21 @@ final class LocationPageVC: BaseBottomSheetController {
         locationManager.desiredAccuracy = kCLLocationAccuracyBest   // 가장 높은 정확도의 위치 정보를 요청
         
         // 지도 초기화 설정
-//        mapView.showsUserLocation = true    // 유저 현재 위치 보이게
+        mapView.showsUserLocation = true    // 유저 현재 위치 보이게
         mapView.mapType = MKMapType.standard    // 일반적인 지도 스타일
         mapView.setUserTrackingMode(.follow, animated: true)    // 지도가 사용자의 위치를 따라가는 모드로 전환
-        mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: LocationAnnotationView.identifier)  // 지도에 어노테이션 커스텀 뷰 등록
+        mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)  // 지도에 어노테이션 커스텀 뷰 등록
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)   // 지도에 클러스터 커스텀뷰 등록
         
         
         
-        /// 테스트 데이터를 갖고 핀으로 map에 붙이기
+        // MARK: - 테스트 데이터를 갖고 핀으로 map에 붙이기
         test_locations.forEach { data in
             let pin = MKPointAnnotation()
             pin.coordinate = data.location
             pin.title = "TEST"
             mapView.addAnnotation(pin)
         }
-        
-        
-        
     }
     
     
@@ -166,16 +171,19 @@ final class LocationPageVC: BaseBottomSheetController {
 }
 
 // MARK: - LocationManagerDelgete 입니다. 위치를 갖고 오고, 이에 따른 추가 작업을 진행합니다.
+// MARK: - 본 VC에서는 처음 한번만 호출됩니다.
 extension LocationPageVC: CLLocationManagerDelegate {
     
-    /// 위치가 업데이트 되었을 때 호출됩니다.
+    // 위치가 업데이트 되었을 때 호출됩니다.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // location 가져오기 성공했을 때
         if let userLocation = locations.last?.coordinate {
-            // region 설정 - 1km * 1km 반경으로 설정
+            // region 설정 - 7km * 7km 반경으로 설정
             let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 7000, longitudinalMeters: 7000)
             mapView.setRegion(region, animated: true)
         }
+        // loacation 업데이트 종료
+        locationManager.stopUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -187,49 +195,54 @@ extension LocationPageVC: CLLocationManagerDelegate {
 extension LocationPageVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-//        switch annotation {
-//        case is MKUserLocation :
-//            return nil
-//        case is MKClusterAnnotation :
-//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationDataMapClusterView.identifier, for: annotation)
-//        default :
-//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationAnnotationView.identifier, for: annotation)
+        switch annotation {
+            
+            // 사용자 위치 표시는 따로 처리
+        case is MKUserLocation :
+            return nil
+            
+            // 클러스터 뷰인경우
+        case is MKClusterAnnotation :
+            return LocationDataMapClusterView(annotation: annotation, reuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+            
+            // 위치 annotation은 커스텀 이미지로
+        default :
+            return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+        }
+        
+        // MARK: - 마커로 annotation
+//        if let markerAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "MarkerAnnotation") as? MKMarkerAnnotationView {
+//            // 이미 생성된 마커 뷰 재사용
+//            markerAnnotationView.annotation = annotation
+//            return markerAnnotationView
+//        } else {
+//            // 새로운 마커 뷰 생성
+//            let markerAnnotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "MarkerAnnotation")
+//            markerAnnotationView.glyphImage = UIImage(systemName: "circle.circle.fill")  // 아이콘 설정
+//            markerAnnotationView.markerTintColor = main03  // 색상 설정
+//            markerAnnotationView.clusteringIdentifier = "bookStore"
+//            return markerAnnotationView
 //        }
         
-        
-        
-        // 사용자 위치 표시는 따로 처리
-        if annotation is MKUserLocation {
-            return nil
-        }
-        
-        // 클러스터 뷰인경우
-        if annotation is MKClusterAnnotation {
-            print("되는거 맞냐")
-//            return mapView.dequeueReusableAnnotationView(withIdentifier: LocationDataMapClusterView.identifier, for: annotation)
-            return LocationDataMapClusterView(annotation: annotation, reuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-        }
-
-//        return mapView.dequeueReusableAnnotationView(withIdentifier: LocationAnnotationView.identifier, for: annotation)
-        
-        let reuseIdentifier = "pin"
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
-
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
-            // 핀 탭하면 상세 정보 팝업
-            annotationView?.canShowCallout = true
-            // 팝업 정보창 오른쪽 뷰 설정
-//            let infoButton = UIButton(type: .infoLight)
-//            annotationView?.rightCalloutAccessoryView = infoButton
-            annotationView?.pinTintColor = main03
-            annotationView?.clusteringIdentifier = "test"
-        } else {
-            annotationView?.annotation = annotation
-        }
-
-        return annotationView
+        // MARK: - 노란색 핀으로 annotation
+//        let reuseIdentifier = "pin"
+//        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
+//
+//        if annotationView == nil {
+//            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+//
+//            // 핀 탭하면 상세 정보 팝업
+//            annotationView?.canShowCallout = true
+//            // 팝업 정보창 오른쪽 뷰 설정
+////            let infoButton = UIButton(type: .infoLight)
+////            annotationView?.rightCalloutAccessoryView = infoButton
+//            annotationView?.pinTintColor = main03
+//            annotationView?.clusteringIdentifier = "bookStore"
+//        } else {
+//            annotationView?.annotation = annotation
+//        }
+//
+//        return annotationView
     }
     
 }

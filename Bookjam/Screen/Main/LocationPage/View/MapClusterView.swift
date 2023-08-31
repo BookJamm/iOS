@@ -8,6 +8,7 @@
 import Foundation
 import MapKit
 import UIKit
+import SnapKit
 
 final class LocationDataMapClusterView: MKAnnotationView {
 
@@ -17,12 +18,9 @@ final class LocationDataMapClusterView: MKAnnotationView {
 
     override var annotation: MKAnnotation? {
         didSet {
-//             guard let annotation = annotation as? MKClusterAnnotation else {
-//                assertionFailure("Using LocationDataMapClusterView with wrong annotation type")
-//                return
-//            } -> 얘 때문에 안되느거임
-
-//            countLabel.text = annotation.memberAnnotations.count < 100 ? "\(annotation.memberAnnotations.count)" : "99+"
+            if let annotation = annotation as? MKClusterAnnotation {
+                countLabel.text = annotation.memberAnnotations.count < 100 ? "\(annotation.memberAnnotations.count)" : "99+"
+            }
         }
     }
 
@@ -32,7 +30,7 @@ final class LocationDataMapClusterView: MKAnnotationView {
         displayPriority = .defaultHigh
         collisionMode = .circle
 
-        frame = CGRect(x: 0, y: 0, width: 40, height: 50)
+        frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
 
        
@@ -47,6 +45,26 @@ final class LocationDataMapClusterView: MKAnnotationView {
     // MARK: Setup
     private func setupUI() {
 //        ...
-        backgroundColor = .gray
+        backgroundColor = .clear
+        
+//        let view = UIImageView(image: UIImage(color: main03!, size: CGSize(width: 30, height: 30)).circularImage()!)
+//        addSubview(view)
+//        view.frame = bounds
+        
+        let circleImage = UIImage(systemName: "circle.circle.fill")
+        let circleView = UIImageView(image: circleImage)
+        circleView.tintColor = main03
+        self.addSubview(circleView)
+        circleView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        countLabel.textColor = .white
+        countLabel.font = paragraph01
+        circleView.addSubview(countLabel)
+        countLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
     }
 }

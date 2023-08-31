@@ -12,6 +12,7 @@ import UIKit
 final class LocationAnnotationView: MKAnnotationView {
 
     static let identifier: String = "LocationAnnotationView"
+    private let customImage = UIImageView()
     
     // MARK: Initialization
 
@@ -19,8 +20,8 @@ final class LocationAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-
-        canShowCallout = true
+        clusteringIdentifier = "bookStore"
+//        canShowCallout = true
         setupUI()
     }
 
@@ -33,10 +34,11 @@ final class LocationAnnotationView: MKAnnotationView {
 
     private func setupUI() {
         backgroundColor = .clear
-
-        let view = UIImageView(image: UIImage(color: main03!, size: CGSize(width: 30, height: 30)).circularImage()!)
-        addSubview(view)
-
-        view.frame = bounds
+        customImage.image = UIImage(named: "locationPin")//?.withRenderingMode(.alwaysTemplate)
+        customImage.tintColor = main03
+        self.addSubview(customImage)
+        customImage.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
