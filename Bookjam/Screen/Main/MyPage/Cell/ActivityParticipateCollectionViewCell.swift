@@ -139,17 +139,17 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
     }
 }
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct ActivityParticipateCollectionViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = ActivityParticipateCollectionViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct ActivityParticipateCollectionViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = ActivityParticipateCollectionViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

@@ -655,10 +655,10 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     }
     
 }
-
-struct MyPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        MyPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//
+//struct MyPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MyPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
