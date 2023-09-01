@@ -424,23 +424,22 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
             cell.titleLabel.text = books![indexPath.row].title
             cell.authorLabel.text = books![indexPath.row].author
             cell.publisherLabel.text = books![indexPath.row].publisher
-                //api 수정되면 출판사 주석 풀기
             
             if let imageUrlString = books![indexPath.row].cover {
                 if let imageUrl = URL(string: imageUrlString) {
-                        
-                        DispatchQueue.global().async {
-                            if let imageData = try? Data(contentsOf: imageUrl),
-                               let image = UIImage(data: imageData) {
-                                DispatchQueue.main.async {
-                                    cell.bookImageView.image = image
-                                }
+                    
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.bookImageView.image = image
                             }
                         }
                     }
-                } else {
-                    cell.bookImageView.image = UIImage(named: "squareDefaultImage")
                 }
+            } else {
+                cell.bookImageView.image = UIImage(named: "squareDefaultImage")
+            }
             
             return cell
         }
@@ -450,24 +449,22 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
             
             
             self.bookActivityCountLabel.text = String(activities?.count ?? 0)
-
-//            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
             
             if let imageUrlString = activities![indexPath.row].imageUrl {
                 if let imageUrl = URL(string: imageUrlString) {
-                        
-                        DispatchQueue.global().async {
-                            if let imageData = try? Data(contentsOf: imageUrl),
-                               let image = UIImage(data: imageData) {
-                                DispatchQueue.main.async {
-                                    cell.activityImageView.image = image
-                                }
+                    
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.activityImageView.image = image
                             }
                         }
                     }
-                } else {
-                    cell.activityImageView.image = UIImage(named: "squareDefaultImage")
                 }
+            } else {
+                cell.activityImageView.image = UIImage(named: "squareDefaultImage")
+            }
             
             cell.titleLabel.text = activities![indexPath.row].title
             cell.ratingLabel.text = String(activities![indexPath.row].totalRating!)
@@ -499,7 +496,7 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
         
         
         let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]
-
+        
         if let images = reviews![indexPath.row].images {
             for index in 0..<imageArray.count {
                 let imageView = imageArray[index]

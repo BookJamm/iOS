@@ -89,8 +89,8 @@ class MyPageVC: UIViewController {
     //활동 참여 현황 콜렉션뷰
     var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
-        $0.minimumLineSpacing = 1
-        $0.minimumInteritemSpacing = 1
+        $0.minimumLineSpacing = 10
+        $0.minimumInteritemSpacing = 10
     }).then {
         $0.register(ActivityParticipateCollectionViewCell.self, forCellWithReuseIdentifier: ActivityParticipateCollectionViewCell.cellID)
     }
@@ -117,24 +117,30 @@ class MyPageVC: UIViewController {
         $0.setTitle("독립서점", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 20
     }
     
     var bookPlaygroundButton: UIButton = UIButton().then{
         $0.setTitle("책놀이터", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 20
     }
     
     var libraryButton: UIButton = UIButton().then{
         $0.setTitle("도서관", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.cornerRadius = 20
     }
     
     var etcButton: UIButton = UIButton().then{
@@ -218,7 +224,7 @@ class MyPageVC: UIViewController {
                     self.userActivityLabel.text = "\(result.username!)님의 활동"
                     self.activityFrameView.recordNumberLabel.text = "\(result.record!)"
                     self.activityFrameView.reviewNumberLabel.text = "\(result.review!)"
-                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile! ?? ""), placeholder: UIImage(named: "BasicProfile"))
+                    self.userProfileImageView.kf.setImage(with: URL(string: result.profile!), placeholder: UIImage(named: "BasicProfile"))
                     self.activityFrameView.visitNumberLabel.text = "\(result.reserve!)"
                 }
             }
@@ -429,7 +435,7 @@ class MyPageVC: UIViewController {
         contentView.snp.makeConstraints{
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1650)
+            $0.height.equalTo(1630)
         }
         
         //유저 프로필뷰
@@ -471,7 +477,6 @@ class MyPageVC: UIViewController {
         activityParticipateView.snp.makeConstraints{
             $0.top.equalTo(userProfileView.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(220)
         }
         
         activityParticipateLabel.snp.makeConstraints{
@@ -484,23 +489,23 @@ class MyPageVC: UIViewController {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        collectionView.snp.makeConstraints{
-            $0.top.equalTo(activityParticipateLabel.snp.bottom).offset(10)
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(activityParticipateLabel.snp.bottom).offset(20)
             $0.leading.equalTo(activityParticipateLabel)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(144)
+            $0.bottom.equalTo(activityParticipateView.snp.bottom).offset(-20)
         }
         
         //나의 기록 뷰
         myRecordView.snp.makeConstraints{
             $0.top.equalTo(activityParticipateView.snp.bottom).offset(14)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.height.equalTo(390)
         }
         
         myRecordLabel.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalToSuperview().offset(20)
+            $0.top.leading.equalToSuperview().offset(20)
         }
         
         myRecordMoreButton.snp.makeConstraints{
@@ -509,34 +514,37 @@ class MyPageVC: UIViewController {
         }
         
         independantBookStoreButton.snp.makeConstraints{
-            $0.top.equalTo(myRecordLabel.snp.bottom).offset(20)
+            $0.top.equalTo(myRecordLabel.snp.bottom).offset(16)
             $0.leading.equalTo(myRecordLabel)
-            $0.width.equalTo(100)
+            $0.width.equalTo(90)
+            $0.height.equalTo(36)
         }
         
         bookPlaygroundButton.snp.makeConstraints{
             $0.top.width.equalTo(independantBookStoreButton)
             $0.leading.equalTo(independantBookStoreButton.snp.trailing).offset(10)
+            $0.height.equalTo(36)
         }
         
         libraryButton.snp.makeConstraints{
             $0.top.equalTo(independantBookStoreButton)
             $0.leading.equalTo(bookPlaygroundButton.snp.trailing).offset(10)
             $0.width.equalTo(80)
+            $0.height.equalTo(36)
         }
 
         myRecordBookStoreView.snp.makeConstraints{
-            $0.top.equalTo(independantBookStoreButton.snp.bottom).offset(20)
+            $0.top.equalTo(independantBookStoreButton.snp.bottom).offset(16)
             $0.leading.equalTo(independantBookStoreButton)
-            $0.trailing.equalToSuperview().multipliedBy(0.5)
+            $0.trailing.equalTo(view.snp.centerX).offset(-5)
             $0.height.equalTo(160)
         }
         
         myRecordBookStoreView2.snp.makeConstraints{
             $0.top.equalTo(myRecordBookStoreView)
+            $0.leading.equalTo(view.snp.centerX).offset(5)
+            $0.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(160)
-            $0.leading.equalTo(myRecordBookStoreView.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().inset(10)
         }
         
         //나의 리뷰 뷰
@@ -559,22 +567,23 @@ class MyPageVC: UIViewController {
         myReviewBookStoreView.snp.makeConstraints{
             $0.top.equalTo(myReviewLabel.snp.bottom).offset(20)
             $0.leading.equalTo(myReviewLabel)
-            $0.trailing.equalToSuperview().multipliedBy(0.5)
+            $0.trailing.equalTo(view.snp.centerX).offset(-5)
             $0.height.equalTo(200)
         }
         
         myReviewBookStoreView2.snp.makeConstraints{
             $0.top.equalTo(myReviewBookStoreView)
-            $0.leading.equalTo(myReviewBookStoreView.snp.trailing).offset(10)
+            $0.leading.equalTo(view.snp.centerX).offset(5)
             $0.height.equalTo(160)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
         //좋아요한 활동 뷰
         likeActivityView.snp.makeConstraints{
             $0.top.equalTo(myReviewView.snp.bottom).offset(14)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(myReviewView)
+            $0.height.equalTo(330)
+            $0.bottom.equalTo(contentView)
         }
         
         likeActivityLabel.snp.makeConstraints{
@@ -591,14 +600,14 @@ class MyPageVC: UIViewController {
             $0.top.equalTo(likeActivityLabel.snp.bottom).offset(20)
             $0.leading.equalTo(likeActivityLabel)
             $0.height.equalTo(160)
-            $0.trailing.equalToSuperview().multipliedBy(0.49)
+            $0.trailing.equalTo(view.snp.centerX).offset(-5)
         }
         
         likeActivityBookStoreView2.snp.makeConstraints{
             $0.top.equalTo(likeActivityBookStoreView)
-            $0.leading.equalTo(likeActivityBookStoreView.snp.trailing).offset(10)
+            $0.leading.equalTo(view.snp.centerX).offset(5)
             $0.height.equalTo(160)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }//end of constraint
     
@@ -617,44 +626,39 @@ class MyPageVC: UIViewController {
 
 extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return userActivities.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
-
-        if indexPath.row == 0 {
-            cell.activityImageView.image = UIImage(named: "1984StoreTwo")
-            cell.activityNameLabel.text = "즐거운 책 표지 그리기"
-            cell.numOfReviewLabel.text = "리뷰 10"
-
-        }
-        else if indexPath.row == 1 {
-            cell.activityImageView.image = UIImage(named: "ChaekYeon")
-            cell.activityNameLabel.text = "우하하 신나는 독서토론"
-            cell.numOfReviewLabel.text = "리뷰 12"
-        }
         
+        cell.activityImageView.kf.setImage(with: URL(string: userActivities[indexPath.row].image_url ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+        cell.activityNameLabel.text = userActivities[indexPath.row].title
+        cell.starValueLabel.text = String(userActivities[indexPath.row].total_rating!)
+        cell.numOfReviewLabel.text = "리뷰 \(String(userActivities[indexPath.row].review_count!))"
+
         
-//        cell.activityImageView.kf.setImage(with: URL(string: userActivities[indexPath.row].image_url!), placeholder: UIImage(named: "squareDefaultImage"))
-//        cell.activityNameLabel.text = userActivities[indexPath.row].title
-//        cell.starValueLabel.text = String(userActivities[indexPath.row].total_rating!)
-//        cell.numOfReviewLabel.text = "리뷰 \(String(userActivities[indexPath.row].review_count!))"
-//
+        /// 셀 뒷 박스 선언
+        cell.backgroundColor = gray01
+        cell.clipsToBounds = true
+        cell.layer.cornerRadius = 8
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = gray03?.cgColor
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width - 20, height: collectionView.frame.height)
     }
     
 }
 
-//struct MyPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        MyPageVC().toPreview()
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct MyPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        MyPageVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
+}

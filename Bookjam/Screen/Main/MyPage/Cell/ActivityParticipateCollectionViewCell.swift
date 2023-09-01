@@ -49,12 +49,12 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
     }
     
     var starValueLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "4.93"
     }
     
     var numOfReviewLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "리뷰 584"
     }
     
@@ -102,50 +102,54 @@ class ActivityParticipateCollectionViewCell: UICollectionViewCell {
     
     func setUpConstraint() {
         
-        activityImageView.snp.makeConstraints{
-            $0.top.leading.equalToSuperview().inset(10)
-            $0.bottom.equalToSuperview().offset(-10)
-            $0.width.height.equalTo(100)
+        activityImageView.snp.makeConstraints {
+            $0.top.leading.equalToSuperview().inset(12)
+            $0.bottom.equalToSuperview().offset(-12)
+            $0.width.height.equalTo(120)
         }
-        activityNameLabel.snp.makeConstraints{
-            $0.top.equalTo(activityImageView).offset(10)
+        
+        activityNameLabel.snp.makeConstraints {
+            $0.top.equalTo(activityImageView)
             $0.leading.equalTo(activityImageView.snp.trailing).offset(15)
-            $0.height.equalTo(24)
         }
-        starImageView.snp.makeConstraints{
+        
+        starImageView.snp.makeConstraints {
             $0.leading.equalTo(activityNameLabel).inset(-1)
             $0.top.equalTo(activityNameLabel.snp.bottom).offset(10)
             $0.height.width.equalTo(20)
         }
-        starValueLabel.snp.makeConstraints{
+        
+        starValueLabel.snp.makeConstraints {
             $0.centerY.equalTo(starImageView)
             $0.leading.equalTo(starImageView.snp.trailing).offset(5)
         }
-        numOfReviewLabel.snp.makeConstraints{
+        
+        numOfReviewLabel.snp.makeConstraints {
             $0.centerY.equalTo(starImageView)
             $0.leading.equalTo(starValueLabel.snp.trailing).offset(10)
         }
-        detailViewButton.snp.makeConstraints{
+        
+        detailViewButton.snp.makeConstraints {
             $0.top.equalTo(starImageView.snp.bottom).offset(20)
-            $0.bottom.equalTo(activityImageView.snp.bottom)
+            $0.bottom.equalToSuperview().offset(-12)
             $0.leading.equalTo(starImageView)
-            $0.trailing.equalToSuperview().offset(-20).priority(.high)
+            $0.trailing.equalToSuperview().offset(-12).priority(.high)
             $0.height.equalTo(40)
         }
     }
 }
 
-//#if DEBUG
-//
-//@available(iOS 13.0, *)
-//struct ActivityParticipateCollectionViewCell_Preview: PreviewProvider {
-//    static var previews: some View {
-//        UIViewPreview {
-//            let cell = ActivityParticipateCollectionViewCell()
-//            return cell
-//        }
-//        .previewLayout(.sizeThatFits)
-//        .padding(10)
-//    }
-//}
-//#endif
+#if DEBUG
+
+@available(iOS 13.0, *)
+struct ActivityParticipateCollectionViewCell_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = ActivityParticipateCollectionViewCell()
+            return cell
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
+    }
+}
+#endif
