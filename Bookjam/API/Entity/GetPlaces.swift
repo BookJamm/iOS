@@ -22,7 +22,7 @@ struct getPlaceRequestModel: Codable {
             self.last = last
         }
     
-}
+} 
 
 struct GetPlaceResponseModel: Codable {
     let placeId: Int?

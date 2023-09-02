@@ -31,6 +31,9 @@
 		947ED6652A90DCC10037FB38 /* PlaceIdActivities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */; };
 		947ED6672A9162DE0037FB38 /* PlaceIdReviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6662A9162DE0037FB38 /* PlaceIdReviews.swift */; };
 		947ED6692A9394310037FB38 /* MainPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6682A9394310037FB38 /* MainPageInfoViewController.swift */; };
+		947ED66C2A9EFE940037FB38 /* FriendPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED66B2A9EFE940037FB38 /* FriendPageVC.swift */; };
+		947ED66F2AA1F6950037FB38 /* ActivityParticipateMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED66E2AA1F6950037FB38 /* ActivityParticipateMoreVC.swift */; };
+		947ED6712AA204C10037FB38 /* ActivityParticipateMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ED6702AA204C10037FB38 /* ActivityParticipateMoreTableViewCell.swift */; };
 		94D658F82A712FF300E7F183 /* MainPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658F72A712FF300E7F183 /* MainPageVC.swift */; };
 		94D658FE2A71653A00E7F183 /* LocationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D658FD2A71653A00E7F183 /* LocationPageVC.swift */; };
 		94D659012A7165AB00E7F183 /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D659002A7165AB00E7F183 /* MyPageVC.swift */; };
@@ -163,6 +166,9 @@
 		947ED6642A90DCC10037FB38 /* PlaceIdActivities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdActivities.swift; sourceTree = "<group>"; };
 		947ED6662A9162DE0037FB38 /* PlaceIdReviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceIdReviews.swift; sourceTree = "<group>"; };
 		947ED6682A9394310037FB38 /* MainPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageInfoViewController.swift; sourceTree = "<group>"; };
+		947ED66B2A9EFE940037FB38 /* FriendPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPageVC.swift; sourceTree = "<group>"; };
+		947ED66E2AA1F6950037FB38 /* ActivityParticipateMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityParticipateMoreVC.swift; sourceTree = "<group>"; };
+		947ED6702AA204C10037FB38 /* ActivityParticipateMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityParticipateMoreTableViewCell.swift; sourceTree = "<group>"; };
 		94D658F72A712FF300E7F183 /* MainPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageVC.swift; sourceTree = "<group>"; };
 		94D658FD2A71653A00E7F183 /* LocationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationPageVC.swift; sourceTree = "<group>"; };
 		94D659002A7165AB00E7F183 /* MyPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageVC.swift; sourceTree = "<group>"; };
@@ -327,6 +333,24 @@
 			path = Token;
 			sourceTree = "<group>";
 		};
+		947ED66A2A9EFE680037FB38 /* FriendPage */ = {
+			isa = PBXGroup;
+			children = (
+				947ED66D2AA1F4B70037FB38 /* More */,
+				947ED66B2A9EFE940037FB38 /* FriendPageVC.swift */,
+			);
+			path = FriendPage;
+			sourceTree = "<group>";
+		};
+		947ED66D2AA1F4B70037FB38 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				947ED66E2AA1F6950037FB38 /* ActivityParticipateMoreVC.swift */,
+				947ED6702AA204C10037FB38 /* ActivityParticipateMoreTableViewCell.swift */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
 		94D658F62A712FC000E7F183 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,6 +506,7 @@
 				DD7994292A89F4850066CFB7 /* TableViewCell.swift */,
 				DD3540792A83BBFB00B5A9A3 /* Login */,
 				DDC6EA982A61559C00C4B127 /* Onboarding */,
+				947ED66A2A9EFE680037FB38 /* FriendPage */,
 				DD38CFEF2A599F0F00D32B00 /* Main */,
 			);
 			path = Screen;
@@ -1087,6 +1112,7 @@
 				DDB9074C2A73B0A6000A24F0 /* BookstoreDetailPageVC.swift in Sources */,
 				DDD74A8E2A8BC9EB008C999F /* Token.swift in Sources */,
 				DDD74A8A2A8B41EF008C999F /* FeedPostPageVC.swift in Sources */,
+				947ED66C2A9EFE940037FB38 /* FriendPageVC.swift in Sources */,
 				DD38CFC12A59993400D32B00 /* ViewController.swift in Sources */,
 				DDD74A942A8C0AA7008C999F /* SearchBookPopUpVC.swift in Sources */,
 				DDC4450F2A80E1E0000FE1C7 /* UIView+.swift in Sources */,
@@ -1108,6 +1134,7 @@
 				DDC090142A790B7F00CDCC8A /* BookListTableViewCell.swift in Sources */,
 				DD2A4E032A8E1B7200D7A6B8 /* RecommendFriend.swift in Sources */,
 				DDD5DAB62A7DD40D0052C3EB /* TabBarController.swift in Sources */,
+				947ED66F2AA1F6950037FB38 /* ActivityParticipateMoreVC.swift in Sources */,
 				DDAECC302A93744800B3D676 /* UsersRecords.swift in Sources */,
 				DD1022412A82C94000F74CC6 /* APIModel.swift in Sources */,
 				DDC6EAA22A61B38E00C4B127 /* Onboarding09VC.swift in Sources */,
@@ -1130,6 +1157,7 @@
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
 				DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */,
 				DDAECC322A93EA2B00B3D676 /* RecommendFriendPopUpVC.swift in Sources */,
+				947ED6712AA204C10037FB38 /* ActivityParticipateMoreTableViewCell.swift in Sources */,
 				DD35407B2A83BC0900B5A9A3 /* LoginVC.swift in Sources */,
 				DDC445072A80D10B000FE1C7 /* UIViewController+.swift in Sources */,
 				DDD74A9A2A8C1F1B008C999F /* Record.swift in Sources */,
