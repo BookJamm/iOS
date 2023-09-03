@@ -12,11 +12,6 @@ class ActivityParticipateMoreVC: UIViewController {
 
     // MARK: Variables
     
-    var dayLabel1: UILabel = UILabel().then{
-        $0.text = "2023년 8월"
-        $0.font = title06
-    }
-    
     var lastYearButton: UIButton = UIButton().then{
         $0.setTitle("작년 활동 현황 보기", for: .normal)
     }
@@ -36,6 +31,8 @@ class ActivityParticipateMoreVC: UIViewController {
          setUpDelegate()
          setUpConstraint()
          
+         tableView.separatorStyle = .none
+
          tableView.tableFooterView = lastYearButton
      }
     
@@ -87,9 +84,8 @@ extension ActivityParticipateMoreVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityParticipateMoreTableViewCell().cellID, for: indexPath) as! ActivityParticipateMoreTableViewCell
-        
-        cell.selectionStyle = .none
-        cell.backgroundColor = gray01
+
+//        cell.backgroundColor = gray01
 
         return cell
     }
@@ -103,11 +99,19 @@ extension ActivityParticipateMoreVC: UITableViewDelegate, UITableViewDataSource{
         let headerLabel = UILabel().then{
             $0.text = "2023년 8월"
             $0.font = title06
-            $0.frame = CGRect(x: 10, y: 0, width: tableView.frame.size.width - 20, height: 30) // 헤더 높이 조절 가능
+            $0.frame = CGRect(x: 10, y: 0, width: tableView.frame.size.width - 20, height: 20) // 헤더 높이 조절 가능
         }
+        
         headerView.addSubview(headerLabel)
         
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        // 섹션 푸터를 생성하고 구분 라인을 제거합니다.
+        let footerView = UIView()
+        footerView.backgroundColor = .clear // 배경을 투명하게 설정하면 라인이 보이지 않습니다.
+        return footerView
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

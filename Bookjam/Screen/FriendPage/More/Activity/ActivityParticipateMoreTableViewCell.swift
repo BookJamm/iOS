@@ -17,6 +17,8 @@ class ActivityParticipateMoreTableViewCell: UITableViewCell {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        
+        contentView.backgroundColor = gray01
     }
     
     //셀 간 간격 두기
@@ -24,6 +26,8 @@ class ActivityParticipateMoreTableViewCell: UITableViewCell {
         super.layoutSubviews()
 
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+        contentView.layer.cornerRadius = 10 // Adjust the corner radius value as needed
+           contentView.layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {

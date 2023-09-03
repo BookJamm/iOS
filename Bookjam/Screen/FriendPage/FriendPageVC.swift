@@ -110,33 +110,38 @@ class FriendPageVC: UIViewController {
         $0.setTitle("독립서점", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
     }
     
     var bookPlaygroundButton: UIButton = UIButton().then{
         $0.setTitle("책놀이터", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var libraryButton: UIButton = UIButton().then{
         $0.setTitle("도서관", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var etcButton: UIButton = UIButton().then{
         $0.setTitle("기타", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
         $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var myRecordBookStoreView = MyRecordBookStoreView()
     
