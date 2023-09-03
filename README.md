@@ -12,10 +12,10 @@
 
 # 🍎 Team iOS Members 🍎
   
-<img width="200px" src="https://avatars.githubusercontent.com/u/80394340?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/99167099?v=4"/> | 
-|:-----:|:-----:|
-|[이유진 (Zimging)](https://github.com/youz2me)|[장준모 (Jangmo)](https://github.com/Jangjoonmo)|
-|팀원 👩‍💻|팀원 🧑‍💻|
+<img width="200px" src="https://avatars.githubusercontent.com/u/80394340?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/99167099?v=4"/> | <img width="200px" src="https://avatars.githubusercontent.com/u/125115284?v=4"/> |
+|:-----:|:-----:|:-----:|
+|[이유진 (Zimging)](https://github.com/youz2me)|[장준모 (Jangmo)](https://github.com/Jangjoonmo)|[박민서 (Lamp)](https://github.com/FpRaArNkK)|
+|팀원 👩‍💻|팀원 🧑‍💻|팀원 🧑‍💻|
 
 <br>
 

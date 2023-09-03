@@ -36,7 +36,7 @@ class Onboarding09VC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "내 주변의 다양한 독서 공간을\n검색하고, 기록해보세요!"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        $0.font = title02
         $0.numberOfLines = 2
         $0.sizeToFit()
     }
@@ -47,11 +47,12 @@ class Onboarding09VC: UIViewController {
     }
     
     let nextButton: UIButton = UIButton().then {
-        $0.backgroundColor = main01
+        $0.layer.borderColor = main03?.cgColor
+        $0.layer.borderWidth = 1
         $0.layer.cornerRadius = 8
-        $0.setTitle("메인으로", for: .normal)
-        $0.titleLabel?.textColor = .white
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.setTitleColor(main03, for: .normal)
+        $0.titleLabel?.font = paragraph01
+        $0.setTitle("로그인 화면으로", for: .normal)
         $0.addTarget(self, action: #selector(didNextButtonTapped), for: .touchUpInside)
     }
 

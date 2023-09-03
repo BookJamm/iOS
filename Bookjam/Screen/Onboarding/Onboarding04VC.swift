@@ -24,7 +24,7 @@ class Onboarding04VC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "프로필과 닉네임을 설정해주세요."
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .heavy)
+        $0.font = title01
         $0.sizeToFit()
     }
     
@@ -40,7 +40,7 @@ class Onboarding04VC: UIViewController {
     let nicknameTextField: UITextField = UITextField().then {
         $0.placeholder = "책먹는 두루미"
         $0.textColor = .black
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.font = paragraph01
         $0.addTarget(self, action: #selector(didTextFieldChanged), for: .editingChanged)
     }
     
@@ -48,7 +48,7 @@ class Onboarding04VC: UIViewController {
         $0.backgroundColor = gray04
         $0.layer.cornerRadius = 8
         $0.setTitle("결정하기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.titleLabel?.font = paragraph01
         $0.addTarget(self, action: #selector(didDecisionButtonTapped), for: .touchUpInside)
         $0.isEnabled = false
     }

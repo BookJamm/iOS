@@ -517,7 +517,7 @@ class FeedPostPageVC: UIViewController {
             reviewContentBackgroundView,
             reviewContentTextView
         ].forEach { reviewContentView.addSubview($0) }
-       
+        
         [
             secretPostLabel,
             secretPostToggleButton,
@@ -632,49 +632,49 @@ class FeedPostPageVC: UIViewController {
             $0.top.leading.equalToSuperview().offset(20)
         }
         
-//        /// 활동 선택됐으면 활동 정보 표시
-//        if isActivitySelected == true {
-//            activityInfoView.snp.makeConstraints {
-//                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
-//                $0.leading.equalTo(activityLabel)
-//                $0.trailing.equalToSuperview().offset(-20)
-//                $0.height.equalTo(150)
-//                $0.bottom.equalToSuperview().offset(-20)
-//            }
-//
-//            activityImageView.snp.makeConstraints {
-//                $0.top.leading.equalToSuperview().offset(12)
-//                $0.width.height.equalTo(128)
-//            }
-//
-//            activityInfoLabel.snp.makeConstraints {
-//                $0.top.equalTo(activityImageView).offset(5)
-//                $0.leading.equalTo(activityImageView.snp.trailing).offset(14)
-//                $0.trailing.equalToSuperview().offset(-10)
-//            }
-//
-//            activityStarImageView.snp.makeConstraints {
-//                $0.top.equalTo(activityInfoLabel.snp.bottom).offset(10)
-//                $0.leading.equalTo(activityInfoLabel)
-//            }
-//
-//            activityRatingLabel.snp.makeConstraints {
-//                $0.centerY.equalTo(activityStarImageView)
-//                $0.leading.equalTo(activityStarImageView.snp.trailing).offset(5)
-//            }
-//
-//            activityNumOfReviewLabel.snp.makeConstraints {
-//                $0.centerY.equalTo(activityStarImageView)
-//                $0.leading.equalTo(activityRatingLabel.snp.trailing).offset(5)
-//            }
-//
-//            cancelButton.snp.makeConstraints {
-//                $0.top.equalTo(activityStarImageView.snp.bottom).offset(25)
-//                $0.leading.equalTo(activityStarImageView)
-//                $0.trailing.equalToSuperview().offset(-10)
-//                $0.bottom.equalTo(activityImageView.snp.bottom).offset(-5)
-//            }
-//        }
+        //        /// 활동 선택됐으면 활동 정보 표시
+        //        if isActivitySelected == true {
+        //            activityInfoView.snp.makeConstraints {
+        //                $0.top.equalTo(activityLabel.snp.bottom).offset(20)
+        //                $0.leading.equalTo(activityLabel)
+        //                $0.trailing.equalToSuperview().offset(-20)
+        //                $0.height.equalTo(150)
+        //                $0.bottom.equalToSuperview().offset(-20)
+        //            }
+        //
+        //            activityImageView.snp.makeConstraints {
+        //                $0.top.leading.equalToSuperview().offset(12)
+        //                $0.width.height.equalTo(128)
+        //            }
+        //
+        //            activityInfoLabel.snp.makeConstraints {
+        //                $0.top.equalTo(activityImageView).offset(5)
+        //                $0.leading.equalTo(activityImageView.snp.trailing).offset(14)
+        //                $0.trailing.equalToSuperview().offset(-10)
+        //            }
+        //
+        //            activityStarImageView.snp.makeConstraints {
+        //                $0.top.equalTo(activityInfoLabel.snp.bottom).offset(10)
+        //                $0.leading.equalTo(activityInfoLabel)
+        //            }
+        //
+        //            activityRatingLabel.snp.makeConstraints {
+        //                $0.centerY.equalTo(activityStarImageView)
+        //                $0.leading.equalTo(activityStarImageView.snp.trailing).offset(5)
+        //            }
+        //
+        //            activityNumOfReviewLabel.snp.makeConstraints {
+        //                $0.centerY.equalTo(activityStarImageView)
+        //                $0.leading.equalTo(activityRatingLabel.snp.trailing).offset(5)
+        //            }
+        //
+        //            cancelButton.snp.makeConstraints {
+        //                $0.top.equalTo(activityStarImageView.snp.bottom).offset(25)
+        //                $0.leading.equalTo(activityStarImageView)
+        //                $0.trailing.equalToSuperview().offset(-10)
+        //                $0.bottom.equalTo(activityImageView.snp.bottom).offset(-5)
+        //            }
+        //        }
         activitySelectButton.snp.makeConstraints {
             $0.top.equalTo(activityLabel.snp.bottom).offset(20)
             $0.leading.equalTo(activityLabel)
@@ -773,10 +773,10 @@ class FeedPostPageVC: UIViewController {
         }
         
         // TODO: 서버 api 나오면 추후 연결
-//        bookSearchResultPublisherLabel.snp.makeConstraints {
-//            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
-//            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
-//        }
+        //        bookSearchResultPublisherLabel.snp.makeConstraints {
+        //            $0.top.equalTo(bookSearchResultAuthorLabel.snp.bottom).offset(10)
+        //            $0.leading.equalTo(bookSearchResultImageView.snp.trailing).offset(20)
+        //        }
         
         reviewContentView.snp.makeConstraints {
             $0.top.equalTo(bookView.snp.bottom).offset(10)
@@ -787,7 +787,7 @@ class FeedPostPageVC: UIViewController {
         reviewContentInfoLabel.snp.makeConstraints {
             $0.top.leading.equalToSuperview().offset(20)
         }
-
+        
         reviewContentBackgroundView.snp.makeConstraints {
             $0.top.equalTo(reviewContentInfoLabel.snp.bottom).offset(20)
             $0.leading.equalTo(reviewContentInfoLabel)
@@ -795,7 +795,7 @@ class FeedPostPageVC: UIViewController {
             $0.height.equalTo(220)
             $0.bottom.equalToSuperview().offset(-20)
         }
-
+        
         reviewContentTextView.snp.makeConstraints {
             $0.top.equalTo(reviewContentBackgroundView).offset(20)
             $0.leading.equalTo(reviewContentBackgroundView).offset(20)
@@ -846,14 +846,14 @@ class FeedPostPageVC: UIViewController {
     func checkUploadPossible() {
         uploadButton.backgroundColor = main03
         uploadButton.isEnabled = true
-//        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
-//            uploadButton.backgroundColor = main03
-//            uploadButton.isEnabled = true
-//        }
-//        else {
-//            uploadButton.backgroundColor = main03
-//            uploadButton.isEnabled = true
-//        }
+        //        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
+        //            uploadButton.backgroundColor = main03
+        //            uploadButton.isEnabled = true
+        //        }
+        //        else {
+        //            uploadButton.backgroundColor = main03
+        //            uploadButton.isEnabled = true
+        //        }
     }
     
     /// 네비게이션 바에 있는 뒤로가기 버튼 누르면 현재 뷰 dismiss
@@ -918,7 +918,7 @@ class FeedPostPageVC: UIViewController {
         playGroundButton.isSelected = true
         playGroundButton.backgroundColor = main01
         playGroundButton.layer.borderColor = main03?.cgColor
-       
+        
         
         // 업로드 가능한지 판별
         isPlaceTypeSelected = true
@@ -1088,19 +1088,24 @@ class FeedPostPageVC: UIViewController {
                 isNotPublic: isSecret,
                 commentNotAllowed: isCommentAllowed)) { response in
                     if let recordID = response?.result?.recordId {
-                        APIManager.shared.postImage(
-                            urlEndpointString: Constant.postRecordsImages(recordId: recordID),
-                            responseDataType: APIModel<RecordImageResponseModel>?.self,
-                            images: self.images) { response in
-                                if response?.message == "성공" {
-                                    self.dismiss(animated: true)
+                        if !self.images.isEmpty {
+                            APIManager.shared.postImage(
+                                urlEndpointString: Constant.postRecordsImages(recordId: recordID),
+                                responseDataType: APIModel<RecordImageResponseModel>?.self,
+                                images: self.images) { response in
+                                    if response?.message == "성공" {
+                                        self.dismiss(animated: true)
+                                    }
                                 }
-                            }
+                        }
+                        else {
+                            self.dismiss(animated: true)
+                        }
                     }
                 }
     }
     
-    /// 업로드 버튼 누르면 정보 넘기고 화면 dismiss
+    /// 업로드 버튼 누르면 확인 팝업 나오게 수정
     @objc func didFeedUploadButtonTapped() {
         let feedPostCheckPopUpVC = FeedPostCheckPopUpVC()
         

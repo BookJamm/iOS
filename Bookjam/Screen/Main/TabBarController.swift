@@ -83,7 +83,7 @@ class TabBarController: UITabBarController {
         
         // TODO: 데모데이 이후 위치 기반 페이지 개발할 때 주석 풀기
         setViewControllers([mainNavigationController,
-                            // locationNavigationController,
+                             locationNavigationController,
                             feedNavigationController,
                             mypageNavigationController], animated: true)
     }

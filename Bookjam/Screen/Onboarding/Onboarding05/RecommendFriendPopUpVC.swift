@@ -31,7 +31,7 @@ class RecommendFriendPopUpVC: UIViewController {
         $0.textColor = .black
         $0.textAlignment = .left
         $0.text = "검색 결과"
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        $0.font = title06
         $0.sizeToFit()
     }
     
@@ -45,7 +45,7 @@ class RecommendFriendPopUpVC: UIViewController {
         $0.layer.cornerRadius = 8
         $0.setTitle("추가 완료", for: .normal)
         $0.titleLabel?.textColor = .white
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        $0.titleLabel?.font = paragraph01
          $0.addTarget(self, action: #selector(didAddFinishButtonTapped), for: .touchUpInside)
     }
 
