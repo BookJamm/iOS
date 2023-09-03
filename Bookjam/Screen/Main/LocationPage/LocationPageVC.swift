@@ -194,7 +194,6 @@ extension LocationPageVC: CLLocationManagerDelegate {
 // MARK: - MKMapViewDelegate 입니다. mapView에서 사용되는 annotation의 기본 내용을 설정합니다.
 extension LocationPageVC: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         switch annotation {
             
             // 사용자 위치 표시는 따로 처리

@@ -570,7 +570,14 @@ class BookstoreDetailPageVC: UIViewController {
             starLabel.text = String(bookStoreDetail.rating!)
             reviewCountLabel.text = "리뷰 " + String(bookStoreDetail.reviewCount!)
             locationLabel.text = bookStoreDetail.address?.road
-            siteURL.setTitle(bookStoreDetail.website, for: .normal)
+            if bookStoreDetail.website == nil {
+                siteURL.setTitle("책방 사이트가 존재하지 않습니다.", for: .normal)
+                siteURL.setTitleColor(gray04, for: .normal)
+            }
+            else {
+                siteURL.setTitle(bookStoreDetail.website, for: .normal)
+            }
+            
             
             if let open = bookStoreDetail.open { // open 여부에 따른 ui 변경
                 timeLabel.text = open ? "영업 중" : "영업 종료"
