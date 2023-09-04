@@ -231,9 +231,9 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-struct BookStoreListViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreListViewController().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreListViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreListViewController().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
