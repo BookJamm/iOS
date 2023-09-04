@@ -99,7 +99,8 @@ final class LocationPageVC: BaseBottomSheetController {
         mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)  // 지도에 어노테이션 커스텀 뷰 등록
         mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)   // 지도에 클러스터 커스텀뷰 등록
         
-        
+        // MARK: - add Target
+        self.currentLocateBtn.addTarget(self, action: #selector(searchOnCurrentLocation), for: .touchUpInside)
         
         // MARK: - 테스트 데이터를 갖고 핀으로 map에 붙이기
         test_locations.forEach { data in
@@ -146,10 +147,14 @@ final class LocationPageVC: BaseBottomSheetController {
     
     // MARK: - Floating Panel에서 셀 선택했을 때 호출
     @objc func presentVC(_ sender: Notification) {
-        
         if let placeID = sender.object as? Int {
             GETStoreDetail(selectedPlaceId: placeID)
         }
+    }
+    
+    // MARK: - 현재 위치에서 탐색 눌렀을 때 호출
+    @objc func searchOnCurrentLocation() {
+        self.locationManager.startUpdatingLocation() // 위치 업데이트
     }
 }
 
