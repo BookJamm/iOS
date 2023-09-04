@@ -13,12 +13,12 @@ import Then
 
 
 class BookStoreListViewController: UIViewController {
-
+    
     // MARK: Variables
     /// BookStoreVC에서 사용하는 서점 객체들의 모델 리스트입니다.
     /// Cell Data Fetching에 사용합니다.
     private var bookStoreList : [GetPlaceResponseModel]?
-
+    
     /// 테이블 뷰 위의 타이틀과 필터 버튼이 들어가는 헤더입니다.
     lazy var headerView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -106,7 +106,7 @@ class BookStoreListViewController: UIViewController {
         self.locationTableView.isScrollEnabled = true
     }
     
-
+    
     // MARK: View
     func setUpView() {
         self.view.backgroundColor = .white
@@ -132,7 +132,7 @@ class BookStoreListViewController: UIViewController {
         [
             headerView,
             locationTableView
-//            footerView
+            //            footerView
         ].forEach { self.view.addSubview($0) }
     }
     
@@ -145,16 +145,16 @@ class BookStoreListViewController: UIViewController {
             $0.height.equalTo(60)
         }
         
-            titleLabel.snp.makeConstraints {
-                $0.leading.equalToSuperview().offset(20)
-                $0.trailing.equalTo(filterBtn.snp.leading).offset(-10).priority(.low)
-                $0.centerY.equalToSuperview()
-            }
-            
-            filterBtn.snp.makeConstraints {
-                $0.trailing.equalToSuperview().offset(-30).priority(.high)
-                $0.centerY.equalTo(titleLabel)
-            }
+        titleLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalTo(filterBtn.snp.leading).offset(-10).priority(.low)
+            $0.centerY.equalToSuperview()
+        }
+        
+        filterBtn.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-30).priority(.high)
+            $0.centerY.equalTo(titleLabel)
+        }
         
         // MARK: - body tableView
         locationTableView.snp.makeConstraints {
@@ -164,19 +164,16 @@ class BookStoreListViewController: UIViewController {
         }
         
         // MARK: - footer
-//        footerView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.height.equalTo(60)
-//            $0.horizontalEdges.equalToSuperview()
-//            $0.bottom.equalToSuperview()
-//        }
+        //        footerView.snp.makeConstraints {
+        //            $0.width.equalToSuperview()
+        //            $0.height.equalTo(60)
+        //            $0.horizontalEdges.equalToSuperview()
+        //            $0.bottom.equalToSuperview()
+        //        }
         
-            bottomBtn.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
-        
-        
-        
+        bottomBtn.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     // MARK: - LocationPageVC에서 API 작업 진행 후 넘어오는 noti
@@ -192,7 +189,7 @@ class BookStoreListViewController: UIViewController {
 // MARK: - API연결시 변경해주어야 합니다
 extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-// MARK: - 셀 리스트 개수 반환
+        // MARK: - 셀 리스트 개수 반환
         if let count = bookStoreList?.count{
             return count
         }
@@ -211,7 +208,7 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
         cell.cellModel = storeList[indexPath.row]
         return cell
     }
-            
+    
     
     // MARK: - 테이블뷰 셀 선택 시
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환
@@ -231,9 +228,9 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-//struct BookStoreListViewController_Preview: PreviewProvider {
-//    static var previews: some View {
-//        BookStoreListViewController().toPreview()
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct BookStoreListViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        BookStoreListViewController().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
+}

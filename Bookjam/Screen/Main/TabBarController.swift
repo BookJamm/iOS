@@ -11,6 +11,13 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        tabBar.frame.size.height = 100
+        tabBar.frame.origin.y = view.frame.height - 100
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = main03
