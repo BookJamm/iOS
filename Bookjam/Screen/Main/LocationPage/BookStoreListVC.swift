@@ -15,6 +15,9 @@ import Then
 class BookStoreListViewController: UIViewController {
 
     // MARK: Variables
+    /// BookStoreVC에서 사용하는 서점 객체들의 모델 리스트입니다.
+    /// Cell Data Fetching에 사용합니다.
+    private var bookStoreList : [GetPlaceResponseModel]?
 
     /// 테이블 뷰 위의 타이틀과 필터 버튼이 들어가는 헤더입니다.
     lazy var headerView: UIView = UIView().then {
@@ -83,6 +86,13 @@ class BookStoreListViewController: UIViewController {
         $0.setImage(UIImage(systemName: "chevron.down", withConfiguration: config), for: .normal)
         $0.tintColor = .black
         $0.semanticContentAttribute = .forceRightToLeft
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // MARK: - LocationPageVC에서 서점 목록 불러왔을 때 본 VC의 테이블 뷰 업데이트
+        NotificationCenter.default.addObserver(self, selector: #selector(handStoreList), name: NSNotification.Name("handStoreList") , object: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -168,6 +178,14 @@ class BookStoreListViewController: UIViewController {
         
         
     }
+    
+    // MARK: - LocationPageVC에서 API 작업 진행 후 넘어오는 noti
+    @objc func handStoreList(_ sender: Notification) {
+        if let storeList = sender.object as? [GetPlaceResponseModel] {
+            self.bookStoreList = storeList
+            self.locationTableView.reloadData()
+        }
+    }
 }
 
 // MARK: - TableView Extension
@@ -175,11 +193,10 @@ class BookStoreListViewController: UIViewController {
 extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 // MARK: - 셀 리스트 개수 반환
-//        if let count = bookStoreList?.count{
-//            return count
-//        }
-        return 4
-        
+        if let count = bookStoreList?.count{
+            return count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -189,47 +206,22 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LocationTableViewCell", for: indexPath) as! LocationTableViewCell
         
-// MARK: - 셀 내용 배정
-//        if let bookStoreList = bookStoreList {
-//            let book = bookStoreList[indexPath.row]
-//            cell.bookstoreLabel.text = book.name
-//            cell.locationLabel.text = book.address?.road
-//            if let rating = bookStoreList[indexPath.row].rating {
-//                cell.starLabel.text = String(rating)
-//            }
-//
-//            if let reviewCount = bookStoreList[indexPath.row].reviewCount {
-//                cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
-//            }
-//            if let imageUrls = bookStoreList[indexPath.row].images {    //이미지 url을 이미지로
-//                cell.images = imageUrls
-//            }
-//        }
-        
+        // MARK: - 셀 내용 배정
+        guard let storeList = self.bookStoreList else { return cell }
+        cell.cellModel = storeList[indexPath.row]
         return cell
     }
             
     
-// MARK: - 테이블뷰 셀 선택 시
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환
-//        let detailPage = BookstoreDetailPageVC()
-//
-//        let selectedPlaceId = bookStoreList![indexPath.row].placeId!
-//
-//        APIManager.shared.getData(
-//            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
-//            responseDataType: APIModel<PlaceIdResponseModel>?.self,
-//            requestDataType: PlaceIdRequestModel.self,
-//            parameter: nil,
-//            completionHandler: { [self]
-//                response in
-//                    print(response)
-//                detailPage.bookStoreDetail = response?.result ?? nil
-//                navigationController?.pushViewController(detailPage, animated: true)
-//            })
-//
-//    }
+    // MARK: - 테이블뷰 셀 선택 시
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환
+        
+        if let placeID = self.bookStoreList?[indexPath.row].placeId {
+            NotificationCenter.default.post(name: NSNotification.Name("presentVC"), object: placeID)
+        }
+    }
     
+    // MARK: - 테이블 뷰 스크롤 시
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == self.locationTableView {
             if scrollView.contentOffset.y < 0 {
@@ -239,9 +231,9 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-struct BookStoreListViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreListViewController().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreListViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreListViewController().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
