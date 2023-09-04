@@ -27,6 +27,8 @@ final class LocationPageVC: BaseBottomSheetController {
     private let mapView = MKMapView()
     /// 유저 현재 위치
     private var userLocation: CLLocationCoordinate2D?
+    /// 서점 목록
+    private var bookStoreList: [GetPlaceResponseModel]?
     
     /// 화면 상단 서치바
     lazy var searchBar: UISearchBar = UISearchBar().then {
@@ -59,8 +61,10 @@ final class LocationPageVC: BaseBottomSheetController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        // Floating Panel의 위치 설정 관련 함수를 Notification 등록 - Floating Panel의 VC안에서 post함
+        // Floating Panel의 위치 설정 관련 함수를 Notification 등록 - Floating Panel의 VC안에서 post
         NotificationCenter.default.addObserver(self, selector: #selector(moveState), name: NSNotification.Name("PanelMove") , object: nil)
+        //  서점 디테일뷰 불러오기 요청시 호출되는 Noti - Floating Panel의 VC안에서 post
+        NotificationCenter.default.addObserver(self, selector: #selector(presentVC), name: NSNotification.Name("presentVC") , object: nil)
     }
 
     override func viewDidLoad() {
@@ -78,34 +82,6 @@ final class LocationPageVC: BaseBottomSheetController {
         // 본 VC안의 모든 notification 종료
         NotificationCenter.default.removeObserver(self)
     }
-    
-    /// Floating Panel의 스크롤 상태를 이동시키는 함수입니다.
-    /// 서점 목록 tableView에서 스크롤을 끝까지 올린경우, Notification을 호출하여 해당 함수를 호출합니다.
-    @objc func moveState(_ sender: Notification) {
-        switch self.fpc.state {
-        case .half :
-            self.fpc.move(to: .tip, animated: true)
-        case .full :
-            self.fpc.move(to: .half, animated: true)
-        default :
-           break
-        }
-    }
-    
-    // MARK: - Floating Panel - primary setting
-    func setUpFloatingPanel() {
-        let BottomContent = BookStoreListViewController()   // 바텀시트에 들어갈 서점 목록 VC
-        let BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent) // 서점목록VC 전용 바텀시트 DelegateController 등록
-        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController) // 바텀시트 등록
-        
-        // 현재위티 버튼 위치는 바텀 시트 윗부분입니다. 해당 부분에서 설정해주어야 합니다.
-        currentLocateBtn.snp.makeConstraints {
-            $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
-            $0.centerX.equalToSuperview()
-        }
-        
-    }
-    
 
     // MARK: View
     func setUpView() {
@@ -167,7 +143,14 @@ final class LocationPageVC: BaseBottomSheetController {
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
-            
+    
+    // MARK: - Floating Panel에서 셀 선택했을 때 호출
+    @objc func presentVC(_ sender: Notification) {
+        
+        if let placeID = sender.object as? Int {
+            GETStoreDetail(selectedPlaceId: placeID)
+        }
+    }
 }
 
 // MARK: - LocationManagerDelgete 입니다. 위치를 갖고 오고, 이에 따른 추가 작업을 진행합니다.
@@ -181,9 +164,12 @@ extension LocationPageVC: CLLocationManagerDelegate {
             // region 설정 - 7km * 7km 반경으로 설정
             let region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 7000, longitudinalMeters: 7000)
             mapView.setRegion(region, animated: false)
+            self.userLocation = userLocation
+            self.GETBookStoreList(coord: userLocation)
+            // loacation 업데이트 종료
+            locationManager.stopUpdatingLocation()
         }
-        // loacation 업데이트 종료
-        locationManager.stopUpdatingLocation()
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -210,7 +196,7 @@ extension LocationPageVC: MKMapViewDelegate {
             return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
         }
         
-        // MARK: - 마커로 annotation
+// MARK: - 마커로 annotation
 //        if let markerAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "MarkerAnnotation") as? MKMarkerAnnotationView {
 //            // 이미 생성된 마커 뷰 재사용
 //            markerAnnotationView.annotation = annotation
@@ -224,7 +210,7 @@ extension LocationPageVC: MKMapViewDelegate {
 //            return markerAnnotationView
 //        }
         
-        // MARK: - 노란색 핀으로 annotation
+// MARK: - 노란색 핀으로 annotation
 //        let reuseIdentifier = "pin"
 //        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? MKPinAnnotationView
 //
@@ -245,6 +231,76 @@ extension LocationPageVC: MKMapViewDelegate {
 //        return annotationView
     }
     
+}
+
+// MARK: - Floating Panel
+extension LocationPageVC {
+    /// Floating Panel의 스크롤 상태를 이동시키는 함수입니다.
+    /// 서점 목록 tableView에서 스크롤을 끝까지 올린경우, Notification을 호출하여 해당 함수를 호출합니다.
+    @objc func moveState(_ sender: Notification) {
+        switch self.fpc.state {
+        case .half :
+            self.fpc.move(to: .tip, animated: true)
+        case .full :
+            self.fpc.move(to: .half, animated: true)
+        default :
+           break
+        }
+    }
+    
+    // MARK: - Floating Panel - primary setting
+    func setUpFloatingPanel() {
+        let BottomContent = BookStoreListViewController()   // 바텀시트에 들어갈 서점 목록 VC
+        let BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent) // 서점목록VC 전용 바텀시트 DelegateController 등록
+        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController) // 바텀시트 등록
+        
+        // 현재위치 버튼 위치는 바텀 시트 윗부분입니다. 해당 부분에서 설정해주어야 합니다.
+        currentLocateBtn.snp.makeConstraints {
+            $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
+            $0.centerX.equalToSuperview()
+        }
+    }
+
+}
+
+// MARK: - API
+extension LocationPageVC {
+    
+    private func GETBookStoreList(category: Int = 0, sortBy: String = "distance", coord: CLLocationCoordinate2D) {
+
+        let requestParam = getPlaceRequestModel(
+            category: category,
+            sortBy: sortBy,
+            lat: Float(coord.latitude),
+            lon: Float(coord.longitude))
+        
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaces,
+            responseDataType: APIModel<[GetPlaceResponseModel]>?.self,
+            requestDataType: getPlaceRequestModel.self,
+            parameter: requestParam,
+            completionHandler: { [self]
+                response in
+                self.bookStoreList = response?.result
+                // BookStoreListVC로 데이터 넘기기
+                NotificationCenter.default.post(name: NSNotification.Name("handStoreList"), object: self.bookStoreList)
+            })
+    }
+    
+    private func GETStoreDetail(selectedPlaceId: Int) {
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
+            responseDataType: APIModel<PlaceIdResponseModel>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { [self]
+                response in
+                let detailPage = BookstoreDetailPageVC()
+//                detailPage.navigationController?.navigationBar.isHidden = false
+                detailPage.bookStoreDetail = response?.result ?? nil
+                self.navigationController?.pushViewController(detailPage, animated: true)
+            })
+    }
 }
 
 // MARK: - preview
