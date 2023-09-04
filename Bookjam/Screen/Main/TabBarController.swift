@@ -66,7 +66,7 @@ class TabBarController: UITabBarController {
         
         [
             mainVC,
-            locationVC,
+//            locationVC,
             feedVC,
             mypageVC
         ].forEach {

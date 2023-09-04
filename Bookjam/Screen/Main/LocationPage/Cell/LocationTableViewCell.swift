@@ -16,6 +16,13 @@ import Then
 
 class LocationTableViewCell: UITableViewCell {
     
+    // MARK: - Cell ViewModel
+    var cellModel: GetPlaceResponseModel? {
+        didSet {
+            fetchCellData()
+        }
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -31,7 +38,7 @@ class LocationTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        fetchCellData()
         photosCollectionView.reloadData()
     }
     
@@ -94,11 +101,42 @@ class LocationTableViewCell: UITableViewCell {
         $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
     }
     
+    // MARK: - Cell Model Data Fetching
+    /// Cell Model의 데이터를 UI에 반영합니다
+    func fetchCellData() {
+        self.bookstoreLabel.text = self.cellModel?.name ?? "이름 없음"
+        self.locationLabel.text = self.cellModel?.address?.road ?? "주소 없음"
+        self.changeStatus(isOpen: self.cellModel?.open)
+        self.starLabel.text = self.cellModel?.rating?.description ?? "0.0"
+        self.reviewCountLabel.text =  "리뷰 " + (self.cellModel?.reviewCount?.description ?? "0")
+        self.images = self.cellModel?.images ?? []
+    }
+    
+    /// 해당 서점의 현재 상태를 확인하고, 영업 중 라벨을 변경합니다.
+    private func changeStatus(isOpen: Bool?) {
+        // 데이터가 없는 경우
+        guard let isOpen = isOpen else {
+            self.timeButton.setTitle("   미등록   ", for: .normal)
+            self.timeButton.backgroundColor = gray06
+            return
+        }
+        
+        // 영업 여부에 따라 분기처리
+        let isOpenText = isOpen ? "   영업중   " : "   영업 종료   "
+        let backgroundColor = isOpen ? complete : alert
+        
+        // UI 처리
+        self.timeButton.setTitle(isOpenText, for: .normal)
+        self.timeButton.backgroundColor = backgroundColor
+        
+    }
+    
     
     // MARK: View
     
     func setUpView() {
         self.selectionStyle = .none
+        fetchCellData()
     }
     
     
@@ -186,14 +224,16 @@ extension LocationTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
         if images.isEmpty {
-                    // 이미지 배열이 비어있으면 기본 이미지 설정
-                    cell.photoImageView.image = UIImage(named: "squareDefaultImage")
-                } else {
-                    // 이미지 데이터가 있을 경우 해당 이미지 설정
-                    cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row].url!), placeholder: UIImage(named: "squareDefaultImage"))
-                }
-                
-                cell.photoImageView.layer.cornerRadius = 8
+            // 이미지 배열이 비어있으면 기본 이미지 설정
+            cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+        }
+        else {
+            // 이미지 데이터가 있을 경우 해당 이미지 설정
+            cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row].url!), placeholder: UIImage(named: "squareDefaultImage"))
+        }
+        
+        cell.photoImageView.layer.cornerRadius = 8
+                    
         
         return cell
     }
