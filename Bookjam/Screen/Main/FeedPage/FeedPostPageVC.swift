@@ -1037,9 +1037,6 @@ class FeedPostPageVC: UIViewController {
         var isSecret = 0
         var isCommentAllowed = 0
         let date = selectDateButton.titleLabel?.text?.replacingOccurrences(of: " / ", with: "-")
-        
-        if secretPostToggleButton.isOn { isSecret = 1 }
-        if allowCommentToggleButton.isOn { isCommentAllowed = 1 }
 
         /// 리뷰 내용 게시 API 호출
         APIManager.shared.postData(
@@ -1137,8 +1134,6 @@ extension FeedPostPageVC: UITextViewDelegate {
         if textView.text.count > 0 && textView.text != "당신의 한마디를 입력해주세요." {
             uploadButton.backgroundColor = main03
             uploadButton.isEnabled = true
-            
-            viewDidLoad()
         }
     }
 

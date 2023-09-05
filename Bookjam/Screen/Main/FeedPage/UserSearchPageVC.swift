@@ -213,6 +213,9 @@ extension UserSearchPageVC: UITableViewDelegate, UITableViewDataSource {
         /// 셀 ID는 두 셀 모두 feedViewCell로 통일
         let cell = tableView.dequeueReusableCell(withIdentifier: "feedViewCell", for: indexPath)
         
+        /// 셀 클릭했을 때 색 바뀌지 않도록 설정
+        cell.selectionStyle = .none
+        
         return cell
     }
     
