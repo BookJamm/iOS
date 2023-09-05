@@ -844,16 +844,10 @@ class FeedPostPageVC: UIViewController {
     /// 업로드 버튼 활성화 가능 여부 판단하는 함수
     /// 방문날짜, 장소, 책제목, 내용 모두 선택하고 채워야 업로드 함수 활성화
     func checkUploadPossible() {
-        uploadButton.backgroundColor = main03
-        uploadButton.isEnabled = true
-        //        if isPlaceTypeSelected && isVisitDateSelected && isBookSelected && isContentFilled {
-        //            uploadButton.backgroundColor = main03
-        //            uploadButton.isEnabled = true
-        //        }
-        //        else {
-        //            uploadButton.backgroundColor = main03
-        //            uploadButton.isEnabled = true
-        //        }
+        if reviewContentTextView.text.count > 0 && reviewContentTextView.text != "당신의 한마디를 입력해주세요." {
+            uploadButton.backgroundColor = main03
+            uploadButton.isEnabled = true
+        }
     }
     
     /// 네비게이션 바에 있는 뒤로가기 버튼 누르면 현재 뷰 dismiss
@@ -898,10 +892,6 @@ class FeedPostPageVC: UIViewController {
         bookStorebutton.isSelected = true
         bookStorebutton.backgroundColor = main01
         bookStorebutton.layer.borderColor = main03?.cgColor
-        
-        // 업로드 가능한지 판별
-        isPlaceTypeSelected = true
-        checkUploadPossible()
     }
     
     @objc func didPlayGroundButtonTapped() {
@@ -918,11 +908,6 @@ class FeedPostPageVC: UIViewController {
         playGroundButton.isSelected = true
         playGroundButton.backgroundColor = main01
         playGroundButton.layer.borderColor = main03?.cgColor
-        
-        
-        // 업로드 가능한지 판별
-        isPlaceTypeSelected = true
-        checkUploadPossible()
     }
     
     @objc func didLibraryButtonTapped() {
@@ -940,10 +925,6 @@ class FeedPostPageVC: UIViewController {
         libraryButton.isSelected = true
         libraryButton.backgroundColor = main01
         libraryButton.layer.borderColor = main03?.cgColor
-        
-        // 업로드 가능한지 판별
-        isPlaceTypeSelected = true
-        checkUploadPossible()
     }
     
     /// 장소 탭에 있는 검색 바 누르면 발생하는 이벤트
@@ -1025,10 +1006,6 @@ class FeedPostPageVC: UIViewController {
         // bookStoreLabel.text = ""
         // bookStoreRatingLabel.text = ""
         // bookStoreNumOfReviewLabel.text = "리뷰 \()"
-        
-        /// 업로드 버튼 활성화 가능한지 체크
-        isplaceSelected = true
-        checkUploadPossible()
     }
     
     /// 선택한 날짜 데이터 notification으로 받아와서 버튼 날짜 업데이트
@@ -1038,10 +1015,6 @@ class FeedPostPageVC: UIViewController {
         if let date = notification.object as? Date {
             selectDateButton.setTitle(dateFormat.string(from: date), for: .normal)
         }
-        
-        /// 업로드 버튼 활성화 가능한지 체크
-        isVisitDateSelected = true
-        checkUploadPossible()
     }
     
     /// 선택한 책 데이터 notification으로 받아와서 책 데이터 업데이트
@@ -1054,10 +1027,6 @@ class FeedPostPageVC: UIViewController {
             bookSearchResultAuthorLabel.text = data.author
             isbn = Int(data.isbn!)!
         }
-        
-        /// 업로드 버튼 활성화 가능한지 체크
-        isBookSelected = true
-        checkUploadPossible()
     }
     
     /// 작성 데이터 서버에 넘기고 화면 dismiss
@@ -1067,13 +1036,11 @@ class FeedPostPageVC: UIViewController {
         let content = reviewContentTextView.text
         var isSecret = 0
         var isCommentAllowed = 0
-        var date = selectDateButton.titleLabel?.text?.replacingOccurrences(of: " / ", with: "-")
+        let date = selectDateButton.titleLabel?.text?.replacingOccurrences(of: " / ", with: "-")
         
         if secretPostToggleButton.isOn { isSecret = 1 }
         if allowCommentToggleButton.isOn { isCommentAllowed = 1 }
-        
-        print(date)
-        
+
         /// 리뷰 내용 게시 API 호출
         APIManager.shared.postData(
             urlEndpointString: Constant.postRecord,
@@ -1163,10 +1130,16 @@ extension FeedPostPageVC: UITextViewDelegate {
             textView.text = nil
             textView.textColor = .black
         }
-        
-        /// 업로드 가능 여부 판별
-        isContentFilled = true
-        checkUploadPossible()
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        /// 내용 채워지면 게시 버튼 활성화되도록 구현
+        if textView.text.count > 0 && textView.text != "당신의 한마디를 입력해주세요." {
+            uploadButton.backgroundColor = main03
+            uploadButton.isEnabled = true
+            
+            viewDidLoad()
+        }
     }
 
     /// placeholder 글자 수 0일 때 나타나도록 설정
@@ -1175,10 +1148,6 @@ extension FeedPostPageVC: UITextViewDelegate {
             textView.text = "당신의 한마디를 입력해주세요."
             textView.textColor = .lightGray
         }
-        
-        /// 업로드 가능 여부 판별
-        isContentFilled = false
-        checkUploadPossible()
     }
 }
 
