@@ -325,16 +325,16 @@ extension LocationPageVC {
 }
 
 // MARK: - preview
-struct LocationPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        // MARK: - UIViewControllerPreview를 사용하여 tabBarController의 index를 사용합니다
-        UIViewControllerPreview {
-            let tabBarController = TabBarController()
-            tabBarController.selectedIndex = 1
-            return tabBarController
-        }
-    }
-}
+//struct LocationPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        // MARK: - UIViewControllerPreview를 사용하여 tabBarController의 index를 사용합니다
+//        UIViewControllerPreview {
+//            let tabBarController = TabBarController()
+//            tabBarController.selectedIndex = 1
+//            return tabBarController
+//        }
+//    }
+//}
 
 // MARK: 테스트 데이터 모델
 struct Location {

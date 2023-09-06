@@ -20,7 +20,7 @@ final class LocationAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-        clusteringIdentifier = "bookStore"
+        clusteringIdentifier = LocationDataMapClusterView.identifier
 //        canShowCallout = true
         setupUI()
     }
@@ -28,6 +28,12 @@ final class LocationAnnotationView: MKAnnotationView {
     @available(*, unavailable)
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var annotation: MKAnnotation? {
+        willSet {
+            clusteringIdentifier = LocationDataMapClusterView.identifier
+        }
     }
 
     // MARK: Setup

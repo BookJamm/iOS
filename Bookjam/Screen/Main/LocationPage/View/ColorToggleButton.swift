@@ -74,17 +74,17 @@ class ColorToggleButton: UIButton {
     }
 }
 
-#if DEBUG
-import SwiftUI
-
-@available(iOS 13.0, *)
-struct ColorToggleButton_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = ColorToggleButton(title: "인기순")
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-    }
-}
-#endif
+//#if DEBUG
+//import SwiftUI
+//
+//@available(iOS 13.0, *)
+//struct ColorToggleButton_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = ColorToggleButton(title: "인기순")
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//    }
+//}
+//#endif
