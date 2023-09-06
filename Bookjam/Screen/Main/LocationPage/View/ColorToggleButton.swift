@@ -17,30 +17,30 @@ class ColorToggleButton: UIButton {
             if isOn {
                 self.configuration = selectedConfig()
                 self.layer.borderWidth = 0
+                self.setTitle(titleString, for: .normal)
             }
             else {
                 self.configuration = defaultConfig()
                 self.layer.borderWidth = 1.0
+                self.setTitle(titleString, for: .normal)
             }
         }
     }
     
-    ///평소 버튼색
-    var normalColor: UIColor = gray06!
-    ///선택 후 버튼색
-    var selectedColor: UIColor = main03!
+    var titleString: String?
     
     init(title: String) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 100, height: 60))
+        super.init(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
         
         // MARK: - 기본설정 적용
         self.configuration = self.defaultConfig()
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = normalColor.cgColor
+        self.layer.borderColor = gray05?.cgColor
         
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 18
         self.setTitle(title, for: .normal)
+        self.titleString = title
         self.titleLabel?.font = captionText02
         
         // MARK: - 선택했을 때 색 변경

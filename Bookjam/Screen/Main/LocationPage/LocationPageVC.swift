@@ -25,10 +25,12 @@ final class LocationPageVC: BaseBottomSheetController {
     private let locationManager = CLLocationManager()
     /// 지도 뷰
     private let mapView = MKMapView()
-    /// 유저 현재 위치
+    /// 유저 위치
     private var userLocation: CLLocationCoordinate2D?
     /// 서점 목록
     private var bookStoreList: [GetPlaceResponseModel]?
+    /// 지도 현재 지도 중심 위치 + 스케일
+    private var mapCurrentLocation: MKCoordinateRegion?
     
     /// 화면 상단 서치바
     lazy var searchBar: UISearchBar = UISearchBar().then {
@@ -65,6 +67,8 @@ final class LocationPageVC: BaseBottomSheetController {
         NotificationCenter.default.addObserver(self, selector: #selector(moveState), name: NSNotification.Name("PanelMove") , object: nil)
         //  서점 디테일뷰 불러오기 요청시 호출되는 Noti - Floating Panel의 VC안에서 post
         NotificationCenter.default.addObserver(self, selector: #selector(presentVC), name: NSNotification.Name("presentVC") , object: nil)
+        //  서점 필터 변경 요청시 호출되는 Noti - Floating Panel의 VC안에서 post
+        NotificationCenter.default.addObserver(self, selector: #selector(changeFilter), name: NSNotification.Name("changeFilter") , object: nil)
     }
 
     override func viewDidLoad() {
@@ -155,7 +159,13 @@ final class LocationPageVC: BaseBottomSheetController {
     // MARK: - 현재 위치에서 탐색 눌렀을 때 호출
     @objc func searchOnCurrentLocation() {
         self.locationManager.startUpdatingLocation() // 위치 업데이트
-        
+    }
+    
+    // MARK: - 필터 변경했을 때 호출
+    @objc func changeFilter(_ sender: Notification) {
+        if let selected = sender.object as? filters {
+            GETBookStoreList(sortBy: selected.rawValue, coord: self.userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0))
+        }
     }
 }
 
@@ -185,6 +195,11 @@ extension LocationPageVC: CLLocationManagerDelegate {
 
 // MARK: - MKMapViewDelegate 입니다. mapView에서 사용되는 annotation의 기본 내용을 설정합니다.
 extension LocationPageVC: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        self.mapCurrentLocation = mapView.region
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         switch annotation {
@@ -310,16 +325,16 @@ extension LocationPageVC {
 }
 
 // MARK: - preview
-//struct LocationPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        // MARK: - UIViewControllerPreview를 사용하여 tabBarController의 index를 사용합니다
-//        UIViewControllerPreview {
-//            let tabBarController = TabBarController()
-//            tabBarController.selectedIndex = 1
-//            return tabBarController
-//        }
-//    }
-//}
+struct LocationPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        // MARK: - UIViewControllerPreview를 사용하여 tabBarController의 index를 사용합니다
+        UIViewControllerPreview {
+            let tabBarController = TabBarController()
+            tabBarController.selectedIndex = 1
+            return tabBarController
+        }
+    }
+}
 
 // MARK: 테스트 데이터 모델
 struct Location {
