@@ -10,6 +10,7 @@
 		411FD826C5A9F974087EAC6B /* Pods_BookjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47ED49659B4E111FDC84ECA9 /* Pods_BookjamTests.framework */; };
 		4F360426894B4364D871ACEA /* Pods_Bookjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */; };
 		88198FA82AA8D3CA002A4447 /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88198FA72AA8D3CA002A4447 /* ColorToggleButton.swift */; };
+		88198FAB2AA8E3A3002A4447 /* filterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88198FAA2AA8E3A3002A4447 /* filterModel.swift */; };
 		88232B2E2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */; };
 		88232B302A9E612200BAC0F5 /* BookStoreListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B2F2A9E612200BAC0F5 /* BookStoreListVC.swift */; };
 		88232B322A9FB1A200BAC0F5 /* MapClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B312A9FB1A200BAC0F5 /* MapClusterView.swift */; };
@@ -151,6 +152,7 @@
 		6F687D70DC26FAB7B740C979 /* Pods-Bookjam-BookjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam-BookjamUITests.release.xcconfig"; path = "Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88198FA72AA8D3CA002A4447 /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
+		88198FAA2AA8E3A3002A4447 /* filterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterModel.swift; sourceTree = "<group>"; };
 		88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetController.swift; sourceTree = "<group>"; };
 		88232B2F2A9E612200BAC0F5 /* BookStoreListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListVC.swift; sourceTree = "<group>"; };
 		88232B312A9FB1A200BAC0F5 /* MapClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapClusterView.swift; sourceTree = "<group>"; };
@@ -314,6 +316,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		88198FA92AA8E394002A4447 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88198FAA2AA8E3A3002A4447 /* filterModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		88F41F952A9C98C200AA376C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +382,7 @@
 		94D658F92A7162FD00E7F183 /* LocationPage */ = {
 			isa = PBXGroup;
 			children = (
+				88198FA92AA8E394002A4447 /* Model */,
 				88F41F962A9C98D500AA376C /* View */,
 				88F41F952A9C98C200AA376C /* Cell */,
 				94D658FD2A71653A00E7F183 /* LocationPageVC.swift */,
@@ -1182,6 +1193,7 @@
 				DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */,
 				DDAECC322A93EA2B00B3D676 /* RecommendFriendPopUpVC.swift in Sources */,
 				DD35407B2A83BC0900B5A9A3 /* LoginVC.swift in Sources */,
+				88198FAB2AA8E3A3002A4447 /* filterModel.swift in Sources */,
 				DDC445072A80D10B000FE1C7 /* UIViewController+.swift in Sources */,
 				DDD74A9A2A8C1F1B008C999F /* Record.swift in Sources */,
 				DD3A22132A7CD0E400E7B423 /* NewsTableViewCell.swift in Sources */,
