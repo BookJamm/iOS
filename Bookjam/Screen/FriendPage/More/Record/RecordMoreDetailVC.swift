@@ -456,9 +456,9 @@ extension RecordMoreDetailVC: UITableViewDataSource, UITableViewDelegate{
     }
 }
 
-struct RecordMoreDetailVC_Preview: PreviewProvider {
-    static var previews: some View {
-        RecordMoreDetailVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct RecordMoreDetailVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        RecordMoreDetailVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

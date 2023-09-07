@@ -153,17 +153,17 @@ class RecordMoreTableViewCell: UITableViewCell {
 }
 
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct RecordMoreTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = RecordMoreTableViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct RecordMoreTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = RecordMoreTableViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

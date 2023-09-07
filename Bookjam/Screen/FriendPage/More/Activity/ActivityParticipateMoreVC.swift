@@ -117,9 +117,9 @@ extension ActivityParticipateMoreVC: UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-struct ActivityParticipateMoreVC_Preview: PreviewProvider {
-    static var previews: some View {
-        ActivityParticipateMoreVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct ActivityParticipateMoreVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        ActivityParticipateMoreVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

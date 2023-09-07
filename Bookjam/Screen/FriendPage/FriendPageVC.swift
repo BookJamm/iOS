@@ -608,7 +608,8 @@ class FriendPageVC: UIViewController {
         activityParticipateVC.modalPresentationStyle = .fullScreen
         activityParticipateVC.modalTransitionStyle = .coverVertical
         
-        self.present(activityParticipateVC, animated: false, completion: nil)
+//        self.present(activityParticipateVC, animated: false, completion: nil)
+        navigationController?.pushViewController(activityParticipateVC, animated: true)
     }
     
     @objc func didMoreRecordButtonTapped() {
@@ -617,7 +618,8 @@ class FriendPageVC: UIViewController {
         recordMoreVC.modalPresentationStyle = .fullScreen
         recordMoreVC.modalTransitionStyle = .coverVertical
         
-        self.present(recordMoreVC, animated: false, completion: nil)
+//        self.present(recordMoreVC, animated: false, completion: nil)
+        navigationController?.pushViewController(recordMoreVC, animated: true)
     }
     
     //디자인 없는 관계로 임시로 주석 처리
@@ -632,7 +634,8 @@ class FriendPageVC: UIViewController {
         
         let likeActivityVC = LikeActivityTableViewController()
         likeActivityVC.modalPresentationStyle = .overFullScreen
-        self.present(likeActivityVC, animated: false, completion: nil)
+//        self.present(likeActivityVC, animated: false, completion: nil)
+        navigationController?.pushViewController(likeActivityVC, animated: true)
     }
     
 }
@@ -676,9 +679,9 @@ extension FriendPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
 }
 
-struct FriendPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        FriendPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct FriendPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        FriendPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

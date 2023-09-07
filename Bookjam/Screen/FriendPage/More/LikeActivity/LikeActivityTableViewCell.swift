@@ -151,17 +151,17 @@ class LikeActivityTableViewCell: UITableViewCell {
 }
 
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct LikeActivityTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = LikeActivityTableViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct LikeActivityTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = LikeActivityTableViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif
