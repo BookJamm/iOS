@@ -141,17 +141,17 @@ class PlaceSearchTableViewCell: UITableViewCell {
 }
 
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct PlaceSearchTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = PlaceSearchTableViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct PlaceSearchTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = PlaceSearchTableViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif

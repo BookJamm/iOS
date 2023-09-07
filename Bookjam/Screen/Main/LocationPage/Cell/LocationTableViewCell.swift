@@ -260,17 +260,17 @@ extension LocationTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
     }
 }
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct MainPageBookStoreTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let button = MainPageBookStoreTableViewCell()
-            return button
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct MainPageBookStoreTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let button = MainPageBookStoreTableViewCell()
+//            return button
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif
