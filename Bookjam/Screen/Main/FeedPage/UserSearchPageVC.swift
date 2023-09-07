@@ -82,7 +82,7 @@ class UserSearchPageVC: UIViewController {
         setUpDelegate()
         setUpConstraint()
         
-        navigationItem.titleView = searchBar
+//        navigationItem.titleView = searchBar
         
     }
     
@@ -128,22 +128,22 @@ class UserSearchPageVC: UIViewController {
 //            $0.leading.equalToSuperview().offset(20)
 //        }
         
-//        searchBar.snp.makeConstraints {
-////            $0.centerY.equalTo(backButton)
-//            //            $0.leading.equalTo(backButton.snp.trailing).offset(10)
-//
+        searchBar.snp.makeConstraints {
+//            $0.centerY.equalTo(backButton)
+            //            $0.leading.equalTo(backButton.snp.trailing).offset(10)
 //            $0.centerY.equalTo(view.safeAreaLayoutGuide).offset(10)
-//            $0.leading.equalToSuperview().offset(10)
-//            $0.trailing.equalToSuperview().offset(-10)
-//            $0.height.equalTo(45)
-//        }
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalToSuperview().offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.height.equalTo(45)
+        }
         
         segmentController.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview().offset(-10)
 //            $0.top.equalTo(searchBar.snp.bottom).offset(10)
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalTo(searchBar.snp.bottom).offset(10)
         }
 
         segmentControlUnderlineView.snp.makeConstraints {
@@ -250,9 +250,9 @@ extension UserSearchPageVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-//struct UserSearchPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        UserSearchPageVC().toPreview()
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct UserSearchPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        UserSearchPageVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
+}
