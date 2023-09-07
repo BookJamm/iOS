@@ -64,6 +64,7 @@ class BookstoreDetailPageVC: UIViewController {
     var starLabel: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.text = "3.75"
+        $0.sizeToFit()
     }
     
     var reviewCountLabel: UILabel = UILabel().then {
@@ -94,12 +95,14 @@ class BookstoreDetailPageVC: UIViewController {
         $0.font = paragraph05
         $0.textColor = gray06
         $0.text = "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층"
+        $0.sizeToFit()
     }
     
     var timeLabel: UILabel = UILabel().then {
         $0.font = paragraph05
         $0.textColor = complete
         $0.text = "영업 중"
+        $0.sizeToFit()
     }
     
     var siteURL: UIButton = UIButton().then {
@@ -262,14 +265,14 @@ class BookstoreDetailPageVC: UIViewController {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(1800)
+            $0.height.equalTo(scrollView.frameLayoutGuide)
         }
         
         photoCollectionView.snp.makeConstraints {
@@ -401,6 +404,8 @@ class BookstoreDetailPageVC: UIViewController {
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
+        
+        scrollView.updateContentSize()
     }
     
     
@@ -448,10 +453,10 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            contentView.snp.removeConstraints()
-            
-            let homeViewHeight = 1200 + reviewView.reviews.count * 350
-            setUpContentviewConstraint(height: homeViewHeight)
+//            contentView.snp.removeConstraints()
+//            
+//            let homeViewHeight = 1200 + reviewView.reviews.count * 250
+//            setUpContentviewConstraint(height: homeViewHeight)
             
         }
         /// 소식 탭
@@ -464,11 +469,11 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            contentView.snp.removeConstraints()
-            
-            let newsViewHeight = 1200 + newsView.newsList.count * 200
-            
-            setUpContentviewConstraint(height: newsViewHeight)
+//            contentView.snp.removeConstraints()
+//
+//            let newsViewHeight = 1200 + newsView.newsList.count * 200
+//
+//            setUpContentviewConstraint(height: newsViewHeight)
         }
         /// 참여 탭
         else if segmentIndex == 2 {
@@ -480,11 +485,11 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let activityViewHeight = 1200 + activityView.activities.count * 80
-            
-            contentView.snp.removeConstraints()
-            
-            setUpContentviewConstraint(height: activityViewHeight)
+//            let activityViewHeight = 1200 + activityView.activities.count * 80
+//
+//            contentView.snp.removeConstraints()
+//
+//            setUpContentviewConstraint(height: activityViewHeight)
         }
         /// 리뷰 탭
         else if segmentIndex == 3 {
@@ -496,11 +501,11 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let reviewViewHeight = 1200 + reviewView.reviews.count * 260 + 250
-            
-            contentView.snp.removeConstraints()
-            
-            setUpContentviewConstraint(height: reviewViewHeight)
+//            let reviewViewHeight = 1200 + reviewView.reviews.count * 260 + 250
+//
+//            contentView.snp.removeConstraints()
+//
+//            setUpContentviewConstraint(height: reviewViewHeight)
         }
         /// 책 종류 탭
         else if segmentIndex == 4 {

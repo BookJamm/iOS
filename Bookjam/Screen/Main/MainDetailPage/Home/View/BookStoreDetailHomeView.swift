@@ -40,6 +40,7 @@ class BookStoreDetailHomeView: UIView {
     var newsLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = .black
+        $0.sizeToFit()
     }
 
     var newsMoreButton: UIButton = UIButton().then {
@@ -62,16 +63,19 @@ class BookStoreDetailHomeView: UIView {
     var newsTitle: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var newsContent: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var newsDate: UILabel = UILabel().then {
         $0.font = captionText02
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var bookListView: UIView = UIView().then {
@@ -109,12 +113,14 @@ class BookStoreDetailHomeView: UIView {
         $0.font = title06
         $0.textColor = .black
         $0.text = "독서 활동 참여 목록"
+        $0.sizeToFit()
     }
     
     var bookActivityCountLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = main03
-        $0.text = "1"
+        $0.text = "0"
+        $0.sizeToFit()
     }
     
     var bookActivityMoreButton: UIButton = UIButton().then {
@@ -141,6 +147,7 @@ class BookStoreDetailHomeView: UIView {
         $0.font = title06
         $0.textColor = .black
         $0.text = "리뷰"
+        $0.sizeToFit()
     }
     
     var reviewMoreButton: UIButton = UIButton().then {
@@ -262,10 +269,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
 
-        newsMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(newsLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        newsMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(newsLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         newsPreview.snp.makeConstraints {
             $0.top.equalTo(newsLabel.snp.bottom).offset(25)
@@ -310,10 +317,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        bookListMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(bookListLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        bookListMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(bookListLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         bookListCollectionView.snp.makeConstraints {
             $0.top.equalTo(bookListLabel.snp.bottom).offset(20)
@@ -340,10 +347,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalTo(bookActivityLabel.snp.trailing).offset(10)
         }
 
-        bookActivityMoreButton.snp.makeConstraints {
-            $0.top.equalTo(bookActivityLabel.snp.top)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        bookActivityMoreButton.snp.makeConstraints {
+//            $0.top.equalTo(bookActivityLabel.snp.top)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
 
         bookActivityCollectionView.snp.makeConstraints {
             $0.top.equalTo(bookActivityCountLabel.snp.bottom).offset(25)
@@ -365,10 +372,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        reviewMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(reviewLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        reviewMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(reviewLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         reviewTableView.snp.makeConstraints {
             $0.top.equalTo(reviewLabel.snp.bottom).offset(10)

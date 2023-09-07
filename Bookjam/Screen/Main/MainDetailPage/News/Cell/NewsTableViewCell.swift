@@ -34,7 +34,7 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     var newsContent: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.text = "뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용"
         $0.numberOfLines = 20
         $0.sizeToFit()

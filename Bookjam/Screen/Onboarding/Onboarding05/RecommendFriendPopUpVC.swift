@@ -58,6 +58,11 @@ class RecommendFriendPopUpVC: UIViewController {
         setUpConstraint()
     }
     
+    /// 뒷쪽 뷰 클릭하면 화면 dismiss되도록 설정
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.dismiss(animated: true)
+    }
+    
 
     // MARK: View
     

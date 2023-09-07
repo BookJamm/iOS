@@ -60,7 +60,7 @@ class ActivityTableViewCell: UITableViewCell {
     }
     
     var descriptionLabel: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.text = "북 큐레이팅 서비스입니다. 한 달 동안 정기적으로 3권의 책을 보내드립니다. 구매자의 사연과 요청에 따라 가게의 주인장이 추천하는 책을 짧은 메시지와 함께 보내드립니다."
         $0.numberOfLines = 20
     }
@@ -174,17 +174,17 @@ class ActivityTableViewCell: UITableViewCell {
     }
 }
 
-#if DEBUG
-
-@available(iOS 13.0, *)
-struct ActivityTableViewCell_Preview: PreviewProvider {
-    static var previews: some View {
-        UIViewPreview {
-            let cell = ActivityTableViewCell()
-            return cell
-        }
-        .previewLayout(.sizeThatFits)
-        .padding(10)
-    }
-}
-#endif
+//#if DEBUG
+//
+//@available(iOS 13.0, *)
+//struct ActivityTableViewCell_Preview: PreviewProvider {
+//    static var previews: some View {
+//        UIViewPreview {
+//            let cell = ActivityTableViewCell()
+//            return cell
+//        }
+//        .previewLayout(.sizeThatFits)
+//        .padding(10)
+//    }
+//}
+//#endif
