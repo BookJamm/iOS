@@ -40,7 +40,7 @@ final class LocationAnnotationView: MKAnnotationView {
 
     private func setupUI() {
         backgroundColor = .clear
-        customImage.image = UIImage(named: "locationPin")//?.withRenderingMode(.alwaysTemplate)
+        customImage.image = UIImage(named: "bookPin")//?.withRenderingMode(.alwaysTemplate)
         customImage.tintColor = main03
         self.addSubview(customImage)
         customImage.snp.makeConstraints {
