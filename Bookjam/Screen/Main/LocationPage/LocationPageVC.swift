@@ -187,6 +187,7 @@ final class LocationPageVC: BaseBottomSheetController {
                 let pin = MKPointAnnotation()
                 pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
                 pin.title = model.name
+                pin.subtitle = LocationCategory(rawValue: model.category ?? 0)?.getName_InKorean()
                 self.mapView.addAnnotation(pin)
             }
             
@@ -227,7 +228,6 @@ extension LocationPageVC: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         switch annotation {
             
             // 사용자 위치 표시는 따로 처리
@@ -363,44 +363,44 @@ extension LocationPageVC {
 //}
 
 // MARK: 테스트 데이터 모델
-struct Location {
-    let location: CLLocationCoordinate2D
-    let isOnline: Bool
-}
-
-// MARK: 테스트 데이터
-let test_locations: [Location] = [
-    Location(location: CLLocationCoordinate2D(latitude: 37.54478472921202, longitude: 126.94673688998076),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54439820083342, longitude: 126.948773984529),
-             isOnline: false),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54504947320774, longitude: 126.9550424714841),
-             isOnline: false),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54272316128486, longitude: 126.95069875049849),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54580371975873, longitude: 126.9486824957686),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54746336131146, longitude: 126.95301543492582),
-             isOnline: false),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54187695023674, longitude: 126.95247580718593),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.540310515649004, longitude: 126.95583737028332),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54111875425007, longitude: 126.94921751985316),
-             isOnline: false),
-    Location(location: CLLocationCoordinate2D(latitude: 37.53979090501977, longitude: 126.94666123767706),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.54845995224114, longitude: 126.94993678169008),
-             isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.494421166348764, longitude: 126.82028764389928), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.488346902267495, longitude: 126.81579203804258), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49504914992981, longitude: 126.81993141424413), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.4908971317027, longitude: 126.80895351558094), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49158859722595, longitude: 126.81273229448066), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49448832262324, longitude: 126.81572773122747), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49521139983187, longitude: 126.81864321432767), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49686821489078, longitude: 126.81099234551315), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.49722714555698, longitude: 126.82161664736311), isOnline: true),
-    Location(location: CLLocationCoordinate2D(latitude: 37.48738974689891, longitude: 126.8222710328802), isOnline: true)
-
-]
+//struct Location {
+//    let location: CLLocationCoordinate2D
+//    let isOnline: Bool
+//}
+//
+//// MARK: 테스트 데이터
+//let test_locations: [Location] = [
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54478472921202, longitude: 126.94673688998076),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54439820083342, longitude: 126.948773984529),
+//             isOnline: false),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54504947320774, longitude: 126.9550424714841),
+//             isOnline: false),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54272316128486, longitude: 126.95069875049849),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54580371975873, longitude: 126.9486824957686),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54746336131146, longitude: 126.95301543492582),
+//             isOnline: false),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54187695023674, longitude: 126.95247580718593),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.540310515649004, longitude: 126.95583737028332),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54111875425007, longitude: 126.94921751985316),
+//             isOnline: false),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.53979090501977, longitude: 126.94666123767706),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.54845995224114, longitude: 126.94993678169008),
+//             isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.494421166348764, longitude: 126.82028764389928), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.488346902267495, longitude: 126.81579203804258), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49504914992981, longitude: 126.81993141424413), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.4908971317027, longitude: 126.80895351558094), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49158859722595, longitude: 126.81273229448066), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49448832262324, longitude: 126.81572773122747), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49521139983187, longitude: 126.81864321432767), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49686821489078, longitude: 126.81099234551315), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.49722714555698, longitude: 126.82161664736311), isOnline: true),
+//    Location(location: CLLocationCoordinate2D(latitude: 37.48738974689891, longitude: 126.8222710328802), isOnline: true)
+//
+//]

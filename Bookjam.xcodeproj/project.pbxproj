@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		411FD826C5A9F974087EAC6B /* Pods_BookjamTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47ED49659B4E111FDC84ECA9 /* Pods_BookjamTests.framework */; };
 		4F360426894B4364D871ACEA /* Pods_Bookjam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */; };
+		880566EE2AA99EA800F951AE /* LocationCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880566ED2AA99EA800F951AE /* LocationCategoryModel.swift */; };
 		88198FA82AA8D3CA002A4447 /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88198FA72AA8D3CA002A4447 /* ColorToggleButton.swift */; };
 		88198FAB2AA8E3A3002A4447 /* filterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88198FAA2AA8E3A3002A4447 /* filterModel.swift */; };
 		88232B2E2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */; };
@@ -151,6 +152,7 @@
 		6CF20512EC3BB55ACCE6EF83 /* Pods-Bookjam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam.release.xcconfig"; path = "Target Support Files/Pods-Bookjam/Pods-Bookjam.release.xcconfig"; sourceTree = "<group>"; };
 		6F687D70DC26FAB7B740C979 /* Pods-Bookjam-BookjamUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bookjam-BookjamUITests.release.xcconfig"; path = "Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests.release.xcconfig"; sourceTree = "<group>"; };
 		75444A0A19CD8D859E3F0FFE /* Pods_Bookjam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bookjam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		880566ED2AA99EA800F951AE /* LocationCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCategoryModel.swift; sourceTree = "<group>"; };
 		88198FA72AA8D3CA002A4447 /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
 		88198FAA2AA8E3A3002A4447 /* filterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterModel.swift; sourceTree = "<group>"; };
 		88232B2D2A9E5B0A00BAC0F5 /* BaseBottomSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetController.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				88198FAA2AA8E3A3002A4447 /* filterModel.swift */,
+				880566ED2AA99EA800F951AE /* LocationCategoryModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1191,6 +1194,7 @@
 				DDD5DAB82A7E539C0052C3EB /* BookStorePhotoCollectionViewCell.swift in Sources */,
 				DD48893F2A6FAE8D00F878C0 /* FriendInfo.swift in Sources */,
 				DD81DB622A7BDC8B00E8DD42 /* ActivityInfo.swift in Sources */,
+				880566EE2AA99EA800F951AE /* LocationCategoryModel.swift in Sources */,
 				DDAECC322A93EA2B00B3D676 /* RecommendFriendPopUpVC.swift in Sources */,
 				DD35407B2A83BC0900B5A9A3 /* LoginVC.swift in Sources */,
 				88198FAB2AA8E3A3002A4447 /* filterModel.swift in Sources */,
