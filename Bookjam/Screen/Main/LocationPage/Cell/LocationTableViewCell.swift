@@ -106,17 +106,18 @@ class LocationTableViewCell: UITableViewCell {
     func fetchCellData() {
         self.bookstoreLabel.text = self.cellModel?.name ?? "이름 없음"
         self.locationLabel.text = self.cellModel?.address?.road ?? "주소 없음"
-        self.changeStatus(isOpen: self.cellModel?.open)
+        self.changeOpenStatus(isOpen: self.cellModel?.open)
+        self.changeStarStatus(rating: self.cellModel?.rating)
         self.starLabel.text = self.cellModel?.rating?.description ?? "0.0"
         self.reviewCountLabel.text =  "리뷰 " + (self.cellModel?.reviewCount?.description ?? "0")
         self.images = self.cellModel?.images ?? []
     }
     
     /// 해당 서점의 현재 상태를 확인하고, 영업 중 라벨을 변경합니다.
-    private func changeStatus(isOpen: Bool?) {
+    private func changeOpenStatus(isOpen: Bool?) {
         // 데이터가 없는 경우
         guard let isOpen = isOpen else {
-            self.timeButton.setTitle("   미등록   ", for: .normal)
+            self.timeButton.setTitle("   정보 미등록   ", for: .normal)
             self.timeButton.backgroundColor = gray06
             return
         }
@@ -128,6 +129,21 @@ class LocationTableViewCell: UITableViewCell {
         // UI 처리
         self.timeButton.setTitle(isOpenText, for: .normal)
         self.timeButton.backgroundColor = backgroundColor
+        
+    }
+    
+    /// 해당 서점의 별점을 확인하고, 별 이미지와 라벨을 변경합니다.
+    private func changeStarStatus(rating: Float?) {
+        // 데이터가 없는 경우
+        guard let rating = rating else {
+            self.starImageView.tintColor = gray06
+            self.starLabel.text = "0.00"
+            return
+        }
+        
+        // UI 처리
+        self.starLabel.text = rating.description
+        self.starImageView.tintColor = warning
         
     }
     

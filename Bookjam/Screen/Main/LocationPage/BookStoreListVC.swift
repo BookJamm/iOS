@@ -19,6 +19,9 @@ class BookStoreListViewController: UIViewController {
     /// Cell Data Fetching에 사용합니다.
     private var bookStoreList : [GetPlaceResponseModel]?
     
+    // MARK: - 검색 필터 인덱스 입니다
+    private var selectedFilterIndex: filters = .distance
+    
     /// 테이블 뷰 위의 타이틀과 필터 버튼이 들어가는 헤더입니다.
     lazy var headerView: UIView = UIView().then {
         $0.backgroundColor = .white
@@ -61,6 +64,33 @@ class BookStoreListViewController: UIViewController {
         $0.changesSelectionAsPrimaryAction = true
     }
     
+    /// 평점순 버튼
+    lazy var filterButton_rating = ColorToggleButton(title: "평점순").then {
+        $0.tag = 0
+    }
+    
+    /// 리뷰순 버튼
+    lazy var filterButton_review = ColorToggleButton(title: "리뷰순").then {
+        $0.tag = 1
+    }
+    
+    /// 거리순 버튼
+    lazy var filterButton_distance = ColorToggleButton(title: "거리순").then {
+        $0.tag = 2
+        $0.isOn = true
+    }
+    
+    /// 헤더의 필터 스택뷰입니다
+    lazy var filterHStackView: UIStackView = UIStackView(arrangedSubviews: [
+        filterButton_rating,
+        filterButton_review,
+        filterButton_distance
+    ]).then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+        $0.spacing = 10
+    }
+    
     /// 바디의 테이블 뷰입니다
     lazy var locationTableView: UITableView = UITableView().then {
         $0.backgroundColor = .white
@@ -98,6 +128,7 @@ class BookStoreListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
+        setUpDelegate()
         setUpLayout()
         setUpConstraint()
     }
@@ -112,17 +143,27 @@ class BookStoreListViewController: UIViewController {
         self.view.backgroundColor = .white
         self.locationTableView.tableFooterView = footerView
         self.locationTableView.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationTableViewCell")
+        
+        [
+            filterButton_rating,
+            filterButton_review,
+            filterButton_distance
+        ].forEach { $0.addTarget(self, action: #selector(selectFilter(_:)), for: .touchUpInside) }
+    }
+    
+    // MARK: - Delegate
+    func setUpDelegate() {
         self.locationTableView.dataSource = self
         self.locationTableView.delegate = self
     }
     
     
     // MARK: Layout
-    
     func setUpLayout() {
         [
             titleLabel,
-            filterBtn
+//            filterBtn,
+            filterHStackView
         ].forEach { self.headerView.addSubview($0)}
         
         [
@@ -142,19 +183,25 @@ class BookStoreListViewController: UIViewController {
         // MARK: - header
         headerView.snp.makeConstraints {
             $0.top.left.right.equalToSuperview()
-            $0.height.equalTo(60)
+            $0.height.equalTo(100)
         }
         
-        titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalTo(filterBtn.snp.leading).offset(-10).priority(.low)
-            $0.centerY.equalToSuperview()
-        }
+            titleLabel.snp.makeConstraints {
+                $0.leading.equalToSuperview().offset(20)
+//                $0.trailing.equalTo(filterBtn.snp.leading).offset(-10).priority(.low)
+//                $0.centerY.equalToSuperview()
+                $0.top.equalToSuperview().offset(20)
+            }
+            
+//            filterBtn.snp.makeConstraints {
+//                $0.trailing.equalToSuperview().offset(-30).priority(.high)
+//                $0.centerY.equalTo(titleLabel)
+//            }
         
-        filterBtn.snp.makeConstraints {
-            $0.trailing.equalToSuperview().offset(-30).priority(.high)
-            $0.centerY.equalTo(titleLabel)
-        }
+            filterHStackView.snp.makeConstraints {
+                $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+                $0.leading.equalToSuperview().offset(20)
+            }
         
         // MARK: - body tableView
         locationTableView.snp.makeConstraints {
@@ -176,6 +223,33 @@ class BookStoreListViewController: UIViewController {
         }
     }
     
+    @objc func selectFilter(_ sender: UIButton) {
+        
+        switch self.selectedFilterIndex {
+        case .rating :
+            self.filterButton_rating.isOn = false
+        case .review :
+            self.filterButton_review.isOn = false
+        case .distance :
+            self.filterButton_distance.isOn = false
+        }
+        
+        switch sender.tag {
+        case 0 :
+            self.selectedFilterIndex = .rating
+        case 1 :
+            self.selectedFilterIndex = .review
+        case 2 :
+            self.selectedFilterIndex = .distance
+        default :
+            break
+        }
+        
+        NotificationCenter.default.post(name: NSNotification.Name("changeFilter"), object: self.selectedFilterIndex)
+        
+    }
+    
+    
     // MARK: - LocationPageVC에서 API 작업 진행 후 넘어오는 noti
     @objc func handStoreList(_ sender: Notification) {
         if let storeList = sender.object as? [GetPlaceResponseModel] {
@@ -186,7 +260,6 @@ class BookStoreListViewController: UIViewController {
 }
 
 // MARK: - TableView Extension
-// MARK: - API연결시 변경해주어야 합니다
 extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // MARK: - 셀 리스트 개수 반환
