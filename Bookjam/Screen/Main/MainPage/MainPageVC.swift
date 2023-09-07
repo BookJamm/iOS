@@ -378,7 +378,24 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             if let imageUrls = bookStoreList[indexPath.row].images {    //이미지 url을 이미지로
                 cell.images = imageUrls
             }
+            
+            /// 해당 서점의 현재 상태를 확인하고, 영업 중 라벨을 변경합니다.
+            if let isOpen = bookStoreList[indexPath.row].open {
+                // 영업 여부에 따라 분기처리
+                let isOpenText = isOpen ? "   영업중   " : "   영업 종료   "
+                let backgroundColor = isOpen ? complete : alert
+                
+                // UI 처리
+                cell.timeButton.setTitle(isOpenText, for: .normal)
+                cell.timeButton.backgroundColor = backgroundColor
+            }
+            else {
+                // 데이터가 없는 경우
+                cell.timeButton.setTitle("   정보 미등록   ", for: .normal)
+                cell.timeButton.backgroundColor = gray06
+            }
         }
+        
         return cell
     }
     

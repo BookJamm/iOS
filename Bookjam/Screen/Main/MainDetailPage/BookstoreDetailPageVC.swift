@@ -187,6 +187,7 @@ class BookstoreDetailPageVC: UIViewController {
         setUpNotification()
         
         viewUpdate()
+        
         if bookStoreDetail != nil{
             getPlaceIdNews()
             getPlaceIdBooks()
@@ -284,6 +285,7 @@ class BookstoreDetailPageVC: UIViewController {
         bookstoreLabel.snp.makeConstraints {
             $0.top.equalTo(photoCollectionView.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(20)
         }
         
         bookMarkImageView.snp.makeConstraints {
@@ -299,6 +301,7 @@ class BookstoreDetailPageVC: UIViewController {
         starImageView.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel)
             $0.top.equalTo(storeTypeLabel.snp.bottom).offset(12)
+            $0.width.height.equalTo(20)
         }
         
         starLabel.snp.makeConstraints {
@@ -405,17 +408,17 @@ class BookstoreDetailPageVC: UIViewController {
             $0.bottom.equalToSuperview()
         }
         
-        scrollView.updateContentSize()
+//        scrollView.updateContentSize()
     }
     
     
     // MARK: Functions
     
     func setUpContentviewConstraint(height: Int) {
-        contentView.snp.makeConstraints{
+        contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalToSuperview().multipliedBy(0.7).offset(height)
+            $0.height.equalTo(height)
         }
     }
     
@@ -453,12 +456,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-//            contentView.snp.removeConstraints()
-//            
-//            let homeViewHeight = 1200 + reviewView.reviews.count * 250
-//            setUpContentviewConstraint(height: homeViewHeight)
+            contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
             
+            let homeViewHeight = 1650 + self.reviewView.reviews.count * 230
+            setUpContentviewConstraint(height: homeViewHeight)
         }
+        
         /// 소식 탭
         else if segmentIndex == 1 {
             newsView.isHidden = false
@@ -469,12 +472,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-//            contentView.snp.removeConstraints()
-//
-//            let newsViewHeight = 1200 + newsView.newsList.count * 200
-//
-//            setUpContentviewConstraint(height: newsViewHeight)
+            contentView.snp.removeConstraints()
+
+            let newsViewHeight = 650 + newsView.newsList.count * 150
+            setUpContentviewConstraint(height: newsViewHeight)
         }
+        
         /// 참여 탭
         else if segmentIndex == 2 {
             activityView.isHidden = false
@@ -485,12 +488,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-//            let activityViewHeight = 1200 + activityView.activities.count * 80
-//
-//            contentView.snp.removeConstraints()
-//
-//            setUpContentviewConstraint(height: activityViewHeight)
+            let activityViewHeight = 1200 + activityView.activities.count * 80
+
+            contentView.snp.removeConstraints()
+            setUpContentviewConstraint(height: activityViewHeight)
         }
+        
         /// 리뷰 탭
         else if segmentIndex == 3 {
             reviewView.isHidden = false
@@ -501,12 +504,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-//            let reviewViewHeight = 1200 + reviewView.reviews.count * 260 + 250
-//
-//            contentView.snp.removeConstraints()
-//
-//            setUpContentviewConstraint(height: reviewViewHeight)
+            let reviewViewHeight = 1200 + reviewView.reviews.count * 260 + 250
+
+            contentView.snp.removeConstraints()
+            setUpContentviewConstraint(height: reviewViewHeight)
         }
+        
         /// 책 종류 탭
         else if segmentIndex == 4 {
             bookListView.isHidden = false
@@ -518,9 +521,8 @@ class BookstoreDetailPageVC: UIViewController {
             ].forEach { $0.isHidden = true }
             
             let bookListViewHeight = 1200 + bookListView.bookList.count * 220 + 100
-            
+
             contentView.snp.removeConstraints()
-            
             setUpContentviewConstraint(height: bookListViewHeight)
         }
     }//end of didSegmentControllerValueChanged()
@@ -594,8 +596,8 @@ class BookstoreDetailPageVC: UIViewController {
                 timeLabel.textColor = open ? complete : alert
             }
             else {
-                timeLabel.text = "영업 종료"
-                timeLabel.textColor = alert
+                timeLabel.text = "정보 미등록"
+                timeLabel.textColor = gray06
             }
         }
     } //end of viewUpdate()
@@ -672,7 +674,7 @@ class BookstoreDetailPageVC: UIViewController {
                     
                     self.contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
                     
-                    let homeViewHeight = 1200 + self.reviewView.reviews.count * 300
+                    let homeViewHeight = 1650 + self.reviewView.reviews.count * 230
                     self.setUpContentviewConstraint(height: homeViewHeight)
                 }
             })
