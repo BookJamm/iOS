@@ -201,6 +201,7 @@ class BookStoreListViewController: UIViewController {
             filterHStackView.snp.makeConstraints {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(20)
                 $0.leading.equalToSuperview().offset(20)
+                $0.height.equalTo(28)
             }
         
         // MARK: - body tableView
@@ -301,9 +302,9 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
     }
 }
 
-struct BookStoreListViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        BookStoreListViewController().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct BookStoreListViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        BookStoreListViewController().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}

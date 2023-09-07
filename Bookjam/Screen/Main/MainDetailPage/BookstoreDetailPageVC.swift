@@ -488,7 +488,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let activityViewHeight = 1200 + activityView.activities.count * 80
+            let activityViewHeight = 600 + activityView.activities.count * 480
 
             contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: activityViewHeight)
@@ -504,7 +504,7 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let reviewViewHeight = 1200 + reviewView.reviews.count * 260 + 250
+            let reviewViewHeight = 750 + reviewView.reviews.count * 260
 
             contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: reviewViewHeight)
@@ -520,7 +520,7 @@ class BookstoreDetailPageVC: UIViewController {
                 newsView
             ].forEach { $0.isHidden = true }
             
-            let bookListViewHeight = 1200 + bookListView.bookList.count * 220 + 100
+            let bookListViewHeight = 650 + bookListView.bookList.count * 220
 
             contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: bookListViewHeight)

@@ -113,6 +113,7 @@ extension BookStoreDetailBookListView: UITableViewDelegate, UITableViewDataSourc
                 cell.bookImageView.image = UIImage(named: "squareDefaultImage")
             }
         cell.contentLabel.text = bookList[indexPath.row].description
+        cell.selectionStyle = .none
         
         return cell
     }
