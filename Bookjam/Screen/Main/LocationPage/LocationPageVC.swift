@@ -109,6 +109,7 @@ final class LocationPageVC: BaseBottomSheetController {
         
         // MARK: - add Target
         self.currentLocateBtn.addTarget(self, action: #selector(searchOnCurrentLocation), for: .touchUpInside)
+        self.searchBar.searchTextField.addTarget(self, action: #selector(moveToSearchPage), for: .touchDown)
         
         // MARK: - 테스트 데이터를 갖고 핀으로 map에 붙이기
 //        test_locations.forEach { data in
@@ -172,6 +173,12 @@ final class LocationPageVC: BaseBottomSheetController {
         }
     }
     
+    // MARK: - 검색 VC 전환
+    @objc func moveToSearchPage() {
+        let nextVC = SearchPageVC()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
     // MARK: - MapView에 Annotation 추가
     private func dispatchBookStoreList() {
         self.bookStoreList?.forEach { model in
@@ -183,8 +190,8 @@ final class LocationPageVC: BaseBottomSheetController {
                 self.mapView.addAnnotation(pin)
             }
             
-        }
-    }
+        }//: forEach
+    }//: func
     
 }
 
