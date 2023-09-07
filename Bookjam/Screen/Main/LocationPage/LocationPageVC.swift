@@ -28,7 +28,11 @@ final class LocationPageVC: BaseBottomSheetController {
     /// 유저 위치
     private var userLocation: CLLocationCoordinate2D?
     /// 서점 목록
-    private var bookStoreList: [GetPlaceResponseModel]?
+    private var bookStoreList: [GetPlaceResponseModel]? {
+        didSet {
+            self.dispatchBookStoreList()
+        }
+    }
     /// 지도 현재 지도 중심 위치 + 스케일
     private var mapCurrentLocation: MKCoordinateRegion?
     
@@ -107,12 +111,12 @@ final class LocationPageVC: BaseBottomSheetController {
         self.currentLocateBtn.addTarget(self, action: #selector(searchOnCurrentLocation), for: .touchUpInside)
         
         // MARK: - 테스트 데이터를 갖고 핀으로 map에 붙이기
-        test_locations.forEach { data in
-            let pin = MKPointAnnotation()
-            pin.coordinate = data.location
-            pin.title = "TEST"
-            mapView.addAnnotation(pin)
-        }
+//        test_locations.forEach { data in
+//            let pin = MKPointAnnotation()
+//            pin.coordinate = data.location
+//            pin.title = "TEST"
+//            mapView.addAnnotation(pin)
+//        }
     }
     
     
@@ -167,6 +171,21 @@ final class LocationPageVC: BaseBottomSheetController {
             GETBookStoreList(sortBy: selected.rawValue, coord: self.userLocation ?? CLLocationCoordinate2D(latitude: 0, longitude: 0))
         }
     }
+    
+    // MARK: - MapView에 Annotation 추가
+    private func dispatchBookStoreList() {
+        self.bookStoreList?.forEach { model in
+            
+            if let lat = model.coords?.lat, let lon = model.coords?.lon {
+                let pin = MKPointAnnotation()
+                pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
+                pin.title = model.name
+                self.mapView.addAnnotation(pin)
+            }
+            
+        }
+    }
+    
 }
 
 // MARK: - LocationManagerDelgete 입니다. 위치를 갖고 오고, 이에 따른 추가 작업을 진행합니다.
