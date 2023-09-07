@@ -164,6 +164,11 @@ extension RecordMoreVC: UITableViewDelegate, UITableViewDataSource{
         return 170
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let recordMoreDetailVC = RecordMoreDetailVC()
+        
+        navigationController?.pushViewController(recordMoreDetailVC, animated: true)
+    }
     
 }
 

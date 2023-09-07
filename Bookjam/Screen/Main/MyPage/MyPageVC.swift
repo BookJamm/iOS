@@ -84,6 +84,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreActivityParticipateButtonTapped), for: .touchUpInside)
     }
     
     //활동 참여 현황 콜렉션뷰
@@ -111,6 +112,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreRecordButtonTapped), for: .touchUpInside)
     }
     
     var independantBookStoreButton: UIButton = UIButton().then{
@@ -184,6 +186,7 @@ class MyPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreLikeActivityButtonTapped), for: .touchUpInside)
     }
     var likeActivityBookStoreView = LikeActivityBookStoreView()
     var likeActivityBookStoreView2 = LikeActivityBookStoreView()
@@ -612,6 +615,28 @@ class MyPageVC: UIViewController {
         userPageVC.userProfileImageView.kf.setImage(with: URL(string: self.userProfileURL), placeholder: UIImage(named: "BasicProfile"))
         
         navigationController?.pushViewController(userPageVC, animated: true)
+    }
+    
+    //더보기 버튼들
+    @objc func didMoreActivityParticipateButtonTapped() {
+        
+        let activityParticipateVC = ActivityParticipateMoreVC()
+        
+        navigationController?.pushViewController(activityParticipateVC, animated: true)
+    }
+    
+    @objc func didMoreRecordButtonTapped() {
+        
+        let recordMoreVC = RecordMoreVC()
+        
+        navigationController?.pushViewController(recordMoreVC, animated: true)
+    }
+    
+    @objc func didMoreLikeActivityButtonTapped() {
+        
+        let likeActivityVC = LikeActivityTableViewController()
+
+        navigationController?.pushViewController(likeActivityVC, animated: true)
     }
 }
 

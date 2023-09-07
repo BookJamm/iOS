@@ -48,7 +48,6 @@ class FriendPageVC: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.layer.backgroundColor = main03?.cgColor
         $0.layer.cornerRadius = 15
-//        $0.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
     }
     
     var userActivityLabel: UILabel = UILabel().then{
@@ -77,6 +76,7 @@ class FriendPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreActivityParticipateButtonTapped), for: .touchUpInside)
     }
     
     //활동 참여 현황 콜렉션뷰
@@ -104,6 +104,7 @@ class FriendPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreRecordButtonTapped), for: .touchUpInside)
     }
     
     var independantBookStoreButton: UIButton = UIButton().then{
@@ -182,6 +183,7 @@ class FriendPageVC: UIViewController {
         $0.titleLabel?.font = paragraph05
         $0.setTitleColor(main01, for: .normal)
         $0.sizeToFit()
+        $0.addTarget(self, action: #selector(didMoreLikeActivityButtonTapped), for: .touchUpInside)
     }
     var likeActivityBookStoreView = LikeActivityBookStoreView()
     var likeActivityBookStoreView2 = LikeActivityBookStoreView()
@@ -600,13 +602,37 @@ class FriendPageVC: UIViewController {
     
     // MARK: Function
     
-    ///  마이페이지 설정 눌렀을 때 UserPageVC로 전환
-    @objc func didMyPageSetUpButtonTapped() {
-        let userPageVC = UserPageVC()
-        userPageVC.userNameLabel.text = self.userName
-        userPageVC.userProfileImageView.kf.setImage(with: URL(string: self.userProfileURL), placeholder: UIImage(named: "BasicProfile"))
+    @objc func didMoreActivityParticipateButtonTapped() {
         
-        navigationController?.pushViewController(userPageVC, animated: true)
+        let activityParticipateVC = ActivityParticipateMoreVC()
+        activityParticipateVC.modalPresentationStyle = .fullScreen
+        activityParticipateVC.modalTransitionStyle = .coverVertical
+        
+        self.present(activityParticipateVC, animated: false, completion: nil)
+    }
+    
+    @objc func didMoreRecordButtonTapped() {
+        
+        let recordMoreVC = RecordMoreVC()
+        recordMoreVC.modalPresentationStyle = .fullScreen
+        recordMoreVC.modalTransitionStyle = .coverVertical
+        
+        self.present(recordMoreVC, animated: false, completion: nil)
+    }
+    
+    //디자인 없는 관계로 임시로 주석 처리
+//    @objc func didMoreReviewButtonTapped() {
+//
+//        let recordMoreVC = RecordMoreVC()
+//        recordMoreVC.modalPresentationStyle = .overFullScreen
+//        self.present(recordMoreVC, animated: false, completion: nil)
+//    }
+    
+    @objc func didMoreLikeActivityButtonTapped() {
+        
+        let likeActivityVC = LikeActivityTableViewController()
+        likeActivityVC.modalPresentationStyle = .overFullScreen
+        self.present(likeActivityVC, animated: false, completion: nil)
     }
     
 }

@@ -230,6 +230,13 @@ extension UserSearchPageVC: UITableViewDelegate, UITableViewDataSource {
             
             self.present(detailVC, animated: true)
         }
+        if tableView == userTableView {
+            let friendVC = FriendPageVC()
+            friendVC.modalPresentationStyle = .fullScreen
+            friendVC.modalTransitionStyle = .coverVertical
+            
+            self.present(friendVC, animated: true)
+        }
     }
 }
 

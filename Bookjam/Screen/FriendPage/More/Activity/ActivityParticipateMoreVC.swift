@@ -85,8 +85,6 @@ extension ActivityParticipateMoreVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ActivityParticipateMoreTableViewCell().cellID, for: indexPath) as! ActivityParticipateMoreTableViewCell
 
-//        cell.backgroundColor = gray01
-
         return cell
     }
     
