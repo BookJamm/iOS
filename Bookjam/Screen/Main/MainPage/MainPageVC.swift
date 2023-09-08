@@ -434,9 +434,9 @@ extension MainPageVC: CLLocationManagerDelegate{
     }
 }
 
-struct MainPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        MainPageVC().toPreview()
-            //.edgesIgnoringSafeArea(.all)
-    }
-}
+//struct MainPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainPageVC().toPreview()
+//            //.edgesIgnoringSafeArea(.all)
+//    }
+//}
