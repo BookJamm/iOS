@@ -1170,9 +1170,9 @@ extension FeedPostPageVC: UIImagePickerControllerDelegate, UINavigationControlle
 }
 
 
-struct FeedPostPageVC_Preview: PreviewProvider {
-    static var previews: some View {
-        FeedPostPageVC().toPreview()
-            // .edgesIgnoringSafeArea(.all)
-    }
-}
+//struct FeedPostPageVC_Preview: PreviewProvider {
+//    static var previews: some View {
+//        FeedPostPageVC().toPreview()
+//            // .edgesIgnoringSafeArea(.all)
+//    }
+//}
