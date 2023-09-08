@@ -1,21 +1,14 @@
 //
-//  MyPageVC.swift
+//  FriendPageVC.swift
 //  Bookjam
 //
-//  Created by 장준모 on 2023/07/26.
+//  Created by 장준모 on 2023/08/30.
 //
 
-// MARK: - 메인 탭바에서 마이 누르면 나오는 마이 페이지 화면
-
-import SwiftUI
 import UIKit
+import SwiftUI
 
-import Kingfisher
-import SnapKit
-import Then
-
-
-class MyPageVC: UIViewController {
+class FriendPageVC: UIViewController {
 
     // MARK: Variables
     
@@ -32,8 +25,9 @@ class MyPageVC: UIViewController {
     var contentView: UIView = UIView()
     
     //유저 프로필뷰
+    
     var userProfileView: UIView = UIView().then {
-        $0.backgroundColor = .white
+        $0.backgroundColor = main05
     }
     
     var userProfileImageView: UIImageView = UIImageView().then {
@@ -41,7 +35,6 @@ class MyPageVC: UIViewController {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 45
-        
     }
     
     var userNameLabel: UILabel = UILabel().then {
@@ -50,12 +43,11 @@ class MyPageVC: UIViewController {
     }
     
     var myPageSetUpButton: UIButton = UIButton().then {
-        $0.setTitle("마이페이지 설정", for: .normal)
+        $0.setTitle("친구추가", for: .normal)
         $0.titleLabel?.font = paragraph04
-        $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.backgroundColor = main03?.cgColor
         $0.layer.cornerRadius = 15
-        $0.addTarget(self, action: #selector(didMyPageSetUpButtonTapped), for: .touchUpInside)
     }
     
     var userActivityLabel: UILabel = UILabel().then{
@@ -64,7 +56,7 @@ class MyPageVC: UIViewController {
     }
     
     var activityFrameView = ActivityFrameView().then{
-        $0.backgroundColor = main05
+        $0.backgroundColor = .white
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 8
     }
@@ -119,33 +111,38 @@ class MyPageVC: UIViewController {
         $0.setTitle("독립서점", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1
     }
     
     var bookPlaygroundButton: UIButton = UIButton().then{
         $0.setTitle("책놀이터", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var libraryButton: UIButton = UIButton().then{
         $0.setTitle("도서관", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
-        $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.backgroundColor = gray02?.cgColor
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var etcButton: UIButton = UIButton().then{
         $0.setTitle("기타", for: .normal)
         $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray06, for: .normal)
         $0.layer.backgroundColor = gray03?.cgColor
-        $0.layer.cornerRadius = 8
-    }
+        $0.layer.cornerRadius = 10
+        $0.layer.borderColor = gray03?.cgColor
+        $0.layer.borderWidth = 1    }
     
     var myRecordBookStoreView = MyRecordBookStoreView()
     
@@ -201,10 +198,7 @@ class MyPageVC: UIViewController {
         setUpConstraint()
         setUpDelegate()
     }
-    
 
-    // MARK: View
-    
     func setUpAPI() {
         /// 마이페이지 정보 요약 API 불러오기
         APIManager.shared.getData(
@@ -608,39 +602,45 @@ class MyPageVC: UIViewController {
     
     // MARK: Function
     
-    ///  마이페이지 설정 눌렀을 때 UserPageVC로 전환
-    @objc func didMyPageSetUpButtonTapped() {
-        let userPageVC = UserPageVC()
-        userPageVC.userNameLabel.text = self.userName
-        userPageVC.userProfileImageView.kf.setImage(with: URL(string: self.userProfileURL), placeholder: UIImage(named: "BasicProfile"))
-        
-        navigationController?.pushViewController(userPageVC, animated: true)
-    }
-    
-    //더보기 버튼들
     @objc func didMoreActivityParticipateButtonTapped() {
         
         let activityParticipateVC = ActivityParticipateMoreVC()
+        activityParticipateVC.modalPresentationStyle = .fullScreen
+        activityParticipateVC.modalTransitionStyle = .coverVertical
         
+//        self.present(activityParticipateVC, animated: false, completion: nil)
         navigationController?.pushViewController(activityParticipateVC, animated: true)
     }
     
     @objc func didMoreRecordButtonTapped() {
         
         let recordMoreVC = RecordMoreVC()
+        recordMoreVC.modalPresentationStyle = .fullScreen
+        recordMoreVC.modalTransitionStyle = .coverVertical
         
+//        self.present(recordMoreVC, animated: false, completion: nil)
         navigationController?.pushViewController(recordMoreVC, animated: true)
     }
+    
+    //디자인 없는 관계로 임시로 주석 처리
+//    @objc func didMoreReviewButtonTapped() {
+//
+//        let recordMoreVC = RecordMoreVC()
+//        recordMoreVC.modalPresentationStyle = .overFullScreen
+//        self.present(recordMoreVC, animated: false, completion: nil)
+//    }
     
     @objc func didMoreLikeActivityButtonTapped() {
         
         let likeActivityVC = LikeActivityTableViewController()
-
+        likeActivityVC.modalPresentationStyle = .overFullScreen
+//        self.present(likeActivityVC, animated: false, completion: nil)
         navigationController?.pushViewController(likeActivityVC, animated: true)
     }
+    
 }
 
-extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension FriendPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 2
         
@@ -648,6 +648,8 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActivityParticipateCollectionViewCell.cellID, for: indexPath) as? ActivityParticipateCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.backgroundColor = gray01
 
         if indexPath.row == 0 {
             cell.activityImageView.image = UIImage(named: "1984StoreTwo")
@@ -677,9 +679,9 @@ extension MyPageVC: UICollectionViewDelegate, UICollectionViewDataSource, UIColl
     
 }
 
-//struct MyPageVC_Preview: PreviewProvider {
+//struct FriendPageVC_Preview: PreviewProvider {
 //    static var previews: some View {
-//        MyPageVC().toPreview()
+//        FriendPageVC().toPreview()
 //            // .edgesIgnoringSafeArea(.all)
 //    }
 //}

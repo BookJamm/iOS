@@ -256,7 +256,6 @@ class MainPageVC: UIViewController {
     
     @objc func didInfoButtonTapped() {
         
-
         let popupVC = MainPageInfoViewController()
         popupVC.modalPresentationStyle = .overFullScreen
         self.present(popupVC, animated: false, completion: nil)

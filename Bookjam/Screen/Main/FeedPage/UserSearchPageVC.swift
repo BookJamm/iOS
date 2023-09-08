@@ -81,6 +81,9 @@ class UserSearchPageVC: UIViewController {
         setUpLayout()
         setUpDelegate()
         setUpConstraint()
+        
+        navigationItem.titleView = searchBar
+        
     }
     
 
@@ -97,7 +100,7 @@ class UserSearchPageVC: UIViewController {
     
     func setUpLayout() {
         [
-            backButton,
+//            backButton,
             searchBar,
             segmentController,
             segmentControlUnderlineView,
@@ -120,23 +123,27 @@ class UserSearchPageVC: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        backButton.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-            $0.leading.equalToSuperview().offset(20)
-        }
+//        backButton.snp.makeConstraints {
+//            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+//            $0.leading.equalToSuperview().offset(20)
+//        }
         
-        searchBar.snp.makeConstraints {
-            $0.centerY.equalTo(backButton)
-            $0.leading.equalTo(backButton.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.height.equalTo(45)
-        }
+//        searchBar.snp.makeConstraints {
+////            $0.centerY.equalTo(backButton)
+//            //            $0.leading.equalTo(backButton.snp.trailing).offset(10)
+//
+//            $0.centerY.equalTo(view.safeAreaLayoutGuide).offset(10)
+//            $0.leading.equalToSuperview().offset(10)
+//            $0.trailing.equalToSuperview().offset(-10)
+//            $0.height.equalTo(45)
+//        }
         
         segmentController.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview().offset(-10)
-            $0.top.equalTo(searchBar.snp.bottom).offset(10)
+//            $0.top.equalTo(searchBar.snp.bottom).offset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
         }
 
         segmentControlUnderlineView.snp.makeConstraints {
@@ -229,6 +236,16 @@ extension UserSearchPageVC: UITableViewDelegate, UITableViewDataSource {
             detailVC.modalTransitionStyle = .coverVertical
             
             self.present(detailVC, animated: true)
+        }
+        
+        if tableView == userTableView {
+            let friendVC = FriendPageVC()
+//            friendVC.modalPresentationStyle = .fullScreen
+//            friendVC.modalTransitionStyle = .coverVertical
+//
+//            self.present(friendVC, animated: true)
+
+            navigationController?.pushViewController(friendVC, animated: true)
         }
     }
 }

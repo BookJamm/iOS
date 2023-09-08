@@ -22,7 +22,7 @@ struct getPlaceRequestModel: Codable {
             self.last = last
         }
     
-}
+} 
 
 /// 서점 목록을 불러올 때 사용하는 API RESPONSE Model입니다.
 /// placeId : 서점 고유 식별자

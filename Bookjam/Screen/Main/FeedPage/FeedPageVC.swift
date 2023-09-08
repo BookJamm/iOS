@@ -140,7 +140,9 @@ class FeedPageVC: UIViewController {
         searchPage.modalPresentationStyle = .fullScreen
         searchPage.modalTransitionStyle = .coverVertical
         
-        self.present(searchPage, animated: true)
+//        self.present(searchPage, animated: true)
+        
+        navigationController?.pushViewController(searchPage, animated: true)
     }
     
     @objc func didWritePostButtonTapped() {
