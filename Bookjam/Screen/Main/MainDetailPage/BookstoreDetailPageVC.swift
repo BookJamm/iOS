@@ -15,10 +15,10 @@ import SnapKit
 import Then
 
 class BookstoreDetailPageVC: UIViewController {
-
+    
     // MARK: Variables
     
-    //api 모델 변수 - 이 변수에 api 호출 결과를 저장하여 뷰 업데이트 등에 사용
+    /// api 모델 변수 - 이 변수에 api 호출 결과를 저장하여 뷰 업데이트 등에 사용
     var bookStoreDetail: PlaceIdResponseModel?
     var bookStoreNewsList: [PlaceIdNewsResponseModel]?
     
@@ -62,12 +62,13 @@ class BookstoreDetailPageVC: UIViewController {
     }
     
     var starLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "3.75"
+        $0.sizeToFit()
     }
     
     var reviewCountLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "리뷰 5"
         $0.sizeToFit()
     }
@@ -78,11 +79,15 @@ class BookstoreDetailPageVC: UIViewController {
     
     var locationPinImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "locationPin")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
         $0.tintColor = gray07
     }
     
     var clockImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(systemName: "clock.fill")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
         $0.tintColor = gray07
     }
     
@@ -90,18 +95,21 @@ class BookstoreDetailPageVC: UIViewController {
         $0.font = paragraph05
         $0.textColor = gray06
         $0.text = "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층"
+        $0.sizeToFit()
     }
     
     var timeLabel: UILabel = UILabel().then {
         $0.font = paragraph05
         $0.textColor = complete
         $0.text = "영업 중"
+        $0.sizeToFit()
     }
     
     var siteURL: UIButton = UIButton().then {
         $0.setTitle("https://www.instagram.com/chaegbangyeonhui/", for: .normal)
         $0.setTitleColor(main03, for: .normal)
-        $0.titleLabel?.font = paragraph06
+        $0.titleLabel?.font = paragraph05
+        $0.contentHorizontalAlignment = .leading
         $0.addTarget(self, action: #selector(didURLTapped), for: .touchUpInside)
     }
     
@@ -115,11 +123,11 @@ class BookstoreDetailPageVC: UIViewController {
         $0.setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         $0.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: gray04!,
-            NSAttributedString.Key.font: paragraph03
+            NSAttributedString.Key.font: paragraph02
         ], for: .normal)
         $0.setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: main03!,
-            NSAttributedString.Key.font: paragraph03
+            NSAttributedString.Key.font: paragraph02
         ], for: .selected)
         
         /// segments 삽입
@@ -128,7 +136,7 @@ class BookstoreDetailPageVC: UIViewController {
         $0.insertSegment(withTitle: "참여", at: 2, animated: true)
         $0.insertSegment(withTitle: "리뷰", at: 3, animated: true)
         $0.insertSegment(withTitle: "책 종류", at: 4, animated: true)
-
+        
         /// 기본 탭은 홈으로 설정
         $0.selectedSegmentIndex = 0
         
@@ -179,6 +187,7 @@ class BookstoreDetailPageVC: UIViewController {
         setUpNotification()
         
         viewUpdate()
+        
         if bookStoreDetail != nil{
             getPlaceIdNews()
             getPlaceIdBooks()
@@ -187,7 +196,7 @@ class BookstoreDetailPageVC: UIViewController {
         }
     }
     
-
+    
     // MARK: View
     
     func setUpView() {
@@ -257,14 +266,14 @@ class BookstoreDetailPageVC: UIViewController {
         }
         
         scrollView.snp.makeConstraints {
-            $0.top.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalTo(2500)
+            $0.height.equalTo(scrollView.frameLayoutGuide)
         }
         
         photoCollectionView.snp.makeConstraints {
@@ -272,89 +281,95 @@ class BookstoreDetailPageVC: UIViewController {
             $0.width.equalToSuperview()
             $0.height.equalTo(200)
         }
-
+        
         bookstoreLabel.snp.makeConstraints {
-            $0.left.equalTo(photoCollectionView).offset(15)
-            $0.bottom.equalTo(photoCollectionView).multipliedBy(1.2)
+            $0.top.equalTo(photoCollectionView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(20)
         }
-
+        
         bookMarkImageView.snp.makeConstraints {
-            $0.right.equalTo(bookstoreLabel).offset(30)
+            $0.leading.equalTo(bookstoreLabel.snp.trailing).offset(4)
             $0.centerY.equalTo(bookstoreLabel)
         }
-
+        
         storeTypeLabel.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel)
             $0.bottom.equalTo(bookstoreLabel).offset(30)
         }
-
+        
         starImageView.snp.makeConstraints {
             $0.left.equalTo(bookstoreLabel)
-            $0.bottom.equalTo(storeTypeLabel).offset(35)
+            $0.top.equalTo(storeTypeLabel.snp.bottom).offset(12)
+            $0.width.height.equalTo(20)
         }
-
+        
         starLabel.snp.makeConstraints {
-            $0.left.equalTo(bookstoreLabel).offset(25)
-            $0.bottom.equalTo(storeTypeLabel).offset(35)
+            $0.leading.equalTo(starImageView.snp.trailing).offset(4)
+            $0.centerY.equalTo(starImageView)
         }
-
+        
         reviewCountLabel.snp.makeConstraints {
-            $0.leading.equalTo(starLabel.snp.trailing).offset(10)
-            $0.bottom.equalTo(storeTypeLabel).offset(35)
+            $0.leading.equalTo(starLabel.snp.trailing).offset(12)
+            $0.centerY.equalTo(starImageView)
         }
-
+        
         underLineView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.93)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(1)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(starImageView).offset(20)
+            $0.top.equalTo(starImageView.snp.bottom).offset(16)
         }
-
+        
         locationPinImageView.snp.makeConstraints {
+            $0.width.height.equalTo(20)
             $0.left.equalTo(starImageView)
             $0.bottom.equalTo(underLineView).offset(40)
         }
-
+        
         locationLabel.snp.makeConstraints {
-            $0.left.equalTo(locationPinImageView).offset(25)
+            $0.leading.equalTo(locationPinImageView.snp.trailing).offset(4)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.centerY.equalTo(locationPinImageView)
         }
-
+        
         clockImageView.snp.makeConstraints {
+            $0.width.height.equalTo(20)
             $0.centerX.equalTo(locationPinImageView)
             $0.bottom.equalTo(locationPinImageView).offset(30)
         }
-
+        
         timeLabel.snp.makeConstraints {
-            $0.left.equalTo(clockImageView).offset(25)
+            $0.leading.equalTo(clockImageView.snp.trailing).offset(4)
             $0.centerY.equalTo(clockImageView)
         }
-
+        
         siteURL.snp.makeConstraints {
-            $0.leading.equalTo(clockImageView.snp.leading).offset(5)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
             $0.bottom.equalTo(clockImageView).offset(35)
         }
-
+        
         dividerView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(15)
             $0.top.equalTo(siteURL.snp.bottom).offset(10)
         }
-
+        
         segmentController.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview().offset(-10)
             $0.top.equalTo(dividerView.snp.bottom).offset(5)
         }
-
+        
         segmentControlUnderlineView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(1)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(segmentController.snp.bottom).offset(5)
         }
-
+        
         segmentControlSelectedUnderLineView.snp.makeConstraints {
             $0.width.equalTo(segmentController).dividedBy(5)
             $0.height.equalTo(1)
@@ -368,40 +383,42 @@ class BookstoreDetailPageVC: UIViewController {
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-
+        
         newsView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-
+        
         activityView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-
+        
         reviewView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
-
+        
         bookListView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.top.equalTo(segmentControlUnderlineView.snp.bottom)
             $0.bottom.equalToSuperview()
         }
+        
+//        scrollView.updateContentSize()
     }
     
     
     // MARK: Functions
     
-    func setUpContentviewConstraint(height: Int){
-        contentView.snp.makeConstraints{
+    func setUpContentviewConstraint(height: Int) {
+        contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView.contentLayoutGuide)
             $0.width.equalTo(scrollView.frameLayoutGuide)
-            $0.height.equalToSuperview().multipliedBy(0.7).offset(height)
+            $0.height.equalTo(height)
         }
     }
     
@@ -439,12 +456,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            contentView.snp.removeConstraints()
+            contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
             
-            let homeViewHeight = 1200 + reviewView.reviews.count * 350
+            let homeViewHeight = 1650 + self.reviewView.reviews.count * 230
             setUpContentviewConstraint(height: homeViewHeight)
-            
         }
+        
         /// 소식 탭
         else if segmentIndex == 1 {
             newsView.isHidden = false
@@ -456,11 +473,11 @@ class BookstoreDetailPageVC: UIViewController {
             ].forEach { $0.isHidden = true }
             
             contentView.snp.removeConstraints()
-            
-            let newsViewHeight = newsView.getNewsViewHeight() + 100
-            
-            setUpContentviewConstraint(height: Int(newsViewHeight))
+
+            let newsViewHeight = 650 + newsView.newsList.count * 150
+            setUpContentviewConstraint(height: newsViewHeight)
         }
+        
         /// 참여 탭
         else if segmentIndex == 2 {
             activityView.isHidden = false
@@ -471,13 +488,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let activityViewHeight = activityView.activities.count * 480 + 100
-            
-            contentView.snp.removeConstraints()
+            let activityViewHeight = 600 + activityView.activities.count * 480
 
+            contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: activityViewHeight)
-            
         }
+        
         /// 리뷰 탭
         else if segmentIndex == 3 {
             reviewView.isHidden = false
@@ -488,12 +504,12 @@ class BookstoreDetailPageVC: UIViewController {
                 bookListView
             ].forEach { $0.isHidden = true }
             
-            let reviewViewHeight = reviewView.reviews.count * 260 + 250
-            
-            contentView.snp.removeConstraints()
+            let reviewViewHeight = 750 + reviewView.reviews.count * 260
 
+            contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: reviewViewHeight)
         }
+        
         /// 책 종류 탭
         else if segmentIndex == 4 {
             bookListView.isHidden = false
@@ -504,10 +520,9 @@ class BookstoreDetailPageVC: UIViewController {
                 newsView
             ].forEach { $0.isHidden = true }
             
-            let bookListViewHeight = bookListView.bookList.count * 220 + 100
-            
-            contentView.snp.removeConstraints()
+            let bookListViewHeight = 650 + bookListView.bookList.count * 220
 
+            contentView.snp.removeConstraints()
             setUpContentviewConstraint(height: bookListViewHeight)
         }
     }//end of didSegmentControllerValueChanged()
@@ -522,8 +537,6 @@ class BookstoreDetailPageVC: UIViewController {
     
     /// 리뷰 작성하고 업로드 버튼 누르면 토스트 메시지 띄우도록 구현
     @objc func makeReviewUploadToast() {
-        print("맛있는 토스트 굽굽")
-        
         UIView.animate(withDuration: 0.5, animations: {
             self.toastMessageImageView.alpha = 1.0
             self.toastMessageImageView.isHidden = false
@@ -543,15 +556,16 @@ class BookstoreDetailPageVC: UIViewController {
         navigationController?.pushViewController(BookStoreActvityDetailVC(), animated: true)
     }
     
-    // MainPageVC에서 받아온 BookStoreDetail로 뷰 업데이트하는 함수
-    func viewUpdate(){
-        if let bookStoreDetail = bookStoreDetail{
+    /// MainPageVC에서 받아온 BookStoreDetail로 뷰 업데이트하는 함수
+    func viewUpdate() {
+        if let bookStoreDetail = bookStoreDetail {
             
             bookstoreLabel.text = bookStoreDetail.name
             newsView.bookStoreName = bookStoreDetail.name!
             homeView.bookstoreName = bookStoreDetail.name!
             
-            switch bookStoreDetail.category{//카테고리에 따른 카테고리 이미지, label 설정.
+            /// 카테고리에 따른 카테고리 이미지와 label 설정
+            switch bookStoreDetail.category {
             case 0:
                 bookMarkImageView.image = UIImage(systemName: "book.fill")
                 storeTypeLabel.text = "독립서점"
@@ -564,23 +578,31 @@ class BookstoreDetailPageVC: UIViewController {
             default:
                 bookMarkImageView.isHidden = true
             }
+            
             starLabel.text = String(bookStoreDetail.rating!)
             reviewCountLabel.text = "리뷰 " + String(bookStoreDetail.reviewCount!)
             locationLabel.text = bookStoreDetail.address?.road
-            siteURL.setTitle(bookStoreDetail.website, for: .normal)
+            if bookStoreDetail.website == nil {
+                siteURL.setTitle("책방 사이트가 존재하지 않습니다.", for: .normal)
+                siteURL.setTitleColor(gray04, for: .normal)
+            }
+            else {
+                siteURL.setTitle(bookStoreDetail.website, for: .normal)
+            }
             
-            if let open = bookStoreDetail.open{ // open 여부에 따른 ui 변경
+            
+            if let open = bookStoreDetail.open { // open 여부에 따른 ui 변경
                 timeLabel.text = open ? "영업 중" : "영업 종료"
                 timeLabel.textColor = open ? complete : alert
             }
-            else{
-                timeLabel.text = "영업 종료"
-                timeLabel.textColor = alert
+            else {
+                timeLabel.text = "정보 미등록"
+                timeLabel.textColor = gray06
             }
         }
-    }//end of viewUpdate()
+    } //end of viewUpdate()
     
-    //placeIdNews api (소식) 호출 후 뷰 업데이트 함수
+    ///placeIdNews api (소식) 호출 후 뷰 업데이트 함수
     func getPlaceIdNews(){
         
         APIManager.shared.getData(
@@ -589,7 +611,6 @@ class BookstoreDetailPageVC: UIViewController {
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: { response in
-                print(response)
                 if let result = response?.result {
                     self.newsView.newsList = result
                     self.newsView.newsTableView.reloadData()
@@ -609,7 +630,6 @@ class BookstoreDetailPageVC: UIViewController {
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: { response in
-                print(response)
                 if let result = response?.result {
                     self.bookListView.bookList = result
                     self.bookListView.bookListTableView.reloadData()
@@ -627,7 +647,6 @@ class BookstoreDetailPageVC: UIViewController {
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: { response in
-                print(response)
                 if let result = response?.result {
                     self.activityView.activities = result.result
                     self.activityView.activityTableView.reloadData()
@@ -645,7 +664,6 @@ class BookstoreDetailPageVC: UIViewController {
             requestDataType: PlaceIdRequestModel.self,
             parameter: nil,
             completionHandler: {  response in
-                print(response)
                 if let result = response?.result {
                     self.reviewView.reviews = result
                     self.reviewView.setUpConstraint()
@@ -656,12 +674,12 @@ class BookstoreDetailPageVC: UIViewController {
                     
                     self.contentView.snp.removeConstraints() //홈셀 contentview 제약조건 재설정
                     
-                    let homeViewHeight = 1200 + self.reviewView.reviews.count * 300
+                    let homeViewHeight = 1650 + self.reviewView.reviews.count * 230
                     self.setUpContentviewConstraint(height: homeViewHeight)
-                    
                 }
             })
     }
+    
     
     // MARK: Notification
     
@@ -675,7 +693,6 @@ class BookstoreDetailPageVC: UIViewController {
         /// ActivityTableViewCell에서 참여하기 버튼 눌렀을 때 전송되는 notification을 수신
         NotificationCenter.default.addObserver(self, selector: #selector(pushBookStoreActivityDetailVC), name: NSNotification.Name("joinActivityButtonTapped"), object: nil)
     }
-    
 }//end of BookStoreDetailPageVC
 
 /// 디테일 페이지 가장 위에 표시되는 5개 사진 목록 CollectionView 구현을 위한 Delegate, DataSource extension
@@ -690,22 +707,21 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
         
         // 컬렉션뷰 셀 이미지에 api에서 받아온 이미지 연결, 없다면 기본 이미지로
         if let images = bookStoreDetail?.images, indexPath.row < images.count {
-                let imageUrlString = images[indexPath.row].url
+            let imageUrlString = images[indexPath.row].url
             if let imageUrl = URL(string: imageUrlString!) {
-                    
-                    DispatchQueue.global().async {
-                        if let imageData = try? Data(contentsOf: imageUrl),
-                           let image = UIImage(data: imageData) {
-                            DispatchQueue.main.async {
-                                cell.photoImageView.image = image
-                            }
+                DispatchQueue.global().async {
+                    if let imageData = try? Data(contentsOf: imageUrl),
+                       let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            cell.photoImageView.image = image
                         }
                     }
                 }
-            } else {
-                
-                cell.photoImageView.image = UIImage(named: "squareDefaultImage")
             }
+        }
+        else {
+            cell.photoImageView.image = UIImage(named: "squareDefaultImage")
+        }
         return cell
     }
     
@@ -716,7 +732,7 @@ extension BookstoreDetailPageVC: UICollectionViewDelegate, UICollectionViewDataS
             return CGSize(width: photoCollectionView.frame.height - 1, height: photoCollectionView.frame.height - 1)
         }
         /// 아닐 경우 width와 height를 모두 (프레임 높이 / 2)와 같게 조정
-        return CGSize(width: photoCollectionView.frame.height / 2 - 1, height: photoCollectionView.frame.height / 2 - 1)
+        return CGSize(width: photoCollectionView.frame.height / 2 - 0.5, height: photoCollectionView.frame.height / 2 - 0.5)
     }
 }
 

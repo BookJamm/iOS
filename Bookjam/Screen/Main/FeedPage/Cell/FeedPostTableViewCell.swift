@@ -33,7 +33,7 @@ class FeedPostTableViewCell: UITableViewCell {
     
     var timeLabel: UILabel = UILabel().then {
         $0.text = "2023 / 06 / 06 14:22"
-        $0.font = captionText03
+        $0.font = captionText02
     }
     
     var photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
@@ -48,8 +48,8 @@ class FeedPostTableViewCell: UITableViewCell {
     
     var contextLabel: UILabel = UILabel().then {
         $0.text = "유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다. 유저 독후감입니다."
-        $0.numberOfLines = 4
-        $0.font = paragraph06
+        $0.numberOfLines = 20
+        $0.font = paragraph05
     }
     
     var moreButton: UIButton = UIButton().then {
@@ -132,7 +132,7 @@ class FeedPostTableViewCell: UITableViewCell {
             timeLabel,
             photoCollectionView,
             contextLabel,
-            moreButton,
+            //moreButton,
             bookView,
             bookLabel,
             commentImageView,
@@ -180,13 +180,13 @@ class FeedPostTableViewCell: UITableViewCell {
             $0.trailing.equalToSuperview().offset(-20)
         }
         
-        moreButton.snp.makeConstraints {
-            $0.top.equalTo(contextLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().offset(20)
-        }
+//        moreButton.snp.makeConstraints {
+//            $0.top.equalTo(contextLabel.snp.bottom).offset(10)
+//            $0.leading.equalToSuperview().offset(20)
+//        }
         
         bookView.snp.makeConstraints {
-            $0.top.equalTo(moreButton.snp.bottom).offset(10)
+            $0.top.equalTo(contextLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(30)
         }
@@ -234,12 +234,16 @@ extension FeedPostTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "bookStorePhotoCell", for: indexPath) as! BookStorePhotoCollectionViewCell
         
         if images.count == 0 {
+            cell.photoImageView.layer.cornerRadius = 8
+            cell.clipsToBounds = true
+            
             return cell
         }
         
         // images 데이터 cell에 할당
         cell.photoImageView.kf.setImage(with: URL(string: images[indexPath.row]))
         cell.photoImageView.layer.cornerRadius = 8
+        cell.clipsToBounds = true
         
         return cell
     }

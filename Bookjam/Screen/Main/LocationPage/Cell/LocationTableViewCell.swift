@@ -75,18 +75,18 @@ class LocationTableViewCell: UITableViewCell {
     }
     
     var starLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "4.53"
     }
     
     var reviewCountLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.text = "리뷰 132"
         $0.sizeToFit()
     }
     
     var locationLabel: UILabel = UILabel().then {
-        $0.font = paragraph03
+        $0.font = paragraph02
         $0.textColor = gray06
         $0.text = "경기도 수원시 팔달구 매산로52번길 20"
     }

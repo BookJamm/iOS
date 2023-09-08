@@ -67,7 +67,7 @@ extension APIManager {
         AF
             .request(url, method: .post, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: U.self) { response in
-                print(response)
+                //print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
@@ -121,7 +121,7 @@ extension APIManager {
         AF
             .request(url, method: .patch, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: U.self) { response in
-                print(response)
+                //print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)
@@ -145,7 +145,7 @@ extension APIManager {
         AF
             .request(url, method: .delete, parameters: parameter, encoder: .json, headers: self.headers)
             .responseDecodable(of: U.self) { response in
-                print(response)
+                //print(response)
                 switch response.result {
                 case .success(let success):
                     completionHandler(success)

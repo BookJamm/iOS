@@ -80,35 +80,41 @@ class MyRecordBookStoreView: UIView {
     // MARK: Constraint
     
     func setUpConstraint() {
-        bookStoreImageView.snp.makeConstraints{
+        bookStoreImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(166)
         }
-        bookStoreName.snp.makeConstraints{
-            $0.top.equalTo(bookStoreImageView.snp.bottom).offset(10)
+        
+        bookStoreName.snp.makeConstraints {
+            $0.top.equalTo(bookStoreImageView.snp.bottom).offset(12)
         }
-        bookMarkImageView.snp.makeConstraints{
+        
+        bookMarkImageView.snp.makeConstraints {
             $0.centerY.equalTo(bookStoreName)
             $0.leading.equalTo(bookStoreName.snp.trailing).offset(10)
         }
-        speechBubbleImageView.snp.makeConstraints{
+        
+        speechBubbleImageView.snp.makeConstraints {
             $0.top.equalTo(bookStoreName.snp.bottom).offset(10)
         }
-        speechBubbleLabel.snp.makeConstraints{
+        
+        speechBubbleLabel.snp.makeConstraints {
             $0.centerY.equalTo(speechBubbleImageView)
             $0.leading.equalTo(speechBubbleImageView.snp.trailing).offset(10)
         }
-        heartImageView.snp.makeConstraints{
+        
+        heartImageView.snp.makeConstraints {
             $0.centerY.equalTo(speechBubbleImageView)
             $0.leading.equalTo(speechBubbleLabel.snp.trailing).offset(20)
         }
-        heartLabel.snp.makeConstraints{
+        
+        heartLabel.snp.makeConstraints {
             $0.centerY.equalTo(speechBubbleImageView)
             $0.leading.equalTo(heartImageView.snp.trailing).offset(10)
         }
-        visitDayLabel.snp.makeConstraints{
+        
+        visitDayLabel.snp.makeConstraints {
             $0.top.equalTo(speechBubbleImageView.snp.bottom).offset(10)
-            
         }
     }
     

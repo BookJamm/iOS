@@ -22,7 +22,7 @@ class BookStoreDetailHomeView: UIView {
 
     var news: PlaceIdNewsResponseModel? = nil
     
-    var books: [PlaceIdBooksResponseModel]? = nil
+    var books = [PlaceIdBooksResponseModel]()
     
     var reviews: [PlaceIdReviewsResponseModel]? = nil
     
@@ -40,6 +40,7 @@ class BookStoreDetailHomeView: UIView {
     var newsLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = .black
+        $0.sizeToFit()
     }
 
     var newsMoreButton: UIButton = UIButton().then {
@@ -62,16 +63,19 @@ class BookStoreDetailHomeView: UIView {
     var newsTitle: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var newsContent: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var newsDate: UILabel = UILabel().then {
         $0.font = captionText02
         $0.textColor = .black
+        $0.sizeToFit()
     }
     
     var bookListView: UIView = UIView().then {
@@ -109,12 +113,14 @@ class BookStoreDetailHomeView: UIView {
         $0.font = title06
         $0.textColor = .black
         $0.text = "독서 활동 참여 목록"
+        $0.sizeToFit()
     }
     
     var bookActivityCountLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = main03
-        $0.text = "1"
+        $0.text = "0"
+        $0.sizeToFit()
     }
     
     var bookActivityMoreButton: UIButton = UIButton().then {
@@ -141,6 +147,7 @@ class BookStoreDetailHomeView: UIView {
         $0.font = title06
         $0.textColor = .black
         $0.text = "리뷰"
+        $0.sizeToFit()
     }
     
     var reviewMoreButton: UIButton = UIButton().then {
@@ -169,12 +176,15 @@ class BookStoreDetailHomeView: UIView {
     
     func setUpView() {
         
-        // 소식 Section 업데이트
+        /// 소식 Section 업데이트
         newsLabel.text = "\(bookstoreName)의 소식"
         newsTitle.text = news?.title
         newsContent.text = news?.contents
         newsDate.text = news?.createdAt!.components(separatedBy: "T")[0]
         newsPhoto.image =  UIImage(named: "squareDefaultImage")
+        
+        /// 테이블 뷰 셀 높이 유동적으로 조절
+        reviewTableView.rowHeight = UITableView.automaticDimension
         
         if let contents = news?.contents{
             if contents.count >= 18{
@@ -259,10 +269,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
 
-        newsMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(newsLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        newsMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(newsLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         newsPreview.snp.makeConstraints {
             $0.top.equalTo(newsLabel.snp.bottom).offset(25)
@@ -283,14 +293,15 @@ class BookStoreDetailHomeView: UIView {
         }
         
         newsContent.snp.makeConstraints {
-            $0.top.equalTo(newsTitle.snp.bottom).offset(10)
+            $0.top.equalTo(newsTitle.snp.bottom).offset(8)
             $0.leading.equalTo(newsPhoto.snp.trailing).offset(15)
             $0.trailing.equalTo(newsPreview.snp.trailing).offset(-5)
         }
         
         newsDate.snp.makeConstraints {
-            $0.top.equalTo(newsContent.snp.bottom).offset(10)
+            $0.top.equalTo(newsContent.snp.bottom).offset(8)
             $0.leading.equalTo(newsPhoto.snp.trailing).offset(15)
+            $0.bottom.equalToSuperview().offset(-15)
         }
         
         // 책 목록 Section
@@ -306,10 +317,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        bookListMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(bookListLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        bookListMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(bookListLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         bookListCollectionView.snp.makeConstraints {
             $0.top.equalTo(bookListLabel.snp.bottom).offset(20)
@@ -336,10 +347,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalTo(bookActivityLabel.snp.trailing).offset(10)
         }
 
-        bookActivityMoreButton.snp.makeConstraints {
-            $0.top.equalTo(bookActivityLabel.snp.top)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        bookActivityMoreButton.snp.makeConstraints {
+//            $0.top.equalTo(bookActivityLabel.snp.top)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
 
         bookActivityCollectionView.snp.makeConstraints {
             $0.top.equalTo(bookActivityCountLabel.snp.bottom).offset(25)
@@ -361,10 +372,10 @@ class BookStoreDetailHomeView: UIView {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        reviewMoreButton.snp.makeConstraints {
-            $0.centerY.equalTo(reviewLabel)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
+//        reviewMoreButton.snp.makeConstraints {
+//            $0.centerY.equalTo(reviewLabel)
+//            $0.trailing.equalToSuperview().offset(-20)
+//        }
         
         reviewTableView.snp.makeConstraints {
             $0.top.equalTo(reviewLabel.snp.bottom).offset(10)
@@ -403,12 +414,17 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // 책 목록 셀 수 초기화
         if collectionView == self.bookListCollectionView {
-            return books?.count ?? 0
+            if books.count == 0 {
+                return 1
+            }
+            return books.count
         }
+        
         // 독서 활동 참여 목록 셀 수 초기화
         else if collectionView == self.bookActivityCollectionView {
             return activities?.count ?? 0
         }
+        
         return 5
     }
     
@@ -421,53 +437,47 @@ extension BookStoreDetailHomeView: UICollectionViewDelegate, UICollectionViewDat
         if collectionView == self.bookListCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookListCollectionViewCell
             
-            cell.titleLabel.text = books![indexPath.row].title
-            cell.authorLabel.text = books![indexPath.row].author
-            cell.publisherLabel.text = books![indexPath.row].publisher
-                //api 수정되면 출판사 주석 풀기
-            
-            if let imageUrlString = books![indexPath.row].cover {
-                if let imageUrl = URL(string: imageUrlString) {
-                        
-                        DispatchQueue.global().async {
-                            if let imageData = try? Data(contentsOf: imageUrl),
-                               let image = UIImage(data: imageData) {
-                                DispatchQueue.main.async {
-                                    cell.bookImageView.image = image
-                                }
-                            }
-                        }
-                    }
-                } else {
-                    cell.bookImageView.image = UIImage(named: "squareDefaultImage")
-                }
+            if books.count == 0 {
+                
+            }
+            else {
+                cell.titleLabel.text = books[indexPath.row].title
+                cell.authorLabel.text = books[indexPath.row].author
+                cell.publisherLabel.text = books[indexPath.row].publisher
+                cell.bookImageView.kf.setImage(with: URL(string: books[indexPath.row].cover ?? ""), placeholder: UIImage(named: "squareDefaultImage"))
+                
+                /// 그림자 구현
+                cell.bookImageView.layer.shadowOpacity = 0.3
+                cell.bookImageView.layer.shadowOffset = CGSize(width: 0, height: 7)
+                cell.bookImageView.layer.shadowRadius = 3
+                cell.bookImageView.layer.masksToBounds = false
+            }
             
             return cell
         }
+        
         // 독서 활동 참여 목록 데이터 삽입
         else if collectionView == self.bookActivityCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "homeViewCell", for: indexPath) as! BookActivityCollectionViewCell
             
             
             self.bookActivityCountLabel.text = String(activities?.count ?? 0)
-
-//            cell.activityImageView.image = UIImage(named: activities[indexPath.row].photo)
             
             if let imageUrlString = activities![indexPath.row].imageUrl {
                 if let imageUrl = URL(string: imageUrlString) {
-                        
-                        DispatchQueue.global().async {
-                            if let imageData = try? Data(contentsOf: imageUrl),
-                               let image = UIImage(data: imageData) {
-                                DispatchQueue.main.async {
-                                    cell.activityImageView.image = image
-                                }
+                    
+                    DispatchQueue.global().async {
+                        if let imageData = try? Data(contentsOf: imageUrl),
+                           let image = UIImage(data: imageData) {
+                            DispatchQueue.main.async {
+                                cell.activityImageView.image = image
                             }
                         }
                     }
-                } else {
-                    cell.activityImageView.image = UIImage(named: "squareDefaultImage")
                 }
+            } else {
+                cell.activityImageView.image = UIImage(named: "squareDefaultImage")
+            }
             
             cell.titleLabel.text = activities![indexPath.row].title
             cell.ratingLabel.text = String(activities![indexPath.row].totalRating!)
@@ -499,7 +509,7 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
         
         
         let imageArray: [UIImageView] = [cell.firstImage, cell.secondImage, cell.thirdImage, cell.fourthImage]
-
+        
         if let images = reviews![indexPath.row].images {
             for index in 0..<imageArray.count {
                 let imageView = imageArray[index]
@@ -522,12 +532,16 @@ extension BookStoreDetailHomeView: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        
+        // 버튼 선택 구현을 위한 selectionStyle 조건 추가
+        cell.selectionStyle = .none
+        
         return cell
     }
     
     // TODO: 사진 유무 and 리뷰 길이에 따라 높이 수정해야 함
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 260
+        return tableView.rowHeight
     }
 }
 

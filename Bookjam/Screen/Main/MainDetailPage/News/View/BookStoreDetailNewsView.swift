@@ -44,13 +44,14 @@ class BookStoreDetailNewsView: UIView {
         setUpDelegate()
         setUpConstraint()
     }
-    
+
 
     // MARK: View
     
     func setUpView() {
         newsTableView.isScrollEnabled = false
         newsTableView.separatorStyle = .none
+        newsTableView.rowHeight = UITableView.automaticDimension
         
         bookPlaceLabel.text = "\(bookStoreName)의 소식"
     }
@@ -140,15 +141,10 @@ extension BookStoreDetailNewsView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    // 글 길이에 맞게 뷰 높이 조절
+    /// 글 길이에 맞게 뷰 높이 조절
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if newsList[indexPath.row].contents!.count < 30 { return 100 }
-        else if newsList[indexPath.row].contents!.count >= 18 && newsList[indexPath.row].contents!.count < 36 { return 150 }
-        else if newsList[indexPath.row].contents!.count >= 30 && newsList[indexPath.row].contents!.count < 36 { return 170 }
-        else { return 170 }
+        return tableView.rowHeight
     }
-    
-    
 }
 
 //#if DEBUG

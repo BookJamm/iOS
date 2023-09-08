@@ -30,17 +30,20 @@ class NewsTableViewCell: UITableViewCell {
     var newsLabel: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.text = "뉴스 제목"
+        $0.sizeToFit()
     }
     
     var newsContent: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.text = "뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용뉴스내용뉴진스내용"
-        $0.numberOfLines = 3
+        $0.numberOfLines = 20
+        $0.sizeToFit()
     }
     
     var newsDate: UILabel = UILabel().then {
         $0.font = captionText02
         $0.text = "yyyy. mm. dd"
+        $0.sizeToFit()
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -90,11 +93,13 @@ class NewsTableViewCell: UITableViewCell {
             $0.top.equalToSuperview().offset(20)
             $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
             $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         newsLabel.snp.makeConstraints {
             $0.top.equalTo(newsView.snp.top).offset(16)
             $0.leading.equalTo(newsView.snp.leading).offset(16)
+            $0.trailing.equalToSuperview().offset(-10)
         }
         
         newsContent.snp.makeConstraints {

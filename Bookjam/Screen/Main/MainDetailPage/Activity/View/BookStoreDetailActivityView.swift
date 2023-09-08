@@ -42,11 +42,14 @@ class BookStoreDetailActivityView: UIView {
     // MARK: View
     
     func setUpView() {
-        // 스크롤 중첩 방지
+        /// 스크롤 중첩 방지
         activityTableView.isScrollEnabled = false
         activityTableView.separatorStyle = .none
         
-        // 참여 목록 수 업데이트
+        /// 테이블 뷰 셀 크기 유동적으로 조정
+        activityTableView.rowHeight = UITableView.automaticDimension
+        
+        /// 참여 목록 수 업데이트
         activityLabel.text = "\(activities.count)개의 참여"
     }
     
@@ -113,7 +116,6 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
                     }
                 }
             } else {
-                
                 cell.activityImageView.image = UIImage(named: "squareDefaultImage")
             }
         
@@ -121,11 +123,6 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
         cell.activityLabel.text = activities[indexPath.row].title
         cell.numOfReviewLabel.text = "리뷰 \(String(activities[indexPath.row].reviewCount!))"
         cell.starValueLabel.text = String(activities[indexPath.row].totalRating!)
-//        
-        // 배경 회색으로 구현하고 cornerRadius 적용
-        cell.contentView.backgroundColor = gray02
-        cell.contentView.layer.cornerRadius = 20
-        cell.clipsToBounds = true
         
         // 버튼 선택 구현을 위한 selectionStyle 조건 추가
         cell.selectionStyle = .none
@@ -133,9 +130,9 @@ extension BookStoreDetailActivityView: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    // 셀 높이 480으로 지정
+    // 셀 높이 유동적으로 지정
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 480
+        return tableView.rowHeight
     }
 }
 

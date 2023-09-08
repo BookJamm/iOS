@@ -50,7 +50,7 @@ class UserPageVC: UIViewController {
     
     var changeNicknameButton: UIButton = UIButton().then {
         $0.setTitle("프로필 / 닉네임 변경", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(.black, for: .normal)
         $0.sizeToFit()
         $0.addTarget(self, action: #selector(didChangeNicknameButtonTapped), for: .touchUpInside)
@@ -58,14 +58,14 @@ class UserPageVC: UIViewController {
     
     var changePasswordButton: UIButton = UIButton().then {
         $0.setTitle("비밀번호 변경", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(.black, for: .normal)
         $0.sizeToFit()
     }
     
     var alertSettingButton: UIButton = UIButton().then {
         $0.setTitle("알림 설정", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(.black, for: .normal)
     }
     
@@ -84,28 +84,28 @@ class UserPageVC: UIViewController {
     
     var myPostButton: UIButton = UIButton().then {
         $0.setTitle("내가 쓴 글", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(.black, for: .normal)
         $0.sizeToFit()
     }
     
     var myCommentButton: UIButton = UIButton().then {
         $0.setTitle("내가 쓴 댓글", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(.black, for: .normal)
         $0.sizeToFit()
     }
     
     var logoutButton: UIButton = UIButton().then {
         $0.setTitle("로그아웃", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(alert, for: .normal)
         $0.sizeToFit()
     }
     
     var deleteAccountButton: UIButton = UIButton().then {
         $0.setTitle("계정 탈퇴", for: .normal)
-        $0.titleLabel?.font = paragraph03
+        $0.titleLabel?.font = paragraph02
         $0.setTitleColor(gray05, for: .normal)
         $0.sizeToFit()
     }

@@ -28,12 +28,14 @@ class VisitReviewTableViewCell: UITableViewCell {
         $0.font = paragraph05
         $0.textColor = .black
         $0.text = "유저 이름"
+        $0.sizeToFit()
     }
 
     var userVisitDateLabel: UILabel = UILabel().then {
-        $0.font = captionText03
+        $0.font = captionText02
         $0.textColor = .black
         $0.text = "YYYY / MM / DD 방문"
+        $0.sizeToFit()
     }
 
     var addFriendButton: UIButton = UIButton().then {
@@ -46,10 +48,11 @@ class VisitReviewTableViewCell: UITableViewCell {
     }
 
     var commentLabel: UILabel = UILabel().then {
-        $0.font = paragraph06
+        $0.font = paragraph05
         $0.textColor = .black
         $0.text = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용"
-        $0.numberOfLines = 2
+        $0.numberOfLines = 20
+        $0.sizeToFit()
     }
 
     var imageStackView: UIStackView = UIStackView().then {
@@ -162,11 +165,11 @@ class VisitReviewTableViewCell: UITableViewCell {
             $0.top.equalTo(commentLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-20)
         }
         
         firstImage.snp.makeConstraints {
             $0.height.width.equalTo(commentLabel.snp.width).dividedBy(4).offset(-1)
-            $0.bottom.equalToSuperview().offset(-20)
         }
         
         secondImage.snp.makeConstraints {

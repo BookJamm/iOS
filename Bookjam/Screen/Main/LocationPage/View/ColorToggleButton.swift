@@ -17,31 +17,32 @@ class ColorToggleButton: UIButton {
             if isOn {
                 self.configuration = selectedConfig()
                 self.layer.borderWidth = 0
-                self.setTitle(titleString, for: .normal)
             }
             else {
                 self.configuration = defaultConfig()
                 self.layer.borderWidth = 1.0
-                self.setTitle(titleString, for: .normal)
             }
+            
+            self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
         }
     }
     
     var titleString: String?
     
     init(title: String) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 80, height: 40))
+        super.init(frame: CGRect(x: 0, y: 0, width: 64, height: 28))
         
         // MARK: - 기본설정 적용
         self.configuration = self.defaultConfig()
         self.layer.borderWidth = 1.0
         self.layer.borderColor = gray05?.cgColor
         
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 18
-        self.setTitle(title, for: .normal)
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 13
+        
         self.titleString = title
-        self.titleLabel?.font = captionText02
+        
+        self.setAttributedTitle(NSAttributedString(string: title, attributes: [.font : captionText02!]), for: .normal)
         
         // MARK: - 선택했을 때 색 변경
         self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
@@ -60,7 +61,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = gray05
         config.background.backgroundColor = .clear
-        config.contentInsets = .init(top: 8, leading: 18, bottom: 8, trailing: 18)
+        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
     
@@ -69,7 +70,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = .white
         config.background.backgroundColor = main03
-        config.contentInsets = .init(top: 8, leading: 18, bottom: 8, trailing: 18)
+        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
 }

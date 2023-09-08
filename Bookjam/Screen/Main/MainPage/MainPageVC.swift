@@ -23,16 +23,19 @@ class MainPageVC: UIViewController {
     
     var locationManager = CLLocationManager()
     
-    var searchBarButton: UIButton = UIButton().then {
-        $0.setTitle("  상호명 또는 주소 검색", for: .normal)
-        $0.setTitleColor(gray06, for: .normal)
-        $0.titleLabel?.font = paragraph02
-        $0.layer.cornerRadius = 25
+    var searchView: UIView = UIView().then {
         $0.clipsToBounds = true
+        $0.layer.cornerRadius = 24
+        $0.layer.borderColor = main02?.cgColor
+        $0.layer.borderWidth = 1.2
+    }
+    
+    var userSearchButton: UIButton = UIButton().then {
+        $0.setTitle(" 상호명 또는 주소 검색", for: .normal)
+        $0.titleLabel?.font = paragraph02
+        $0.setTitleColor(gray06, for: .normal)
         $0.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
         $0.tintColor = main03
-        $0.layer.borderColor = main02?.cgColor
-        $0.layer.borderWidth = 1
         $0.addTarget(self, action: #selector(didSearchBarButtonTapped), for: .touchUpInside)
     }
     
@@ -130,6 +133,7 @@ class MainPageVC: UIViewController {
     }
     
     var tableView: UITableView = UITableView().then {
+        $0.backgroundColor = .white
         $0.register(MainPageBookStoreTableViewCell.self, forCellReuseIdentifier: "bookStoreCell")
     }
     
@@ -161,15 +165,16 @@ class MainPageVC: UIViewController {
     // TODO: 데모데이 이후 주석 풀기
     func setUpLayout(){
         [
-            searchBarButton,
+            searchView,
             // independentBookstoreButton,
             // bookPlayGroundButton,
             // libraryButton,
             tableView,
             sortView
-        ].forEach {
-            view.addSubview($0)
-        }
+        ].forEach { view.addSubview($0) }
+        
+        searchView.addSubview(userSearchButton)
+        
         sortView.addSubview(lineView)
         sortView.addSubview(sortButton)
         sortView.addSubview(infoButton)
@@ -179,11 +184,16 @@ class MainPageVC: UIViewController {
 
     // TODO: 데모데이 이후 버튼 주석 풀기
     func setUpConstraint(){
-        searchBarButton.snp.makeConstraints {
+        searchView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(10)
             $0.leading.equalToSuperview().offset(20)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.height.equalTo(45)
+            $0.height.equalTo(44)
+        }
+        
+        userSearchButton.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
         }
         
 //        independentBookstoreButton.snp.makeConstraints {
@@ -202,9 +212,9 @@ class MainPageVC: UIViewController {
 //        }
         
         sortView.snp.makeConstraints {
-            $0.top.equalTo(searchBarButton.snp.bottom).offset(20)
+            $0.top.equalTo(searchView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(50)
+            $0.height.equalTo(44)
         }
         
         sortButton.snp.makeConstraints {
@@ -329,12 +339,9 @@ class MainPageVC: UIViewController {
                     self.getIndependantBookStorePlaces(category: 0, sortBy: "rating")
                 }),
             ])
-            
             sortButton.showsMenuAsPrimaryAction = true
             sortButton.changesSelectionAsPrimaryAction = true
-            
         }
-    
 }//end of MainPageVC
 
 
@@ -347,7 +354,6 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             return count
         }
         return 0
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -366,10 +372,26 @@ extension MainPageVC: UITableViewDelegate, UITableViewDataSource {
             }
             
             if let reviewCount = bookStoreList[indexPath.row].reviewCount {
-                cell.reviewCountLabel.text = "리뷰 " + String(reviewCount) + "개"
+                cell.reviewCountLabel.text = "리뷰 " + String(reviewCount)
             }
             if let imageUrls = bookStoreList[indexPath.row].images {    //이미지 url을 이미지로
                 cell.images = imageUrls
+            }
+            
+            /// 해당 서점의 현재 상태를 확인하고, 영업 중 라벨을 변경합니다.
+            if let isOpen = bookStoreList[indexPath.row].open {
+                // 영업 여부에 따라 분기처리
+                let isOpenText = isOpen ? "   영업중   " : "   영업 종료   "
+                let backgroundColor = isOpen ? complete : alert
+                
+                // UI 처리
+                cell.timeButton.setTitle(isOpenText, for: .normal)
+                cell.timeButton.backgroundColor = backgroundColor
+            }
+            else {
+                // 데이터가 없는 경우
+                cell.timeButton.setTitle("   정보 미등록   ", for: .normal)
+                cell.timeButton.backgroundColor = gray06
             }
         }
         

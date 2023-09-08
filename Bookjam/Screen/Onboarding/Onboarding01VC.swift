@@ -18,7 +18,6 @@ import KakaoSDKUser
 
 class Onboarding01VC: UIViewController {
     
-    
     // MARK: Variables
     
     let logoImage = UIImageView().then {
@@ -49,7 +48,7 @@ class Onboarding01VC: UIViewController {
         $0.setTitle("회원가입", for: .normal)
         $0.titleLabel?.font = paragraph01
         $0.layer.cornerRadius = 8
-        $0.layer.borderWidth = 1.5
+        $0.layer.borderWidth = 1.1
         $0.layer.borderColor = UIColor.white.cgColor
         $0.addTarget(self, action: #selector(didSignUpButtonTapped), for: .touchUpInside)
     }
@@ -246,6 +245,5 @@ extension Onboarding01VC: ASAuthorizationControllerDelegate, ASAuthorizationCont
 //struct Onboarding01VC_Preview: PreviewProvider {
 //    static var previews: some View {
 //        Onboarding01VC().toPreview()
-//            
 //    }
 //}

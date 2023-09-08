@@ -22,32 +22,25 @@ class BookListCollectionViewCell: UICollectionViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        
-        // 그림자 구현
-        $0.layer.shadowOpacity = 0.3
-        $0.layer.shadowOffset = CGSize(width: 0, height: 7)
-        $0.layer.shadowRadius = 3
-        $0.layer.masksToBounds = false
-        
-        $0.image = UIImage(named: "tempBookImage")
+        $0.image = UIImage(named: "emptyBook")
     }
     
     var titleLabel: UILabel = UILabel().then {
         $0.font = paragraph02
         $0.textColor = .black
-        $0.text = "책 이름"
+        $0.text = "등록된 책이 없습니다."
     }
     
     var authorLabel: UILabel = UILabel().then {
         $0.font = captionText02
         $0.textColor = gray06
-        $0.text = "작가 이름"
+        $0.text = ""
     }
     
     var publisherLabel: UILabel = UILabel().then {
         $0.font = captionText02
         $0.textColor = gray06
-        $0.text = "출판사 이름"
+        $0.text = ""
     }
     
     override init(frame: CGRect) {

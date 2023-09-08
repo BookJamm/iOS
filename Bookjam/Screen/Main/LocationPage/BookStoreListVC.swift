@@ -137,7 +137,7 @@ class BookStoreListViewController: UIViewController {
         self.locationTableView.isScrollEnabled = true
     }
     
-
+    
     // MARK: View
     func setUpView() {
         self.view.backgroundColor = .white
@@ -173,7 +173,7 @@ class BookStoreListViewController: UIViewController {
         [
             headerView,
             locationTableView
-//            footerView
+            //            footerView
         ].forEach { self.view.addSubview($0) }
     }
     
@@ -201,6 +201,7 @@ class BookStoreListViewController: UIViewController {
             filterHStackView.snp.makeConstraints {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(20)
                 $0.leading.equalToSuperview().offset(20)
+                $0.height.equalTo(28)
             }
         
         // MARK: - body tableView
@@ -211,19 +212,16 @@ class BookStoreListViewController: UIViewController {
         }
         
         // MARK: - footer
-//        footerView.snp.makeConstraints {
-//            $0.width.equalToSuperview()
-//            $0.height.equalTo(60)
-//            $0.horizontalEdges.equalToSuperview()
-//            $0.bottom.equalToSuperview()
-//        }
+        //        footerView.snp.makeConstraints {
+        //            $0.width.equalToSuperview()
+        //            $0.height.equalTo(60)
+        //            $0.horizontalEdges.equalToSuperview()
+        //            $0.bottom.equalToSuperview()
+        //        }
         
-            bottomBtn.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
-        
-        
-        
+        bottomBtn.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
     }
     
     @objc func selectFilter(_ sender: UIButton) {
@@ -265,7 +263,7 @@ class BookStoreListViewController: UIViewController {
 // MARK: - TableView Extension
 extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-// MARK: - 셀 리스트 개수 반환
+        // MARK: - 셀 리스트 개수 반환
         if let count = bookStoreList?.count{
             return count
         }
@@ -284,7 +282,7 @@ extension BookStoreListViewController: UITableViewDelegate, UITableViewDataSourc
         cell.cellModel = storeList[indexPath.row]
         return cell
     }
-            
+    
     
     // MARK: - 테이블뷰 셀 선택 시
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {//셀 클릭 시 해당 placeId api 불러오고 디테일뷰로 전환

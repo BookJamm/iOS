@@ -33,7 +33,7 @@ class Onboarding05VC: UIViewController {
     }
     
     let searchIDLabel: UILabel = UILabel().then {
-        $0.textColor = UIColor(hexCode: "6F6F6F")
+        $0.textColor = gray07
         $0.textAlignment = .left
         $0.text = "아이디로 검색하기"
         $0.font = title03
@@ -151,18 +151,18 @@ class Onboarding05VC: UIViewController {
         
         bottomLineView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.87)
-            $0.height.equalToSuperview().multipliedBy(0.0011)
+            $0.height.equalTo(1.1)
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().multipliedBy(0.72)
+            $0.top.equalTo(emailTextField.snp.bottom).offset(13)
         }
         
         recommendLabel.snp.makeConstraints {
-            $0.top.equalTo(bottomLineView.snp.bottom).offset(40)
+            $0.top.equalTo(bottomLineView.snp.bottom).offset(62)
             $0.leading.equalTo(searchIDLabel)
         }
         
         recommendTableView.snp.makeConstraints {
-            $0.top.equalTo(recommendLabel.snp.bottom).offset(20)
+            $0.top.equalTo(recommendLabel.snp.bottom).offset(12)
             $0.leading.equalTo(recommendLabel)
             $0.trailing.equalTo(bottomLineView)
             $0.height.equalTo(300)
@@ -172,7 +172,7 @@ class Onboarding05VC: UIViewController {
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().multipliedBy(0.94)
             $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalToSuperview().multipliedBy(0.06)
+            $0.height.equalTo(50)
         }
     }
     
@@ -256,7 +256,7 @@ extension Onboarding05VC: UITableViewDelegate, UITableViewDataSource {
         return 90
     }
 }
-//
+
 //struct Onboarding05VC_Preview: PreviewProvider {
 //    static var previews: some View {
 //        Onboarding05VC().toPreview()
