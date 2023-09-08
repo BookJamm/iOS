@@ -220,6 +220,8 @@ class MainPageVC: UIViewController {
         sortButton.snp.makeConstraints {
             $0.top.equalTo(lineView.snp.bottom).offset(15)
             $0.leading.equalToSuperview().offset(30)
+            $0.height.equalTo(30)
+            $0.width.equalTo(60)
         }
         
         infoButton.snp.makeConstraints {
@@ -432,9 +434,9 @@ extension MainPageVC: CLLocationManagerDelegate{
     }
 }
 
-//struct MainPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        MainPageVC().toPreview()
-//            //.edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct MainPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        MainPageVC().toPreview()
+            //.edgesIgnoringSafeArea(.all)
+    }
+}

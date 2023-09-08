@@ -547,8 +547,9 @@ class FeedPostPageVC: UIViewController {
         }
         
         backButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalToSuperview().offset(20)
+            $0.top.leading.equalToSuperview()
+            $0.height.equalToSuperview()
+            $0.width.equalTo(60)
         }
         
         postLabel.snp.makeConstraints {
@@ -1169,9 +1170,9 @@ extension FeedPostPageVC: UIImagePickerControllerDelegate, UINavigationControlle
 }
 
 
-//struct FeedPostPageVC_Preview: PreviewProvider {
-//    static var previews: some View {
-//        FeedPostPageVC().toPreview()
-//            // .edgesIgnoringSafeArea(.all)
-//    }
-//}
+struct FeedPostPageVC_Preview: PreviewProvider {
+    static var previews: some View {
+        FeedPostPageVC().toPreview()
+            // .edgesIgnoringSafeArea(.all)
+    }
+}
