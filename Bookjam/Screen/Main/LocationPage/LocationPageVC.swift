@@ -181,15 +181,20 @@ final class LocationPageVC: BaseBottomSheetController {
     
     // MARK: - MapView에 Annotation 추가
     private func dispatchBookStoreList() {
-        self.bookStoreList?.forEach { model in
-            
-            if let lat = model.coords?.lat, let lon = model.coords?.lon {
-                let pin = MKPointAnnotation()
-                pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
-                pin.title = model.name
-                pin.subtitle = LocationCategory(rawValue: model.category ?? 0)?.getName_InKorean()
-                self.mapView.addAnnotation(pin)
-            }
+        // TODO: 데모데이 끝나고 수정
+        if self.mapView.annotations.count < 2 {
+            self.bookStoreList?.forEach { model in
+                
+                if let lat = model.coords?.lat, let lon = model.coords?.lon {
+                    let pin = MKPointAnnotation()
+                    pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
+                    pin.title = model.name
+                    pin.subtitle = LocationCategory(rawValue: model.category ?? 0)?.getName_InKorean()
+                    self.mapView.addAnnotation(pin)
+                }
+        }
+        
+        
             
         }//: forEach
     }//: func

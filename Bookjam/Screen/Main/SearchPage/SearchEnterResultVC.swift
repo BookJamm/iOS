@@ -172,11 +172,22 @@ extension SearchEnterResultVC: UITableViewDelegate, UITableViewDataSource {
         
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let resultVC = BookstoreDetailPageVC()
+        let detailPage = BookstoreDetailPageVC()
         
-        // TODO: 데이터 연결
+//        let selectedPlaceId = bookStoreList![indexPath.row].placeId!
+        let selectedPlaceId = searchResults![indexPath.row].placeId!
         
-        navigationController?.pushViewController(resultVC, animated: true)
+        APIManager.shared.getData(
+            urlEndpointString: Constant.getPlaceId(placeId: selectedPlaceId),
+            responseDataType: APIModel<PlaceIdResponseModel>?.self,
+            requestDataType: PlaceIdRequestModel.self,
+            parameter: nil,
+            completionHandler: { [self]
+                response in
+                    print(response)
+                detailPage.bookStoreDetail = response?.result ?? nil
+                navigationController?.pushViewController(detailPage, animated: true)
+            })
     }
 }
 
