@@ -45,6 +45,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD0919122AFA5FC2001E5501 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
+				DD754DEC2AFA4D920001FBC4 /* ViewController.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		DD0919132AFA5FCA001E5501 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				DD754DF12AFA4D930001FBC4 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		DD754DDC2AFA4D920001FBC4 = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +83,8 @@
 			children = (
 				DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */,
 				DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */,
-				DD754DEC2AFA4D920001FBC4 /* ViewController.swift */,
-				DD754DF12AFA4D930001FBC4 /* Assets.xcassets */,
-				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
+				DD0919132AFA5FCA001E5501 /* Resource */,
+				DD0919122AFA5FC2001E5501 /* Source */,
 				DD754DF62AFA4D940001FBC4 /* Info.plist */,
 			);
 			path = BookJam;
