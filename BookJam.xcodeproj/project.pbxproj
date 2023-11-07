@@ -12,6 +12,8 @@
 		DD09190B2AFA5EC4001E5501 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD09190A2AFA5EC4001E5501 /* Then */; };
 		DD09190E2AFA5ED8001E5501 /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DD09190D2AFA5ED8001E5501 /* RxAlamofire */; };
 		DD0919112AFA5F25001E5501 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD0919102AFA5F25001E5501 /* Kingfisher */; };
+		DD0919162AFA621D001E5501 /* FontData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919152AFA621D001E5501 /* FontData.swift */; };
+		DD0919182AFA6225001E5501 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919172AFA6225001E5501 /* ColorData.swift */; };
 		DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */; };
 		DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */; };
 		DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* ViewController.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0919152AFA621D001E5501 /* FontData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontData.swift; sourceTree = "<group>"; };
+		DD0919172AFA6225001E5501 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 		DD754DE52AFA4D920001FBC4 /* BookJam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookJam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,10 +61,20 @@
 		DD0919132AFA5FCA001E5501 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DD0919142AFA61FC001E5501 /* Data */,
 				DD754DF12AFA4D930001FBC4 /* Assets.xcassets */,
 				DD754DF62AFA4D940001FBC4 /* Info.plist */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		DD0919142AFA61FC001E5501 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DD0919152AFA621D001E5501 /* FontData.swift */,
+				DD0919172AFA6225001E5501 /* ColorData.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		DD754DDC2AFA4D920001FBC4 = {
@@ -175,6 +189,8 @@
 			files = (
 				DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */,
 				DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */,
+				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
+				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,
 				DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
