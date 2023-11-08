@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD02247A2AFBD476005637B6 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = DD0224792AFBD476005637B6 /* FloatingPanel */; };
 		DD0919062AFA5EB3001E5501 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DD0919052AFA5EB3001E5501 /* SnapKit */; };
 		DD0919082AFA5EB3001E5501 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = DD0919072AFA5EB3001E5501 /* SnapKit-Dynamic */; };
 		DD09190B2AFA5EC4001E5501 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DD09190A2AFA5EC4001E5501 /* Then */; };
@@ -53,6 +54,7 @@
 				DD0919062AFA5EB3001E5501 /* SnapKit in Frameworks */,
 				DD09190E2AFA5ED8001E5501 /* RxAlamofire in Frameworks */,
 				DD09190B2AFA5EC4001E5501 /* Then in Frameworks */,
+				DD02247A2AFBD476005637B6 /* FloatingPanel in Frameworks */,
 				DD0919082AFA5EB3001E5501 /* SnapKit-Dynamic in Frameworks */,
 				DD0919112AFA5F25001E5501 /* Kingfisher in Frameworks */,
 			);
@@ -160,6 +162,7 @@
 				DD09190A2AFA5EC4001E5501 /* Then */,
 				DD09190D2AFA5ED8001E5501 /* RxAlamofire */,
 				DD0919102AFA5F25001E5501 /* Kingfisher */,
+				DD0224792AFBD476005637B6 /* FloatingPanel */,
 			);
 			productName = BookJam;
 			productReference = DD754DE52AFA4D920001FBC4 /* BookJam.app */;
@@ -194,6 +197,7 @@
 				DD0919092AFA5EC4001E5501 /* XCRemoteSwiftPackageReference "Then" */,
 				DD09190C2AFA5ED8001E5501 /* XCRemoteSwiftPackageReference "RxAlamofire" */,
 				DD09190F2AFA5F25001E5501 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = DD754DE62AFA4D920001FBC4 /* Products */;
 			projectDirPath = "";
@@ -452,6 +456,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scenee/FloatingPanel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.0;
+			};
+		};
 		DD0919042AFA5EB3001E5501 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -487,6 +499,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DD0224792AFBD476005637B6 /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
+		};
 		DD0919052AFA5EB3001E5501 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DD0919042AFA5EB3001E5501 /* XCRemoteSwiftPackageReference "SnapKit" */;
