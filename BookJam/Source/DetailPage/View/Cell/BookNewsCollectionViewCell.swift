@@ -9,10 +9,11 @@ import UIKit
 
 class BookNewsCollectionViewCell: UICollectionViewCell {
     
-    static let cellID =  "HomeNewsCell"
+    static let id =  "HomeNewsCell"
     
     var profileImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(named: "squareDefaultImage")?.circularImage()
+//        $0.image = UIImage(named: "squareDefaultImage")?.circularImage()
+        $0.image = UIImage(named: "squareDefaultImage")
     }
     
     var newsView: UIView = UIView().then {
@@ -106,5 +107,10 @@ class BookNewsCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(newsLabel.snp.leading)
             $0.bottom.equalTo(newsView.snp.bottom).offset(-20)
         }
+    }
+    
+    public func configure(title: String, content: String) {
+        newsLabel.text = title
+        newsContent.text = content
     }
 }

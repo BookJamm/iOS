@@ -10,7 +10,7 @@ import UIKit
 class BookReviewCollectionViewCell: UICollectionViewCell {
     // MARK: Variable
     
-    static let cellID =  "visitReviewCell"
+    static let id =  "visitReviewCell"
     
     var userProfileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage(named: "squareDefaultImage")!.circularImage()

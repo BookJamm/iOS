@@ -19,7 +19,7 @@ class MainDetailTopView: UIView {
         $0.minimumInteritemSpacing = 1
     }).then {
         $0.backgroundColor = .white
-//        $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.cellID)
+        $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.id)
     }
     
     var bookstoreLabel: UILabel = UILabel().then {
@@ -96,6 +96,17 @@ class MainDetailTopView: UIView {
         $0.titleLabel?.font = paragraph05
         $0.contentHorizontalAlignment = .leading
 //        $0.addTarget(self, action: #selector(didURLTapped), for: .touchUpInside)
+    }
+    
+    // MARK: init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUpLayout()
+        setUpConstraint()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Layout

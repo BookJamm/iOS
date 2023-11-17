@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import RxSwift
+
+class MainDetailPageViewModel{
+    let disposeBag = DisposeBag()
+    
+}

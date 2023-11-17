@@ -7,6 +7,7 @@
 
 import UIKit
 
+@available(iOS 16.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -19,7 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         // MARK: 앱 시작시 처음 보여질 ViewController 설정
-        self.window?.rootViewController = ViewController()
+//        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = MainDetailPageViewController()
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

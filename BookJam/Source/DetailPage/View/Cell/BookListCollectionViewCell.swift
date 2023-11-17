@@ -18,7 +18,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
     // MARK: Variables
     
     // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
-    static var cellID = "homeListCell"
+    static var id = "homeListCell"
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill

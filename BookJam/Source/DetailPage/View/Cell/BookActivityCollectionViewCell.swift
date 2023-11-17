@@ -12,13 +12,13 @@ import SwiftUI
 
 import SnapKit
 import Then
-
+import Kingfisher
 
 class BookActivityCollectionViewCell: UICollectionViewCell {
     // MARK: Variables
     
     // CollectionView가 여러 개라 extension 분기 나누는 거 고려해서 cell id 전부 homeViewCell로 통일
-    static var cellID = "homeActivityCell"
+    static var id = "homeActivityCell"
     
     var activityImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleToFill
@@ -143,6 +143,11 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     // 참여하기 버튼 누르면 실행되는 메소드
     @objc func didJoinButtonTapped() {
         
+    }
+    
+    public func configure(title: String, url: String) {
+        titleLabel.text = title
+        activityImageView.kf.setImage(with: URL(string: url))
     }
 }
 //

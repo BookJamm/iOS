@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+struct PlaceIdNewsResponseModel: Codable, Hashable {
+    let newsId: Int?
+    let createdAt: String?
+    let updatedAt: String?
+    let title: String?
+    let contents: String?
+    let placeId: Int?
+
+}
