@@ -13,7 +13,7 @@ class BookReviewCollectionViewCell: UICollectionViewCell {
     static let id =  "visitReviewCell"
     
     var userProfileImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(named: "squareDefaultImage")!.circularImage()
+        $0.image = UIImage(named: "squareDefaultImage")!
     }
     
     var userNameLabel: UILabel = UILabel().then {

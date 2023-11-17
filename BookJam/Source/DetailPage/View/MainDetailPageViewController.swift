@@ -153,10 +153,16 @@ class MainDetailPageViewController: UIViewController {
             Item.NewsItem(defailtNewsData)
         ]
         snapshot.appendItems(bannerItems1, toSection: section1)
+        
+        //책 목록
+        let section2 = DetailSection.BookList
+        snapshot.appendSections([section2])
+        let bookData = Item.BookListItem(PlaceIdBooksResponseModel(title: "진격거", author: "에렌 예거", cover: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp", description: "진격의 거인", isbn: "", publisher: "출판사"))
+        snapshot.appendItems([bookData], toSection: section2)
+        
+        // 독서 활동
         let section = DetailSection.Activity
         snapshot.appendSections([section])
-        
-        // 기본값으로 사용할 데이터 생성 (실제 데이터를 사용하도록 변경하세요)
         let defaultActivityData = Activities(activityId: 1, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
         let defaultActivityData1 = Activities(activityId: 2, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
             
@@ -171,10 +177,10 @@ class MainDetailPageViewController: UIViewController {
             
         snapshot.appendItems(bannerItems, toSection: section)
         
-        let section2 = DetailSection.BookList
-        snapshot.appendSections([section2])
-        let bookData = Item.BookListItem(PlaceIdBooksResponseModel(title: "진격거", author: "에렌 예거", cover: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp", description: "진격의 거인", isbn: "", publisher: "출판사"))
-        snapshot.appendItems([bookData], toSection: section2)
+        let section3 = DetailSection.Review
+        snapshot.appendSections([section3])
+        let reviewItem = Item.ReviewItem(PlaceIdReviewsResponseModel(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil)))
+        snapshot.appendItems([reviewItem], toSection: section3)
         
         self.dataSource?.apply(snapshot)
         
@@ -264,9 +270,13 @@ class MainDetailPageViewController: UIViewController {
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(320))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 4)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        section.boundarySupplementaryItems = [header]
         
         return section
     }
@@ -276,7 +286,7 @@ class MainDetailPageViewController: UIViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .absolute(320))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.38), heightDimension: .absolute(320))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
