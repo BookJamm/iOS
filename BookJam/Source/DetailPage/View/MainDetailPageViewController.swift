@@ -110,7 +110,7 @@ class MainDetailPageViewController: UIViewController {
                 return cell!
             case .BookListItem(let movieData):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookListCollectionViewCell.id, for: indexPath) as? BookListCollectionViewCell
-//                cell?.configure(title: movieData.title, overview: movieData.overview, review: movieData.vote, url: movieData.posterUrl)
+                cell?.configure(url: movieData.cover!, title: movieData.title!, author: movieData.author!, publish: movieData.publisher!)
                 return cell!
             case .NewsItem(let movieData):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookNewsCollectionViewCell.id, for: indexPath) as? BookNewsCollectionViewCell
@@ -144,7 +144,15 @@ class MainDetailPageViewController: UIViewController {
     
     private func setSnapShot() {
         var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
+        //소식
+        let section1 = DetailSection.News
+        snapshot.appendSections([section1])
         
+        let defailtNewsData = PlaceIdNewsResponseModel(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
+        let bannerItems1 = [
+            Item.NewsItem(defailtNewsData)
+        ]
+        snapshot.appendItems(bannerItems1, toSection: section1)
         let section = DetailSection.Activity
         snapshot.appendSections([section])
         
@@ -163,16 +171,10 @@ class MainDetailPageViewController: UIViewController {
             
         snapshot.appendItems(bannerItems, toSection: section)
         
-//        self.dataSource?.apply(snapshot)
-        
-        let section1 = DetailSection.News
-        snapshot.appendSections([section1])
-        
-        let defailtNewsData = PlaceIdNewsResponseModel(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
-        let bannerItems1 = [
-            Item.NewsItem(defailtNewsData)
-        ]
-        snapshot.appendItems(bannerItems1, toSection: section1)
+        let section2 = DetailSection.BookList
+        snapshot.appendSections([section2])
+        let bookData = Item.BookListItem(PlaceIdBooksResponseModel(title: "진격거", author: "에렌 예거", cover: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp", description: "진격의 거인", isbn: "", publisher: "출판사"))
+        snapshot.appendItems([bookData], toSection: section2)
         
         self.dataSource?.apply(snapshot)
         
@@ -250,7 +252,6 @@ class MainDetailPageViewController: UIViewController {
         section.orthogonalScrollingBehavior = .continuous
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
-        
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
         section.boundarySupplementaryItems = [header]
         
@@ -275,10 +276,14 @@ class MainDetailPageViewController: UIViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(320))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 4)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .absolute(320))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        section.boundarySupplementaryItems = [header]
         
         return section
     }

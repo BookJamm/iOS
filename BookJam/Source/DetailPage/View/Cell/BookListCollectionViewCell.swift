@@ -78,7 +78,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
     func setUpConstraint() {
         bookImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().offset(30)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(200)
             $0.width.equalTo(100)
         }
@@ -99,5 +99,12 @@ class BookListCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(authorLabel.snp.trailing).offset(10)
             $0.trailing.equalToSuperview()
         }
+    }
+    
+    public func configure(url: String, title: String, author: String, publish: String) {
+        bookImageView.kf.setImage(with: URL(string: url))
+        titleLabel.text = title
+        authorLabel.text = author
+        publisherLabel.text = publish
     }
 }
