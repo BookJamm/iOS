@@ -16,7 +16,7 @@ enum DetailSection: Hashable {
     case Home
     case Review
     case Activity
-    case News
+    case News(String)
     case BookList
 }
 
@@ -130,13 +130,18 @@ class MainDetailPageViewController: UIViewController {
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.id, for: indexPath)
             let section = self?.dataSource?.sectionIdentifier(for: indexPath.section)
             
-//            switch section {
-//            case .horizontal(let title), .vertical(let title):
-//                (header as? HeaderView)?.configure(title: title)
-//                
-//            default:
-//                print("Default")
-//            }
+            switch section {
+            case .News(let title):
+                (header as? HeaderView)?.configure(title: "\(title)의 소식")
+            case .BookList:
+                (header as? HeaderView)?.configure(title: "책 목록")
+            case .Activity:
+                (header as? HeaderView)?.configure(title: "독서 활동 참여 목록")
+            case .Review:
+                (header as? HeaderView)?.configure(title: "리뷰")
+            default:
+                print("Default")
+            }
             
             return header
         }
@@ -145,7 +150,7 @@ class MainDetailPageViewController: UIViewController {
     private func setSnapShot() {
         var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
         //소식
-        let section1 = DetailSection.News
+        let section1 = DetailSection.News("임시")
         snapshot.appendSections([section1])
         
         let defailtNewsData = PlaceIdNewsResponseModel(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
