@@ -11,4 +11,20 @@ import RxSwift
 class MainDetailPageViewModel{
     let disposeBag = DisposeBag()
     
+    struct Input {
+        let homeTrigger: Observable<Void>
+        let newsTrigger: Observable<Void>
+        let activityTrigger: Observable<Void>
+        let reviewTrigger: Observable<Void>
+        let bookListTrigger: Observable<Void>
+    }
+    
+    struct Output {
+        let homeAllList: Observable<Void>
+        let newsList: Observable<Void>
+        let activityList: Observable<Void>
+        let reviewList: Observable<Void>
+        let bookListList: Observable<Void>
+        
+    }
 }
