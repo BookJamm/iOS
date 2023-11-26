@@ -56,6 +56,7 @@ class MainDetailTopView: UIView {
         $0.font = paragraph02
         $0.text = "리뷰 5"
         $0.sizeToFit()
+        
     }
     
     var underLineView: UIView = UIView().then {
