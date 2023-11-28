@@ -7,13 +7,12 @@
 
 import Foundation
 
-struct PlaceIdActivitiesResponseModel: Codable {
+struct PlaceIdActivitiesResponseModel: Codable, Hashable {
     let error: Bool?
-    
     let result: [Activities]
 }
 
-struct Activities: Codable{
+struct Activities: Codable, Hashable{
     let activityId: Int?
     let createdAt: String?
     let updatedAt: String?

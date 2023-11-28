@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlaceIdNewsResponseModel: Codable {
+struct PlaceIdNewsResponseModel: Codable, Hashable {
     let newsId: Int?
     let createdAt: String?
     let updatedAt: String?

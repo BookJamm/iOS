@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlaceIdBooksResponseModel: Codable {
+struct PlaceIdBooksResponseModel: Codable, Hashable {
     let title: String?
     let author: String?
     let cover: String?  //이미지
