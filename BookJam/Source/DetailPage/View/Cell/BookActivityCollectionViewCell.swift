@@ -31,6 +31,7 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
         $0.font = paragraph01
         $0.textColor = main03
         $0.text = "활동 이름"
+        
     }
     
     var starImageView: UIImageView = UIImageView().then {
