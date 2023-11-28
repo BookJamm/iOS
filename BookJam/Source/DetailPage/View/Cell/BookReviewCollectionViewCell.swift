@@ -55,6 +55,7 @@ class BookReviewCollectionViewCell: UICollectionViewCell {
         $0.image = UIImage(named: "squareDefaultImage")
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 4
+        
         $0.clipsToBounds = true
     }
 
