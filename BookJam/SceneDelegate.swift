@@ -20,9 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.makeKeyAndVisible()
         
         // MARK: 앱 시작시 처음 보여질 ViewController 설정
-//        self.window?.rootViewController = ViewController()
-        self.window?.rootViewController = MainDetailPageViewController()
-        
+        self.window?.rootViewController = LandingVC()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

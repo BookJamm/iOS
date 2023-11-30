@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LogoCharacter" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-fL-kO2">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CharacterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="bIj-fL-kO2">
                                 <rect key="frame" x="90" y="346" width="212" height="161"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="212" id="KeM-IR-UGs"/>
@@ -28,7 +28,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="Main01"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bIj-fL-kO2" secondAttribute="trailing" constant="63" id="7nF-Vs-wLE"/>
                             <constraint firstItem="bIj-fL-kO2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="90" id="ElA-Yj-Bza"/>
                             <constraint firstItem="bIj-fL-kO2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="287" id="S6H-vW-HAw"/>
                         </constraints>
@@ -40,7 +39,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LogoCharacter" width="212" height="161"/>
+        <image name="CharacterLogo" width="212" height="161"/>
         <namedColor name="Main01">
             <color red="0.96100002527236938" green="0.59600001573562622" blue="0.043000001460313797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

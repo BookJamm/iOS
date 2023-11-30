@@ -64,7 +64,7 @@
 		DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919232AFA6B4F001E5501 /* UIColor+.swift */; };
 		DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */; };
 		DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */; };
-		DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* ViewController.swift */; };
+		DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */; };
 		DD754DF22AFA4D930001FBC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF12AFA4D930001FBC4 /* Assets.xcassets */; };
 		DD754DF52AFA4D940001FBC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -122,7 +122,7 @@
 		DD754DE52AFA4D920001FBC4 /* BookJam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookJam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD754DEC2AFA4D920001FBC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		DD754DF12AFA4D930001FBC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD754DF42AFA4D940001FBC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD754DF62AFA4D940001FBC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 			children = (
 				949750F02AFDF99A00DCC096 /* DetailPage */,
 				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
-				DD754DEC2AFA4D920001FBC4 /* ViewController.swift */,
+				DDAA84052B109A7200132964 /* OnboardingPage */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -325,6 +325,22 @@
 				DD0919122AFA5FC2001E5501 /* Source */,
 			);
 			path = BookJam;
+			sourceTree = "<group>";
+		};
+		DDAA84052B109A7200132964 /* OnboardingPage */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA84062B10A1B300132964 /* View */,
+			);
+			path = OnboardingPage;
+			sourceTree = "<group>";
+		};
+		DDAA84062B10A1B300132964 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,6 +450,7 @@
 				88472A7A2B15D9220073AE61 /* UsersRecords.swift in Sources */,
 				88472A772B15D9220073AE61 /* UsersOutline.swift in Sources */,
 				88472A792B15D9220073AE61 /* Login.swift in Sources */,
+				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
 				DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */,
 				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
 				88472A722B15D9210073AE61 /* SearchFriend.swift in Sources */,

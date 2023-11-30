@@ -46,6 +46,8 @@ extension UIViewController {
         public func updateUIView(_ view: UIView, context: Context) {
             view.setContentHuggingPriority(.defaultHigh, for: .horizontal)
             view.setContentHuggingPriority(.defaultHigh, for: .vertical)
+            
+            
         }
     }
 
