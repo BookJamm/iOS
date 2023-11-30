@@ -48,6 +48,15 @@ class BookNewsCollectionViewCell: UICollectionViewCell {
         setUpConstraint()
     }
     
+    // collectionviewCell 용 init 함수
+//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        
+//        setUpView()
+//        setUpLayout()
+//        setUpConstraint()
+//    }
+    
     required init?(coder: NSCoder) {
         fatalError("init (coder:) has not been implemented")
     }

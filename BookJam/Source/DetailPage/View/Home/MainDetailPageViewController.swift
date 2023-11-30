@@ -44,7 +44,26 @@ class MainDetailPageViewController: UIViewController {
     
     
     let topView = MainDetailTopView()
+    
+    let newsView = MainDetailNewsCollectionViewController()
+    
     let segmentedControl = MainDetailSegmentedControl(items: ["홈", "소식", "참여", "리뷰", "책 종류"])
+    
+//    var shouldHideFirstView: Bool? {
+//        didSet {
+//          guard let shouldHideFirstView = self.shouldHideFirstView else { return }
+//          self.collectionView.isHidden = shouldHideFirstView
+//          self.newsView.isHidden = !self.collectionView.isHidden
+//        }
+//      }
+    
+    var shouldHideFirstView: Bool = false {
+        didSet {
+            self.collectionView.isHidden = shouldHideFirstView
+            self.newsView.isHidden = !self.collectionView.isHidden
+        }
+    }
+    
     // MARK: viewDidLoad()
     
     override func viewDidLoad() {
@@ -56,6 +75,12 @@ class MainDetailPageViewController: UIViewController {
         setDatasource()
         setSnapShot()
         //        setUpDelegate()
+        
+        self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
+        
+        self.segmentedControl.selectedSegmentIndex = 0
+        self.didChangeValue(segment: self.segmentedControl)
+        
     }
     
     // MARK: Constraint
@@ -64,6 +89,7 @@ class MainDetailPageViewController: UIViewController {
         self.view.addSubview(topView)
         self.view.addSubview(collectionView)
         self.view.addSubview(segmentedControl)
+        self.view.addSubview(newsView)
         
         topView.snp.makeConstraints{
             $0.top.horizontalEdges.equalToSuperview()
@@ -80,6 +106,10 @@ class MainDetailPageViewController: UIViewController {
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.top.equalTo(segmentedControl.snp.bottom)
             
+        }
+        newsView.snp.makeConstraints{
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.top.equalTo(segmentedControl.snp.bottom)
         }
     }
     
@@ -303,6 +333,10 @@ class MainDetailPageViewController: UIViewController {
         return section
     }
     
+    //Segmented Control 클릭 시
+    @objc private func didChangeValue(segment: UISegmentedControl) {
+        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
+      }
     
 }
 
