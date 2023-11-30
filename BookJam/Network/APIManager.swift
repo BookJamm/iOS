@@ -15,12 +15,18 @@ class APIManager: ObservableObject  {
     static let shared = APIManager()
 }
 
+
+
 // MARK: Request Wrapper 함수입니다.
 extension APIManager {
     
     /// get, post, patch, delete와 같은 일반적인 요청을 수행하는 함수입니다.
     /// endpoint에 해당 요청에 맞는 APIEndPoint를 설정하세요.
     /// requestData에는 요청값 데이터, responseDataType에는 응닶값 데이터의 모델(data.self)을 입력하세요
+    /// - ex - APIManager.shared.requestData(
+    ///  endpoint: .getPlaceReviewsURL(placeId: 0),
+    ///  requestData: ReviewContentRequestModel(content),
+    ///  responseDataType: ReviewContentResponseModel.self)
     func requestData<T: Encodable, U:Decodable>(endpoint: APIEndPoint,
                                                 requestData: T?,
                                                 responseDataType: U.Type
@@ -28,7 +34,7 @@ extension APIManager {
         
         // EndPoint merging
         guard let url = URL(string: APIEndPoint.baseURL + endpoint.url) else {
-            return Observable.error(NetworkError.invalidURL)
+            return Observable.error(APIError.invalidURL)
         }
         
         print("endpoint URL --> \(url)")
@@ -48,7 +54,7 @@ extension APIManager {
                         emitter.onNext(result)
                     }
                     else {
-                        emitter.onError(NetworkError.invalidResponse)
+                        emitter.onError(APIError.invalidResponse)
                     }
                 case .failure(let error):
                     emitter.onError(error)
@@ -68,7 +74,7 @@ extension APIManager {
                                             images: [Data]
     ) -> Observable<U> {
         guard let url = URL(string: APIEndPoint.baseURL + endpoint.url) else {
-            return Observable.error(NetworkError.invalidURL)
+            return Observable.error(APIError.invalidURL)
         }
         
         print("post image 요청 URL --> \(url)")
@@ -91,7 +97,7 @@ extension APIManager {
                         emitter.onNext(result)
                     }
                     else {
-                        emitter.onError(NetworkError.invalidResponse)
+                        emitter.onError(APIError.invalidResponse)
                     }
                 case .failure(let error):
                     emitter.onError(error)
