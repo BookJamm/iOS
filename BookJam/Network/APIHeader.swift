@@ -8,35 +8,57 @@
 import Foundation
 import Alamofire
 
-enum APIHeader {
-    // 얘네 테스트용이니 다 날려야 함
-    static let jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMzLCJpYXQiOjE2OTIwMDExNDQsImV4cCI6MTc5MjAwNDc0NCwiaXNzIjoiYm9va2phbSJ9.BGN1CGC4Zu8xRVuH_zA-aTK1GYMWvNitR2mAfgG1zWU"
+//enum APIHeader {
+//
+//    
+//    case header
+//    case sendImageHeader
+//    
+//    var getValue: HTTPHeaders {
+//        switch self {
+//        case .header :
+//            return [    //임시 슈퍼 jwt 토큰
+////                "Authorization": "Bearer \(APIHeader.jwtToken)"
+//            ]
+//        case .sendImageHeader :
+//            return [
+////                "Authorization": "Bearer \(APIHeader.jwtToken)",
+//                "Content-Type" : "multipart/form-data"
+//            ]
+//        }
+//    }
+//
+//    // 추후 Token 로직 구현되었을 때 예시 with KeyChain
+////    case .logout:
+////        return ["Authorization": KeyChain.shared.read(account: .accessToken),
+////                "Refresh-Token": KeyChain.shared.read(account: .refreshToken),
+////                "Content-Type": "application/json"]
+////    default:
+////        return ["Authorization": KeyChain.shared.read(account: .accessToken),
+////                "Content-Type": "application/json"]
+//}
 
-    static let kakaoAppID = "e71c9521872b70f64acf3a7139889342"
-    
-    case header
-    case sendImageHeader
-    
-    var getValue: HTTPHeaders {
+extension APIEndPoint {
+    // 사용 시 접근 예시 : APIEndPoint.getAuthFriends.header
+    var header: HTTPHeaders {
         switch self {
-        case .header :
+            
+            // 토큰 필요 없는 경우 default 값 반환
+        case .postAuthEmailCheck, .getAuthFriends, .postAuthLogin, .getSearchUser:
+            return HTTPHeaders()
+            
+            // 토큰 필요한 API 경우 토큰 반환
+        case .getUsersOutline, .getUsersActivities, .getUsersReviews, .getUsersRecords, .getPlaces, .getPlacesSearch, .getPlaceId, .getPlaceNewsURL, .getPlaceBooksURL, .getPlaceActivitiesURL, .getPlaceReviewsURL, .postPlacesReviews, .getBooksList, .postRecord, .getRecordsFriends:
             return [    //임시 슈퍼 jwt 토큰
-                "Authorization": "Bearer \(APIHeader.jwtToken)"
+                "Authorization": "Bearer \(APIEndPoint.jwtToken)"
             ]
-        case .sendImageHeader :
+            
+            // 이미지 POST인 경우 multipart/form-data 추가
+        case .postReviewsImages, .postRecordsImages:
             return [
-                "Authorization": "Bearer \(APIHeader.jwtToken)",
+                "Authorization": "Bearer \(APIEndPoint.jwtToken)",
                 "Content-Type" : "multipart/form-data"
             ]
         }
     }
-
-    // 추후 Token 로직 구현되었을 때 예시 with KeyChain
-//    case .logout:
-//        return ["Authorization": KeyChain.shared.read(account: .accessToken),
-//                "Refresh-Token": KeyChain.shared.read(account: .refreshToken),
-//                "Content-Type": "application/json"]
-//    default:
-//        return ["Authorization": KeyChain.shared.read(account: .accessToken),
-//                "Content-Type": "application/json"]
 }
