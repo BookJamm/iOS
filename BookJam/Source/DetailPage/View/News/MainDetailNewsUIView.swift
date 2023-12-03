@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainDetailNewsCollectionViewController: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+class MainDetailNewsUIView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
 
     var bookStoreName = "책방연희"
     
@@ -76,7 +76,7 @@ class MainDetailNewsCollectionViewController: UIView, UICollectionViewDelegate, 
     
 }
 
-extension MainDetailNewsCollectionViewController {
+extension MainDetailNewsUIView {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         3
     }
