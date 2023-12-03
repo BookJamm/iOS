@@ -34,19 +34,12 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Variables
     private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
     
-    lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
-        // HomwCell, EventCell, participantCell,,, 5개
-        
-        $0.register(BookNewsCollectionViewCell.self, forCellWithReuseIdentifier: BookNewsCollectionViewCell.id)
-        $0.register(BookActivityCollectionViewCell.self, forCellWithReuseIdentifier: BookActivityCollectionViewCell.id)
-        $0.register(BookListCollectionViewCell.self, forCellWithReuseIdentifier: BookListCollectionViewCell.id)
-        $0.register(BookReviewCollectionViewCell.self, forCellWithReuseIdentifier: BookReviewCollectionViewCell.id)
-        $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderView.id)
-    }
-        
-    let topView = MainDetailTopView()
+    var topView = MainDetailTopView()
     
-//    let newsView = MainDetailNewsUIView()
+    
+    lazy var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then{
+        $0.register(MainDetailHomeTabTableViewCell.self, forCellReuseIdentifier: MainDetailHomeTabTableViewCell.id)
+    }
     
     let segmentedControl = MainDetailSegmentedControl(items: ["홈", "소식", "참여", "리뷰", "책 종류"])
     
@@ -73,45 +66,33 @@ final class MainDetailPageViewController: UIViewController {
         setUpView()
         //        setUpLayout()
         setUpConstraint()
-        setDatasource()
         setSnapShot()
-        //        setUpDelegate()
-        
-//        self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
-//        
-//        self.segmentedControl.selectedSegmentIndex = 0
-//        self.didChangeValue(segment: self.segmentedControl)
-        
+        setUpDelegate()
+  
     }
     
     // MARK: Constraint
     
     func setUpConstraint() {
         self.view.addSubview(topView)
-        self.view.addSubview(collectionView)
+        self.view.addSubview(tableView)
         self.view.addSubview(segmentedControl)
-//        self.view.addSubview(newsView)
+        tableView.tableHeaderView = topView
         
-        topView.snp.makeConstraints{
-            $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(450)
-        }
-        
-        segmentedControl.snp.makeConstraints{
-            $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalTo(40)
-            $0.centerX.equalToSuperview().offset(-10)
-            $0.top.equalTo(topView.snp.bottom)
-        }
-        collectionView.snp.makeConstraints{
-            $0.horizontalEdges.bottom.equalToSuperview()
-            $0.top.equalTo(segmentedControl.snp.bottom)
-            
-        }
-//        newsView.snp.makeConstraints{
-//            $0.horizontalEdges.bottom.equalToSuperview()
-//            $0.top.equalTo(segmentedControl.snp.bottom)
+        topView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 450)
+
+//        segmentedControl.snp.makeConstraints{
+//            $0.width.equalToSuperview().multipliedBy(0.9)
+//            $0.height.equalTo(40)
+//            $0.centerX.equalToSuperview().offset(-10)
+//            $0.top.equalTo(topView.snp.bottom)
 //        }
+        
+        tableView.snp.makeConstraints{
+            $0.horizontalEdges.bottom.equalToSuperview()
+            $0.top.equalToSuperview()
+        }
+
     }
     
     // MARK: View
@@ -129,53 +110,9 @@ final class MainDetailPageViewController: UIViewController {
     
     // MARK: Delegate
     
-    func setDatasource() {
-        dataSource = UICollectionViewDiffableDataSource<DetailSection, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            
-            switch itemIdentifier {
-            case .ActivityItem(let contentData):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookActivityCollectionViewCell.id, for: indexPath) as? BookActivityCollectionViewCell
-//                cell?.configure(title: contentData.title, review: contentData.vote, desc: contentData.overview, imageURL: contentData.posterURL)
-                cell?.configure(title: contentData.title, url: contentData.imageUrl!)
-                print("Activity Item 데이터소스 등록")
-                return cell!
-            case .BookListItem(let movieData):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookListCollectionViewCell.id, for: indexPath) as? BookListCollectionViewCell
-                cell?.configure(url: movieData.cover!, title: movieData.title!, author: movieData.author!, publish: movieData.publisher!)
-                return cell!
-            case .NewsItem(let movieData):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookNewsCollectionViewCell.id, for: indexPath) as? BookNewsCollectionViewCell
-                cell?.configure(title: movieData.title!, content: movieData.contents!)
-                print("News Item 데이터소스 등록")
-                return cell!
-            case .ReviewItem(let movieData):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookReviewCollectionViewCell.id, for: indexPath) as? BookReviewCollectionViewCell
-//                cell?.configure(title: movieData.title, releaseDate: movieData.releaseDate, url: movieData.posterUrl)
-                return cell!
-            }
-        })
-        
-        //Header 설정
-        dataSource?.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath ->
-        UICollectionReusableView in
-            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderView.id, for: indexPath)
-            let section = self?.dataSource?.sectionIdentifier(for: indexPath.section)
-            
-            switch section {
-            case .News(let title):
-                (header as? HeaderView)?.configure(title: "\(title)의 소식")
-            case .BookList:
-                (header as? HeaderView)?.configure(title: "책 목록")
-            case .Activity:
-                (header as? HeaderView)?.configure(title: "독서 활동 참여 목록")
-            case .Review:
-                (header as? HeaderView)?.configure(title: "리뷰")
-            default:
-                print("Default")
-            }
-            
-            return header
-        }
+    private func setUpDelegate() {
+        tableView.dataSource = self
+        tableView.delegate = self
     }
     
     private func setSnapShot() {
@@ -186,30 +123,6 @@ final class MainDetailPageViewController: UIViewController {
 
     // MARK: Function
     
-    private func createLayout() -> UICollectionViewCompositionalLayout {
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 14
-        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
-            let section = self?.dataSource?.sectionIdentifier(for: sectionIndex)
-            
-            switch section {
-            case .Home:
-                return self!.createHomeSection()
-//            case .News:
-//                print("뉴스 레이아웃 생성")
-//                return self?.createNewsSection()
-//            case .Activity:
-//                print("액티비티 레이아웃 생성")
-//                return self?.createActivitySection()
-//            case .Review:
-//                return self?.createReviewSection()
-//            case .BookList:
-//                return self?.createBookListSection()
-            default:
-                return self!.createHomeSection()
-            }
-        }, configuration: config)
-    }//end of createLayout()
     
     private func createHomeSection() -> NSCollectionLayoutSection{//홈 섹션
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -230,6 +143,35 @@ final class MainDetailPageViewController: UIViewController {
 //    @objc private func didChangeValue(segment: UISegmentedControl) {
 //        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
 //      }
+    
+}
+
+@available(iOS 16.0, *)
+extension MainDetailPageViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    // 소식 셀 데이터 삽입
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+        
+        cell.selectionStyle = .none
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 1000 //임시
+        
+    }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailTopView.id)
+//        
+//        return header
+//    }
     
 }
 

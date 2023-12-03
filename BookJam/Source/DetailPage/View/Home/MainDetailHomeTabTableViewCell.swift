@@ -12,6 +12,8 @@ import UIKit
 class MainDetailHomeTabTableViewCell: UITableViewCell {
 
     // MARK: Variables
+    
+    static let id = "MainDetailHomeTabCell"
     private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
     
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
@@ -31,8 +33,6 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        
         
         setDatasource()
         setUpConstraint()
@@ -56,7 +56,6 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         collectionView.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
-        
     }
     
     // MARK: Delegate

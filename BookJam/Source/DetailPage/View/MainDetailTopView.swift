@@ -13,6 +13,8 @@ class MainDetailTopView: UIView {
     
     var contentView: UIView = UIView()
     
+    static let id: String = "MainDetailTopView"
+    
     var photoCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .horizontal
         $0.minimumLineSpacing = 1
