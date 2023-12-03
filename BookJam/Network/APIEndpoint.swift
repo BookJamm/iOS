@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import Alamofire
 
 enum APIEndPoint {
     static let baseURL = "https://bookjam.shop"
+    
+    // 얘네 테스트용이니 다 날려야 함
+    static let jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMzLCJpYXQiOjE2OTIwMDExNDQsImV4cCI6MTc5MjAwNDc0NCwiaXNzIjoiYm9va2phbSJ9.BGN1CGC4Zu8xRVuH_zA-aTK1GYMWvNitR2mAfgG1zWU"
+
+    static let kakaoAppID = "e71c9521872b70f64acf3a7139889342"
+    
     // Auth
     case postAuthEmailCheck
     case getAuthFriends
@@ -39,7 +46,9 @@ enum APIEndPoint {
     case postRecord
     case getRecordsFriends
     case postRecordsImages(recordId: Int)
-    
+}
+
+extension APIEndPoint {
     // 사용 시 접근 예시 : APIEndPoint.getAuthFriends.url
     var url: String {
         switch self {
@@ -83,7 +92,6 @@ enum APIEndPoint {
         // Book
         case .getBooksList(let title):
             return "/books/list?title=\(title)"
-            
         // Record
         case .postRecord:
             return "/records"
@@ -95,3 +103,5 @@ enum APIEndPoint {
         
     }
 }
+
+
