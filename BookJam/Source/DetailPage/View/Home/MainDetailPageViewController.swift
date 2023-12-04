@@ -74,10 +74,13 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-        self.view.addSubview(topView)
+//        self.view.addSubview(topView)
         self.view.addSubview(tableView)
         self.view.addSubview(segmentedControl)
-        tableView.tableHeaderView = topView
+//        tableView.tableHeaderView = topView
+        
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 450))
+        tableView.tableHeaderView?.addSubview(topView)
         
         topView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 450)
 
@@ -117,7 +120,6 @@ final class MainDetailPageViewController: UIViewController {
     
     private func setSnapShot() {
         var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
-        
     }
     
 
