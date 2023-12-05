@@ -36,10 +36,10 @@ final class MainDetailPageViewController: UIViewController {
     
     var topView = MainDetailTopView()
     
+    
     lazy var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then{
         $0.register(MainDetailHomeTabTableViewCell.self, forCellReuseIdentifier: MainDetailHomeTabTableViewCell.id)
     }
-    var innerScrollingDownDueToOuterScroll = false
     
     let segmentedControl = MainDetailSegmentedControl(items: ["홈", "소식", "참여", "리뷰", "책 종류"])
     
@@ -149,21 +149,20 @@ final class MainDetailPageViewController: UIViewController {
 }
 
 @available(iOS 16.0, *)
-extension MainDetailPageViewController: UICollectionViewDelegate {
-    private enum Policy {
-            static let floatingPointTolerance = 0.1
-        }
+extension MainDetailPageViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //innerScrollView
         
         let innerCellIndex = IndexPath(row: 0, section: 0)
+        
         guard let cell = tableView.cellForRow(at: innerCellIndex) as? MainDetailHomeTabTableViewCell else {
             return
         }
-        let innerScrollView = cell.collectionView
         
+        let innerScrollView = cell.collectionView
+
         let outerScroll = tableView == scrollView   // outerScrollView
-        let innerScroll = innerScrollView == scrollView
+        let innerScroll = !outerScroll
         
         print("outerScroll: \(outerScroll), innerScroll: \(innerScroll)")
 
@@ -175,13 +174,10 @@ extension MainDetailPageViewController: UICollectionViewDelegate {
 
         let innerScrollMaxOffsetY = innerScrollView.contentSize.height - innerScrollView.frame.height
 
-        if innerScroll && moreScroll{
-            
-            guard
-                tableView.contentOffset.y + Policy.floatingPointTolerance < outerScrollMaxOffsetY!,
-                    !innerScrollingDownDueToOuterScroll
-                else { return }
-            
+        if innerScroll {
+
+            innerScrollView.isScrollEnabled = false
+
             // outer scroll를 more 스크롤
             let minOffetY = min(tableView.contentOffset.y + innerScrollView.contentOffset.y, outerScrollMaxOffsetY!)
             let offsetY = max(minOffetY, 0)
@@ -190,12 +186,11 @@ extension MainDetailPageViewController: UICollectionViewDelegate {
             // inner scroll은 스크롤 되지 않아야 하므로 0으로 고정
             innerScrollView.contentOffset.y = 0
         }
-        
     }
 }
 
 @available(iOS 16.0, *)
-extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainDetailPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -205,7 +200,6 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
         
         cell.selectionStyle = .none
-        cell.collectionView.delegate = self
 
         return cell
     }
