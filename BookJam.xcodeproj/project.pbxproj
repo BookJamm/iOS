@@ -74,6 +74,8 @@
 		DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */; };
 		DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919222AFA6B4F001E5501 /* UIImage+.swift */; };
 		DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919232AFA6B4F001E5501 /* UIColor+.swift */; };
+		DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5E40682B1CD444002D7686 /* LoginVC.swift */; };
+		DD5E406C2B1CD529002D7686 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5E406B2B1CD529002D7686 /* BaseViewController.swift */; };
 		DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */; };
 		DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */; };
 		DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */; };
@@ -143,6 +145,8 @@
 		DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+.swift"; sourceTree = "<group>"; };
 		DD0919222AFA6B4F001E5501 /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DD0919232AFA6B4F001E5501 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DD5E40682B1CD444002D7686 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		DD5E406B2B1CD529002D7686 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DD754DE52AFA4D920001FBC4 /* BookJam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookJam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 		DD0919132AFA5FCA001E5501 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DD5E406A2B1CD512002D7686 /* Base */,
 				DD09191E2AFA6B4F001E5501 /* Extension */,
 				DD0919192AFA6657001E5501 /* Font */,
 				DD0919142AFA61FC001E5501 /* Data */,
@@ -404,6 +409,14 @@
 				DD0919232AFA6B4F001E5501 /* UIColor+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DD5E406A2B1CD512002D7686 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DD5E406B2B1CD529002D7686 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		DD754DDC2AFA4D920001FBC4 = {
@@ -447,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */,
+				DD5E40682B1CD444002D7686 /* LoginVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -555,14 +569,15 @@
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
 				88472A8D2B18A44C0073AE61 /* APIEncoder.swift in Sources */,
 				88472A6A2B15D9210073AE61 /* PlaceIdReviewsDTO.swift in Sources */,
-				DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */,
+				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
 				949750FF2AFE398200DCC096 /* BookReviewCollectionViewCell.swift in Sources */,
 				88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */,
 				94A844FD2B04D1280036DE72 /* PlaceNetwork.swift in Sources */,
-				88472A7A2B15D9220073AE61 /* UsersRecords.swift in Sources */,
-				88472A772B15D9220073AE61 /* UsersOutline.swift in Sources */,
-				88472A792B15D9220073AE61 /* Login.swift in Sources */,
+				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
+				88472A772B15D9220073AE61 /* UsersOutlineDTO.swift in Sources */,
+				88472A792B15D9220073AE61 /* LoginDTO.swift in Sources */,
 				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
+				DD5E406C2B1CD529002D7686 /* BaseViewController.swift in Sources */,
 				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
 				88472A772B15D9220073AE61 /* UsersOutlineDTO.swift in Sources */,
 				88472A992B18CA020073AE61 /* ImageDTO.swift in Sources */,
@@ -575,6 +590,7 @@
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
 				94A844FF2B0601980036DE72 /* MainDetailSegmentedControl.swift in Sources */,
 				DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */,
+				DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */,
 				88472A512B15D8500073AE61 /* BaseResponse.swift in Sources */,
 				949750F92AFE303E00DCC096 /* BookListCollectionViewCell.swift in Sources */,
 				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,

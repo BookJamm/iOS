@@ -24,8 +24,8 @@ class LandingVC: UIViewController {
     
     let kakaoLoginButton: UIButton = UIButton().then {
         $0.backgroundColor = UIColor(hexCode: "FEE500")
-        $0.setImage(UIImage(named: "KakaoLogo"), for: .normal)
-        $0.setTitle(" 카카오 계정 연동하기", for: .normal)
+        $0.setImage(UIImage(named: "KakaoIcon"), for: .normal)
+        $0.setTitle("  카카오 계정 연동하기", for: .normal)
         $0.setTitleColor(UIColor(hexCode: "191919"), for: .normal)
         $0.titleLabel?.font = paragraph01
         $0.layer.cornerRadius = 8
