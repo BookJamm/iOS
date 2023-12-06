@@ -27,7 +27,7 @@ class MainDetailTopView: UIView {
     var bookstoreLabel: UILabel = UILabel().then {
         $0.font = title06
         $0.textColor = .black
-        $0.text = "책방연희"
+        $0.text = "서점 명"
         $0.sizeToFit()
     }
     
@@ -82,7 +82,7 @@ class MainDetailTopView: UIView {
     var locationLabel: UILabel = UILabel().then {
         $0.font = paragraph05
         $0.textColor = gray06
-        $0.text = "서울특별시 마포구 와우산로35길 3 (서교동) 지하 1층"
+        $0.text = "서울특별시 종로구 평창동 000-00"
         $0.sizeToFit()
     }
     
@@ -94,7 +94,7 @@ class MainDetailTopView: UIView {
     }
     
     var siteURL: UIButton = UIButton().then {
-        $0.setTitle("https://www.instagram.com/chaegbangyeonhui/", for: .normal)
+        $0.setTitle("https://www.instagram.com/joonmoring/", for: .normal)
         $0.setTitleColor(main03, for: .normal)
         $0.titleLabel?.font = paragraph05
         $0.contentHorizontalAlignment = .leading
