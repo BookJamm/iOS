@@ -22,10 +22,10 @@ enum DetailSection: Hashable {
 
 //디테일 페이지 셀
 enum Item: Hashable {
-    case ReviewItem(PlaceIdReviewsResponseModel)
-    case ActivityItem(Activities)
-    case NewsItem(PlaceIdNewsResponseModel)
-    case BookListItem(PlaceIdBooksResponseModel)
+    case ReviewItem(Review)
+    case ActivityItem(Activity)
+    case NewsItem(News)
+    case BookListItem(Book)
 }
 
 @available(iOS 16.0, *)
@@ -148,7 +148,7 @@ final class MainDetailPageViewController: UIViewController {
     
 }
 
-@available(iOS 16.0, *)
+@available(iOS 16.0, *) // 이중 스크롤 구현
 extension MainDetailPageViewController: UICollectionViewDelegate {
     private enum Policy {
             static let floatingPointTolerance = 0.1
@@ -175,7 +175,19 @@ extension MainDetailPageViewController: UICollectionViewDelegate {
 
         let innerScrollMaxOffsetY = innerScrollView.contentSize.height - innerScrollView.frame.height
 
-        if innerScroll && moreScroll{
+        if outerScroll && lessScroll {//외부 스크롤을 less 스크롤
+            guard innerScrollView.contentOffset.y > 0 && tableView.contentOffset.y < outerScrollMaxOffsetY! else { return }
+            innerScrollingDownDueToOuterScroll = true
+            defer { innerScrollingDownDueToOuterScroll = false }
+            
+            // outer scroll에서 스크롤한 만큼 inner scroll에 적용
+            innerScrollView.contentOffset.y = max(innerScrollView.contentOffset.y - (outerScrollMaxOffsetY! - tableView.contentOffset.y), 0)
+            
+            // outer scroll은 스크롤 되지 않고 고정
+            tableView.contentOffset.y = outerScrollMaxOffsetY!
+        }
+        
+        if innerScroll && moreScroll{//내부 스크롤을 more 스크롤
             
             guard
                 tableView.contentOffset.y + Policy.floatingPointTolerance < outerScrollMaxOffsetY!,
