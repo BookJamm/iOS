@@ -81,6 +81,7 @@
 		DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */; };
 		DD754DF22AFA4D930001FBC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF12AFA4D930001FBC4 /* Assets.xcassets */; };
 		DD754DF52AFA4D940001FBC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */; };
+		DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -154,6 +155,7 @@
 		DD754DF12AFA4D930001FBC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD754DF42AFA4D940001FBC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD754DF62AFA4D940001FBC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailPopUpVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -461,6 +463,7 @@
 			children = (
 				DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */,
 				DD5E40682B1CD444002D7686 /* LoginVC.swift */,
+				DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -586,6 +589,7 @@
 				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
 				88472A722B15D9210073AE61 /* SearchFriendDTO.swift in Sources */,
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
+				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
 				94A844FF2B0601980036DE72 /* MainDetailSegmentedControl.swift in Sources */,
