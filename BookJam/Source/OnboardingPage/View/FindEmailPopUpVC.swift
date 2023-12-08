@@ -25,6 +25,7 @@ class FindEmailPopUpVC: UIViewController {
         $0.font = paragraph02
         $0.text = "계정 관련 문의는\n1:1 문의로 진행해주세요."
         $0.numberOfLines = 2
+        $0.setLineSpacing()
         $0.textAlignment = .center
     }
     

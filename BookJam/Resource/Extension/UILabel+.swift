@@ -10,16 +10,27 @@ import UIKit
 
 
 extension UILabel {
-    // MARK: 라인 간 간격 주는 코드
-    func setLineSpacing(spacing: CGFloat) {
+    func setLineSpacing() {
         guard let text = text else { return }
-
+        
         let attributeString = NSMutableAttributedString(string: text)
         let style = NSMutableParagraphStyle()
-        style.lineSpacing = spacing
+        style.lineHeightMultiple = 1.2
         attributeString.addAttribute(.paragraphStyle,
                                      value: style,
                                      range: NSRange(location: 0, length: attributeString.length))
+        attributedText = attributeString
+    }
+    
+    func addLineSpacing(attributeString: NSAttributedString) {
+        let attributedString = NSMutableAttributedString(attributedString: attributeString)
+        let style = NSMutableParagraphStyle()
+        
+        style.lineHeightMultiple = 1.2
+        attributedString.addAttribute(.paragraphStyle,
+                                     value: style,
+                                     range: NSRange(location: 0, length: attributeString.length))
+        
         attributedText = attributeString
     }
 }
