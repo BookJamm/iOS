@@ -82,6 +82,7 @@
 		DD754DF22AFA4D930001FBC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF12AFA4D930001FBC4 /* Assets.xcassets */; };
 		DD754DF52AFA4D940001FBC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */; };
 		DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */; };
+		DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81286D2B2311CA00743DF2 /* UILabel+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +157,7 @@
 		DD754DF42AFA4D940001FBC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD754DF62AFA4D940001FBC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailPopUpVC.swift; sourceTree = "<group>"; };
+		DD81286D2B2311CA00743DF2 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +411,7 @@
 				DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */,
 				DD0919222AFA6B4F001E5501 /* UIImage+.swift */,
 				DD0919232AFA6B4F001E5501 /* UIColor+.swift */,
+				DD81286D2B2311CA00743DF2 /* UILabel+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				88472A812B15D9220073AE61 /* PlaceIdNewsDTO.swift in Sources */,
 				88472A9D2B18CA330073AE61 /* AuthorDTO.swift in Sources */,
 				949750FB2AFE347100DCC096 /* HeaderView.swift in Sources */,
+				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
 				88472A952B18BF600073AE61 /* AddressDTO.swift in Sources */,
 				88472A802B15D9220073AE61 /* ReviewContentDTO.swift in Sources */,
 			);
