@@ -74,8 +74,14 @@ class LoginVC: UIViewController {
         $0.textColor = gray07
     }
     
-    var findEmailAndPasswordLabel: UIButton = UIButton().then {
-        $0.setTitle("이메일 / 비밀번호 찾기", for: .normal)
+    var findLoginButton: UIButton = UIButton().then {
+        $0.setTitle("아이디 찾기", for: .normal)
+        $0.setTitleColor(gray06, for: .normal)
+        $0.titleLabel?.font = captionText01
+    }
+    
+    var findPasswordButton: UIButton = UIButton().then {
+        $0.setTitle("비밀번호 찾기", for: .normal)
         $0.setTitleColor(gray06, for: .normal)
         $0.titleLabel?.font = captionText01
     }
@@ -121,7 +127,8 @@ class LoginVC: UIViewController {
             checkLabel,
             autoLoginLabel,
             checkBoxButton,
-            findEmailAndPasswordLabel,
+            findLoginButton,
+            findPasswordButton,
             loginButton
         ].forEach { view.addSubview($0) }
     }
@@ -190,15 +197,20 @@ class LoginVC: UIViewController {
             $0.leading.equalTo(checkBoxButton.snp.trailing).offset(10)
         }
         
-        findEmailAndPasswordLabel.snp.makeConstraints {
+        findPasswordButton.snp.makeConstraints {
             $0.centerY.equalTo(checkBoxButton.snp.centerY)
             $0.trailing.equalToSuperview().offset(-20)
         }
         
+        findLoginButton.snp.makeConstraints {
+            $0.centerY.equalTo(checkBoxButton.snp.centerY)
+            $0.trailing.equalTo(findPasswordButton.snp.leading).offset(-12)
+        }
+        
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(findEmailAndPasswordLabel.snp.bottom).offset(20)
+            $0.top.equalTo(findPasswordButton.snp.bottom).offset(20)
             $0.leading.equalTo(checkBoxButton.snp.leading)
-            $0.trailing.equalTo(findEmailAndPasswordLabel.snp.trailing)
+            $0.trailing.equalTo(findPasswordButton.snp.trailing)
             $0.height.equalTo(50)
         }
     }

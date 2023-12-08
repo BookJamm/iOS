@@ -306,11 +306,4 @@ import Then
 //    
 //}
 //
-//import SwiftUI
-//@available(iOS 16.0, *)
-//struct MainDetailPageViewController_Preview: PreviewProvider {
-//    static var previews: some View {
-//        MainDetailPageViewController().toPreview()
-//            //.edgesIgnoringSafeArea(.all)
-//    }
-//}
+ 
