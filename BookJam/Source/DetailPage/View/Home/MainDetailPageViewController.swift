@@ -38,25 +38,11 @@ final class MainDetailPageViewController: UIViewController {
     
     lazy var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then{
         $0.register(MainDetailHomeTabTableViewCell.self, forCellReuseIdentifier: MainDetailHomeTabTableViewCell.id)
+        $0.register(MainDetailNewsTableViewCell.self, forCellReuseIdentifier: MainDetailNewsTableViewCell.id)
+        
+        $0.register(MainDetailHomeHeader.self, forHeaderFooterViewReuseIdentifier: MainDetailHomeHeader.id)
     }
     var innerScrollingDownDueToOuterScroll = false
-    
-    let segmentedControl = MainDetailSegmentedControl(items: ["홈", "소식", "참여", "리뷰", "책 종류"])
-    
-//    var shouldHideFirstView: Bool? {
-//        didSet {
-//          guard let shouldHideFirstView = self.shouldHideFirstView else { return }
-//          self.collectionView.isHidden = shouldHideFirstView
-//          self.newsView.isHidden = !self.collectionView.isHidden
-//        }
-//      }
-    
-//    var shouldHideFirstView: Bool = false {
-//        didSet {
-//            self.collectionView.isHidden = shouldHideFirstView
-//            self.newsView.isHidden = !self.collectionView.isHidden
-//        }
-//    }
     
     // MARK: viewDidLoad()
     
@@ -74,22 +60,12 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Constraint
     
     func setUpConstraint() {
-//        self.view.addSubview(topView)
         self.view.addSubview(tableView)
-        self.view.addSubview(segmentedControl)
-//        tableView.tableHeaderView = topView
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 450))
         tableView.tableHeaderView?.addSubview(topView)
         
         topView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 450)
-
-//        segmentedControl.snp.makeConstraints{
-//            $0.width.equalToSuperview().multipliedBy(0.9)
-//            $0.height.equalTo(40)
-//            $0.centerX.equalToSuperview().offset(-10)
-//            $0.top.equalTo(topView.snp.bottom)
-//        }
         
         tableView.snp.makeConstraints{
             $0.horizontalEdges.bottom.equalToSuperview()
@@ -139,12 +115,6 @@ final class MainDetailPageViewController: UIViewController {
         return section
     }
     
-    
-    
-    //Segmented Control 클릭 시
-//    @objc private func didChangeValue(segment: UISegmentedControl) {
-//        self.shouldHideFirstView = segment.selectedSegmentIndex != 0
-//      }
     
 }
 
@@ -228,11 +198,15 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
         
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailTopView.id)
-//        
-//        return header
-//    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id)
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
     
 }
 

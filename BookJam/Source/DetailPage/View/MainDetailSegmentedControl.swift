@@ -26,6 +26,7 @@ class MainDetailSegmentedControl: UISegmentedControl {
     
     private func commonInit() {
         
+        backgroundColor = .white
         setBackgroundImage(UIImage(), for: .normal, barMetrics: .default)
         setDividerImage(UIImage(), forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
         setTitleTextAttributes([
@@ -38,8 +39,12 @@ class MainDetailSegmentedControl: UISegmentedControl {
         ], for: .selected)
         
         // Default segments
-//        insertSegment(withTitle: "유저", at: 0, animated: true)
-//        insertSegment(withTitle: "게시물", at: 1, animated: true)
+        insertSegment(withTitle: "홈", at: 0, animated: true)
+        insertSegment(withTitle: "소식", at: 1, animated: true)
+        insertSegment(withTitle: "참여", at: 2, animated: true)
+        insertSegment(withTitle: "리뷰", at: 3, animated: true)
+        insertSegment(withTitle: "책 종류", at: 4, animated: true)
+
         
         // Default selected segment
         selectedSegmentIndex = 0
