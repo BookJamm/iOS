@@ -313,6 +313,13 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
+		946C1CE62B29CA4F00A9A564 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		949750F02AFDF99A00DCC096 /* DetailPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +339,7 @@
 				94F550022B18A02F00F11371 /* Home */,
 				94F550032B18A03300F11371 /* News */,
 				94F550042B18A05500F11371 /* Activity */,
+				946C1CE62B29CA4F00A9A564 /* Review */,
 				949750F52AFE2FC200DCC096 /* Cell */,
 			);
 			path = View;
