@@ -74,11 +74,15 @@
 		DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */; };
 		DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919222AFA6B4F001E5501 /* UIImage+.swift */; };
 		DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0919232AFA6B4F001E5501 /* UIColor+.swift */; };
+		DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5E40682B1CD444002D7686 /* LoginVC.swift */; };
+		DD5E406C2B1CD529002D7686 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5E406B2B1CD529002D7686 /* BaseViewController.swift */; };
 		DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */; };
 		DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */; };
-		DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* ViewController.swift */; };
+		DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */; };
 		DD754DF22AFA4D930001FBC4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF12AFA4D930001FBC4 /* Assets.xcassets */; };
 		DD754DF52AFA4D940001FBC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */; };
+		DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */; };
+		DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD81286D2B2311CA00743DF2 /* UILabel+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,13 +147,17 @@
 		DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+.swift"; sourceTree = "<group>"; };
 		DD0919222AFA6B4F001E5501 /* UIImage+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		DD0919232AFA6B4F001E5501 /* UIColor+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
+		DD5E40682B1CD444002D7686 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		DD5E406B2B1CD529002D7686 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DD754DE52AFA4D920001FBC4 /* BookJam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookJam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD754DE82AFA4D920001FBC4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD754DEA2AFA4D920001FBC4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD754DEC2AFA4D920001FBC4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingVC.swift; sourceTree = "<group>"; };
 		DD754DF12AFA4D930001FBC4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD754DF42AFA4D940001FBC4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD754DF62AFA4D940001FBC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailPopUpVC.swift; sourceTree = "<group>"; };
+		DD81286D2B2311CA00743DF2 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,7 +368,7 @@
 			children = (
 				949750F02AFDF99A00DCC096 /* DetailPage */,
 				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
-				DD754DEC2AFA4D920001FBC4 /* ViewController.swift */,
+				DDAA84052B109A7200132964 /* OnboardingPage */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -368,6 +376,7 @@
 		DD0919132AFA5FCA001E5501 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				DD5E406A2B1CD512002D7686 /* Base */,
 				DD09191E2AFA6B4F001E5501 /* Extension */,
 				DD0919192AFA6657001E5501 /* Font */,
 				DD0919142AFA61FC001E5501 /* Data */,
@@ -402,8 +411,17 @@
 				DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */,
 				DD0919222AFA6B4F001E5501 /* UIImage+.swift */,
 				DD0919232AFA6B4F001E5501 /* UIColor+.swift */,
+				DD81286D2B2311CA00743DF2 /* UILabel+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		DD5E406A2B1CD512002D7686 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DD5E406B2B1CD529002D7686 /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 		DD754DDC2AFA4D920001FBC4 = {
@@ -433,6 +451,24 @@
 				DD0919122AFA5FC2001E5501 /* Source */,
 			);
 			path = BookJam;
+			sourceTree = "<group>";
+		};
+		DDAA84052B109A7200132964 /* OnboardingPage */ = {
+			isa = PBXGroup;
+			children = (
+				DDAA84062B10A1B300132964 /* View */,
+			);
+			path = OnboardingPage;
+			sourceTree = "<group>";
+		};
+		DDAA84062B10A1B300132964 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DD754DEC2AFA4D920001FBC4 /* LandingVC.swift */,
+				DD5E40682B1CD444002D7686 /* LoginVC.swift */,
+				DD81286B2B230E2A00743DF2 /* FindEmailPopUpVC.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,10 +575,15 @@
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
 				88472A8D2B18A44C0073AE61 /* APIEncoder.swift in Sources */,
 				88472A6A2B15D9210073AE61 /* PlaceIdReviewsDTO.swift in Sources */,
-				DD754DED2AFA4D920001FBC4 /* ViewController.swift in Sources */,
+				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
 				949750FF2AFE398200DCC096 /* BookReviewCollectionViewCell.swift in Sources */,
 				88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */,
 				94A844FD2B04D1280036DE72 /* PlaceNetwork.swift in Sources */,
+				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
+				88472A772B15D9220073AE61 /* UsersOutlineDTO.swift in Sources */,
+				88472A792B15D9220073AE61 /* LoginDTO.swift in Sources */,
+				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
+				DD5E406C2B1CD529002D7686 /* BaseViewController.swift in Sources */,
 				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
 				88472A772B15D9220073AE61 /* UsersOutlineDTO.swift in Sources */,
 				88472A992B18CA020073AE61 /* ImageDTO.swift in Sources */,
@@ -551,10 +592,12 @@
 				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
 				88472A722B15D9210073AE61 /* SearchFriendDTO.swift in Sources */,
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
+				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
 				94A844FF2B0601980036DE72 /* MainDetailSegmentedControl.swift in Sources */,
 				DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */,
+				DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */,
 				88472A512B15D8500073AE61 /* BaseResponse.swift in Sources */,
 				949750F92AFE303E00DCC096 /* BookListCollectionViewCell.swift in Sources */,
 				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,
@@ -582,6 +625,7 @@
 				88472A812B15D9220073AE61 /* PlaceIdNewsDTO.swift in Sources */,
 				88472A9D2B18CA330073AE61 /* AuthorDTO.swift in Sources */,
 				949750FB2AFE347100DCC096 /* HeaderView.swift in Sources */,
+				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
 				88472A952B18BF600073AE61 /* AddressDTO.swift in Sources */,
 				88472A802B15D9220073AE61 /* ReviewContentDTO.swift in Sources */,
 			);
