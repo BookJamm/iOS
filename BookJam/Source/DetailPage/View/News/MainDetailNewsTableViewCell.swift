@@ -113,3 +113,19 @@ class MainDetailNewsTableViewCell: UITableViewCell {
         newsContent.text = content
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 16.0, *)
+struct MainDetailNewsTableViewCell_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = MainDetailNewsTableViewCell()
+            return cell
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
+    }
+}
+#endif
