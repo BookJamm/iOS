@@ -52,5 +52,3 @@ extension PlacesResponseModel {
                      coords: coords.map { $0.toDomain() })
     }
 }
-
-

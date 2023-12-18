@@ -1,15 +1,15 @@
 //
-//  BookStoreNewsCollectionViewCell.swift
+//  MainDetailNewsTableViewController.swift
 //  BookJam
 //
-//  Created by 장준모 on 11/10/23.
+//  Created by 장준모 on 11/30/23.
 //
 
 import UIKit
 
-class BookNewsCollectionViewCell: UICollectionViewCell {
-    
-    static let id =  "HomeNewsCell"
+class MainDetailNewsTableViewCell: UITableViewCell {
+
+    static let id =  "HomeNewsTabCell"
     
     var profileImageView: UIImageView = UIImageView().then {
 //        $0.image = UIImage(named: "squareDefaultImage")?.circularImage()
@@ -40,22 +40,13 @@ class BookNewsCollectionViewCell: UICollectionViewCell {
         $0.sizeToFit()
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         setUpView()
         setUpLayout()
         setUpConstraint()
     }
-    
-    // collectionviewCell 용 init 함수
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        
-//        setUpView()
-//        setUpLayout()
-//        setUpConstraint()
-//    }
     
     required init?(coder: NSCoder) {
         fatalError("init (coder:) has not been implemented")
@@ -64,7 +55,6 @@ class BookNewsCollectionViewCell: UICollectionViewCell {
     // MARK: View
     
     func setUpView() {
-        self.backgroundColor = .white
     }
     
     
@@ -123,3 +113,19 @@ class BookNewsCollectionViewCell: UICollectionViewCell {
         newsContent.text = content
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 16.0, *)
+struct MainDetailNewsTableViewCell_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = MainDetailNewsTableViewCell()
+            return cell
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
+    }
+}
+#endif

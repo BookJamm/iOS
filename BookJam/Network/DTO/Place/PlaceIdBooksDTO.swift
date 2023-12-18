@@ -8,7 +8,7 @@
 import Foundation
 
 /// getPlaceBooksURL에 사용
-struct PlaceIdBooksResponseModel: Decodable {
+struct PlaceIdBooksResponseModel:Hashable, Decodable {
     let title: String?
     let author: String?
     let cover: String?  //이미지
