@@ -48,6 +48,20 @@
 		88472AAA2B18E75F0073AE61 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472AA92B18E75F0073AE61 /* Author.swift */; };
 		88472AAC2B18E8420073AE61 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472AAB2B18E8420073AE61 /* Place.swift */; };
 		88472AAE2B18E9610073AE61 /* Coordinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472AAD2B18E9610073AE61 /* Coordinate.swift */; };
+		885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9A2B31DCF3009F6F7E /* LocationViewController.swift */; };
+		885EFA9E2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9D2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift */; };
+		885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */; };
+		885EFAA22B31E998009F6F7E /* RxMapViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */; };
+		885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA52B31EA12009F6F7E /* Diff.swift */; };
+		885EFAA82B31EE10009F6F7E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA72B31EE10009F6F7E /* ViewModelType.swift */; };
+		885EFAAA2B31EE84009F6F7E /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA92B31EE84009F6F7E /* LocationViewModel.swift */; };
+		885EFAAC2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAB2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift */; };
+		885EFAAE2B31F809009F6F7E /* BookStoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAD2B31F809009F6F7E /* BookStoreListViewController.swift */; };
+		885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */; };
+		885EFAB32B31F911009F6F7E /* BookStoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */; };
+		885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */; };
+		885EFAB82B31F97D009F6F7E /* LocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */; };
+		885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */; };
 		949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */; };
 		949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */; };
 		949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */; };
@@ -135,6 +149,20 @@
 		88472AA92B18E75F0073AE61 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		88472AAB2B18E8420073AE61 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		88472AAD2B18E9610073AE61 /* Coordinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinate.swift; sourceTree = "<group>"; };
+		885EFA9A2B31DCF3009F6F7E /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		885EFA9D2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
+		885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
+		885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMapViewDataSourceProxy.swift; sourceTree = "<group>"; };
+		885EFAA52B31EA12009F6F7E /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		885EFAA72B31EE10009F6F7E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		885EFAA92B31EE84009F6F7E /* LocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		885EFAAB2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreBottomSheetViewController.swift; sourceTree = "<group>"; };
+		885EFAAD2B31F809009F6F7E /* BookStoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListViewController.swift; sourceTree = "<group>"; };
+		885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetViewController.swift; sourceTree = "<group>"; };
+		885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListTableViewCell.swift; sourceTree = "<group>"; };
+		885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
+		885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotationView.swift; sourceTree = "<group>"; };
+		885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataMapClusterView.swift; sourceTree = "<group>"; };
 		949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailReviewTableViewCell.swift; sourceTree = "<group>"; };
 		949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailPageViewController.swift; sourceTree = "<group>"; };
 		949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -338,6 +366,7 @@
 		885EFA8E2B30A191009F6F7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAB62B31F96E009F6F7E /* Annotation */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -345,6 +374,7 @@
 		885EFA8F2B30A198009F6F7E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAA92B31EE84009F6F7E /* LocationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -359,6 +389,9 @@
 		885EFA912B30A1A9009F6F7E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				885EFA9A2B31DCF3009F6F7E /* LocationViewController.swift */,
+				885EFAAD2B31F809009F6F7E /* BookStoreListViewController.swift */,
+				885EFAAB2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -377,6 +410,8 @@
 		885EFA932B30A1B9009F6F7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAB12B31F907009F6F7E /* Cell */,
+				885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -384,6 +419,7 @@
 		885EFA942B30A1BC009F6F7E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAA72B31EE10009F6F7E /* ViewModelType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -392,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				DD5E406B2B1CD529002D7686 /* BaseViewController.swift */,
+				885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -402,6 +439,48 @@
 				88472A492B15D5750073AE61 /* Network */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		885EFA9C2B31DF0C009F6F7E /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				885EFA9D2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift */,
+				885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */,
+			);
+			path = DelegateProxy;
+			sourceTree = "<group>";
+		};
+		885EFAA32B31E9AA009F6F7E /* DataSourceProxy */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */,
+			);
+			path = DataSourceProxy;
+			sourceTree = "<group>";
+		};
+		885EFAA42B31EA07009F6F7E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAA52B31EA12009F6F7E /* Diff.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		885EFAB12B31F907009F6F7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		885EFAB62B31F96E009F6F7E /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */,
+				885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */,
+			);
+			path = Annotation;
 			sourceTree = "<group>";
 		};
 		946C1CE62B29CA4F00A9A564 /* Review */ = {
@@ -511,10 +590,10 @@
 		DD0919122AFA5FC2001E5501 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
 				885EFA922B30A1B3009F6F7E /* Common */,
 				885EFA8D2B30A18A009F6F7E /* LocationPage */,
 				949750F02AFDF99A00DCC096 /* DetailPage */,
-				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
 				DDAA84052B109A7200132964 /* OnboardingPage */,
 			);
 			path = Source;
@@ -523,6 +602,7 @@
 		DD0919132AFA5FCA001E5501 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAA42B31EA07009F6F7E /* Util */,
 				DD09191E2AFA6B4F001E5501 /* Extension */,
 				DD0919192AFA6657001E5501 /* Font */,
 				DD0919142AFA61FC001E5501 /* Data */,
@@ -552,6 +632,8 @@
 		DD09191E2AFA6B4F001E5501 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				885EFA9C2B31DF0C009F6F7E /* DelegateProxy */,
+				885EFAA32B31E9AA009F6F7E /* DataSourceProxy */,
 				DD09191F2AFA6B4F001E5501 /* UIView+.swift */,
 				DD0919202AFA6B4F001E5501 /* UIViewController+.swift */,
 				DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */,
@@ -707,14 +789,18 @@
 				88472A832B15EFDE0073AE61 /* APIHeader.swift in Sources */,
 				DD0919252AFA6B4F001E5501 /* UIViewController+.swift in Sources */,
 				88472A752B15D9220073AE61 /* RecordImagesDTO.swift in Sources */,
+				885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */,
 				88472A742B15D9220073AE61 /* UsersActivitiesDTO.swift in Sources */,
 				DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */,
+				885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */,
 				949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */,
 				88472AAE2B18E9610073AE61 /* Coordinate.swift in Sources */,
+				885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */,
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
 				88472A8D2B18A44C0073AE61 /* APIEncoder.swift in Sources */,
 				88472A6A2B15D9210073AE61 /* PlaceIdReviewsDTO.swift in Sources */,
 				DD754DED2AFA4D920001FBC4 /* LandingVC.swift in Sources */,
+				885EFA9E2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift in Sources */,
 				949750FF2AFE398200DCC096 /* BookReviewCollectionViewCell.swift in Sources */,
 				88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */,
 				94F5500A2B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift in Sources */,
@@ -733,27 +819,34 @@
 				88472A722B15D9210073AE61 /* SearchFriendDTO.swift in Sources */,
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
 				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
+				885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */,
+				885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
 				94F550062B18A17600F11371 /* MainDetailNewsTableViewCell.swift in Sources */,
 				94A844FF2B0601980036DE72 /* MainDetailSegmentedControl.swift in Sources */,
+				885EFAAA2B31EE84009F6F7E /* LocationViewModel.swift in Sources */,
 				DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */,
 				DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */,
 				88472A512B15D8500073AE61 /* BaseResponse.swift in Sources */,
 				94A6BF462B2732EC00DF2BF8 /* MainDetailHomeHeader.swift in Sources */,
 				949750F92AFE303E00DCC096 /* BookListCollectionViewCell.swift in Sources */,
+				885EFAAE2B31F809009F6F7E /* BookStoreListViewController.swift in Sources */,
 				949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */,
 				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,
 				88472A712B15D9210073AE61 /* RecommendFriendDTO.swift in Sources */,
 				88472A6E2B15D9210073AE61 /* Filter.swift in Sources */,
+				885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */,
 				88472A702B15D9210073AE61 /* RecordDTO.swift in Sources */,
 				94A6BF3C2B20766000DF2BF8 /* Activity.swift in Sources */,
 				88472A6D2B15D9210073AE61 /* PlaceIdActivitiesDTO.swift in Sources */,
+				885EFAA22B31E998009F6F7E /* RxMapViewDataSourceProxy.swift in Sources */,
 				DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */,
 				88472A4F2B15D8100073AE61 /* APIEndpoint.swift in Sources */,
 				88472A7B2B15D9220073AE61 /* BooksListDTO.swift in Sources */,
 				88472AAA2B18E75F0073AE61 /* Author.swift in Sources */,
 				88472A7E2B15D9220073AE61 /* SignUpDTO.swift in Sources */,
+				885EFAB32B31F911009F6F7E /* BookStoreListTableViewCell.swift in Sources */,
 				949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */,
 				88472A7C2B15D9220073AE61 /* UsersReviewsDTO.swift in Sources */,
 				88472AAC2B18E8420073AE61 /* Place.swift in Sources */,
@@ -766,8 +859,11 @@
 				88472A912B18B7310073AE61 /* Book.swift in Sources */,
 				88472A732B15D9210073AE61 /* PlaceIdBooksDTO.swift in Sources */,
 				DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */,
+				885EFAB82B31F97D009F6F7E /* LocationAnnotationView.swift in Sources */,
 				88472A812B15D9220073AE61 /* PlaceIdNewsDTO.swift in Sources */,
+				885EFAA82B31EE10009F6F7E /* ViewModelType.swift in Sources */,
 				88472A9D2B18CA330073AE61 /* AuthorDTO.swift in Sources */,
+				885EFAAC2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift in Sources */,
 				949750FB2AFE347100DCC096 /* HeaderView.swift in Sources */,
 				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
 				88472A952B18BF600073AE61 /* AddressDTO.swift in Sources */,
@@ -921,6 +1017,8 @@
 				INFOPLIST_FILE = BookJam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -951,6 +1049,8 @@
 				INFOPLIST_FILE = BookJam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
