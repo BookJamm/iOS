@@ -42,3 +42,33 @@ public class RxMapViewReactiveAnnotationDataSource<S: MKAnnotation>
         }.on(observedEvent)
     }
 }
+
+extension Reactive where Base: MKMapView {
+    
+    // MARK: Binding annotation to the Map
+    public func annotations<
+        A: MKAnnotation,
+        O: ObservableType>
+        (_ source: O)
+        -> Disposable
+        where O.Element == [A] {
+            return self.annotations(dataSource: RxMapViewReactiveAnnotationDataSource())(source)
+    }
+
+    public func annotations<
+        DataSource: RxMapViewDataSourceType,
+        O: ObservableType>
+        (dataSource: DataSource)
+        -> (_ source: O)
+        -> Disposable
+        where O.Element == [DataSource.Element],
+        DataSource.Element: MKAnnotation {
+            return { source in
+                return source
+                    .subscribe({ event in
+                        dataSource.mapView(self.base, observedEvent: event)
+                    })
+            }
+    }
+    
+}
