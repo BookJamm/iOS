@@ -25,7 +25,7 @@ final class LocationViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     /// LocationViewController 뷰모델
-//    private var viewModel = LocationViewModel()
+    private var viewModel = LocationViewModel()
 
     /// 위치 관리 매니저
     private let locationManager = CLLocationManager()
@@ -34,7 +34,7 @@ final class LocationViewController: UIViewController {
     private let mapView = MKMapView()
     
     /// 화면 상단 서치바
-    lazy var searchBar: UISearchBar = UISearchBar().then {
+    private lazy var searchBar: UISearchBar = UISearchBar().then {
         $0.placeholder = "보고 싶은 장소를 입력해주세요."
         $0.layer.cornerRadius = 25
         $0.clipsToBounds = true
@@ -46,7 +46,7 @@ final class LocationViewController: UIViewController {
     }
     
     /// 목록뷰 상단의 탐색 버튼입니다.
-    lazy var currentLocateBtn: UIButton = UIButton().then {
+    private lazy var currentLocateBtn: UIButton = UIButton().then {
         
         var titleAttr = AttributedString.init("현재 위치로 탐색")
         titleAttr.font = paragraph04
@@ -72,7 +72,7 @@ final class LocationViewController: UIViewController {
     
 
     // MARK: Configure View
-    func setUpView() {
+    private func setUpView() {
         // 현재 위치 설정
         locationManager.requestWhenInUseAuthorization()  // 권한 확인
         locationManager.startUpdatingLocation() // 위치 업데이트
@@ -86,7 +86,7 @@ final class LocationViewController: UIViewController {
     
     
     // MARK: Layout
-    func setUpLayout() {
+    private func setUpLayout() {
         [
             mapView,
             currentLocateBtn,
@@ -96,7 +96,7 @@ final class LocationViewController: UIViewController {
     
     
     // MARK: Constraint
-    func setUpConstraint() {
+    private func setUpConstraint() {
         // 상단 서치바
         searchBar.snp.makeConstraints {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
