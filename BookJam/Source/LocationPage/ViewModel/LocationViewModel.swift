@@ -7,23 +7,28 @@
 
 import RxSwift
 import CoreLocation
+import RxRelay
 
 final class LocationViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
     
+    // MARK: Input
     struct Input {
-        
-        // 현재위치에서 재탐색 트리거
+        /// 현재위치에서 재탐색 트리거
         let refreshTrigger: Observable<Void>
-        
     }
     
+    // MARK: Output
     struct Output {
         /// 서점 목록
         let bookStoreList: Observable<[Place]>
     }
     
+    // MARK: State
+    let bookStoreList = BehaviorRelay<[Place]>(value: [Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))])
+    
+    // MARK: Transform
     func transform(input: Input) -> Output {
     
         let placeList = input.refreshTrigger.flatMapLatest {

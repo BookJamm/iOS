@@ -22,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // MARK: 앱 시작시 처음 보여질 ViewController 설정
         /// 로그인 또는 회원가입 화면으로 전환할 때 네비게이션 바 표시를 위한 네비게이션 컨트롤러를 rootViewController로 설정
-        let rootNavigationController = UINavigationController(rootViewController: LandingVC())
+        let rootNavigationController = UINavigationController(rootViewController: LocationViewController())
         /// 네비게이션 바 컴포넌트 색상을 검정색으로 설정
         rootNavigationController.navigationBar.tintColor = .black
         

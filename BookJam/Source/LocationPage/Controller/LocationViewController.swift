@@ -26,7 +26,7 @@ final class LocationViewController: UIViewController {
     
     /// LocationViewController 뷰모델
     private var viewModel = LocationViewModel()
-
+    
     /// 위치 관리 매니저
     private let locationManager = CLLocationManager()
     
@@ -64,13 +64,14 @@ final class LocationViewController: UIViewController {
     // MARK: LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setUpView()
+        setUpBinding()
         setUpLayout()
         setUpConstraint()
     }
     
-
+    
     // MARK: Configure View
     private func setUpView() {
         // 현재 위치 설정
@@ -84,6 +85,45 @@ final class LocationViewController: UIViewController {
         mapView.setUserTrackingMode(.follow, animated: true)    // 지도가 사용자의 위치를 따라가는 모드로 전환
     }
     
+    // MARK: Data Binding
+    private func setUpBinding() {
+        // MARK: Input
+        let input = LocationViewModel.Input(refreshTrigger: currentLocateBtn.rx.tap.asObservable())
+        
+        // MARK: Output
+        let output = viewModel.transform(input: input)
+        
+        output.bookStoreList.bind { [weak self] placeList in
+            self?.viewModel.bookStoreList.accept(placeList)
+        }.disposed(by: disposeBag)
+        
+        viewModel.bookStoreList.asDriver(onErrorJustReturn: [])
+            .drive { [weak self] placeList in
+                //            print(placeList)
+                var annotationList: [MKAnnotation] = []
+                placeList.forEach { place in
+                    if let lat = place.coords?.lat, let lon = place.coords?.lon {
+                        let pin = MKPointAnnotation()
+                        pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
+                        pin.title = place.name
+                        pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
+                        annotationList.append(pin)
+                    }
+                    self?.mapView.addAnnotations(annotationList)
+                }
+            }.disposed(by: disposeBag)
+        
+        locationManager.rx.didUpdateLocation
+            .subscribe(onNext: { locations in
+                print(locations)
+            })
+            .disposed(by: disposeBag)
+        
+        locationManager.rx.didUpdateLocation
+            .map{$0[0]}
+            .bind(to: mapView.rx.center)
+            .disposed(by: disposeBag)
+    }
     
     // MARK: Layout
     private func setUpLayout() {
