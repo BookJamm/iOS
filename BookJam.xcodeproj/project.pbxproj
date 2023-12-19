@@ -51,6 +51,8 @@
 		885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9A2B31DCF3009F6F7E /* LocationViewController.swift */; };
 		885EFA9E2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9D2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift */; };
 		885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */; };
+		885EFAA22B31E998009F6F7E /* RxMapViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */; };
+		885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA52B31EA12009F6F7E /* Diff.swift */; };
 		949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */; };
 		949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */; };
 		949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */; };
@@ -141,6 +143,8 @@
 		885EFA9A2B31DCF3009F6F7E /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		885EFA9D2B31E019009F6F7E /* RxCLLocationManagerDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCLLocationManagerDelegateProxy.swift; sourceTree = "<group>"; };
 		885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
+		885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMapViewDataSourceProxy.swift; sourceTree = "<group>"; };
+		885EFAA52B31EA12009F6F7E /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailReviewTableViewCell.swift; sourceTree = "<group>"; };
 		949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailPageViewController.swift; sourceTree = "<group>"; };
 		949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -420,6 +424,22 @@
 			path = DelegateProxy;
 			sourceTree = "<group>";
 		};
+		885EFAA32B31E9AA009F6F7E /* DataSourceProxy */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */,
+			);
+			path = DataSourceProxy;
+			sourceTree = "<group>";
+		};
+		885EFAA42B31EA07009F6F7E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAA52B31EA12009F6F7E /* Diff.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		946C1CE62B29CA4F00A9A564 /* Review */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +559,7 @@
 		DD0919132AFA5FCA001E5501 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAA42B31EA07009F6F7E /* Util */,
 				DD09191E2AFA6B4F001E5501 /* Extension */,
 				DD0919192AFA6657001E5501 /* Font */,
 				DD0919142AFA61FC001E5501 /* Data */,
@@ -569,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				885EFA9C2B31DF0C009F6F7E /* DelegateProxy */,
+				885EFAA32B31E9AA009F6F7E /* DataSourceProxy */,
 				DD09191F2AFA6B4F001E5501 /* UIView+.swift */,
 				DD0919202AFA6B4F001E5501 /* UIViewController+.swift */,
 				DD0919212AFA6B4F001E5501 /* UIScrollView+.swift */,
@@ -753,6 +775,7 @@
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
 				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
 				885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */,
+				885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
 				94F550062B18A17600F11371 /* MainDetailNewsTableViewCell.swift in Sources */,
@@ -769,6 +792,7 @@
 				88472A702B15D9210073AE61 /* RecordDTO.swift in Sources */,
 				94A6BF3C2B20766000DF2BF8 /* Activity.swift in Sources */,
 				88472A6D2B15D9210073AE61 /* PlaceIdActivitiesDTO.swift in Sources */,
+				885EFAA22B31E998009F6F7E /* RxMapViewDataSourceProxy.swift in Sources */,
 				DD754DEB2AFA4D920001FBC4 /* SceneDelegate.swift in Sources */,
 				88472A4F2B15D8100073AE61 /* APIEndpoint.swift in Sources */,
 				88472A7B2B15D9220073AE61 /* BooksListDTO.swift in Sources */,
