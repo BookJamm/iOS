@@ -60,6 +60,8 @@
 		885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */; };
 		885EFAB32B31F911009F6F7E /* BookStoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */; };
 		885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */; };
+		885EFAB82B31F97D009F6F7E /* LocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */; };
+		885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */; };
 		949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */; };
 		949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */; };
 		949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */; };
@@ -159,6 +161,8 @@
 		885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetViewController.swift; sourceTree = "<group>"; };
 		885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListTableViewCell.swift; sourceTree = "<group>"; };
 		885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
+		885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotationView.swift; sourceTree = "<group>"; };
+		885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataMapClusterView.swift; sourceTree = "<group>"; };
 		949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailReviewTableViewCell.swift; sourceTree = "<group>"; };
 		949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailPageViewController.swift; sourceTree = "<group>"; };
 		949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -363,6 +367,7 @@
 		885EFA8E2B30A191009F6F7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAB62B31F96E009F6F7E /* Annotation */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -467,6 +472,15 @@
 				885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		885EFAB62B31F96E009F6F7E /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */,
+				885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */,
+			);
+			path = Annotation;
 			sourceTree = "<group>";
 		};
 		946C1CE62B29CA4F00A9A564 /* Review */ = {
@@ -775,6 +789,7 @@
 				88472A832B15EFDE0073AE61 /* APIHeader.swift in Sources */,
 				DD0919252AFA6B4F001E5501 /* UIViewController+.swift in Sources */,
 				88472A752B15D9220073AE61 /* RecordImagesDTO.swift in Sources */,
+				885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */,
 				88472A742B15D9220073AE61 /* UsersActivitiesDTO.swift in Sources */,
 				DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */,
 				885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */,
@@ -844,6 +859,7 @@
 				88472A912B18B7310073AE61 /* Book.swift in Sources */,
 				88472A732B15D9210073AE61 /* PlaceIdBooksDTO.swift in Sources */,
 				DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */,
+				885EFAB82B31F97D009F6F7E /* LocationAnnotationView.swift in Sources */,
 				88472A812B15D9220073AE61 /* PlaceIdNewsDTO.swift in Sources */,
 				885EFAA82B31EE10009F6F7E /* ViewModelType.swift in Sources */,
 				88472A9D2B18CA330073AE61 /* AuthorDTO.swift in Sources */,
