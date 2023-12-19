@@ -53,6 +53,7 @@
 		885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */; };
 		885EFAA22B31E998009F6F7E /* RxMapViewDataSourceProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */; };
 		885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA52B31EA12009F6F7E /* Diff.swift */; };
+		885EFAA82B31EE10009F6F7E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAA72B31EE10009F6F7E /* ViewModelType.swift */; };
 		949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */; };
 		949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */; };
 		949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */; };
@@ -145,6 +146,7 @@
 		885EFA9F2B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMKMapViewDelegateProxy.swift; sourceTree = "<group>"; };
 		885EFAA12B31E998009F6F7E /* RxMapViewDataSourceProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxMapViewDataSourceProxy.swift; sourceTree = "<group>"; };
 		885EFAA52B31EA12009F6F7E /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
+		885EFAA72B31EE10009F6F7E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailReviewTableViewCell.swift; sourceTree = "<group>"; };
 		949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailPageViewController.swift; sourceTree = "<group>"; };
 		949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				94A6BF3B2B20766000DF2BF8 /* Activity.swift */,
 				94A6BF3D2B20782A00DF2BF8 /* Review.swift */,
 				94A6BF3F2B20824B00DF2BF8 /* News.swift */,
+				885EFAA72B31EE10009F6F7E /* ViewModelType.swift */,
 			);
 			name = Model;
 			path = Controller/Model;
@@ -811,6 +814,7 @@
 				88472A732B15D9210073AE61 /* PlaceIdBooksDTO.swift in Sources */,
 				DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */,
 				88472A812B15D9220073AE61 /* PlaceIdNewsDTO.swift in Sources */,
+				885EFAA82B31EE10009F6F7E /* ViewModelType.swift in Sources */,
 				88472A9D2B18CA330073AE61 /* AuthorDTO.swift in Sources */,
 				949750FB2AFE347100DCC096 /* HeaderView.swift in Sources */,
 				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
