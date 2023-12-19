@@ -69,11 +69,14 @@ final class LocationViewController: BaseBottomSheetController {
         setUpBinding()
         setUpLayout()
         setUpConstraint()
+        setUpFloatingPanel()
     }
     
     
     // MARK: Configure View
     private func setUpView() {
+        self.view.backgroundColor = .white
+        
         // 현재 위치 설정
         locationManager.requestWhenInUseAuthorization()  // 권한 확인
         locationManager.startUpdatingLocation() // 위치 업데이트
@@ -176,16 +179,19 @@ final class LocationViewController: BaseBottomSheetController {
 extension LocationViewController: UITableViewDelegate {
     
     func setUpFloatingPanel() {
+        // MARK: Floating Panel Base Setting
         let BottomContent = BookStoreListViewController()   // 바텀시트에 들어갈 서점 목록 VC
         let BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent) // 서점목록VC 전용 바텀시트 DelegateController 등록
         setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController) // 바텀시트 등록
         
+        // MARK: Floating Panel related Layout
         // 현재위치 버튼 위치는 바텀 시트 윗부분입니다. 해당 부분에서 설정해주어야 합니다.
         currentLocateBtn.snp.makeConstraints {
             $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
         }
         
+        // MARK: Floating Panel Rx Binding
         viewModel.bookStoreList.bind(to: BottomContent.locationTableView.rx.items(
             cellIdentifier: BookStoreTableViewCell.cellID,
             cellType: BookStoreTableViewCell.self)) {
@@ -194,15 +200,13 @@ extension LocationViewController: UITableViewDelegate {
                 cell.cellModel = element
             }.disposed(by: disposeBag)
         
+        // 해당 tableView의 셀 선택 이벤트를 가져오려면 delegate를 가져와야합니다.
         BottomContent.locationTableView.delegate = self
         
         BottomContent.locationTableView.rx.modelSelected(Place.self)
             .subscribe(onNext: { place in
                 print(place)
             }).disposed(by: disposeBag)
-        
-        
-//        BottomContent.locationTableView.layoutIfNeeded()
             
     }
 }

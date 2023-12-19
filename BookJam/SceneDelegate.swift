@@ -18,18 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         window.makeKeyAndVisible()
-        window.inputViewController?.view.backgroundColor = .white
+//        window.inputViewController?.view.backgroundColor = .white
         
         // MARK: 앱 시작시 처음 보여질 ViewController 설정
         /// 로그인 또는 회원가입 화면으로 전환할 때 네비게이션 바 표시를 위한 네비게이션 컨트롤러를 rootViewController로 설정
         let rootNavigationController = UINavigationController(rootViewController: LocationViewController())
         /// 네비게이션 바 컴포넌트 색상을 검정색으로 설정
-        rootNavigationController.navigationBar.tintColor = .black
+//        rootNavigationController.navigationBar.tintColor = .black
         
         self.window?.rootViewController = rootNavigationController
         
         /// 모든 View의 배경색을 흰색으로 설정
-        UIView.appearance().backgroundColor = .white
+//        UIView.appearance().backgroundColor = .white
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
