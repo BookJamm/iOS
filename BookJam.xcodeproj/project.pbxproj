@@ -965,6 +965,8 @@
 				INFOPLIST_FILE = BookJam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -995,6 +997,8 @@
 				INFOPLIST_FILE = BookJam/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북잼";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "가까운 서점 정보를 받아오기 위해 위치 수집을 허용해주세요.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
