@@ -58,6 +58,8 @@
 		885EFAAC2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAB2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift */; };
 		885EFAAE2B31F809009F6F7E /* BookStoreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAD2B31F809009F6F7E /* BookStoreListViewController.swift */; };
 		885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */; };
+		885EFAB32B31F911009F6F7E /* BookStoreListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */; };
+		885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */; };
 		949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */; };
 		949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */; };
 		949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */; };
@@ -155,6 +157,8 @@
 		885EFAAB2B31F7E0009F6F7E /* BookStoreBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreBottomSheetViewController.swift; sourceTree = "<group>"; };
 		885EFAAD2B31F809009F6F7E /* BookStoreListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListViewController.swift; sourceTree = "<group>"; };
 		885EFAAF2B31F8AC009F6F7E /* BaseBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseBottomSheetViewController.swift; sourceTree = "<group>"; };
+		885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreListTableViewCell.swift; sourceTree = "<group>"; };
+		885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
 		949370C12B308B22005E21FE /* MainDetailReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailReviewTableViewCell.swift; sourceTree = "<group>"; };
 		949750F32AFDFAF000DCC096 /* MainDetailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailPageViewController.swift; sourceTree = "<group>"; };
 		949750F62AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookActivityCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -402,6 +406,8 @@
 		885EFA932B30A1B9009F6F7E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				885EFAB12B31F907009F6F7E /* Cell */,
+				885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -453,6 +459,14 @@
 				885EFAA52B31EA12009F6F7E /* Diff.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		885EFAB12B31F907009F6F7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				885EFAB22B31F911009F6F7E /* BookStoreListTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		946C1CE62B29CA4F00A9A564 /* Review */ = {
@@ -807,6 +821,7 @@
 				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,
 				88472A712B15D9210073AE61 /* RecommendFriendDTO.swift in Sources */,
 				88472A6E2B15D9210073AE61 /* Filter.swift in Sources */,
+				885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */,
 				88472A702B15D9210073AE61 /* RecordDTO.swift in Sources */,
 				94A6BF3C2B20766000DF2BF8 /* Activity.swift in Sources */,
 				88472A6D2B15D9210073AE61 /* PlaceIdActivitiesDTO.swift in Sources */,
@@ -816,6 +831,7 @@
 				88472A7B2B15D9220073AE61 /* BooksListDTO.swift in Sources */,
 				88472AAA2B18E75F0073AE61 /* Author.swift in Sources */,
 				88472A7E2B15D9220073AE61 /* SignUpDTO.swift in Sources */,
+				885EFAB32B31F911009F6F7E /* BookStoreListTableViewCell.swift in Sources */,
 				949750F72AFE2FED00DCC096 /* BookActivityCollectionViewCell.swift in Sources */,
 				88472A7C2B15D9220073AE61 /* UsersReviewsDTO.swift in Sources */,
 				88472AAC2B18E8420073AE61 /* Place.swift in Sources */,
