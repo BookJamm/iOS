@@ -11,7 +11,7 @@ import FloatingPanel
 
 /// Floating Panel을 사용하기 위한 기본 BaseController입니다.
 /// 해당 Controller를 상속한 ViewController는 기본 세팅만으로 화면에 Floating panel을 사용할 수 있습니다.
-class BaseBottomSheetController: BaseViewController {
+class BaseBottomSheetController: UIViewController {
     // MARK: - Floating Panel
     var fpc = FloatingPanelController()
     

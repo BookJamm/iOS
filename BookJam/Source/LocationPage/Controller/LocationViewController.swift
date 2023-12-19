@@ -18,7 +18,7 @@ import MapKit
 
 import FloatingPanel
 
-final class LocationViewController: UIViewController {
+final class LocationViewController: BaseBottomSheetController {
     // MARK: Variables
     
     /// Rx - DisposeBag
@@ -123,6 +123,25 @@ final class LocationViewController: UIViewController {
             .map{$0[0]}
             .bind(to: mapView.rx.center)
             .disposed(by: disposeBag)
+        
+        mapView.rx.handleViewForAnnotation { (mapView, annotation) in
+//            print(annotation)
+            switch annotation {
+                
+                // 사용자 위치 표시는 따로 처리
+            case is MKUserLocation :
+                return nil
+                
+                // 클러스터 뷰인경우
+            case is MKClusterAnnotation :
+                return LocationDataMapClusterView(annotation: annotation, reuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+                
+                // 위치 annotation은 커스텀 이미지로
+            default :
+                return mapView.dequeueReusableAnnotationView(withIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier, for: annotation)
+                
+            }
+        }
     }
     
     // MARK: Layout
@@ -150,5 +169,40 @@ final class LocationViewController: UIViewController {
             $0.top.equalTo(self.searchBar.snp.bottom).offset(20)
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
+    }
+}
+
+// MARK: - Floating Panel - primary setting
+extension LocationViewController: UITableViewDelegate {
+    
+    func setUpFloatingPanel() {
+        let BottomContent = BookStoreListViewController()   // 바텀시트에 들어갈 서점 목록 VC
+        let BottomSheetDelegateController = StoreListBottomSheetDelegateController(vc: BottomContent) // 서점목록VC 전용 바텀시트 DelegateController 등록
+        setupBottomSheet(contentVC: BottomContent, floatingPanelDelegate: BottomSheetDelegateController) // 바텀시트 등록
+        
+        // 현재위치 버튼 위치는 바텀 시트 윗부분입니다. 해당 부분에서 설정해주어야 합니다.
+        currentLocateBtn.snp.makeConstraints {
+            $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
+            $0.centerX.equalToSuperview()
+        }
+        
+        viewModel.bookStoreList.bind(to: BottomContent.locationTableView.rx.items(
+            cellIdentifier: BookStoreTableViewCell.cellID,
+            cellType: BookStoreTableViewCell.self)) {
+                (row, element, cell) in
+//                print(element)
+                cell.cellModel = element
+            }.disposed(by: disposeBag)
+        
+        BottomContent.locationTableView.delegate = self
+        
+        BottomContent.locationTableView.rx.modelSelected(Place.self)
+            .subscribe(onNext: { place in
+                print(place)
+            }).disposed(by: disposeBag)
+        
+        
+//        BottomContent.locationTableView.layoutIfNeeded()
+            
     }
 }
