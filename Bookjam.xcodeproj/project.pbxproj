@@ -921,7 +921,6 @@
 				DD38CFB62A59993400D32B00 /* Frameworks */,
 				DD38CFB72A59993400D32B00 /* Resources */,
 				C1C0516EEC3D447BF92D87E2 /* [CP] Embed Pods Frameworks */,
-				6901F32B9B82D3F60C123BDE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -960,7 +959,6 @@
 				DD38CFD62A59993400D32B00 /* Frameworks */,
 				DD38CFD72A59993400D32B00 /* Resources */,
 				7AA66BC5577705357EBF2202 /* [CP] Embed Pods Frameworks */,
-				EEB1B159D7E35BD2384F3B29 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1043,23 +1041,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6901F32B9B82D3F60C123BDE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7AA66BC5577705357EBF2202 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1158,23 +1139,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam/Pods-Bookjam-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EEB1B159D7E35BD2384F3B29 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

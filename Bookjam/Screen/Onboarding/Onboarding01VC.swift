@@ -14,7 +14,6 @@ import UIKit
 import Alamofire
 import SnapKit
 import Then
-import KakaoSDKUser
 
 class Onboarding01VC: UIViewController {
     

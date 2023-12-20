@@ -12,7 +12,6 @@ target 'Bookjam' do
   pod 'SnapKit'
   pod 'Kingfisher'
   pod 'Then'
-  pod 'KakaoSDK'
   pod 'FloatingPanel'
 
   target 'BookjamTests' do

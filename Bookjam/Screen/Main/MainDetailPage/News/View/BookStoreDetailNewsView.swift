@@ -74,7 +74,6 @@ class BookStoreDetailNewsView: UIView {
         newsTableView.delegate = self
     }
     
-    
     // MARK: Constraint
     
     func setUpConstraint() {

@@ -1,14 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Bookjam-BookjamUITests/Pods-Bookjam-BookjamUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/FloatingPanel/FloatingPanel.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKAuth/KakaoSDKAuth.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKCommon/KakaoSDKCommon.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKNavi/KakaoSDKNavi.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKShare/KakaoSDKShare.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKStory/KakaoSDKStory.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKTalk/KakaoSDKTalk.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKTemplate/KakaoSDKTemplate.framework
-${BUILT_PRODUCTS_DIR}/KakaoSDKUser/KakaoSDKUser.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/Moya/Moya.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

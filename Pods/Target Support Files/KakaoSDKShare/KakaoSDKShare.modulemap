@@ -1,6 +1,0 @@
-framework module KakaoSDKShare {
-  umbrella header "KakaoSDKShare-umbrella.h"
-
-  export *
-  module * { export * }
-}

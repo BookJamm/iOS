@@ -27,7 +27,6 @@ class APIManager: ObservableObject  {
     }
 }
 
-
 // MARK: T에는 요청값 데이터의 모델, U에는 응닶값 데이터의 모델 적기
 extension APIManager {
     func getData<T: Codable, U: Decodable>(urlEndpointString: String,

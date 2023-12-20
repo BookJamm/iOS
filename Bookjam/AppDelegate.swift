@@ -8,8 +8,6 @@
 import SwiftUI
 import UIKit
 
-import KakaoSDKCommon
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -27,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         // Kakao
-        KakaoSDK.initSDK(appKey: kakaoAppID)
+//        KakaoSDK.initSDK(appKey: kakaoAppID)
         
         return true
     }
