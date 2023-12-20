@@ -33,15 +33,33 @@ final class LocationViewController: BaseBottomSheetController {
     /// 지도 뷰
     private let mapView = MKMapView()
     
+    /// 화명 상단 배경 뷰
+    private var topBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = .white
+    }
+    
+    /// 화면 상단 서치바 배경 뷰
+    private var searchBarBackgroundView: UIView = UIView().then {
+        $0.backgroundColor = .gray01
+        $0.layer.cornerRadius = 20
+        $0.clipsToBounds = true
+    }
+    
+    /// 화면 상단 서치바 아래 밑줄
+    private var searchBarBackgroundViewLine: UIView = UIView().then {
+        $0.backgroundColor = .gray01
+    }
+    
     /// 화면 상단 서치바
     private lazy var searchBar: UISearchBar = UISearchBar().then {
-        $0.placeholder = "보고 싶은 장소를 입력해주세요."
-        $0.layer.cornerRadius = 25
-        $0.clipsToBounds = true
+        $0.placeholder = "상호명 또는 주소 검색"
         $0.searchBarStyle = .minimal
-        
-        $0.layer.borderColor = main02?.cgColor
-        $0.layer.borderWidth = 1
+
+        $0.searchTextField.backgroundColor = .gray01
+        $0.searchTextField.textColor = .gray06
+        $0.searchTextField.font = paragraph02
+
+        $0.setImage(UIImage.search, for: .search, state: .normal)
         $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
     }
     
@@ -56,9 +74,14 @@ final class LocationViewController: BaseBottomSheetController {
         $0.configuration?.baseForegroundColor = .white
         $0.configuration?.baseBackgroundColor = main03
         $0.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20)
+        $0.configuration?.cornerStyle = .large
         
         $0.layer.cornerRadius = 15
-        $0.clipsToBounds = true
+//        $0.clipsToBounds = true
+        
+        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+        $0.layer.shadowOpacity = 0.2
+        $0.layer.shadowRadius = 20
     }
     
     // MARK: LifeCycle
@@ -143,9 +166,16 @@ final class LocationViewController: BaseBottomSheetController {
     // MARK: Layout
     private func setUpLayout() {
         [
+            searchBarBackgroundView,
+            searchBarBackgroundViewLine,
+            searchBar
+        ].forEach { topBackgroundView.addSubview($0)}
+        
+        
+        [
             mapView,
             currentLocateBtn,
-            searchBar
+            topBackgroundView
         ].forEach { self.view.addSubview($0)}
     }
     
@@ -154,15 +184,36 @@ final class LocationViewController: BaseBottomSheetController {
     private func setUpConstraint() {
         // 상단 서치바
         searchBar.snp.makeConstraints {
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(10)
+            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(0)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(45)
         }
         
+        // 화면 상단 배경 뷰
+        topBackgroundView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.bottom.equalTo(searchBar).offset(10)
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        // 서치바 배경 뷰
+        searchBarBackgroundView.snp.makeConstraints {
+            $0.center.equalTo(searchBar)
+            $0.height.equalTo(searchBar)
+            $0.width.equalTo(searchBar).multipliedBy(1)
+        }
+        
+        // 서치바 배경뷰 아래 밑줄선
+        searchBarBackgroundViewLine.snp.makeConstraints {
+            $0.bottom.equalTo(topBackgroundView)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+        
         // 지도 뷰
         mapView.snp.makeConstraints {
-            $0.top.equalTo(self.searchBar.snp.bottom).offset(20)
+            $0.top.equalTo(self.searchBarBackgroundView.snp.bottom)
             $0.left.right.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
@@ -185,6 +236,8 @@ extension LocationViewController: UITableViewDelegate {
             $0.bottom.equalTo(self.fpc.surfaceView.snp.top).offset(-10)
             $0.centerX.equalToSuperview()
         }
+        // Floating Panel 보다 상단 바가 더 앞으로 오게 재설정
+        self.view.bringSubviewToFront(topBackgroundView)
         
         // MARK: Floating Panel Rx Binding
         // bookStoreList Floating Panel 안의 테이블뷰에 바인딩
@@ -226,4 +279,9 @@ extension LocationViewController: UITableViewDelegate {
             }
             .disposed(by: disposeBag)
     }
+}
+
+@available(iOS 17, *)
+#Preview {
+    LocationViewController()
 }
