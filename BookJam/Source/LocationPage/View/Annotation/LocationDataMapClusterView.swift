@@ -29,10 +29,9 @@ final class LocationDataMapClusterView: MKAnnotationView {
         displayPriority = .defaultHigh
         collisionMode = .circle
 
-        frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        frame = CGRect(x: 0, y: 0, width: 65, height: 65)
         centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
 
-       
         setupUI()
     }
 
@@ -50,7 +49,8 @@ final class LocationDataMapClusterView: MKAnnotationView {
 //        addSubview(view)
 //        view.frame = bounds
         
-        let circleImage = UIImage(systemName: "circle.circle.fill")
+//        let circleImage = UIImage(systemName: "circle.circle.fill")
+        let circleImage = UIImage(named: "cluster")//?.withRenderingMode(.alwaysTemplate)
         let circleView = UIImageView(image: circleImage)
         circleView.tintColor = main03
         self.addSubview(circleView)
@@ -59,7 +59,7 @@ final class LocationDataMapClusterView: MKAnnotationView {
         }
         
         countLabel.textColor = .white
-        countLabel.font = paragraph01
+        countLabel.font = paragraph04
         circleView.addSubview(countLabel)
         countLabel.snp.makeConstraints {
             $0.center.equalToSuperview()

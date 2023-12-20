@@ -61,7 +61,7 @@ class FloatingPanelStocksLayout: FloatingPanelLayout {
     let initialState: FloatingPanelState = .half
 
     let anchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
-        .full: FloatingPanelLayoutAnchor(absoluteInset: 160, edge: .top, referenceGuide: .safeArea),
+        .full: FloatingPanelLayoutAnchor(absoluteInset: 50, edge: .top, referenceGuide: .safeArea),
         .half: FloatingPanelLayoutAnchor(fractionalInset: 0.3, edge: .bottom, referenceGuide: .safeArea),
         .tip: FloatingPanelLayoutAnchor(absoluteInset: 52, edge: .bottom, referenceGuide: .safeArea)
     ]
