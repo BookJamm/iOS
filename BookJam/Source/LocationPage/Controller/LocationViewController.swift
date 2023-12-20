@@ -86,6 +86,10 @@ final class LocationViewController: BaseBottomSheetController {
         mapView.showsUserLocation = true    // 유저 현재 위치 보이게
         mapView.mapType = MKMapType.standard    // 일반적인 지도 스타일
         mapView.setUserTrackingMode(.follow, animated: true)    // 지도가 사용자의 위치를 따라가는 모드로 전환
+        
+        // 지도 AnnotationView Register
+        mapView.register(LocationAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)  // 지도에 어노테이션 커스텀 뷰 등록
+        mapView.register(LocationDataMapClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)   // 지도에 클러스터 커스텀뷰 등록
     }
     
     // MARK: Data Binding
@@ -96,25 +100,29 @@ final class LocationViewController: BaseBottomSheetController {
         // MARK: Output
         let output = viewModel.transform(input: input)
         
-        output.bookStoreList.bind { [weak self] placeList in
-            self?.viewModel.bookStoreList.accept(placeList)
-        }.disposed(by: disposeBag)
+//        output.bookStoreList.bind { [weak self] placeList in
+//            self?.viewModel.bookStoreList.accept(placeList)
+//        }.disposed(by: disposeBag)
         
-        viewModel.bookStoreList.asDriver(onErrorJustReturn: [])
-            .drive { [weak self] placeList in
-                //            print(placeList)
-                var annotationList: [MKAnnotation] = []
-                placeList.forEach { place in
-                    if let lat = place.coords?.lat, let lon = place.coords?.lon {
-                        let pin = MKPointAnnotation()
-                        pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
-                        pin.title = place.name
-                        pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
-                        annotationList.append(pin)
-                    }
-                    self?.mapView.addAnnotations(annotationList)
-                }
-            }.disposed(by: disposeBag)
+//        viewModel.bookStoreList.asDriver(onErrorJustReturn: [])
+//            .drive { [weak self] placeList in
+//                //            print(placeList)
+//                var annotationList: [MKAnnotation] = []
+//                placeList.forEach { place in
+//                    if let lat = place.coords?.lat, let lon = place.coords?.lon {
+//                        let pin = MKPointAnnotation()
+//                        pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
+//                        pin.title = place.name
+//                        pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
+//                        annotationList.append(pin)
+//                    }
+//                    self?.mapView.addAnnotations(annotationList)
+//                }
+//            }.disposed(by: disposeBag)
+        
+        output.bookStoreAnnotationList.asDriver(onErrorJustReturn: [])
+            .drive(mapView.rx.annotations)
+            .disposed(by: disposeBag)
         
         locationManager.rx.didUpdateLocation
             .subscribe(onNext: { locations in
@@ -128,7 +136,7 @@ final class LocationViewController: BaseBottomSheetController {
             .disposed(by: disposeBag)
         
         mapView.rx.handleViewForAnnotation { (mapView, annotation) in
-//            print(annotation)
+            print(annotation)
             switch annotation {
                 
                 // 사용자 위치 표시는 따로 처리
