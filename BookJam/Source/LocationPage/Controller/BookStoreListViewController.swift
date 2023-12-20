@@ -17,7 +17,7 @@ class BookStoreListViewController: UIViewController {
     // MARK: Variables
     /// BookStoreVC에서 사용하는 서점 객체들의 모델 리스트입니다.
     /// Cell Data Fetching에 사용합니다.
-    private var bookStoreList : [Place]?
+//    private var bookStoreList : [Place]?
     
     // MARK: - 검색 필터 인덱스 입니다
     private var selectedFilterIndex: filters = .distance

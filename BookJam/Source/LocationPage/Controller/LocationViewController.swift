@@ -76,6 +76,7 @@ final class LocationViewController: BaseBottomSheetController {
     // MARK: Configure View
     private func setUpView() {
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = true
         
         // 현재 위치 설정
         locationManager.requestWhenInUseAuthorization()  // 권한 확인
@@ -100,43 +101,26 @@ final class LocationViewController: BaseBottomSheetController {
         // MARK: Output
         let output = viewModel.transform(input: input)
         
-//        output.bookStoreList.bind { [weak self] placeList in
-//            self?.viewModel.bookStoreList.accept(placeList)
-//        }.disposed(by: disposeBag)
-        
-//        viewModel.bookStoreList.asDriver(onErrorJustReturn: [])
-//            .drive { [weak self] placeList in
-//                //            print(placeList)
-//                var annotationList: [MKAnnotation] = []
-//                placeList.forEach { place in
-//                    if let lat = place.coords?.lat, let lon = place.coords?.lon {
-//                        let pin = MKPointAnnotation()
-//                        pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
-//                        pin.title = place.name
-//                        pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
-//                        annotationList.append(pin)
-//                    }
-//                    self?.mapView.addAnnotations(annotationList)
-//                }
-//            }.disposed(by: disposeBag)
-        
+        // AnnotationList mapView에 바인딩
         output.bookStoreAnnotationList.asDriver(onErrorJustReturn: [])
             .drive(mapView.rx.annotations)
             .disposed(by: disposeBag)
         
+        // LocationManager 위치 업데이트시 subscribe
         locationManager.rx.didUpdateLocation
             .subscribe(onNext: { locations in
                 print(locations)
             })
             .disposed(by: disposeBag)
         
+        // LocationManager 위치 업데이트시 subscribe
         locationManager.rx.didUpdateLocation
             .map{$0[0]}
             .bind(to: mapView.rx.center)
             .disposed(by: disposeBag)
         
+        // mapView AnnotationView Source 불러올 때 인터셉트
         mapView.rx.handleViewForAnnotation { (mapView, annotation) in
-            print(annotation)
             switch annotation {
                 
                 // 사용자 위치 표시는 따로 처리
@@ -200,17 +184,18 @@ extension LocationViewController: UITableViewDelegate {
         }
         
         // MARK: Floating Panel Rx Binding
+        // bookStoreList Floating Panel 안의 테이블뷰에 바인딩
         viewModel.bookStoreList.bind(to: BottomContent.locationTableView.rx.items(
             cellIdentifier: BookStoreTableViewCell.cellID,
             cellType: BookStoreTableViewCell.self)) {
                 (row, element, cell) in
-//                print(element)
                 cell.cellModel = element
             }.disposed(by: disposeBag)
         
         // 해당 tableView의 셀 선택 이벤트를 가져오려면 delegate를 가져와야합니다.
         BottomContent.locationTableView.delegate = self
         
+        // locationTableView의 셀 누르는 이벤트 subscribe
         BottomContent.locationTableView.rx.modelSelected(Place.self)
             .subscribe(onNext: { place in
                 print(place)
