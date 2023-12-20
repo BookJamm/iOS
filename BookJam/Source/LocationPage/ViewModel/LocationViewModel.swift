@@ -31,6 +31,8 @@ final class LocationViewModel: ViewModelType {
     // MARK: State
     let bookStoreList = BehaviorRelay<[Place]>(value: [Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))])
     
+    let selectedFilterIndex = BehaviorRelay<filters>(value: .distance)
+    
     // MARK: Transform
     func transform(input: Input) -> Output {
         
@@ -57,19 +59,19 @@ final class LocationViewModel: ViewModelType {
         }.bind(to: bookStoreList).disposed(by: disposeBag)
         
         // MARK: bookStoreList transform -> Annotation에 활용
-        let bookStoreAnnotationList = bookStoreList.flatMapLatest { placeList -> Observable<[MKAnnotation]> in
-            return Observable.just(
-                placeList.map { place -> MKAnnotation in
-                    let pin = MKPointAnnotation()
-                    if let lat = place.coords?.lat, let lon = place.coords?.lon {
-                        pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
-                        pin.title = place.name
-                        pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
-                    }
-                    return pin
-                }
-            )
+        let bookStoreAnnotationList = bookStoreList.map { placeList -> [MKAnnotation] in
+            return placeList.compactMap { place -> MKAnnotation? in
+                guard let lat = place.coords?.lat, let lon = place.coords?.lon else { return nil }
+                
+                let pin = MKPointAnnotation()
+                pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
+                pin.title = place.name
+                pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
+                
+                return pin
+            }
         }
+
             
         return Output(bookStoreList: bookStoreList.asObservable(), bookStoreAnnotationList: bookStoreAnnotationList)
     }
