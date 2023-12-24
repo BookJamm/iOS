@@ -17,8 +17,8 @@ enum mainPageSection: Hashable {
 
 enum mainPageItem: Hashable {
     case bookPlace(Place) // 독립서점
-    case bookClub // 독서모임
-    case publication // 출판물
+    case bookClub(BookClub) // 독서모임
+    case publication(Book) // 출판물
 }
 
 final class MainPageViewController: UIViewController {
@@ -146,14 +146,25 @@ extension MainPageViewController {
     private func setDataSource() {
         mainDataSource = UICollectionViewDiffableDataSource<mainPageSection,mainPageItem>(collectionView: mainCollectionView, cellProvider: { (collectionView, indexPath, itemIdentifier) in
             switch itemIdentifier {
-            case .bookPlace(_):
-            case .bookClub:
-            case .publication:
+            case .bookPlace(let data):
+//                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+//                cell.config(data)
+//                return cell
+                break
+            case .bookClub(let data):
+//                            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+//                            cell.config(data)
+//                            return cell
+                break
+            case .publication(let data):
+//                            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
+//                            cell.config(data)
+//                            return cell
+                break
             }
         })
         
         mainDataSource?.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) -> UICollectionReusableView in
-            
         }
     }
 }

@@ -5,21 +5,26 @@
 //  Created by 박민서 on 11/30/23.
 //
 
-import Foundation
-
+/// 출판물(책) 정보에 사용하는 모델입니다.
 struct Book: Hashable {
+    /// bookID : 책 ID
+    var bookID: Int?
+    /// place : 책 판매 서점
+    var place: String?
+    /// title : 책 제목
     var title: String?
+    /// author : 책 저자 이름
     var author: String?
+    /// cover : 책 커버 사진 URL
     var cover: String?
-    var isbn: String?
-    var description: String?
+    /// publisher : 출판사
     var publisher: String?
-    
-    // 일단 이거 빼고, DTO에서 toDomain()을 추가합시다.
-//    init(responseModel: BooksListResponseModel) {
-//        self.title = responseModel.title
-//        self.author = responseModel.author
-//        self.cover = responseModel.cover
-//        self.isbn = responseModel.isbn
-//    }
+    /// genre : 책 장르
+    var genre: String?
+    /// price : 책 가격
+    var price: String?
+    /// isbn : ??
+    var isbn: String?
+    /// description : ??
+    var description: String?
 }

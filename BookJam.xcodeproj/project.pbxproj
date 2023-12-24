@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8830924A2B3853960082729B /* BookClub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883092492B3853960082729B /* BookClub.swift */; };
 		88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472A4C2B15D6D00073AE61 /* APIManager.swift */; };
 		88472A4F2B15D8100073AE61 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472A4E2B15D8100073AE61 /* APIEndpoint.swift */; };
 		88472A512B15D8500073AE61 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88472A502B15D8500073AE61 /* BaseResponse.swift */; };
@@ -109,6 +110,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		883092492B3853960082729B /* BookClub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClub.swift; sourceTree = "<group>"; };
 		88472A4C2B15D6D00073AE61 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		88472A4E2B15D8100073AE61 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		88472A502B15D8500073AE61 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
@@ -251,10 +253,11 @@
 		88472A8F2B18B70F0073AE61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88472AAB2B18E8420073AE61 /* Place.swift */,
+				883092492B3853960082729B /* BookClub.swift */,
 				88472A902B18B7310073AE61 /* Book.swift */,
 				88472A562B15D9210073AE61 /* Filter.swift */,
 				88472A542B15D9210073AE61 /* LocationCategory.swift */,
-				88472AAB2B18E8420073AE61 /* Place.swift */,
 				88472A962B18BFD40073AE61 /* Address.swift */,
 				88472AAD2B18E9610073AE61 /* Coordinate.swift */,
 				88472AA72B18E6DD0073AE61 /* Image.swift */,
@@ -838,6 +841,7 @@
 				DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */,
 				885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */,
 				949750F42AFDFAF000DCC096 /* MainDetailPageViewController.swift in Sources */,
+				8830924A2B3853960082729B /* BookClub.swift in Sources */,
 				88472AAE2B18E9610073AE61 /* Coordinate.swift in Sources */,
 				885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */,
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
