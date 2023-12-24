@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import SnapKit
-import Then
 
 class CategoryButton: UIButton {
     
@@ -49,13 +47,13 @@ class CategoryButton: UIButton {
         self.setAttributedTitle(NSAttributedString(string: category.name, attributes: [.font : paragraph04!]), for: .normal)
         
         // MARK: - 선택했을 때 색 변경 TEST용
-        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
+//        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
     }
     
     // MARK: - 선택했을 때 색 변경 TEST용
-    @objc func toggleColor() {
-        self.isOn.toggle()
-    }
+//    @objc func toggleColor() {
+//        self.isOn.toggle()
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -88,7 +86,7 @@ class CategoryButton: UIButton {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    CategoryButton(category: .BookClub)
-}
+//@available(iOS 17.0, *)
+//#Preview {
+//    CategoryButton(category: .BookClub)
+//}
