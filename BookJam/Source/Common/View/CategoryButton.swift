@@ -14,7 +14,7 @@ class CategoryButton: UIButton {
     /// 버튼의 카테고리
     var buttonCategory: Category?
     /// 비활성화 색
-    var deactivatedColor: UIColor = .gray05
+    var deactivatedColor: UIColor = .gray03
     
     /// 선택되었을때 true인 변수입니다
     var isOn: Bool = false {
