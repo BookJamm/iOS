@@ -51,16 +51,21 @@ final class LocationViewController: BaseBottomSheetController {
     }
     
     /// 화면 상단 서치바
-    private lazy var searchBar: UISearchBar = UISearchBar().then {
-        $0.placeholder = "상호명 또는 주소 검색"
-        $0.searchBarStyle = .minimal
-
-        $0.searchTextField.backgroundColor = .gray01
-        $0.searchTextField.textColor = .gray06
-        $0.searchTextField.font = paragraph02
-
-        $0.setImage(UIImage.search, for: .search, state: .normal)
-        $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
+//    private lazy var searchBar: UISearchBar = UISearchBar().then {
+//        $0.placeholder = "상호명 또는 주소 검색"
+//        $0.searchBarStyle = .minimal
+//
+//        $0.searchTextField.backgroundColor = .gray01
+//        $0.searchTextField.textColor = .gray06
+//        $0.searchTextField.font = paragraph02
+//
+//        $0.setImage(UIImage.search, for: .search, state: .normal)
+//        $0.setSearchFieldBackgroundImage(UIImage(), for: .normal)
+//    }
+    
+    /// 화면 상단 서치바
+    private lazy var searchBar: SearhBarButton = SearhBarButton(placeHolder: "상호명 또는 주소 검색").then {
+        $0.contentHorizontalAlignment = .leading
     }
     
     /// 목록뷰 상단의 탐색 버튼입니다.
