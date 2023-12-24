@@ -17,8 +17,6 @@ struct Book: Hashable {
     var author: String?
     /// cover : 책 커버 사진 URL
     var cover: String?
-    /// publisher : 출판사
-    var publisher: String?
     /// genre : 책 장르
     var genre: String?
     /// price : 책 가격
@@ -27,4 +25,6 @@ struct Book: Hashable {
     var isbn: String?
     /// description : ??
     var description: String?
+    /// publisher : 출판사
+    var publisher: String?
 }
