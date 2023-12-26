@@ -32,6 +32,10 @@ enum Item: Hashable {
 final class MainDetailPageViewController: UIViewController {
     
     // MARK: Variables
+    
+    var viewModel = MainDetailPageViewModel()
+    let disposeBag = DisposeBag()
+    
     private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
     
     var topView = MainDetailTopView()
@@ -55,6 +59,10 @@ final class MainDetailPageViewController: UIViewController {
         setSnapShot()
         setUpDelegate()
   
+    }
+    
+    private func bindViewModel() {
+        let input = viewModel.Input
     }
     
     // MARK: Constraint

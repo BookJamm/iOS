@@ -7,13 +7,14 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
-class MainDetailPageViewModel{
+final class MainDetailPageViewModel{
     let disposeBag = DisposeBag()
     
     struct Input {
         let homeTrigger: Observable<Void>
-        let newsTrigger: Observable<Void>
+        let newsTrigger: BehaviorSubject<Void>
         let activityTrigger: Observable<Void>
         let reviewTrigger: Observable<Void>
         let bookListTrigger: Observable<Void>
