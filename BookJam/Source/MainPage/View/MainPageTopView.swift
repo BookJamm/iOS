@@ -13,6 +13,8 @@ final class MainPageTopView: UICollectionViewCell {
     
     // MARK: Variables
     
+    static let id = "MainPageTopView"
+    
     /// 상단 서치바
     private lazy var searchBar: SearhBarButton = SearhBarButton(placeHolder: "상호명 또는 주소 검색").then {
         $0.contentHorizontalAlignment = .leading
@@ -43,6 +45,8 @@ final class MainPageTopView: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = .white
 
         [
             searchBar,
@@ -68,7 +72,7 @@ final class MainPageTopView: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(80)
-            $0.bottom.equalToSuperview().offset(-16)
+//            $0.bottom.equalToSuperview().offset(-16)
         }
     }
     
