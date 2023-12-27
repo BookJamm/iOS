@@ -9,7 +9,7 @@ import UIKit
 import Then
 import SnapKit
 
-final class MainPageTopView: UIView {
+final class MainPageTopView: UICollectionViewCell {
     
     // MARK: Variables
     
@@ -76,8 +76,8 @@ final class MainPageTopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-        
-@available(iOS 17.0, *) 
+
+@available(iOS 17.0, *)
 #Preview {
     MainPageTopView()
 }
