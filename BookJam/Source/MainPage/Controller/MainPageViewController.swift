@@ -58,7 +58,9 @@ final class MainPageViewController: UIViewController {
         setDataSource()
         
         var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
-        let items: [mainPageItem] = [mainPageItem.bookPlace(Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205")))]
+        let items: [mainPageItem] = [mainPageItem.bookPlace(Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))),
+                                     mainPageItem.bookPlace(Place(placeId: 0, name: "gre", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))),
+                                     mainPageItem.bookPlace(Place(placeId: 0, name: "tjhr", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205")))]
         
         let topSection = mainPageSection.topView
         let bottomSection = mainPageSection.content
@@ -155,7 +157,7 @@ extension MainPageViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.7))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240))
 //        let group = NSCollectionLayoutGroup(layoutSize: groupSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
