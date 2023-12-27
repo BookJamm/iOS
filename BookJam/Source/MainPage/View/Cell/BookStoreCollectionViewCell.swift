@@ -54,10 +54,10 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
         $0.sizeToFit()
     }
     
-    var bookMarkImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "book.fill")
-        $0.tintColor = gray04
-    }
+//    var bookMarkImageView: UIImageView = UIImageView().then {
+//        $0.image = UIImage(systemName: "book.fill")
+//        $0.tintColor = gray04
+//    }
     
     var timeButton: UIButton = UIButton().then {
         $0.setTitle("   영업중   ", for: .normal)
@@ -81,6 +81,10 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
         $0.font = paragraph02
         $0.text = "리뷰 132"
         $0.sizeToFit()
+    }
+    
+    var locationPinImage: UIImageView = UIImageView().then {
+        $0.image = UIImage.pin
     }
     
     var locationLabel: UILabel = UILabel().then {
@@ -159,11 +163,12 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
     func setUpLayout() {
         [
             bookstoreLabel,
-            bookMarkImageView,
+//            bookMarkImageView,
             timeButton,
             starImageView,
             starLabel,
             reviewCountLabel,
+            locationPinImage,
             locationLabel,
             photosCollectionView
         ].forEach { self.contentView.addSubview($0) }
@@ -185,18 +190,13 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
             $0.leading.equalToSuperview().offset(20)
         }
         
-        bookMarkImageView.snp.makeConstraints{
-            $0.centerY.equalTo(bookstoreLabel)
-            $0.leading.equalTo(bookstoreLabel.snp.trailing).offset(10)
-        }
-        
-        locationLabel.snp.makeConstraints{
-            $0.top.equalTo(bookstoreLabel.snp.bottom).offset(8)
-            $0.leading.equalTo(bookstoreLabel.snp.leading)
-        }
+//        bookMarkImageView.snp.makeConstraints{
+//            $0.centerY.equalTo(bookstoreLabel)
+//            $0.leading.equalTo(bookstoreLabel.snp.trailing).offset(10)
+//        }
         
         timeButton.snp.makeConstraints{
-            $0.top.equalTo(locationLabel.snp.bottom).offset(8)
+            $0.top.equalTo(bookstoreLabel.snp.bottom).offset(8)
             $0.leading.equalTo(bookstoreLabel.snp.leading)
         }
         
@@ -214,9 +214,20 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(starLabel.snp.trailing).offset(10)
             $0.centerY.equalTo(timeButton.snp.centerY)
         }
+        
+        locationPinImage.snp.makeConstraints {
+            $0.size.equalTo(20)
+            $0.top.equalTo(timeButton.snp.bottom).offset(8)
+            $0.leading.equalTo(bookstoreLabel.snp.leading)
+        }
+        
+        locationLabel.snp.makeConstraints{
+            $0.top.equalTo(timeButton.snp.bottom).offset(8)
+            $0.leading.equalTo(locationPinImage.snp.trailing).offset(4)
+        }
 
         photosCollectionView.snp.makeConstraints {
-            $0.top.equalTo(timeButton.snp.bottom).offset(10)
+            $0.top.equalTo(locationLabel.snp.bottom).offset(10)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview()
             $0.height.equalTo(110)
@@ -256,4 +267,9 @@ extension BookStoreCollectionViewCell: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
     }
+}
+
+@available(iOS 17.0, *)
+#Preview {
+    BookStoreCollectionViewCell()
 }
