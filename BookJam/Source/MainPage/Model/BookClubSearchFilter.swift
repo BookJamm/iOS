@@ -5,7 +5,7 @@
 //  Created by 박민서 on 12/27/23.
 //
 
-enum BookClubSearchFilter {
+enum BookClubSearchFilter: CaseIterable {
     case mostRecent
     case mostPopular
     

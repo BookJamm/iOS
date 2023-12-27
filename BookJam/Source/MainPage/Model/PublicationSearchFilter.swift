@@ -5,7 +5,7 @@
 //  Created by 박민서 on 12/27/23.
 //
 
-enum PublicationSearchFilter {
+enum PublicationSearchFilter: CaseIterable {
     case mostRecent
     case mostPopular
     case distance
