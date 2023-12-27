@@ -14,7 +14,7 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
     // MARK: Variables
     static let id = "MainPageCollectionHeaderView"
     
-    var filterList: filters?
+    var filterList: [String]?
     var infoText: String?
     
     private lazy var filterButton: UIButton = UIButton().then {
@@ -41,17 +41,24 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
         $0.layer.masksToBounds = true
         
         // menu 설정
-        $0.menu = UIMenu(children: [
-            UIAction(title: "인기순", state: .on, handler: { action in
+        $0.menu = UIMenu(children: 
+                            filterList?.map { element in
+            return UIAction(title: element, handler: { action in
+                print(action.title)
+            })
+        } ??
+                            [
+            UIAction(title: "인기순11", state: .on, handler: { action in
                 print("인기순")
             }),
-            UIAction(title: "리뷰순", handler: { action in
+            UIAction(title: "리뷰순11", handler: { action in
                 print("리뷰순")
             }),
-            UIAction(title: "평점순", handler: { action in
+            UIAction(title: "평점순11", handler: { action in
                 print("평점순")
             }),
-        ])
+                            ]
+        )
         
         $0.showsMenuAsPrimaryAction = true
         $0.changesSelectionAsPrimaryAction = true
@@ -64,7 +71,7 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
         
         // menu 설정
         $0.menu = UIMenu(children: [
-            UIAction(title: "독립 서점은 대규모 자본, 큰 유통망에 의지하지 않고 꾸며진 작은 서점을 의미해요 :)", handler: {_ in} )
+            UIAction(title: infoText ?? "", handler: {_ in} )
         ])
         
         $0.showsMenuAsPrimaryAction = true
@@ -94,6 +101,24 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(category: Category) {
+        switch category {
+        case .BookStore:
+            filters.allCases.forEach {
+                self.filterList?.append($0.inKorean)
+            }
+        case .BookClub:
+            BookClubSearchFilter.allCases.forEach {
+                self.filterList?.append($0.inKorean)
+            }
+        case .Pulication:
+            PublicationSearchFilter.allCases.forEach {
+                self.filterList?.append($0.inKorean)
+            }
+        }
+        infoText = category.infoComment
     }
 }
 
