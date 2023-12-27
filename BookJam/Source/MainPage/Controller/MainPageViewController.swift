@@ -10,12 +10,14 @@ import SnapKit
 import RxSwift
 
 enum mainPageSection: Hashable {
-    case adBanner // 광고 탭 섹션 (미정)
+//    case adBanner // 광고 탭 섹션 (미정)
     case topView // 검색 버튼 + 카테고리 3개 버튼 섹션
     case content // 해당 내용 목록 섹션
 }
 
 enum mainPageItem: Hashable {
+//    case adBanner
+    case topView // 검색버튼 + 카테고리 버튼 3개
     case bookPlace(Place) // 독립서점
     case bookClub(BookClub) // 독서모임
     case publication(Book) // 출판물
@@ -29,15 +31,16 @@ final class MainPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     /// MainPageViewController 뷰모델
-//    private var viewModel
+    private var viewModel = MainPageViewModel()
     
     
     /// 상단 검색 버튼 + 카테고리 3개버튼 포함한 뷰
-    private lazy var topView = MainPageTopView() // -> 여기에 검색탭 + 카테고리 3개 넣는 View
+//    private lazy var topView = MainPageTopView() // -> 여기에 검색탭 + 카테고리 3개 넣는 View
     
     /// 메인 컨텐츠 목록 보여주는 콜렉션 뷰
     private lazy var mainCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
         $0.backgroundColor = .gray
+        $0.register(MainPageTopView.self, forCellWithReuseIdentifier: MainPageTopView.id) // 섹션 상단 검색탭 + 카테고리 3개 넣는 View
         $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 섹션 콜렉션뷰 셀
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
     }
@@ -52,13 +55,26 @@ final class MainPageViewController: UIViewController {
         setUpBinding()
         setUpLayout()
         setUpConstraint()
+        setDataSource()
         
+        var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
+        let items: [mainPageItem] = [mainPageItem.bookPlace(Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205")))]
+        
+        let topSection = mainPageSection.topView
+        let bottomSection = mainPageSection.content
+    
+        snapshot.appendSections([topSection])
+        snapshot.appendItems([mainPageItem.topView], toSection: topSection)
+        
+                snapshot.appendSections([bottomSection])
+                snapshot.appendItems(items, toSection: bottomSection)
+        mainDataSource?.apply(snapshot)
     }
     
     // MARK: Configure View
     private func setUpView() {
         self.view.backgroundColor = .white
-//        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: Data Binding
@@ -95,10 +111,13 @@ extension MainPageViewController {
     // MARK: Section Layout을 포함한 Compositional Layout return
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        
+        config.interSectionSpacing = 10 // section Spacing
+        config.scrollDirection = .vertical
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
             // mainDataSource에서 관리되는 sectionIdentifier에만 대응하여 return
+            
             let section = self?.mainDataSource?.sectionIdentifier(for: sectionIndex)
+
             switch section {
 //            case.adBanner:
 //                return someSection
@@ -106,8 +125,8 @@ extension MainPageViewController {
                 return self?.createTopViewSection()
             case .content:
                 return self?.createContentSection()
-            default:
-//                return NSCollectionLayoutSection(group: <#T##NSCollectionLayoutGroup#>)
+                
+            default : // 둘 다 해당되지 않는 경우 + section 캐스팅 실패
                 return self?.createTopViewSection()
             }
         }, configuration: config)
@@ -120,7 +139,7 @@ extension MainPageViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(180))
 //        let group = NSCollectionLayoutGroup(layoutSize: groupSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
@@ -132,7 +151,7 @@ extension MainPageViewController {
     // MARK: 카테고리 메인 결과 뷰 Section Layout 생성
     private func createContentSection() -> NSCollectionLayoutSection {
         // item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(320))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(240))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group
@@ -140,8 +159,13 @@ extension MainPageViewController {
 //        let group = NSCollectionLayoutGroup(layoutSize: groupSize)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
+        // header
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        
         // section
         let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [header]
         return section
     }
 }
@@ -153,7 +177,12 @@ extension MainPageViewController: UICollectionViewDelegate {
     private func setDataSource() {
         // 셀 설정
         mainDataSource = UICollectionViewDiffableDataSource<mainPageSection,mainPageItem>(collectionView: mainCollectionView, cellProvider: { (collectionView, indexPath, itemIdentifier) in
+            
             switch itemIdentifier {
+            case .topView:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageTopView.id, for: indexPath) as? MainPageTopView else { return UICollectionViewCell() }
+                return cell
+                
             case .bookPlace(let data):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStoreCollectionViewCell.cellID, for: indexPath) as? BookStoreCollectionViewCell else { return UICollectionViewCell() }
                 cell.cellModel = data
@@ -174,7 +203,7 @@ extension MainPageViewController: UICollectionViewDelegate {
         })
         
         // 헤더 뷰 설정
-        mainDataSource?.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) -> UICollectionReusableView in
+        mainDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainPageCollectionHeaderView.id, for: indexPath) as? MainPageCollectionHeaderView else { return UICollectionReusableView() }
             
             // 여기에서 ViewModel의 state 참조 - Viewmodel 필요
