@@ -14,8 +14,19 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
     // MARK: Variables
     static let id = "MainPageCollectionHeaderView"
     
-    var filterList: [String]?
-    var infoText: String?
+    var filterList: [String]? {
+        didSet {
+//            print(filterList)
+            refreshFilter()
+        }
+    }
+    
+    var infoText: String? {
+        didSet {
+//            print(infoText)
+            refreshInfoText()
+        }
+    }
     
     private lazy var filterButton: UIButton = UIButton().then {
 
@@ -80,6 +91,8 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.backgroundColor = .white
+        
         [
             filterButton,
             infoButton
@@ -104,22 +117,42 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
     }
     
     func configure(category: Category) {
+        
+        var filterArray:[String] = []
+        
         switch category {
         case .BookStore:
             filters.allCases.forEach {
-                self.filterList?.append($0.inKorean)
+                filterArray.append($0.inKorean)
             }
         case .BookClub:
             BookClubSearchFilter.allCases.forEach {
-                self.filterList?.append($0.inKorean)
+                filterArray.append($0.inKorean)
             }
         case .Pulication:
             PublicationSearchFilter.allCases.forEach {
-                self.filterList?.append($0.inKorean)
+                filterArray.append($0.inKorean)
             }
         }
+        
+        filterList = filterArray
         infoText = category.infoComment
     }
+    
+    private func refreshFilter() {
+        self.filterButton.menu = UIMenu(children: filterList?.map { element in
+            return UIAction(title: element, handler: { action in
+                print(action.title)
+            })
+        } ?? [UIAction(title: "", handler: { _ in} )] )
+    }
+    
+    private func refreshInfoText() {
+        self.infoButton.menu = UIMenu(children: [
+            UIAction(title: infoText ?? "", handler: { _ in} )
+        ])
+    }
+    
 }
 
 @available(iOS 17.0, *)
