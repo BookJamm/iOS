@@ -11,22 +11,7 @@ import RxSwift
 import RxCocoa
 import Then
 
-//디테일 페이지 섹션 레이아웃
-enum DetailSection: Hashable {
-    case Home
-    case Review
-    case Activity
-    case News(String)
-    case BookList
-}
 
-//디테일 페이지 셀
-enum Item: Hashable {
-    case ReviewItem(Review)
-    case ActivityItem(Activity)
-    case NewsItem(News)
-    case BookListItem(Book)
-}
 
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
@@ -36,7 +21,7 @@ final class MainDetailPageViewController: UIViewController {
     private var viewModel = MainDetailPageViewModel()
     let disposeBag = DisposeBag()
     
-    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
+    private var dataSource = [SettingSection]()
     
     var topView = MainDetailTopView()
     
@@ -58,7 +43,7 @@ final class MainDetailPageViewController: UIViewController {
         setUpConstraint()
         setSnapShot()
         setUpDelegate()
-  
+        
     }
     
     
@@ -134,8 +119,6 @@ final class MainDetailPageViewController: UIViewController {
 
             print("소식 탭 등록")
             
-            tableView.deleteSections(IndexSet(integer: 0), with: .fade) // 홈탭 삭제
-            tableView.insertSections(IndexSet(integer: 1), with: .fade) // 소식탭 추가
 
         default:
             break
