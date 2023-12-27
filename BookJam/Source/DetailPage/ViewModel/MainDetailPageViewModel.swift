@@ -26,6 +26,9 @@ final class MainDetailPageViewModel{
         let activityList: Observable<Void>
         let reviewList: Observable<Void>
         let bookListList: Observable<Void>
-        
     }
+    
+    let newsList = BehaviorRelay<[PlaceIdNewsResponseModel]>(value: [PlaceIdNewsResponseModel(newsId: 1, createdAt: "2022-22-22", updatedAt: "2022-22-22", title: "소식 제목", contents: "소식 제목", placeId: 1) ])
+    
+    
 }

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainDetailHomeHeader: UITableViewHeaderFooterView {
 
@@ -14,6 +16,10 @@ class MainDetailHomeHeader: UITableViewHeaderFooterView {
     static let id = "MainDetailHomeHeader"
     
     var segmentedControl = MainDetailSegmentedControl()
+    
+    let segmentedControlValue = PublishSubject<Int>()
+
+    let disposeBag = DisposeBag()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -36,8 +42,16 @@ class MainDetailHomeHeader: UITableViewHeaderFooterView {
     // MARK: View
     
     func setUpView() {
-    }
-    
+            // 세그먼티드 컨트롤 설정
+            // ...
+
+            // 세그먼티드 컨트롤 값 변경을 Subject에 바인딩
+            segmentedControl.rx.selectedSegmentIndex
+                .bind(to: segmentedControlValue)
+                .disposed(by: disposeBag)
+        
+        
+        }
     
     // MARK: Layout
     
