@@ -149,6 +149,7 @@ class BookStoreCollectionViewCell: UICollectionViewCell {
     // MARK: View
     
     func setUpView() {
+        self.backgroundColor = .white
         fetchCellData()
     }
     
