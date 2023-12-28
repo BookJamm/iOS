@@ -36,6 +36,7 @@ class MainDetailSegmentedControl: UISegmentedControl {
         setTitleTextAttributes([
             NSAttributedString.Key.foregroundColor: main03!,
             NSAttributedString.Key.font: paragraph03
+            
         ], for: .selected)
         
         // Default segments

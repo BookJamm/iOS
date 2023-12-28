@@ -11,28 +11,17 @@ import RxSwift
 import RxCocoa
 import Then
 
-//디테일 페이지 섹션 레이아웃
-enum DetailSection: Hashable {
-    case Home
-    case Review
-    case Activity
-    case News(String)
-    case BookList
-}
 
-//디테일 페이지 셀
-enum Item: Hashable {
-    case ReviewItem(Review)
-    case ActivityItem(Activity)
-    case NewsItem(News)
-    case BookListItem(Book)
-}
 
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
     
     // MARK: Variables
-    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
+    
+    private var viewModel = MainDetailPageViewModel()
+    let disposeBag = DisposeBag()
+    
+    private var dataSource = [SettingSection]()
     
     var topView = MainDetailTopView()
     
@@ -54,8 +43,9 @@ final class MainDetailPageViewController: UIViewController {
         setUpConstraint()
         setSnapShot()
         setUpDelegate()
-  
+        
     }
+    
     
     // MARK: Constraint
     
@@ -114,6 +104,29 @@ final class MainDetailPageViewController: UIViewController {
         
         return section
     }
+    
+    func updateTableViewUI(_ selectedIndex: Int) {
+           // 선택된 인덱스에 따라 테이블 뷰의 UI를 업데이트하는 로직을 수행
+           // 예를 들어, 데이터를 변경하고 다시 로드하는 등의 작업을 수행할 수 있음
+           print("Selected index: \(selectedIndex)")
+           // 여기서 필요한 로직을 구현하면 됩니다.
+        
+        tableView.beginUpdates()
+
+        
+        switch selectedIndex {
+        case 1:
+
+            print("소식 탭 등록")
+            
+
+        default:
+            break
+        }
+        
+        tableView.endUpdates()
+
+       }
     
     
 }
@@ -182,7 +195,7 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
         return 1
     }
     
-    // 소식 셀 데이터 삽입
+    // 셀 데이터 삽입
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
         
@@ -198,9 +211,17 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
         
     }
     
+    //헤더 등록 및 rx 바인딩
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id)
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id) as! MainDetailHomeHeader
         
+        header.segmentedControlValue
+            .subscribe(onNext: { [weak self] selectedIndex in
+                // selectedIndex를 사용하여 테이블 뷰의 UI 업데이트 로직을 수행
+                self?.updateTableViewUI(selectedIndex)
+            })
+            .disposed(by: disposeBag
+            )
         return header
     }
     

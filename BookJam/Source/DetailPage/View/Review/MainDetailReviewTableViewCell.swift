@@ -38,9 +38,11 @@ class MainDetailReviewTableViewCell: UITableViewCell {
         $0.minimumLineSpacing = 5
         $0.minimumInteritemSpacing = 5
         $0.itemSize = CGSize(width: 100, height: 100)
+        
     }).then {
         $0.showsHorizontalScrollIndicator = false
         $0.register(BookStorePhotoCollectionViewCell.self, forCellWithReuseIdentifier: BookStorePhotoCollectionViewCell.id)
+        $0.backgroundColor = .blue  //임시
     }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -90,6 +92,15 @@ class MainDetailReviewTableViewCell: UITableViewCell {
         reviewDate.snp.makeConstraints{
             $0.top.equalTo(nickNameLabel.snp.bottom).offset(2)
             $0.leading.equalTo(nickNameLabel)
+        }
+        reviewContent.snp.makeConstraints{
+            $0.top.equalTo(reviewDate.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(20)
+        }
+        photosCollectionView.snp.makeConstraints{
+            $0.top.equalTo(reviewContent.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(88)
         }
         
     }
