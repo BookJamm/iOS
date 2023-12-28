@@ -40,8 +40,9 @@ final class LocationAnnotationView: MKAnnotationView {
 
     private func setupUI() {
         backgroundColor = .clear
-        customImage.image = UIImage(named: "LogoCharacter")//?.withRenderingMode(.alwaysTemplate)
-        customImage.tintColor = main03
+        customImage.image = UIImage(named: "pin")//?.withRenderingMode(.alwaysTemplate)
+        customImage.contentMode = .scaleAspectFit
+//        customImage.tintColor = main03
         self.addSubview(customImage)
         customImage.snp.makeConstraints {
             $0.edges.equalToSuperview()

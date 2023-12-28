@@ -45,16 +45,16 @@ class ColorToggleButton: UIButton {
         self.setAttributedTitle(NSAttributedString(string: title, attributes: [.font : captionText02!]), for: .normal)
         
         // MARK: - 선택했을 때 색 변경
-        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
+//        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func toggleColor() {
-        self.isOn.toggle()
-    }
+//    @objc func toggleColor() {
+//        self.isOn.toggle()
+//    }
     
     /// 선택되지 않은 기본 설정
     private func defaultConfig() -> UIButton.Configuration {

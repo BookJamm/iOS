@@ -31,13 +31,20 @@ public class RxMapViewReactiveAnnotationDataSource<S: MKAnnotation>
 
     public func mapView(_ mapView: MKMapView, observedEvent: Event<[S]>) {
         Binder(self) { _, newAnnotations in
+            // Diff 사용할 때
+//            DispatchQueue.main.async {
+//                let diff = Diff.calculateFrom(
+//                    previous: self.currentAnnotations,
+//                    next: newAnnotations)
+//                self.currentAnnotations = newAnnotations
+//                mapView.addAnnotations(diff.added)
+//                mapView.removeAnnotations(diff.removed)
+//            }
+            
             DispatchQueue.main.async {
-                let diff = Diff.calculateFrom(
-                    previous: self.currentAnnotations,
-                    next: newAnnotations)
+                mapView.removeAnnotations(self.currentAnnotations)
+                mapView.addAnnotations(newAnnotations)
                 self.currentAnnotations = newAnnotations
-                mapView.addAnnotations(diff.added)
-                mapView.removeAnnotations(diff.removed)
             }
         }.on(observedEvent)
     }

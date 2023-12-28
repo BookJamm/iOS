@@ -1,16 +1,15 @@
 //
-//  LoctionViewModel.swift
+//  MainPageViewModel.swift
 //  BookJam
 //
-//  Created by 박민서 on 12/2/23.
+//  Created by 박민서 on 12/27/23.
 //
 
 import RxSwift
 import CoreLocation
 import RxRelay
-import MapKit
 
-final class LocationViewModel: ViewModelType {
+final class MainPageViewModel: ViewModelType {
     
     var disposeBag = DisposeBag()
     
@@ -24,8 +23,6 @@ final class LocationViewModel: ViewModelType {
     struct Output {
         /// 서점 목록
         let bookStoreList: Observable<[Place]>
-        /// 지도에 표시되는 서점 목록
-        let bookStoreAnnotationList: Observable<[MKAnnotation]>
     }
     
     // MARK: State
@@ -57,22 +54,7 @@ final class LocationViewModel: ViewModelType {
                 Place(placeId: 0, name: "huil", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.498412", lon: "126.827221"))
             ])
         }.bind(to: bookStoreList).disposed(by: disposeBag)
-        
-        // MARK: bookStoreList transform -> Annotation에 활용
-        let bookStoreAnnotationList = bookStoreList.map { placeList -> [MKAnnotation] in
-            return placeList.compactMap { place -> MKAnnotation? in
-                guard let lat = place.coords?.lat, let lon = place.coords?.lon else { return nil }
-                
-                let pin = MKPointAnnotation()
-                pin.coordinate = CLLocationCoordinate2D(latitude: Double(lat) ?? 0, longitude: Double(lon) ?? 0)
-                pin.title = place.name
-                pin.subtitle = LocationCategory(rawValue: place.category ?? 0)?.inKorean
-                
-                return pin
-            }
-        }
 
-            
-        return Output(bookStoreList: bookStoreList.asObservable(), bookStoreAnnotationList: bookStoreAnnotationList)
+        return Output(bookStoreList: bookStoreList.asObservable())
     }
 }
