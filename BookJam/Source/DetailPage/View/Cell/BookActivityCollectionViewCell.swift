@@ -121,7 +121,7 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(locationPinImageView.snp.trailing).offset(4)
         }
         activityTypeButton.snp.makeConstraints{
-            $0.top.equalTo(locationLabel.snp.bottom).offset(4)
+            $0.bottom.equalToSuperview().inset(32)
             $0.leading.equalTo(locationPinImageView)
         }
         

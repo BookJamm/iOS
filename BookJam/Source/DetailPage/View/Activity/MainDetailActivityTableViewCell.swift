@@ -13,7 +13,7 @@ class MainDetailActivityTableViewCell: UITableViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
-        $0.image = UIImage(named: "squareDefaultImage")
+        $0.image = UIImage(named: "defaultBook")
     }
     
     var titleLabel: UILabel = UILabel().then {

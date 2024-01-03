@@ -22,7 +22,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.image = UIImage(named: "emptyBook")
+        $0.image = UIImage(named: "defaultBook")
     }
     
     var titleLabel: UILabel = UILabel().then {
