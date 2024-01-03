@@ -12,7 +12,6 @@ import RxCocoa
 import Then
 
 
-
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
     
@@ -119,6 +118,8 @@ final class MainDetailPageViewController: UIViewController {
 
             print("소식 탭 등록")
             
+            
+        
 
         default:
             break
@@ -131,7 +132,52 @@ final class MainDetailPageViewController: UIViewController {
     
 }
 
-@available(iOS 16.0, *) // 이중 스크롤 구현
+
+
+@available(iOS 16.0, *)
+extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    // 셀 데이터 삽입
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+        
+        cell.selectionStyle = .none
+        cell.collectionView.delegate = self
+
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 1000 //임시
+        
+    }
+    
+    //헤더 등록 및 rx 바인딩
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id) as! MainDetailHomeHeader
+        
+        header.segmentedControlValue
+            .subscribe(onNext: { [weak self] selectedIndex in
+                // selectedIndex를 사용하여 테이블 뷰의 UI 업데이트 로직을 수행
+                self?.updateTableViewUI(selectedIndex)
+            })
+            .disposed(by: disposeBag
+            )
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+}
+
+// MARK: 이중 스크롤 구현 부분
+@available(iOS 16.0, *)
 extension MainDetailPageViewController: UICollectionViewDelegate {
     private enum Policy {
             static let floatingPointTolerance = 0.1
@@ -187,48 +233,6 @@ extension MainDetailPageViewController: UICollectionViewDelegate {
         }
         
     }
-}
-
-@available(iOS 16.0, *)
-extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    // 셀 데이터 삽입
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-        
-        cell.selectionStyle = .none
-        cell.collectionView.delegate = self
-
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 1000 //임시
-        
-    }
-    
-    //헤더 등록 및 rx 바인딩
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id) as! MainDetailHomeHeader
-        
-        header.segmentedControlValue
-            .subscribe(onNext: { [weak self] selectedIndex in
-                // selectedIndex를 사용하여 테이블 뷰의 UI 업데이트 로직을 수행
-                self?.updateTableViewUI(selectedIndex)
-            })
-            .disposed(by: disposeBag
-            )
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    
 }
 
 import SwiftUI

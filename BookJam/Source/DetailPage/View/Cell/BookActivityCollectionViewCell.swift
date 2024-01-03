@@ -28,41 +28,38 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     }
     
     var titleLabel: UILabel = UILabel().then {
-        $0.font = paragraph01
-        $0.textColor = main03
-        $0.text = "활동 이름"
+        $0.font = title03
+        $0.textColor = .black
+        $0.text = "여행하는 독서모임"
         
     }
     
-    var starImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "star.fill")
-        $0.tintColor = warning
+    var dateLabel: UILabel = UILabel().then {
+        $0.font = captionText02
+        $0.text = "11월 29일(수) 16:00"
+        $0.sizeToFit()
     }
     
-    var ratingLabel: UILabel = UILabel().then {
+    var locationPinImageView: UIImageView = UIImageView().then {
+        $0.image = UIImage(named: "locationPin")
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFit
+        $0.tintColor = gray07
+    }
+
+    var locationLabel: UILabel = UILabel().then {
         $0.font = paragraph05
-        $0.text = "5.00"
+        $0.textColor = gray06
+        $0.text = "책발전소 광교"
+        $0.sizeToFit()
     }
     
-    var heartImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "heart")
-        $0.tintColor = .black
-    }
-    
-    var shareImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage(systemName: "arrowshape.turn.up.right")
-        $0.tintColor = .black
-                           
-    }
-    
-    var joinButton: UIButton = UIButton().then {
-        $0.setTitle("참여하기", for: .normal)
-        $0.setTitleColor(UIColor(hexCode: "834205"), for: .normal)
+    var activityTypeButton: UIButton = UIButton().then {
+        $0.setTitle("    글쓰기    ", for: .normal)
+        $0.setTitleColor(main03, for: .normal)
         $0.titleLabel?.font = captionText01
-        $0.layer.borderWidth = 0.7
-        $0.layer.borderColor = UIColor(hexCode: "834205").cgColor
         $0.layer.cornerRadius = 14
-         $0.addTarget(self, action: #selector(didJoinButtonTapped), for: .touchUpInside)
+        $0.backgroundColor = main05
     }
     
     override init(frame: CGRect) {
@@ -90,11 +87,11 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
         [
             activityImageView,
             titleLabel,
-            starImageView,
-            ratingLabel,
-            heartImageView,
-            shareImageView,
-            joinButton
+            dateLabel,
+            locationLabel,
+            locationPinImageView,
+            activityTypeButton,
+          
         ].forEach { self.addSubview($0) }
     }
     
@@ -102,41 +99,33 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
     
     func setUpConstraint() {
         activityImageView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.width.equalTo(150)
+            $0.top.bottom.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().offset(20)
+            $0.size.equalTo(120)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(activityImageView.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.leading.equalTo(activityImageView.snp.trailing).offset(12)
+            $0.top.equalTo(activityImageView)
+        }
+        dateLabel.snp.makeConstraints{
+            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(titleLabel)
+        }
+        locationPinImageView.snp.makeConstraints{
+            $0.top.equalTo(dateLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(dateLabel)
+        }
+        locationLabel.snp.makeConstraints{
+            $0.top.equalTo(locationPinImageView)
+            $0.leading.equalTo(locationPinImageView.snp.trailing).offset(4)
+        }
+        activityTypeButton.snp.makeConstraints{
+            $0.top.equalTo(locationLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(locationPinImageView)
         }
         
-        starImageView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-        }
         
-        ratingLabel.snp.makeConstraints {
-            $0.centerY.equalTo(starImageView)
-            $0.leading.equalTo(starImageView.snp.trailing).offset(2)
-        }
-        
-        heartImageView.snp.makeConstraints {
-            $0.top.equalTo(starImageView.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-        }
-        
-        shareImageView.snp.makeConstraints {
-            $0.centerY.equalTo(heartImageView)
-            $0.leading.equalTo(heartImageView.snp.trailing).offset(5)
-        }
-        
-        joinButton.snp.makeConstraints {
-            $0.top.equalTo(heartImageView.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(activityImageView)
-        }
     }
     
     // MARK: Functions
@@ -151,18 +140,18 @@ class BookActivityCollectionViewCell: UICollectionViewCell {
         activityImageView.kf.setImage(with: URL(string: url))
     }
 }
-//
-//#if DEBUG
-//
-//@available(iOS 13.0, *)
-//struct BookActivityCollectionViewCell_Preview: PreviewProvider {
-//    static var previews: some View {
-//        UIViewPreview {
-//            let cell = BookActivityCollectionViewCell()
-//            return cell
-//        }
-//        .previewLayout(.sizeThatFits)
-//        .padding(10)
-//    }
-//}
-//#endif
+
+#if DEBUG
+
+@available(iOS 16.0, *)
+struct BookActivityCollectionViewCell_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let cell = BookActivityCollectionViewCell()
+            return cell
+        }
+        .previewLayout(.sizeThatFits)
+        .padding(10)
+    }
+}
+#endif
