@@ -123,8 +123,16 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         //책 목록
         let section2 = DetailSection.BookList
         snapshot.appendSections([section2])
-        let bookData = Item.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        snapshot.appendItems([bookData], toSection: section2)
+        let bookData = Item.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        let bookData1 = Item.BookListItem(Book(title: "진격거2", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        let bookData2 = Item.BookListItem(Book(title: "진격거3", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        
+        let bookItems = [
+            bookData,
+            bookData1,
+            bookData2
+        ]
+        snapshot.appendItems(bookItems, toSection: section2)
         
         // 독서 활동
         let section = DetailSection.Activity
@@ -248,13 +256,13 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     }
     
     private func createBookListSection() -> NSCollectionLayoutSection {//책 종류 섹션
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.38), heightDimension: .absolute(320))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(275))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
