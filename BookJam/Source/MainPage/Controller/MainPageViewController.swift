@@ -30,8 +30,16 @@ final class MainPageViewController: UIViewController {
     /// Rx - DisposeBag
     private var disposeBag = DisposeBag()
     
-    /// MainPageViewController 뷰모델
+    /// Rx - ViewModel
     private var viewModel = MainPageViewModel()
+    
+    /// Rx - topView 카테고리 선택 to MainPageCollectionHeaderViewModel
+    private let selectCategory = PublishSubject<Category>()
+    
+    /// Rx - HeaderView Filter 선택 from MainPageCollectionHeaderViewModel
+    private let selectFilter = PublishSubject<CombinedSearchFilter>()
+   
+    
     
     
     /// 상단 검색 버튼 + 카테고리 3개버튼 포함한 뷰
@@ -68,8 +76,8 @@ final class MainPageViewController: UIViewController {
         snapshot.appendSections([topSection])
         snapshot.appendItems([mainPageItem.topView], toSection: topSection)
         
-                snapshot.appendSections([bottomSection])
-                snapshot.appendItems(items, toSection: bottomSection)
+        snapshot.appendSections([bottomSection])
+        snapshot.appendItems(items, toSection: bottomSection)
         mainDataSource?.apply(snapshot)
     }
     
@@ -82,12 +90,18 @@ final class MainPageViewController: UIViewController {
     // MARK: Data Binding
     private func setUpBinding() {
         // MARK: Input
-//        let input = LocationViewModel.Input(refreshTrigger: currentLocateBtn.rx.tap.asObservable())
+        let input = MainPageViewModel.Input(
+            categoryTrigger: self.selectCategory.asObservable(),
+            selectFilter: self.selectFilter.asObservable()
+        )
         
         // MARK: Output
-//        let output = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input)
         
-        
+//        output.selectedCategory // topview에 디자인 연결
+//        
+//        output.selectedFilter // headerview에 목록 연결
+
     }
     
     // MARK: Layout
@@ -183,6 +197,11 @@ extension MainPageViewController: UICollectionViewDelegate {
             switch itemIdentifier {
             case .topView:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageTopView.id, for: indexPath) as? MainPageTopView else { return UICollectionViewCell() }
+                
+                cell.categorySelectEvent
+                    .bind(to: self.selectCategory)
+                    .disposed(by: self.disposeBag)
+                        
                 return cell
                 
             case .bookPlace(let data):
@@ -207,10 +226,30 @@ extension MainPageViewController: UICollectionViewDelegate {
         // 헤더 뷰 설정
         mainDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainPageCollectionHeaderView.id, for: indexPath) as? MainPageCollectionHeaderView else { return UICollectionReusableView() }
-            
+                
             // 여기에서 ViewModel의 state 참조 - Viewmodel 필요
-            let state = Category.BookClub
-            header.configure(category: state)
+            
+            // HeaderView -> MainPage
+//            header.filterSelectEvent
+//                .subscribe(onNext: {
+//                    print($0.inKorean)
+//                }, onError: {
+//                    print($0.localizedDescription)
+//                }, onCompleted: {
+//                    print("com")
+//                }, onDisposed: {
+//                    print("dis")
+//                })
+//                .disposed(by: self.disposeBag)
+            
+            self.selectFilter
+                .bind(to: header.filterSelectEvent)
+                .disposed(by: self.disposeBag)
+            
+            // MainPage -> HeaderView
+            self.selectCategory
+                .bind(to: header.selectedCategory)
+                .disposed(by: self.disposeBag)
             
             return header
         }
