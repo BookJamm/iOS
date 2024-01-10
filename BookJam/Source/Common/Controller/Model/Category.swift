@@ -14,7 +14,7 @@ enum Category {
     /// 모임
     case BookClub
     /// 출판물
-    case Pulication
+    case Publication
     
     /// 해당 카테고리의 테마색입니다.
     var categoryColor: UIColor {
@@ -23,7 +23,7 @@ enum Category {
             return .main01
         case .BookClub:
             return UIColor(hexCode: "80C80A")
-        case .Pulication:
+        case .Publication:
             return .active
         }
     }
@@ -35,7 +35,7 @@ enum Category {
             return "독립서점"
         case .BookClub:
             return "모임"
-        case .Pulication:
+        case .Publication:
             return "출판물"
         }
     }
@@ -47,8 +47,20 @@ enum Category {
             return .bookStore
         case .BookClub:
             return .activity
-        case .Pulication:
+        case .Publication:
             return .book
+        }
+    }
+    
+    /// 각 카테고리에 해당하는 필터 값을 반환합니다.
+    var filters: [CombinedSearchFilter] {
+        switch self {
+        case .BookStore:
+            return [.rating, .review, .distance]
+        case .BookClub:
+            return [.mostRecent, .mostPopular]
+        case .Publication:
+            return [.mostRecent, .mostPopular, .distance]
         }
     }
 }

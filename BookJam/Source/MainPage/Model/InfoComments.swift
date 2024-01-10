@@ -14,7 +14,7 @@ extension Category {
             return "독립 서점은 대규모 자본, 큰 유통망에 의지하지 않고 꾸며진 작은 서점을 의미해요 :)"
         case .BookClub:
             return "독서 모임 :)"
-        case .Pulication:
+        case .Publication:
             return "독립 출판물 :)"
         }
     }
