@@ -63,18 +63,12 @@ final class MainPageViewController: UIViewController {
         super.viewDidLoad()
         
         setUpView()
-        setUpBinding()
         setUpLayout()
         setUpConstraint()
         setDataSource()
         
-        var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
-        let topSection = mainPageSection.topView
-        snapshot.appendSections([topSection])
-        snapshot.appendItems([mainPageItem.topView], toSection: topSection)
-        mainDataSource?.apply(snapshot)
-        print("기본 레이아웃 적용")
-//        self.viewModel.selectedCategory.accept(.BookStore)
+        setUpBinding()
+        self.viewModel.selectedCategory.accept(.BookStore)
     }
     
     // MARK: Configure View
