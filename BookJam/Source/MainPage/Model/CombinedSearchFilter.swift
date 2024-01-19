@@ -23,9 +23,9 @@ enum CombinedSearchFilter {
         case .distance:
             return "거리순"
         case .mostPopular:
-            return "최신순"
-        case .mostRecent:
             return "인기순"
+        case .mostRecent:
+            return "최신순"
         }
     }
 }
