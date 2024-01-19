@@ -83,6 +83,11 @@ class BookClubCollectionViewCell: UICollectionViewCell {
         fatalError("init (coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        fetchCellData()
+    }
+    
     // MARK: View
     
     func setUpView() {
