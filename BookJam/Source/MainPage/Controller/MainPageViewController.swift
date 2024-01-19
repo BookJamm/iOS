@@ -50,8 +50,9 @@ final class MainPageViewController: UIViewController {
         $0.backgroundColor = .gray02
         
         $0.register(MainPageTopView.self, forCellWithReuseIdentifier: MainPageTopView.id) // 섹션 상단 검색탭 + 카테고리 3개 넣는 View
-        $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 섹션 콜렉션뷰 셀
-        $0.register(BookClubCollectionViewCell.self, forCellWithReuseIdentifier: BookClubCollectionViewCell.id) // 섹션 콜렉션뷰 셀
+        $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 독립서점 셀
+        $0.register(BookClubCollectionViewCell.self, forCellWithReuseIdentifier: BookClubCollectionViewCell.id) // 모임 셀
+        $0.register(PublicationCollectionViewCell.self, forCellWithReuseIdentifier: PublicationCollectionViewCell.id) // 출판물 셀
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
     }
     
@@ -272,8 +273,8 @@ extension MainPageViewController: UICollectionViewDelegate {
                 
             // Cell 수정 필요
             case .publication(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStoreCollectionViewCell.cellID, for: indexPath) as? BookStoreCollectionViewCell else { return UICollectionViewCell() }
-//                cell.cellModel = data
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PublicationCollectionViewCell.id, for: indexPath) as? PublicationCollectionViewCell else { return UICollectionViewCell() }
+                cell.cellModel = data
                 return cell
             }
         })
