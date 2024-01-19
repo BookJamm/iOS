@@ -51,6 +51,7 @@ final class MainPageViewController: UIViewController {
         
         $0.register(MainPageTopView.self, forCellWithReuseIdentifier: MainPageTopView.id) // 섹션 상단 검색탭 + 카테고리 3개 넣는 View
         $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 섹션 콜렉션뷰 셀
+        $0.register(BookClubCollectionViewCell.self, forCellWithReuseIdentifier: BookClubCollectionViewCell.id) // 섹션 콜렉션뷰 셀
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
     }
     
@@ -232,11 +233,13 @@ extension MainPageViewController {
         
         // header
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading, absoluteOffset: CGPoint(x: 0, y: -1))
+//        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
         
         // section
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header]
+        section.interGroupSpacing = 1 // group 간 간격 설정
         return section
     }
 }
@@ -263,8 +266,8 @@ extension MainPageViewController: UICollectionViewDelegate {
                 
             // Cell 수정 필요
             case .bookClub(let data):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookStoreCollectionViewCell.cellID, for: indexPath) as? BookStoreCollectionViewCell else { return UICollectionViewCell() }
-//                cell.cellModel = data
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookClubCollectionViewCell.id, for: indexPath) as? BookClubCollectionViewCell else { return UICollectionViewCell() }
+                cell.cellModel = data
                 return cell
                 
             // Cell 수정 필요
@@ -285,48 +288,5 @@ extension MainPageViewController: UICollectionViewDelegate {
             return header
         }
     }
-    
-    // didSelectItemAt
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        // section으로 접근
-//        guard let section = mainDataSource?.sectionIdentifier(for: indexPath.section) else { return }
-//        
-//        switch section {
-//            
-//        case .adBanner:
-//            <#code#>
-//        case .topView:
-//            <#code#>
-//        case .content:
-//            <#code#>
-//        }
-//
-//        
-//        // item으로 접근
-//        guard let selectedItem = mainDataSource?.itemIdentifier(for: indexPath) else { return }
-//        
-//        switch selectedItem {
-//            
-//        case .bookPlace(_):
-//            <#code#>
-//        case .bookClub(_):
-//            <#code#>
-//        case .publication(_):
-//            <#code#>
-//        }
-         
-//         //check whether there was another item already selected in this section
-//         if let nameOfCurrentlySelectedItemInThisSection = stateTracker[indexPath.section] {
-//             //we need to unselect this item, get its indexpath from the other tracker
-//             if let indexPathToDeselect = indexPathTracker[nameOfCurrentlySelectedItemInThisSection] {
-//                 collectionView.deselectItem(at: indexPathToDeselect, animated: false)
-//             }
-//         }
 
-        
-         // update the trackers
-//         stateTracker[indexPath.section] = selectedItem.name
-//         indexPathTracker[selectedItem.name] = indexPath
-     }
 }
