@@ -1,4 +1,4 @@
-//
+///
 //  MainPageViewController.swift
 //  BookJam
 //
@@ -34,10 +34,10 @@ final class MainPageViewController: UIViewController {
     private var viewModel = MainPageViewModel()
     
     /// Rx - topView 카테고리 선택 to MainPageCollectionHeaderViewModel
-    private let selectCategory = PublishSubject<Category>()
+//    private let selectCategory = PublishSubject<Category>()
     
     /// Rx - HeaderView Filter 선택 from MainPageCollectionHeaderViewModel
-    private let selectFilter = PublishSubject<CombinedSearchFilter>()
+//    private let selectFilter = PublishSubject<CombinedSearchFilter>()
    
     
     
@@ -47,7 +47,8 @@ final class MainPageViewController: UIViewController {
     
     /// 메인 컨텐츠 목록 보여주는 콜렉션 뷰
     private lazy var mainCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .gray02
+        
         $0.register(MainPageTopView.self, forCellWithReuseIdentifier: MainPageTopView.id) // 섹션 상단 검색탭 + 카테고리 3개 넣는 View
         $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 섹션 콜렉션뷰 셀
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
@@ -66,19 +67,12 @@ final class MainPageViewController: UIViewController {
         setDataSource()
         
         var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
-        let items: [mainPageItem] = [mainPageItem.bookPlace(Place(placeId: 0, name: "asdf", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))),
-                                     mainPageItem.bookPlace(Place(placeId: 0, name: "gre", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205"))),
-                                     mainPageItem.bookPlace(Place(placeId: 0, name: "tjhr", rating: 0.0, reviewCount: 0, category: 0, open: true, images: nil, address: nil, coords: Coordinate(lat: "37.493421", lon: "126.829205")))]
-        
         let topSection = mainPageSection.topView
-        let bottomSection = mainPageSection.content
-    
         snapshot.appendSections([topSection])
         snapshot.appendItems([mainPageItem.topView], toSection: topSection)
-        
-        snapshot.appendSections([bottomSection])
-        snapshot.appendItems(items, toSection: bottomSection)
         mainDataSource?.apply(snapshot)
+        print("기본 레이아웃 적용")
+//        self.viewModel.selectedCategory.accept(.BookStore)
     }
     
     // MARK: Configure View
@@ -90,18 +84,79 @@ final class MainPageViewController: UIViewController {
     // MARK: Data Binding
     private func setUpBinding() {
         // MARK: Input
-        let input = MainPageViewModel.Input(
-            categoryTrigger: self.selectCategory.asObservable(),
-            selectFilter: self.selectFilter.asObservable()
-        )
+//        let input = MainPageViewModel.Input(
+//            categoryTrigger: self.selectCategory.asObservable(),
+//            selectFilter: self.selectFilter.asObservable()
+//        )
         
         // MARK: Output
-        let output = viewModel.transform(input: input)
-        
+//        let output = viewModel.transform(input: input)
+//        output.
 //        output.selectedCategory // topview에 디자인 연결
 //        
 //        output.selectedFilter // headerview에 목록 연결
-
+        
+        let output = viewModel.transform(input: MainPageViewModel.Input())
+        
+        output.bookStoreList.bind { [weak self] bookStoreList in
+            var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
+            let items = bookStoreList.map { bookStore in
+                return mainPageItem.bookPlace(bookStore)
+            }
+            
+            let topSection = mainPageSection.topView
+            let bottomSection = mainPageSection.content
+            
+            snapshot.appendSections([topSection])
+            snapshot.appendItems([mainPageItem.topView], toSection: topSection)
+            
+            snapshot.appendSections([bottomSection])
+            snapshot.appendItems(items, toSection: bottomSection)
+            
+            self?.mainDataSource?.apply(snapshot)
+            print("bookStoreList 레이아웃 적용")
+        }
+        .disposed(by: disposeBag)
+        
+        output.bookClubList.bind { [weak self] bookClubList in
+            var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
+            let items = bookClubList.map { bookClub in
+                return mainPageItem.bookClub(bookClub)
+            }
+            
+            let topSection = mainPageSection.topView
+            let bottomSection = mainPageSection.content
+            
+            snapshot.appendSections([topSection])
+            snapshot.appendItems([mainPageItem.topView], toSection: topSection)
+            
+            snapshot.appendSections([bottomSection])
+            snapshot.appendItems(items, toSection: bottomSection)
+            
+            self?.mainDataSource?.apply(snapshot)
+            print("bookClubList 레이아웃 적용")
+        }
+        .disposed(by: disposeBag)
+        
+        output.publicationList.bind { [weak self] publicationList in
+            var snapshot = NSDiffableDataSourceSnapshot<mainPageSection,mainPageItem>()
+            let items = publicationList.map { publication in
+                return mainPageItem.publication(publication)
+            }
+            
+            let topSection = mainPageSection.topView
+            let bottomSection = mainPageSection.content
+            
+            snapshot.appendSections([topSection])
+            snapshot.appendItems([mainPageItem.topView], toSection: topSection)
+            
+            snapshot.appendSections([bottomSection])
+            snapshot.appendItems(items, toSection: bottomSection)
+            
+            self?.mainDataSource?.apply(snapshot)
+            print("publicationList 레이아웃 적용")
+        }
+        .disposed(by: disposeBag)
     }
     
     // MARK: Layout
@@ -198,10 +253,7 @@ extension MainPageViewController: UICollectionViewDelegate {
             case .topView:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageTopView.id, for: indexPath) as? MainPageTopView else { return UICollectionViewCell() }
                 
-                cell.categorySelectEvent
-                    .bind(to: self.selectCategory)
-                    .disposed(by: self.disposeBag)
-                        
+                cell.viewModel = MainPageTopViewModel(dataProvider: self.viewModel)
                 return cell
                 
             case .bookPlace(let data):
@@ -228,28 +280,7 @@ extension MainPageViewController: UICollectionViewDelegate {
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MainPageCollectionHeaderView.id, for: indexPath) as? MainPageCollectionHeaderView else { return UICollectionReusableView() }
                 
             // 여기에서 ViewModel의 state 참조 - Viewmodel 필요
-            
-            // HeaderView -> MainPage
-//            header.filterSelectEvent
-//                .subscribe(onNext: {
-//                    print($0.inKorean)
-//                }, onError: {
-//                    print($0.localizedDescription)
-//                }, onCompleted: {
-//                    print("com")
-//                }, onDisposed: {
-//                    print("dis")
-//                })
-//                .disposed(by: self.disposeBag)
-            
-            self.selectFilter
-                .bind(to: header.filterSelectEvent)
-                .disposed(by: self.disposeBag)
-            
-            // MainPage -> HeaderView
-            self.selectCategory
-                .bind(to: header.selectedCategory)
-                .disposed(by: self.disposeBag)
+            header.viewModel = MainPageCollectionHeaderViewModel(dataProvider: self.viewModel)
             
             return header
         }
