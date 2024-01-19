@@ -148,7 +148,7 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
                 self?.filterButton.menu = UIMenu(children: filters.map { filter in
                     return UIAction(title: filter.inKorean, handler: { action in
                         self?.filterSelectEvent.onNext(filter)
-                        print(action.title)
+//                        print(action.title)
                     })
                 })
             })

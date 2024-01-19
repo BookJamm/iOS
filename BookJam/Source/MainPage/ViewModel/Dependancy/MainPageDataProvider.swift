@@ -14,9 +14,11 @@ protocol MainPageDataProvider {
     
     /// Rx - Category 선택 emitted from MainPageCollectionHeaderViewModel
     var selectedCategory: BehaviorRelay<Category> { get }
+//    var selectedCategory: PublishRelay<Category> { get }
     
     /// Rx - Filter 선택 emitted from MainPageCollectionHeaderViewModel
     var selectedFilter: BehaviorRelay<CombinedSearchFilter> { get }
+//    var selectedFilter: PublishRelay<CombinedSearchFilter> { get }
     
     /// Rx - 서치바 탭 이벤트 emitted from MainPageTopViewModel
     var searchbarTapEvent: PublishRelay<Void> { get }

@@ -42,7 +42,7 @@ final class MainPageTopView: UICollectionViewCell {
     
     /// 중간 분리줄
     private var borderLine:UIView = UIView().then {
-        $0.backgroundColor = .gray03
+        $0.backgroundColor = .gray02
     }
     
     /// 독립서점 버튼
@@ -110,7 +110,7 @@ final class MainPageTopView: UICollectionViewCell {
             bookClubButton.rx.tap.map { Category.BookClub },
             publicationButton.rx.tap.map { Category.Publication }
         )
-        .throttle(.milliseconds(500), latest: false, scheduler: MainScheduler())
+        .throttle(.milliseconds(250), latest: false, scheduler: MainScheduler())
 
         // MARK: Input
         let input = MainPageTopViewModel.Input(
