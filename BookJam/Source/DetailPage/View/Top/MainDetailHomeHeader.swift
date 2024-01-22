@@ -42,16 +42,15 @@ class MainDetailHomeHeader: UITableViewHeaderFooterView {
     // MARK: View
     
     func setUpView() {
-            // 세그먼티드 컨트롤 설정
-            // ...
-
-            // 세그먼티드 컨트롤 값 변경을 Subject에 바인딩
-            segmentedControl.rx.selectedSegmentIndex
-                .bind(to: segmentedControlValue)
-                .disposed(by: disposeBag)
+        // 세그먼티드 컨트롤 설정
+        // ...
         
+        // 세그먼티드 컨트롤 값 변경을 Subject에 바인딩
+        segmentedControl.rx.selectedSegmentIndex
+            .bind(to: segmentedControlValue)
+            .disposed(by: disposeBag)
         
-        }
+    }
     
     // MARK: Layout
     
