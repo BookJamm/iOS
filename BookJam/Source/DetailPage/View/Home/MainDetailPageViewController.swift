@@ -20,8 +20,6 @@ final class MainDetailPageViewController: UIViewController {
     private var viewModel = MainDetailPageViewModel()
     let disposeBag = DisposeBag()
     
-    private var dataSource = [SettingSection]()
-    
     var topView = MainDetailTopView()
     
     lazy var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then{
@@ -97,9 +95,10 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Data Binding
     private func setUpBinding() {
         // MARK: Input
-
+        
         output.newsList
             .bind(to: tableView.rx.items(cellIdentifier: MainDetailNewsTableViewCell.id, cellType: MainDetailNewsTableViewCell.self)) { row, news, cell in
+
                 cell.configure(title: news.title!, content: news.contents!)
             }
             .disposed(by: disposeBag)
@@ -134,6 +133,7 @@ final class MainDetailPageViewController: UIViewController {
             
         case 1:
             print("소식 탭 등록")
+            self.newsTrigger.onNext(Void())
         default:
             break
         }
@@ -167,7 +167,7 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
                 .subscribe(onNext: { [weak cell] homeAllList in
                     cell?.bindViewModel(homeAllList: Observable.just(homeAllList))
                            })
-                .disposed(by: disposeBag)
+                .disposed(by: cell.disposeBag)
             return cell
             
         case 1: // 소식 탭
@@ -177,10 +177,12 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
                 .bind { [weak cell] news in
                     cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!)
                 }
-                .disposed(by: disposeBag)
+                .disposed(by: cell.disposeBag)
+
             return cell
         case 2: // 모임 탭
             let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+            
             
             return cell
         case 3: // 리뷰 탭

@@ -13,6 +13,8 @@ import RxRelay
  class MainDetailPageViewModel{
     let disposeBag = DisposeBag()
     
+     private let newsListRelay = BehaviorRelay<[News]>(value: [])
+
     struct Input {
         let homeTrigger: Observable<Void>
         let newsTrigger: Observable<Void>
@@ -44,9 +46,19 @@ import RxRelay
              return Observable.just(DetailHomeTabModel(homeList: self.placeId, bookList: [self.bookList], activityList: [self.activityList], reviewList: [self.reviewList], newsList: [self.newsList]  ))
          }
          
-         let news = input.newsTrigger.flatMapLatest { _ in
-             return Observable.just([self.newsList])
-         }
+
+         input.newsTrigger
+             .flatMapLatest { _ in
+                 self.newsListRelay.accept([self.newsList])
+                 return Observable.just(())
+             }
+             .subscribe()
+             .disposed(by: disposeBag)
+         
+//         let news = input.newsTrigger.flatMapLatest { _ in
+//             return Observable.just([self.newsList])
+//         }
+         
 
          let activity = input.activityTrigger.flatMapLatest { _ in
              return Observable.just([self.activityList])
@@ -60,7 +72,7 @@ import RxRelay
              return Observable.just([self.bookList])
          }
 
-         return Output(homeAllList: homeResult, newsList: news, activityList: activity, reviewList: review, bookListList: book)
+         return Output(homeAllList: homeResult, newsList: newsListRelay.asObservable(), activityList: activity, reviewList: review, bookListList: book)
      }
 
 }

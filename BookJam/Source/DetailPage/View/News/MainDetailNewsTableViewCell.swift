@@ -6,10 +6,20 @@
 //
 
 import UIKit
+import RxSwift
 
 class MainDetailNewsTableViewCell: UITableViewCell {
 
     static let id =  "HomeNewsTabCell"
+    
+    var disposeBag = DisposeBag()
+        
+        override func prepareForReuse() {
+            super.prepareForReuse()
+            
+            disposeBag = DisposeBag() // 셀이 재사용될 때마다 새 DisposeBag을 생성합니다.
+        }
+
     
     var profileImageView: UIImageView = UIImageView().then {
 //        $0.image = UIImage(named: "squareDefaultImage")?.circularImage()

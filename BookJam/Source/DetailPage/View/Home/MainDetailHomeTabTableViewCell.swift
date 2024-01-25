@@ -34,6 +34,12 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         
     }
     
+    override func prepareForReuse() {
+            super.prepareForReuse()
+            
+            disposeBag = DisposeBag() // 셀이 재사용될 때마다 새 DisposeBag을 생성합니다.
+        }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
