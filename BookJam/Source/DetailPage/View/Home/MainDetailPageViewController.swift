@@ -41,6 +41,8 @@ final class MainDetailPageViewController: UIViewController {
     lazy var input = MainDetailPageViewModel.Input(homeTrigger: homeTrigger.asObservable(), newsTrigger: newsTrigger.asObservable(), activityTrigger: activityTrigger.asObservable(), reviewTrigger: reviewTrigger.asObservable(), bookListTrigger: bookListTrigger.asObservable())
     lazy var output = viewModel.transform(input: input)
     
+    var cellCount = 1
+    
     var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
 
     // MARK: viewDidLoad()
@@ -96,24 +98,6 @@ final class MainDetailPageViewController: UIViewController {
     private func setUpBinding() {
         // MARK: Input
         
-        output.newsList
-            .bind(to: tableView.rx.items(cellIdentifier: MainDetailNewsTableViewCell.id, cellType: MainDetailNewsTableViewCell.self)) { row, news, cell in
-
-                cell.configure(title: news.title!, content: news.contents!)
-            }
-            .disposed(by: disposeBag)
-        
-//        output.homeAllList
-//            .bind(to: self.tableView.rx.itemSelected
-//                .subscribe(onNext: { [weak self] indexPath in
-//                    let placeId = self?.homeAllList[indexPath.row]
-//                    let cell = self?.tableView.cellForRow(at: indexPath) as? MainDetailHomeTabTableViewCell
-//                    cell?.bindViewModel(output: placeId)
-//                })
-//                    .disposed(by: disposeBag)
-//                  )
-        
-        
     }
     
     // MARK: Function
@@ -151,7 +135,7 @@ final class MainDetailPageViewController: UIViewController {
 @available(iOS 16.0, *)
 extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return cellCount
     }
     
     // 셀 데이터 삽입
@@ -166,6 +150,7 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
             output.homeAllList
                 .subscribe(onNext: { [weak cell] homeAllList in
                     cell?.bindViewModel(homeAllList: Observable.just(homeAllList))
+                    
                            })
                 .disposed(by: cell.disposeBag)
             return cell
@@ -175,7 +160,7 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
             
             output.newsList
                 .bind { [weak cell] news in
-                    cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!)
+                    cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!, date: news[indexPath.row].createdAt!)
                 }
                 .disposed(by: cell.disposeBag)
 
@@ -201,7 +186,20 @@ extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 1000 //임시
+        switch selectedSegmentIndex {
+        case 0:
+            return 1000
+        case 1: // 소식 탭
+            return 122
+        case 2: // 모임 탭
+            return 152
+        case 3: // 리뷰 탭
+            return 254
+        case 4: // 책 종류 탭
+            return 134
+        default:
+            return 44 // 기본 셀 높이
+        }
         
     }
     

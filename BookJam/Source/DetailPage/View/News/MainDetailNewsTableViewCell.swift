@@ -56,10 +56,17 @@ class MainDetailNewsTableViewCell: UITableViewCell {
         setUpView()
         setUpLayout()
         setUpConstraint()
+        layoutSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init (coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 24, left: 20, bottom: 24, right: 20))
     }
     
     // MARK: View
@@ -88,39 +95,39 @@ class MainDetailNewsTableViewCell: UITableViewCell {
     
     func setUpConstraint() {
         profileImageView.snp.makeConstraints {
-            $0.top.leading.equalToSuperview().offset(20)
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
             $0.width.height.equalTo(60)
         }
         
         newsView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
-            $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            $0.top.equalToSuperview()
+            $0.leading.equalTo(profileImageView.snp.trailing).offset(4)
             $0.trailing.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview()
         }
         
         newsLabel.snp.makeConstraints {
-            $0.top.equalTo(newsView.snp.top).offset(16)
-            $0.leading.equalTo(newsView.snp.leading).offset(16)
-            $0.trailing.equalToSuperview().offset(-10)
+            $0.top.equalTo(newsView.snp.top).offset(12.5)
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
         newsContent.snp.makeConstraints {
-            $0.top.equalTo(newsLabel.snp.bottom).offset(6)
-            $0.leading.equalTo(newsLabel.snp.leading)
-            $0.trailing.equalTo(newsView.snp.trailing).offset(-16)
+            $0.top.equalTo(newsLabel.snp.bottom).offset(6.5)
+            $0.horizontalEdges.equalToSuperview().inset(20)
         }
         
         newsDate.snp.makeConstraints {
-            $0.top.equalTo(newsContent.snp.bottom).offset(6)
+            $0.top.equalTo(newsContent.snp.bottom).offset(6.5)
             $0.leading.equalTo(newsLabel.snp.leading)
-            $0.bottom.equalTo(newsView.snp.bottom).offset(-20)
+            $0.bottom.equalTo(newsView.snp.bottom).inset(12.5)
         }
     }
     
-    public func configure(title: String, content: String) {
+    public func configure(title: String, content: String, date: String) {
         newsLabel.text = title
         newsContent.text = content
+        newsDate.text = date
     }
 }
 
