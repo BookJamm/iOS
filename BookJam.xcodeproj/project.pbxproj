@@ -87,6 +87,8 @@
 		949750FF2AFE398200DCC096 /* BookReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949750FE2AFE398200DCC096 /* BookReviewCollectionViewCell.swift */; };
 		949751012AFE3C1300DCC096 /* MainDetailTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949751002AFE3C1300DCC096 /* MainDetailTopView.swift */; };
 		949751032B020ACA00DCC096 /* BookStorePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949751022B020ACA00DCC096 /* BookStorePhotoCollectionViewCell.swift */; };
+		94A63E252B63DF9100ADD480 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 94A63E242B63DF9100ADD480 /* Differentiator */; };
+		94A63E272B63DF9100ADD480 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 94A63E262B63DF9100ADD480 /* RxDataSources */; };
 		94A6BF3C2B20766000DF2BF8 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3B2B20766000DF2BF8 /* Activity.swift */; };
 		94A6BF3E2B20782A00DF2BF8 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3D2B20782A00DF2BF8 /* Review.swift */; };
 		94A6BF402B20824B00DF2BF8 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3F2B20824B00DF2BF8 /* News.swift */; };
@@ -244,6 +246,8 @@
 				DD09190B2AFA5EC4001E5501 /* Then in Frameworks */,
 				DD02247A2AFBD476005637B6 /* FloatingPanel in Frameworks */,
 				DD0919082AFA5EB3001E5501 /* SnapKit-Dynamic in Frameworks */,
+				94A63E272B63DF9100ADD480 /* RxDataSources in Frameworks */,
+				94A63E252B63DF9100ADD480 /* Differentiator in Frameworks */,
 				DD0919112AFA5F25001E5501 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -814,6 +818,8 @@
 				DD09190A2AFA5EC4001E5501 /* Then */,
 				DD0919102AFA5F25001E5501 /* Kingfisher */,
 				DD0224792AFBD476005637B6 /* FloatingPanel */,
+				94A63E242B63DF9100ADD480 /* Differentiator */,
+				94A63E262B63DF9100ADD480 /* RxDataSources */,
 			);
 			productName = BookJam;
 			productReference = DD754DE52AFA4D920001FBC4 /* BookJam.app */;
@@ -848,6 +854,7 @@
 				DD0919092AFA5EC4001E5501 /* XCRemoteSwiftPackageReference "Then" */,
 				DD09190F2AFA5F25001E5501 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = DD754DE62AFA4D920001FBC4 /* Products */;
 			projectDirPath = "";
@@ -1209,6 +1216,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
 		DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -1244,6 +1259,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		94A63E242B63DF9100ADD480 /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		94A63E262B63DF9100ADD480 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		DD0224792AFBD476005637B6 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
