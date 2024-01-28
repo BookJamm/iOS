@@ -67,8 +67,12 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
         selectedCategory
 //            .distinctUntilChanged() // 얘 때문에 안되던 것
             .subscribe(onNext: { [weak self] category in
-                if let defaultFilter = category.filters.first {  // 해당 카테고리의 기본 필터를 얻음
-                    self?.selectedFilter.accept(defaultFilter)
+                if category == .BookClub {
+                    self?.selectedClubCategory.accept([.all])
+                } else {
+                    if let defaultFilter = category.filters.first {  // 해당 카테고리의 기본 필터를 얻음
+                        self?.selectedFilter.accept(defaultFilter)
+                    }
                 }
             })
             .disposed(by: disposeBag)
@@ -104,13 +108,6 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
                 }
             }
             .disposed(by: disposeBag)
-
-            return Output(
-                bookStoreList: bookStoreList.asObservable(), // viewModel 안에서 생성한 State를 Output
-                bookClubList: bookClubList.asObservable(),
-                publicationList: PublicationList.asObservable()
-            )
-            // MARK: ------------End of Re-Code-------------
         
         selectedClubCategory
             .bind { [weak self] selectedClubCategory in
@@ -120,6 +117,13 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
                 }
             }
             .disposed(by: disposeBag)
+        
+        return Output(
+            bookStoreList: bookStoreList.asObservable(), // viewModel 안에서 생성한 State를 Output
+            bookClubList: bookClubList.asObservable(),
+            publicationList: PublicationList.asObservable()
+        )
+        // MARK: ------------End of Re-Code-------------
     }
     
     // MARK: API Call
