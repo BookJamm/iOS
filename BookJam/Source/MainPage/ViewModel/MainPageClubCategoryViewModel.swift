@@ -23,7 +23,7 @@ final class MainPageClubCategoryViewModel: ViewModelType {
         /// 모임 카테고리 선택 이벤트 from self
         let clubCategorySelectEvent: Observable<BookClubCategory>
         /// 모임 카테고리 전체 선택 이벤트 from self
-        let clubCategorySelectAllEvent: Observable<Void>
+//        let clubCategorySelectAllEvent: Observable<Void>
     }
     
     // MARK: Output
@@ -39,26 +39,33 @@ final class MainPageClubCategoryViewModel: ViewModelType {
         }
         
         // 전체 버튼을 눌렀을 때
-        input.clubCategorySelectAllEvent
-            .bind {
-                dataProvider.selectedClubCategory.accept(BookClubCategory.allCases)
-            }
-            .disposed(by: disposeBag)
+//        input.clubCategorySelectAllEvent
+//            .bind {
+//                dataProvider.selectedClubCategory.accept(BookClubCategory.allCases)
+//            }
+//            .disposed(by: disposeBag)
         
-        // 전체 외 개별 카테고리 선택했을 때
+        // 카테고리 선택했을 때
         input.clubCategorySelectEvent
-            .bind { clubCategory in
-                var selectedList = dataProvider.selectedClubCategory.value
-                
-                // 선택된 아이템이 추가/삭제인지 확인하여 list에 반영합니다.
-                if let index = selectedList.firstIndex(of: clubCategory) {
-                    selectedList.remove(at: index)
-                } else {
-                    selectedList.append(clubCategory)
+            .subscribe(onNext: { clubCategory in
+                // "전체" 선택한 경우
+                if clubCategory == .all {
+                    dataProvider.selectedClubCategory.accept([.all])
                 }
-                
-                dataProvider.selectedClubCategory.accept(selectedList)
-            }
+                // 개별 카테고리 선택한 경우
+                else {
+                    var selectedList = dataProvider.selectedClubCategory.value
+                    
+                    // 선택된 아이템이 추가/삭제인지 확인하여 list에 반영합니다.
+                    if let index = selectedList.firstIndex(of: clubCategory) {
+                        selectedList.remove(at: index)
+                    } else {
+                        selectedList.append(clubCategory)
+                    }
+                    
+                    dataProvider.selectedClubCategory.accept(selectedList)
+                }
+            })
             .disposed(by: disposeBag)
         
         return Output.init(selectedClubCategory: dataProvider.selectedClubCategory.asObservable())

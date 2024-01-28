@@ -23,13 +23,13 @@ class ColorToggleButton: UIButton {
                 self.layer.borderWidth = 1.0
             }
             
-            self.setAttributedTitle(NSAttributedString(string: titleString, attributes: [.font : captionText02!]), for: .normal)
+            self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
         }
     }
     
-    var titleString: String {
+    var titleString: String? {
         didSet {
-            self.setAttributedTitle(NSAttributedString(string: titleString, attributes: [.font : captionText02!]), for: .normal)
+            self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
         }
     }
     
@@ -46,7 +46,7 @@ class ColorToggleButton: UIButton {
         
         self.titleString = title
         
-        self.setAttributedTitle(NSAttributedString(string: titleString, attributes: [.font : captionText02!]), for: .normal)
+        self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
         
         // MARK: - 선택했을 때 색 변경
 //        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)

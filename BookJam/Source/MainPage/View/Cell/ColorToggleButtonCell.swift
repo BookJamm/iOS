@@ -13,6 +13,7 @@ class ColorToggleButtonCell: UICollectionViewCell {
     static let id = "ColorToggleButtonCell"
     
     private lazy var colorButton = ColorToggleButton(title: "")
+    var category: BookClubCategory?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,12 +54,12 @@ class ColorToggleButtonCell: UICollectionViewCell {
         }
     }
     
-    func toggleButtonStatus() {
-        self.colorButton.isOn.toggle()
+    func makeButton(status: Bool) {
+        self.colorButton.isOn = status
     }
     
-    func configure(title: String, isOn: Bool) {
-        colorButton.titleString = title
-        colorButton.isOn = isOn
+    func configure(category: BookClubCategory) {
+        self.category = category
+        colorButton.titleString = category.toKorean
     }
 }
