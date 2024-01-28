@@ -57,9 +57,9 @@ final class MainPageCollectionHeaderView: UICollectionReusableView {
         buttonConfig.baseForegroundColor = gray07
         buttonConfig.contentInsets = .init(top: 5, leading: 12, bottom: 5, trailing: 12)
         buttonConfig.baseBackgroundColor = .clear
-        buttonConfig.image = UIImage(systemName: "chevron.down", withConfiguration: imageConfig)
-        buttonConfig.imagePadding = 4
-        buttonConfig.imagePlacement = .trailing
+//        buttonConfig.image = UIImage(systemName: "chevron.down", withConfiguration: imageConfig)
+//        buttonConfig.imagePadding = 4
+//        buttonConfig.imagePlacement = .trailing
         $0.configuration = buttonConfig
         
 //        $0.setAttributedTitle(NSAttributedString(string: "asdf", attributes: [.font: captionText02!, .foregroundColor: gray07!]), for: .normal)

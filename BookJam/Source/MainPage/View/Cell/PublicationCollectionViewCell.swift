@@ -180,8 +180,9 @@ class PublicationCollectionViewCell: UICollectionViewCell {
             $0.leading.equalTo(line2.snp.trailing).offset(8)
         }
         priceLabel.snp.makeConstraints{
-            $0.top.equalTo(publisherLabel.snp.bottom).offset(4)
+            $0.top.equalTo(publisherLabel.snp.bottom).offset(8)
             $0.leading.equalTo(bookCategoryButton)
+            $0.bottom.equalToSuperview().offset(-12)
         }
     }
     
