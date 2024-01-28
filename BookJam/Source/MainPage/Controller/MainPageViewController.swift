@@ -110,7 +110,7 @@ final class MainPageViewController: UIViewController {
             snapshot.appendItems(items, toSection: bottomSection)
             
             self?.mainDataSource?.apply(snapshot)
-            print("bookStoreList 레이아웃 적용")
+//            print("bookStoreList 레이아웃 적용")
         }
         .disposed(by: disposeBag)
         
@@ -130,7 +130,7 @@ final class MainPageViewController: UIViewController {
             snapshot.appendItems(items, toSection: bottomSection)
             
             self?.mainDataSource?.apply(snapshot)
-            print("bookClubList 레이아웃 적용")
+//            print("bookClubList 레이아웃 적용")
         }
         .disposed(by: disposeBag)
         
@@ -150,7 +150,7 @@ final class MainPageViewController: UIViewController {
             snapshot.appendItems(items, toSection: bottomSection)
             
             self?.mainDataSource?.apply(snapshot)
-            print("publicationList 레이아웃 적용")
+//            print("publicationList 레이아웃 적용")
         }
         .disposed(by: disposeBag)
     }
