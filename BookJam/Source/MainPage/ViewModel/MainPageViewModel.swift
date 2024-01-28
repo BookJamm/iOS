@@ -88,11 +88,13 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
                         })
                         .disposed(by: self?.disposeBag ?? DisposeBag())
                 case .BookClub:
-                    self?.getBookClubList(filter: selectedFilter)
-                        .subscribe(onNext: { clubs in
-                            self?.bookClubList.accept(clubs)
-                        })
-                        .disposed(by: self?.disposeBag ?? DisposeBag())
+                    if let clubCategory = self?.selectedClubCategory.value {
+                        self?.getBookClubList(clubCategory: clubCategory, filter: selectedFilter)
+                            .subscribe(onNext: { clubs in
+                                self?.bookClubList.accept(clubs)
+                            })
+                            .disposed(by: self?.disposeBag ?? DisposeBag())
+                    }
                 case .Publication:
                     self?.getBookList(filter: selectedFilter)
                         .subscribe(onNext: { books in
@@ -109,6 +111,15 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
                 publicationList: PublicationList.asObservable()
             )
             // MARK: ------------End of Re-Code-------------
+        
+        selectedClubCategory
+            .bind { [weak self] selectedClubCategory in
+                print("선택된 모임 카테고리 : \(selectedClubCategory)")
+                if let defaultFilter = Category.BookClub.filters.first {  // 해당 카테고리의 기본 필터를 얻음
+                    self?.selectedFilter.accept(defaultFilter)
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     // MARK: API Call
@@ -131,7 +142,7 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
                                 Place(placeId: 1, name: "BookStore6", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)])
     }
     
-    private func getBookClubList(filter:CombinedSearchFilter) -> Observable<[BookClub]> {
+    private func getBookClubList(clubCategory: [BookClubCategory], filter:CombinedSearchFilter) -> Observable<[BookClub]> {
         return Observable.just([BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
                                 BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil),
                                 BookClub(bookClubID: 2, name: "BookClub4", date: nil, cover: nil, place: nil, type: nil),
