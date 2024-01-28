@@ -55,14 +55,18 @@ final class MainPageClubCategoryViewModel: ViewModelType {
                 // 개별 카테고리 선택한 경우
                 else {
                     var selectedList = dataProvider.selectedClubCategory.value
-                    
+                    if let test = selectedList.firstIndex(of: .all) {
+                        // .all이 이미 selectedList에 있는 경우
+                        selectedList.remove(at: test)
+                    }
                     // 선택된 아이템이 추가/삭제인지 확인하여 list에 반영합니다.
                     if let index = selectedList.firstIndex(of: clubCategory) {
+                        // clubCategory가 이미 selectedList에 있는 경우
                         selectedList.remove(at: index)
                     } else {
+                        // 포함되지 않은 경우
                         selectedList.append(clubCategory)
                     }
-                    
                     dataProvider.selectedClubCategory.accept(selectedList)
                 }
             })

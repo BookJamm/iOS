@@ -28,6 +28,8 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
         }
     }
     
+    private var cellsList: [ColorToggleButtonCell] = []
+    
     private var categoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
         $0.minimumLineSpacing = 10
@@ -38,9 +40,8 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setUpView()
-        setUpBinding()
+//        setUpBinding()
         setUpLayout()
         setUpConstraint()
         
@@ -55,31 +56,46 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
         
         categoryCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
+        
+        Observable.just(BookClubCategory.allCases)
+            .bind(to: categoryCollectionView.rx.items(
+                cellIdentifier: ColorToggleButtonCell.id,
+                cellType: ColorToggleButtonCell.self
+            )) { index, category, cell in
+                cell.configure(category: category)
+                self.cellsList.insert(cell, at: index)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setUpBinding() {
+        
+        // 모임 카테고리를 선택하는 이벤트
+        let selectClubCategory = categoryCollectionView.rx.modelSelected(BookClubCategory.self).asObservable()
+
         // MARK: Input
-        let input = MainPageClubCategoryViewModel.Input(
-            clubCategorySelectEvent: <#Observable<BookClubCategory>#>,
-            clubCategorySelectAllEvent: <#Observable<Void>#>)
+        let input = MainPageClubCategoryViewModel.Input(clubCategorySelectEvent: selectClubCategory)
         
         // MARK: Output
         let output = viewModel?.transform(input: input)
         
-        Observable.just(BookClubCategory.allCases)
-            .bind(to: categoryCollectionView.rx.items(
-                cellIdentifier: ColorToggleButtonCell.id, 
-                cellType: ColorToggleButtonCell.self
-            )) { index, category, cell in
-                cell.configure(title: category.toKorean, isOn: <#T##Bool#>)
-            }
-            .disposed(by: disposeBag)
+        
         
         output?.selectedClubCategory
-            .bind { categoryList in
-                
-                categoryCollectionView.cellForItem(at: <#T##IndexPath#>)
+            .bind{ [weak self] selectClubCategories in
+                guard let cellsList = self?.cellsList else { return }
+                for cell in cellsList {
+                    guard let category = cell.category else { return }
+                    if let _ = selectClubCategories.firstIndex(of: category) {
+                        cell.makeButton(status: true)
+                    }
+                    else {
+                        cell.makeButton(status: false)
+                    }
+                }
+                self?.categoryCollectionView.reloadInputViews()
             }
+            .disposed(by: disposeBag)
     }
     
     private func setUpLayout() {
