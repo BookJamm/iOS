@@ -39,6 +39,8 @@ final class MainPageViewModel: ViewModelType, MainPageDataProvider {
     
     internal let searchbarTapEvent = PublishRelay<Void>()
     
+    internal let selectedClubCategory = BehaviorRelay<[BookClubCategory]>(value: BookClubCategory.allCases)
+    
     private let bookStoreList = PublishRelay<[Place]>()
     private let bookClubList = PublishRelay<[BookClub]>()
     private let PublicationList = PublishRelay<[Book]>()

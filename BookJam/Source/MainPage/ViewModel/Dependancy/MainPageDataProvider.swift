@@ -22,5 +22,8 @@ protocol MainPageDataProvider {
     
     /// Rx - 서치바 탭 이벤트 emitted from MainPageTopViewModel
     var searchbarTapEvent: PublishRelay<Void> { get }
+    
+    /// Rx - 모임 Category 변경 이벤트 emitted from MainPageClubCategoryViewModel
+    var selectedClubCategory: BehaviorRelay<[BookClubCategory]> { get }
 
 }
