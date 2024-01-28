@@ -12,7 +12,7 @@ class ColorToggleButtonCell: UICollectionViewCell {
     
     static let id = "ColorToggleButtonCell"
     
-    private lazy var colorButton = ColorToggleButton(title: "")
+    lazy var colorButton = ColorToggleButton(title: "")
     var category: BookClubCategory?
     
     override init(frame: CGRect) {
@@ -33,8 +33,10 @@ class ColorToggleButtonCell: UICollectionViewCell {
     
     // MARK: View
     func setUpView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
+        self.colorButton.titleLabel?.numberOfLines = 1
         self.colorButton.isUserInteractionEnabled = false
+        self.colorButton.backgroundColor = .white
     }
     
     
@@ -63,3 +65,9 @@ class ColorToggleButtonCell: UICollectionViewCell {
         colorButton.titleString = category.toKorean
     }
 }
+
+//@available(iOS 17.0, *)
+//#Preview {
+//    ColorToggleButtonCell()
+//        .configure(category: .academicWriting)
+//}

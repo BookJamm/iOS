@@ -12,7 +12,7 @@ import RxSwift
 import RxRelay
 
 /// MainPage의 BookClub 탭 시 CollectionViewHeader 위에 표시되는 View입니다.
-final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegateFlowLayout {
+final class BookClubCategoryView: UICollectionViewCell {
     
     // MARK: Variables
     
@@ -32,12 +32,13 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
     
     private var categoryCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
         $0.scrollDirection = .vertical
-        $0.minimumLineSpacing = 10
+        $0.minimumLineSpacing = 8
         $0.minimumInteritemSpacing  = 10
     }).then {
         $0.register(ColorToggleButtonCell.self, forCellWithReuseIdentifier: ColorToggleButtonCell.id)
+        $0.backgroundColor = .clear
     }
-    
+     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -52,7 +53,7 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
     }
     
     private func setUpView() {
-        self.backgroundColor = .white
+        self.backgroundColor = .gray01
         
         categoryCollectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
@@ -107,9 +108,23 @@ final class BookClubCategoryView: UICollectionViewCell, UICollectionViewDelegate
     
     private func setUpConstraint() {
         categoryCollectionView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalToSuperview().inset(10)
         }
     }
+}
+
+extension BookClubCategoryView: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        guard let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: ColorToggleButtonCell.id, for: indexPath) as? ColorToggleButtonCell else { return .zero }
+        let item = BookClubCategory.allCases[indexPath.item]
+        cell.colorButton.titleLabel!.text = item.toKorean
+        let width = (cell.colorButton.titleLabel?.intrinsicContentSize.width ?? 64) + 20
+        let height = (cell.colorButton.titleLabel?.intrinsicContentSize.height ?? 18) + 10
+        let size = CGSize(width: width, height: height)
+        
+        return size
+        }
 }
 
 @available(iOS 17.0, *)

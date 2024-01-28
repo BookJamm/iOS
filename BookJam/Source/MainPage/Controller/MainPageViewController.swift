@@ -185,7 +185,7 @@ extension MainPageViewController {
     // MARK: Section Layout을 포함한 Compositional Layout return
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 10 // section Spacing
+//        config.interSectionSpacing = 10 // section Spacing
         config.scrollDirection = .vertical
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
             // mainDataSource에서 관리되는 sectionIdentifier에만 대응하여 return
@@ -221,6 +221,7 @@ extension MainPageViewController {
         
         // section
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets.bottom = 10
         return section
     }
     
@@ -231,7 +232,7 @@ extension MainPageViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(180))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(96))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // section

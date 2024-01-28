@@ -65,7 +65,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = gray05
         config.background.backgroundColor = .clear
-        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
+//        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
     
@@ -74,7 +74,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = .white
         config.background.backgroundColor = main03
-        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
+//        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
 }
