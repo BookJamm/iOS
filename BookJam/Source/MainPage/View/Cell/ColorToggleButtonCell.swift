@@ -28,13 +28,13 @@ class ColorToggleButtonCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        self.colorButton.isOn = false
     }
     
     // MARK: View
     func setUpView() {
         self.backgroundColor = .white
-//        self.colorButton.isUserInteractionEnabled = false
+        self.colorButton.isUserInteractionEnabled = false
     }
     
     
