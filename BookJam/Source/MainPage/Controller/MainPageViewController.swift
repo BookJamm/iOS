@@ -12,12 +12,14 @@ import RxSwift
 enum mainPageSection: Hashable {
 //    case adBanner // 광고 탭 섹션 (미정)
     case topView // 검색 버튼 + 카테고리 3개 버튼 섹션
+    case clubCategory // 독서모임 카테고리 목록 섹션
     case content // 해당 내용 목록 섹션
 }
 
 enum mainPageItem: Hashable {
 //    case adBanner
     case topView // 검색버튼 + 카테고리 버튼 3개
+    case clubCategory // 독서모임 카테고리 목록
     case bookPlace(Place) // 독립서점
     case bookClub(BookClub) // 독서모임
     case publication(Book) // 출판물
@@ -51,6 +53,7 @@ final class MainPageViewController: UIViewController {
         
         $0.register(MainPageTopView.self, forCellWithReuseIdentifier: MainPageTopView.id) // 섹션 상단 검색탭 + 카테고리 3개 넣는 View
         $0.register(BookStoreCollectionViewCell.self, forCellWithReuseIdentifier: BookStoreTableViewCell.cellID) // 독립서점 셀
+        $0.register(BookClubCategoryView.self, forCellWithReuseIdentifier: BookClubCategoryView.id) // 모임 카테고리 목록 셀
         $0.register(BookClubCollectionViewCell.self, forCellWithReuseIdentifier: BookClubCollectionViewCell.id) // 모임 셀
         $0.register(PublicationCollectionViewCell.self, forCellWithReuseIdentifier: PublicationCollectionViewCell.id) // 출판물 셀
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
@@ -121,10 +124,14 @@ final class MainPageViewController: UIViewController {
             }
             
             let topSection = mainPageSection.topView
+            let clubCategorySection = mainPageSection.clubCategory
             let bottomSection = mainPageSection.content
             
             snapshot.appendSections([topSection])
             snapshot.appendItems([mainPageItem.topView], toSection: topSection)
+            
+            snapshot.appendSections([clubCategorySection])
+            snapshot.appendItems([mainPageItem.clubCategory], toSection: clubCategorySection)
             
             snapshot.appendSections([bottomSection])
             snapshot.appendItems(items, toSection: bottomSection)
@@ -190,10 +197,12 @@ extension MainPageViewController {
 //                return someSection
             case .topView:
                 return self?.createTopViewSection()
+            case .clubCategory:
+                return self?.createClubCategoryViewSection()
             case .content:
                 return self?.createContentSection()
                 
-            default : // 둘 다 해당되지 않는 경우 + section 캐스팅 실패
+            default : // 다 해당되지 않는 경우 + section 캐스팅 실패
                 return self?.createTopViewSection()
             }
         }, configuration: config)
@@ -208,6 +217,21 @@ extension MainPageViewController {
         // group
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(180))
 //        let group = NSCollectionLayoutGroup(layoutSize: groupSize)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        // section
+        let section = NSCollectionLayoutSection(group: group)
+        return section
+    }
+    
+    // MARK: 독서 모임 카테고리 목록 뷰 Section Layout 생성
+    private func createClubCategoryViewSection() -> NSCollectionLayoutSection {
+        // item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        // group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(180))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // section
@@ -252,6 +276,11 @@ extension MainPageViewController: UICollectionViewDelegate {
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainPageTopView.id, for: indexPath) as? MainPageTopView else { return UICollectionViewCell() }
                 
                 cell.viewModel = MainPageTopViewModel(dataProvider: self.viewModel)
+                return cell
+                
+            case .clubCategory:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookClubCategoryView.id, for: indexPath) as? BookClubCategoryView else { return UICollectionViewCell()}
+                cell.viewModel = MainPageClubCategoryViewModel(dataProvider: self.viewModel)
                 return cell
                 
             case .bookPlace(let data):
