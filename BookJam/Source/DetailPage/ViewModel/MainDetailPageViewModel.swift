@@ -27,7 +27,7 @@ class MainDetailPageViewModel{
     
     struct Output {
         let homeAllList: Observable<[MainDetailSectionModel]>
-//        let newsList: Observable<[News]>
+        let newsList: Observable<[MainDetailSectionModel]>
 //        let activityList: Observable<[Activity]>
 //        let reviewList: Observable<[Review]>
 //        let bookListList: Observable<[Book]>
@@ -83,9 +83,11 @@ class MainDetailPageViewModel{
             return [MainDetailSectionModel(header: "홈", items: [.homeItem(DetailHomeTabModel(homeList: self.placeId, bookList: [self.bookList], activityList: [self.activityList], reviewList: [self.reviewList], newsList: [self.newsList]))])]
             }
 
-            // 기타 아이템들도 마찬가지로 수정해주세요.
+        let newsList = input.newsTrigger.map { _ -> [MainDetailSectionModel] in
+            return [MainDetailSectionModel(header: "뉴스", items: [.newsItem(self.newsList), .newsItem(self.newsList1)])]
+        }
 
-            return Output(homeAllList: homeAllList)
+            return Output(homeAllList: homeAllList, newsList: newsList)
         
     }
 }

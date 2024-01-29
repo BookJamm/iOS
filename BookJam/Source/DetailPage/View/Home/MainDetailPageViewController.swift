@@ -135,6 +135,9 @@ final class MainDetailPageViewController: UIViewController {
         output.homeAllList
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
+        output.newsList
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     // MARK: Function
@@ -159,7 +162,6 @@ final class MainDetailPageViewController: UIViewController {
             break
         }
         
-        tableView.reloadData()
         tableView.endUpdates()
 
        }
