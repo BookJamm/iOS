@@ -90,6 +90,7 @@ final class MainDetailPageViewController: UIViewController {
         setUpDelegate()
         
         setUpBinding()
+        homeTrigger.onNext(Void())
     }
     
     
@@ -174,51 +175,6 @@ extension MainDetailPageViewController: UITableViewDelegate {
         return cellCount
     }
     
-    // 셀 데이터 삽입
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        switch selectedSegmentIndex {
-//        case 0: // 홈 탭
-//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-//            cell.selectionStyle = .none
-//            cell.collectionView.delegate = self
-//            
-//            output.homeAllList
-//                .subscribe(onNext: { [weak cell] homeAllList in
-//                    cell?.bindViewModel(homeAllList: Observable.just(homeAllList))
-//                    
-//                           })
-//                .disposed(by: cell.disposeBag)
-//            return cell
-//            
-//        case 1: // 소식 탭
-//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
-//            
-//            output.newsList
-//                .bind { [weak cell] news in
-//                    cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!, date: news[indexPath.row].createdAt!)
-//                }
-//                .disposed(by: cell.disposeBag)
-//
-//            return cell
-//        case 2: // 모임 탭
-//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
-//            
-//            return cell
-//        case 3: // 리뷰 탭
-//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
-//            
-//            return cell
-//        case 4: // 책 종류 탭
-//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
-//            
-//            return cell
-//        default:
-//            return UITableViewCell()
-//        }
-//        
-//    }
-//    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch selectedSegmentIndex {
