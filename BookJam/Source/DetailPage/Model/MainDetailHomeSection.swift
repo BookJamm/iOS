@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxDataSources
 
 //디테일 페이지 섹션 레이아웃
 enum DetailSection: Hashable {
@@ -15,11 +16,33 @@ enum DetailSection: Hashable {
     case News(String)
     case BookList
 }
-
-//디테일 페이지 셀
 enum Item: Hashable {
     case ReviewItem(Review)
     case ActivityItem(Activity)
     case NewsItem(News)
     case BookListItem(Book)
 }
+
+//디테일 페이지 셀
+enum SectionItem {
+    case homeItem(DetailHomeTabModel)
+    case newsItem(News)
+    case activityItem(Activity)
+    case reviewItem(Review)
+    case bookListItem(Book)
+}
+
+struct MainDetailSectionModel {
+    var header: String
+    var items: [SectionItem]
+}
+
+extension MainDetailSectionModel: SectionModelType {
+    typealias Item = SectionItem
+
+    init(original: MainDetailSectionModel, items: [Item]) {
+        self = original
+        self.items = items
+    }
+}
+

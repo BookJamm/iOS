@@ -10,7 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Then
-
+import RxDataSources
 
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
@@ -39,11 +39,46 @@ final class MainDetailPageViewController: UIViewController {
     let bookListTrigger = PublishSubject<Void>()
     
     lazy var input = MainDetailPageViewModel.Input(homeTrigger: homeTrigger.asObservable(), newsTrigger: newsTrigger.asObservable(), activityTrigger: activityTrigger.asObservable(), reviewTrigger: reviewTrigger.asObservable(), bookListTrigger: bookListTrigger.asObservable())
+    
     lazy var output = viewModel.transform(input: input)
     
     var cellCount = 1
     
     var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
+
+    private var dataSource = RxTableViewSectionedReloadDataSource<MainDetailSectionModel> (
+            configureCell: { dataSource, tableView, indexPath, item in
+                switch item {
+                case .homeItem(let homeAllList):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+                    cell.bindViewModel(homeAllList: Observable.just(homeAllList))
+                    return cell
+
+                case .newsItem(let news):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
+                    cell.configure(title: news.title!, content: news.contents!, date: news.createdAt!)
+                    return cell
+
+                case .activityItem(let activity):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+                    return cell
+                    
+                case .reviewItem(let review):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
+                    
+                    return cell
+                    
+                case .bookListItem(let book):
+                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
+                    
+                    return cell
+                    
+                default:
+                    return UITableViewCell()
+                }
+            }
+        )
+    
 
     // MARK: viewDidLoad()
     
@@ -54,7 +89,7 @@ final class MainDetailPageViewController: UIViewController {
         setUpConstraint()
         setUpDelegate()
         
-//        setUpBinding()
+        setUpBinding()
     }
     
     
@@ -90,14 +125,15 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Delegate
     
     private func setUpDelegate() {
-        tableView.dataSource = self
+        
         tableView.delegate = self
     }
     
     // MARK: Data Binding
     private func setUpBinding() {
-        // MARK: Input
-        
+        output.homeAllList
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
     
     // MARK: Function
@@ -133,57 +169,56 @@ final class MainDetailPageViewController: UIViewController {
 
 
 @available(iOS 16.0, *)
-extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainDetailPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellCount
     }
     
     // 셀 데이터 삽입
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        switch selectedSegmentIndex {
-        case 0: // 홈 탭
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-            cell.selectionStyle = .none
-            cell.collectionView.delegate = self
-            
-            output.homeAllList
-                .subscribe(onNext: { [weak cell] homeAllList in
-                    cell?.bindViewModel(homeAllList: Observable.just(homeAllList))
-                    
-                           })
-                .disposed(by: cell.disposeBag)
-            return cell
-            
-        case 1: // 소식 탭
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
-            
-            output.newsList
-                .bind { [weak cell] news in
-                    cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!, date: news[indexPath.row].createdAt!)
-                }
-                .disposed(by: cell.disposeBag)
-
-            return cell
-        case 2: // 모임 탭
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
-            
-            
-            return cell
-        case 3: // 리뷰 탭
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
-            
-            return cell
-        case 4: // 책 종류 탭
-            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
-            
-            return cell
-        default:
-            return UITableViewCell()
-        }
-        
-    }
-    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        switch selectedSegmentIndex {
+//        case 0: // 홈 탭
+//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+//            cell.selectionStyle = .none
+//            cell.collectionView.delegate = self
+//            
+//            output.homeAllList
+//                .subscribe(onNext: { [weak cell] homeAllList in
+//                    cell?.bindViewModel(homeAllList: Observable.just(homeAllList))
+//                    
+//                           })
+//                .disposed(by: cell.disposeBag)
+//            return cell
+//            
+//        case 1: // 소식 탭
+//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
+//            
+//            output.newsList
+//                .bind { [weak cell] news in
+//                    cell?.configure(title: news[indexPath.row].title!, content: news[indexPath.row].contents!, date: news[indexPath.row].createdAt!)
+//                }
+//                .disposed(by: cell.disposeBag)
+//
+//            return cell
+//        case 2: // 모임 탭
+//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+//            
+//            return cell
+//        case 3: // 리뷰 탭
+//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
+//            
+//            return cell
+//        case 4: // 책 종류 탭
+//            let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
+//            
+//            return cell
+//        default:
+//            return UITableViewCell()
+//        }
+//        
+//    }
+//    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch selectedSegmentIndex {

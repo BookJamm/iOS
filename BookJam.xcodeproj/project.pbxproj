@@ -89,6 +89,7 @@
 		949751032B020ACA00DCC096 /* BookStorePhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949751022B020ACA00DCC096 /* BookStorePhotoCollectionViewCell.swift */; };
 		94A63E252B63DF9100ADD480 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 94A63E242B63DF9100ADD480 /* Differentiator */; };
 		94A63E272B63DF9100ADD480 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 94A63E262B63DF9100ADD480 /* RxDataSources */; };
+		94A63E2A2B67D19300ADD480 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 94A63E292B67D19300ADD480 /* Alamofire */; };
 		94A6BF3C2B20766000DF2BF8 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3B2B20766000DF2BF8 /* Activity.swift */; };
 		94A6BF3E2B20782A00DF2BF8 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3D2B20782A00DF2BF8 /* Review.swift */; };
 		94A6BF402B20824B00DF2BF8 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A6BF3F2B20824B00DF2BF8 /* News.swift */; };
@@ -243,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD0919062AFA5EB3001E5501 /* SnapKit in Frameworks */,
+				94A63E2A2B67D19300ADD480 /* Alamofire in Frameworks */,
 				DD09190B2AFA5EC4001E5501 /* Then in Frameworks */,
 				DD02247A2AFBD476005637B6 /* FloatingPanel in Frameworks */,
 				DD0919082AFA5EB3001E5501 /* SnapKit-Dynamic in Frameworks */,
@@ -820,6 +822,7 @@
 				DD0224792AFBD476005637B6 /* FloatingPanel */,
 				94A63E242B63DF9100ADD480 /* Differentiator */,
 				94A63E262B63DF9100ADD480 /* RxDataSources */,
+				94A63E292B67D19300ADD480 /* Alamofire */,
 			);
 			productName = BookJam;
 			productReference = DD754DE52AFA4D920001FBC4 /* BookJam.app */;
@@ -855,6 +858,7 @@
 				DD09190F2AFA5F25001E5501 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				94A63E282B67D19300ADD480 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = DD754DE62AFA4D920001FBC4 /* Products */;
 			projectDirPath = "";
@@ -1224,6 +1228,14 @@
 				minimumVersion = 5.0.2;
 			};
 		};
+		94A63E282B67D19300ADD480 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		DD0224782AFBD476005637B6 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scenee/FloatingPanel";
@@ -1268,6 +1280,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 94A63E232B63DF9100ADD480 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		94A63E292B67D19300ADD480 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 94A63E282B67D19300ADD480 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 		DD0224792AFBD476005637B6 /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;

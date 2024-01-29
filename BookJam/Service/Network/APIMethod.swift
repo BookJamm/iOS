@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Alamofire
 
 extension APIEndPoint {
     // 사용 시 접근 예시 : APIEndPoint.getAuthFriends.method
