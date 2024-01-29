@@ -27,7 +27,11 @@ class ColorToggleButton: UIButton {
         }
     }
     
-    var titleString: String?
+    var titleString: String? {
+        didSet {
+            self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
+        }
+    }
     
     init(title: String) {
         super.init(frame: CGRect(x: 0, y: 0, width: 64, height: 28))
@@ -42,7 +46,7 @@ class ColorToggleButton: UIButton {
         
         self.titleString = title
         
-        self.setAttributedTitle(NSAttributedString(string: title, attributes: [.font : captionText02!]), for: .normal)
+        self.setAttributedTitle(NSAttributedString(string: titleString ?? "", attributes: [.font : captionText02!]), for: .normal)
         
         // MARK: - 선택했을 때 색 변경
 //        self.addTarget(self, action: #selector(toggleColor), for: .touchUpInside)
@@ -61,7 +65,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = gray05
         config.background.backgroundColor = .clear
-        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
+//        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
     
@@ -70,7 +74,7 @@ class ColorToggleButton: UIButton {
         var config = UIButton.Configuration.filled()
         config.baseForegroundColor = .white
         config.background.backgroundColor = main03
-        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
+//        config.contentInsets = .init(top: 5, leading: 15, bottom: 5, trailing: 15)
         return config
     }
 }
