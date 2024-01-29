@@ -18,6 +18,7 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Variables
     
     private var viewModel = MainDetailPageViewModel()
+    
     let disposeBag = DisposeBag()
     
     var topView = MainDetailTopView()
@@ -46,40 +47,6 @@ final class MainDetailPageViewController: UIViewController {
     
     var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
 
-    private var dataSource = RxTableViewSectionedReloadDataSource<MainDetailSectionModel> (
-            configureCell: { dataSource, tableView, indexPath, item in
-                switch item {
-                case .homeItem(let homeAllList):
-                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-                    cell.bindViewModel(homeAllList: Observable.just(homeAllList))
-                    return cell
-
-                case .newsItem(let news):
-                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
-                    cell.configure(title: news.title!, content: news.contents!, date: news.createdAt!)
-                    return cell
-
-                case .activityItem(let activity):
-                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
-                    return cell
-                    
-                case .reviewItem(let review):
-                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
-                    
-                    return cell
-                    
-                case .bookListItem(let book):
-                    let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
-                    
-                    return cell
-                    
-                default:
-                    return UITableViewCell()
-                }
-            }
-        )
-    
-
     // MARK: viewDidLoad()
     
     override func viewDidLoad() {
@@ -88,6 +55,7 @@ final class MainDetailPageViewController: UIViewController {
         setUpView()
         setUpConstraint()
         setUpDelegate()
+        setUpDatasource()
         
         setUpBinding()
         homeTrigger.onNext(Void())
@@ -130,14 +98,42 @@ final class MainDetailPageViewController: UIViewController {
         tableView.delegate = self
     }
     
+    // MARK: SetUpDataSource
+    
+    private func setUpDatasource() {
+        tableView.dataSource = MainDetailDataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
+            switch item {
+                
+            case .homeItem(let homeAllList):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
+                return cell
+                
+            case .NewsItem(let news):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
+                cell.configure(title: news.title!, content: news.contents!, date: news.createdAt!)
+                return cell
+                
+            case .ActivityItem(let activity):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+                return cell
+                
+            case .ReviewItem(let review):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
+                
+                return cell
+                
+            case .BookListItem(let book):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
+                
+                return cell
+            }
+        })
+    }
+    
     // MARK: Data Binding
     private func setUpBinding() {
-        output.homeAllList
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
-        output.newsList
-            .bind(to: tableView.rx.items(dataSource: dataSource))
-            .disposed(by: disposeBag)
+        
     }
     
     // MARK: Function

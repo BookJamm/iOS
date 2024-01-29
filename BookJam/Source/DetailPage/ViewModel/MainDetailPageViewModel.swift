@@ -15,7 +15,12 @@ class MainDetailPageViewModel{
     
     let disposeBag = DisposeBag()
     
-    let newsListRelay = BehaviorRelay<[News]>(value: [])
+    // 각 섹션에 해당하는 아이템들을 관리하는 BehaviorRelay
+    let homeItemsRelay = BehaviorRelay<[DetailHomeTabModel]>(value: [])
+    let newsItemsRelay = BehaviorRelay<[News]>(value: [])
+    let activityItemsRelay = BehaviorRelay<[Activity]>(value: [])
+    let reviewItemsRelay = BehaviorRelay<[Review]>(value: [])
+    let bookListItemsRelay = BehaviorRelay<[Book]>(value: [])
     
     struct Input {
         let homeTrigger: Observable<Void>
@@ -26,13 +31,13 @@ class MainDetailPageViewModel{
     }
     
     struct Output {
-        let homeAllList: Observable<[MainDetailSectionModel]>
-        let newsList: Observable<[MainDetailSectionModel]>
-//        let activityList: Observable<[Activity]>
-//        let reviewList: Observable<[Review]>
-//        let bookListList: Observable<[Book]>
-        
+        let homeAllList: Observable<[DetailHomeTabModel]>
+        let newsList: Observable<[News]>
+        let activityList: Observable<[Activity]>
+        let reviewList: Observable<[Review]>
+        let bookListList: Observable<[Book]>
     }
+    
     
     let placeId = PlaceId(placeId: 0, name: "천천히스미", category: 0, rating: 1.1, reviewCount: 111, website: "https://www.instagram.com/joonmoring", address: Address(road: "서울시 종로구 평창동 도로명", jibun: "서울시 종로구 평창동 지번"), images: [Image(id: 1, url: "https://www.google.com/url?sa=i&url=http%3A%2F%2Fwww.bhc.co.kr%2Fmenu%2Fchicken.asp&psig=AOvVaw0AkPNk05_jAJSLpBwwBwQj&ust=1705568056015000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCKDFw6WG5IMDFQAAAAAdAAAAABAD")], open: true, bookmaked: false)
     let newsList = News(newsId: 1, createdAt: "2022-22-22", updatedAt: "2022-22-22", title: "하이하이", contents: "하이하이힝", placeId: 1)
@@ -79,15 +84,39 @@ class MainDetailPageViewModel{
     //         return Output(homeAllList: homeResult, newsList: newsListRelay.asObservable(), activityList: activity, reviewList: review, bookListList: book)
     //     }
     func transform(input: Input) -> Output {
-        let homeAllList = input.homeTrigger.map { _ -> [MainDetailSectionModel] in
-            return [MainDetailSectionModel(header: "홈", items: [.homeItem(DetailHomeTabModel(homeList: self.placeId, bookList: [self.bookList], activityList: [self.activityList], reviewList: [self.reviewList], newsList: [self.newsList]))])]
-            }
-
-        let newsList = input.newsTrigger.map { _ -> [MainDetailSectionModel] in
-            return [MainDetailSectionModel(header: "뉴스", items: [.newsItem(self.newsList), .newsItem(self.newsList1)])]
-        }
-
-            return Output(homeAllList: homeAllList, newsList: newsList)
-        
-    }
+           // 각 Trigger가 작동하면 해당 섹션의 아이템을 가져와서 BehaviorRelay에 추가합니다.
+           // 이 예시에서는 이미 ViewModel에 정의된 데이터를 사용하였습니다.
+           input.homeTrigger
+               .map { [DetailHomeTabModel(homeList: self.placeId, bookList: [self.bookList], activityList: [self.activityList], reviewList: [self.reviewList], newsList: [self.newsList])] }
+               .bind(to: homeItemsRelay)
+               .disposed(by: disposeBag)
+           
+           input.newsTrigger
+               .map { [self.newsList, self.newsList1] }
+               .bind(to: newsItemsRelay)
+               .disposed(by: disposeBag)
+           
+           input.activityTrigger
+               .map { [self.activityList] }
+               .bind(to: activityItemsRelay)
+               .disposed(by: disposeBag)
+           
+           input.reviewTrigger
+               .map { [self.reviewList] }
+               .bind(to: reviewItemsRelay)
+               .disposed(by: disposeBag)
+           
+           input.bookListTrigger
+               .map { [self.bookList] }
+               .bind(to: bookListItemsRelay)
+               .disposed(by: disposeBag)
+           
+           return Output(
+               homeAllList: homeItemsRelay.asObservable(),
+               newsList: newsItemsRelay.asObservable(),
+               activityList: activityItemsRelay.asObservable(),
+               reviewList: reviewItemsRelay.asObservable(),
+               bookListList: bookListItemsRelay.asObservable()
+           )
+       }
 }

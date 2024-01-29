@@ -15,7 +15,7 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     // MARK: Variables
     
     static let id = "MainDetailHomeTabCell"
-    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
+    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, DetailItem>?
     
     var disposeBag = DisposeBag()
 
@@ -55,16 +55,16 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     func bindViewModel(homeAllList: Observable<DetailHomeTabModel>) {
         homeAllList
             .subscribe(onNext: { [weak self] homeAllList in
-                self?.updateSnapshot(section: .News("\(String(describing: homeAllList.homeList.name))의 소식"), items: homeAllList.newsList.map { Item.NewsItem($0) })
-                self?.updateSnapshot(section: .BookList, items: homeAllList.bookList.map { Item.BookListItem($0) })
-                self?.updateSnapshot(section: .Activity, items: homeAllList.activityList.map { Item.ActivityItem($0) })
-                self?.updateSnapshot(section: .Review, items: homeAllList.reviewList.map { Item.ReviewItem($0) })
+                self?.updateSnapshot(section: .News("\(String(describing: homeAllList.homeList.name))의 소식"), items: homeAllList.newsList.map { DetailItem.NewsItem($0) })
+                self?.updateSnapshot(section: .BookList, items: homeAllList.bookList.map { DetailItem.BookListItem($0) })
+                self?.updateSnapshot(section: .Activity, items: homeAllList.activityList.map { DetailItem.ActivityItem($0) })
+                self?.updateSnapshot(section: .Review, items: homeAllList.reviewList.map { DetailItem.ReviewItem($0) })
             })
             .disposed(by: disposeBag)
     }
     
-    private func updateSnapshot(section: DetailSection, items: [Item]) {
-            var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot<DetailSection, Item>()
+    private func updateSnapshot(section: DetailSection, items: [DetailItem]) {
+            var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
 //            snapshot.appendSections([section])
         if snapshot.sectionIdentifiers.contains(section) {
                 let oldItems = snapshot.itemIdentifiers(inSection: section)
@@ -89,7 +89,7 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     // MARK: Delegate
     
     func setDatasource() {
-        dataSource = UICollectionViewDiffableDataSource<DetailSection, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<DetailSection, DetailItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
             switch itemIdentifier {
             case .ActivityItem(let contentData):
@@ -111,6 +111,8 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookReviewCollectionViewCell.id, for: indexPath) as? BookReviewCollectionViewCell
 //                cell?.configure(title: movieData.title, releaseDate: movieData.releaseDate, url: movieData.posterUrl)
                 return cell!
+            case .homeItem(_):
+                return UICollectionViewCell()
             }
         })
         
@@ -138,23 +140,23 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     }
     
      func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
         //소식
         let section1 = DetailSection.News("임시")
         snapshot.appendSections([section1])
         
         let defailtNewsData = News(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
         let bannerItems1 = [
-            Item.NewsItem(defailtNewsData)
+            DetailItem.NewsItem(defailtNewsData)
         ]
         snapshot.appendItems(bannerItems1, toSection: section1)
         
         //책 목록
         let section2 = DetailSection.BookList
         snapshot.appendSections([section2])
-        let bookData = Item.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        let bookData1 = Item.BookListItem(Book(title: "진격거2", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        let bookData2 = Item.BookListItem(Book(title: "진격거3", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        let bookData = DetailItem.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        let bookData1 = DetailItem.BookListItem(Book(title: "진격거2", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
+        let bookData2 = DetailItem.BookListItem(Book(title: "진격거3", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
         
         let bookItems = [
             bookData,
@@ -172,17 +174,17 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         let defaultActivityData3 = Activity(activityId: 3, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
         let defaultActivityData4 = Activity(activityId: 4, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
         let bannerItems = [
-            Item.ActivityItem(defaultActivityData),
-            Item.ActivityItem(defaultActivityData1),
-            Item.ActivityItem(defaultActivityData3),
-            Item.ActivityItem(defaultActivityData4),
+            DetailItem.ActivityItem(defaultActivityData),
+            DetailItem.ActivityItem(defaultActivityData1),
+            DetailItem.ActivityItem(defaultActivityData3),
+            DetailItem.ActivityItem(defaultActivityData4),
         ]
             
         snapshot.appendItems(bannerItems, toSection: section)
         
         let section3 = DetailSection.Review
         snapshot.appendSections([section3])
-        let reviewItem = Item.ReviewItem(Review(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil)))
+        let reviewItem = DetailItem.ReviewItem(Review(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil)))
         snapshot.appendItems([reviewItem], toSection: section3)
         
         self.dataSource?.apply(snapshot)
