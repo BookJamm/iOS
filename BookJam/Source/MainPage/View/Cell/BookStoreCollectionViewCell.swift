@@ -14,7 +14,7 @@ import Then
 
 class BookStoreCollectionViewCell: UICollectionViewCell {
     
-    // MARK: - Cell ViewModel
+    // MARK: - Cell Model
     var cellModel: Place? {
         didSet {
             fetchCellData()
