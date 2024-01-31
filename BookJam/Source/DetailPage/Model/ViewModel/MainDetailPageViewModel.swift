@@ -35,7 +35,7 @@ class MainDetailPageViewModel{
         let newsList: Observable<[News]>
         let activityList: Observable<[Activity]>
         let reviewList: Observable<[Review]>
-        let bookListList: Observable<[Book]>
+        let bookList: Observable<[Book]>
     }
     
     
@@ -84,7 +84,7 @@ class MainDetailPageViewModel{
                newsList: newsItemsRelay.asObservable(),
                activityList: activityItemsRelay.asObservable(),
                reviewList: reviewItemsRelay.asObservable(),
-               bookListList: bookListItemsRelay.asObservable()
+               bookList: bookListItemsRelay.asObservable()
            )
        }
 }

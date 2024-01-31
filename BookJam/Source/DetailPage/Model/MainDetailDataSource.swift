@@ -20,11 +20,11 @@ final class MainDetailDataSource: UITableViewDiffableDataSource<DetailSection, D
 }
 
 extension MainDetailDataSource {
-    func update(items: [DetailItem]) {
+    func update(section: DetailSection, items: [DetailItem]) {
         var snapshot = snapshot()
         snapshot.deleteAllItems()
-//        snapshot.appendSections([0])
-        snapshot.appendItems(items)
+        snapshot.appendSections([section])
+        snapshot.appendItems(items, toSection: section)
         apply(snapshot)
     }
 }

@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 import Then
 import RxDataSources
-import ReactorKit
 
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
@@ -46,7 +45,7 @@ final class MainDetailPageViewController: UIViewController {
     
     var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
 
-    typealias DataSource = UITableViewDiffableDataSource<DetailSection, DetailItem>
+    typealias DataSource = MainDetailDataSource
     
     var dataSource: DataSource!
     
@@ -108,7 +107,7 @@ final class MainDetailPageViewController: UIViewController {
                 
             case .homeItem(let homeAllList):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
+//                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
                 return cell
                 
             case .NewsItem(let news):
@@ -118,6 +117,7 @@ final class MainDetailPageViewController: UIViewController {
                 
             case .ActivityItem(let activity):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+                
                 return cell
                 
             case .ReviewItem(let review):
@@ -140,12 +140,13 @@ final class MainDetailPageViewController: UIViewController {
             let items = homeAll.map { homeAllList in
                 return DetailItem.homeItem(homeAllList)
             }
-            let section = DetailSection.Home
-            snapshot.deleteAllItems()
-            snapshot.appendSections([section])
-            snapshot.appendItems(items, toSection: section )
+//            let section = DetailSection.Home
+//            snapshot.deleteAllItems()
+//            snapshot.appendSections([section])
+//            snapshot.appendItems(items, toSection: section )
+            self?.dataSource.update(section: DetailSection.Home, items: items)
             
-            self?.dataSource.apply(snapshot)
+//            self?.dataSource.apply(snapshot)
         }
         .disposed(by: disposeBag)
         
@@ -154,12 +155,40 @@ final class MainDetailPageViewController: UIViewController {
             let items = newsList.map { news in
                 return DetailItem.NewsItem(news)
             }
-            let section = DetailSection.News("gg")
-            snapshot.deleteAllItems()
-            snapshot.appendSections([section])
-            snapshot.appendItems(items, toSection: section )
+//            let section = DetailSection.News("gg")
+//            snapshot.deleteAllItems()
+//            snapshot.appendSections([section])
+//            snapshot.appendItems(items, toSection: section )
+            self?.dataSource.update(section: DetailSection.News("장모"), items: items)
             
-            self?.dataSource.apply(snapshot)
+//            self?.dataSource.apply(snapshot)
+        }
+        .disposed(by: disposeBag)
+        
+        output.activityList.bind { [weak self] activityList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = activityList.map { activity in
+                return DetailItem.ActivityItem(activity)
+            }
+            self?.dataSource.update(section: DetailSection.Activity, items: items)
+        }
+        .disposed(by: disposeBag)
+        
+        output.reviewList.bind { [weak self] reviewList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = reviewList.map { review in
+                return DetailItem.ReviewItem(review)
+            }
+            self?.dataSource.update(section: DetailSection.Review, items: items)
+        }
+        .disposed(by: disposeBag)
+        
+        output.bookList.bind { [weak self] bookList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = bookList.map { book in
+                return DetailItem.BookListItem(book)
+            }
+            self?.dataSource.update(section: DetailSection.BookList, items: items)
         }
         .disposed(by: disposeBag)
     }
@@ -181,10 +210,13 @@ final class MainDetailPageViewController: UIViewController {
             self.newsTrigger.onNext(Void())
         case 2:
             print("참여 탭 클릭")
+            self.activityTrigger.onNext(Void())
         case 3:
             print("리뷰 탭 클릭")
+            self.reviewTrigger.onNext(Void())
         case 4:
             print("책 종류 클릭")
+            self.bookListTrigger.onNext(Void())
         default:
             break
         }

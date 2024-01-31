@@ -9,24 +9,24 @@ import Foundation
 import RxSwift
 import ReactorKit
 
-class MainDetailReactor: Reactor {
-    
-    enum Action {
-        case home
-        case news
-        case activity
-        case review
-        case bookList
-    }
-    
-    enum Mutation {
-        
-    }
-    
-    struct State {
-        
-    }
-    
-    let initialState: State
-    
-}
+//class MainDetailReactor: Reactor {
+//    
+//    enum Action {
+//        case home
+//        case news
+//        case activity
+//        case review
+//        case bookList
+//    }
+//    
+//    enum Mutation {
+//        
+//    }
+//    
+//    struct State {
+//        
+//    }
+//    
+//    let initialState: State
+//    
+//}
