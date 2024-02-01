@@ -43,7 +43,7 @@ class MainDetailActivityTableViewCell: UITableViewCell {
     }
     
     var activityTypeButton: UIButton = UIButton().then {
-        $0.setTitle("    영업중    ", for: .normal)
+        $0.setTitle("    글쓰기    ", for: .normal)
         $0.setTitleColor(main03, for: .normal)
         $0.titleLabel?.font = captionText01
         $0.layer.cornerRadius = 14
@@ -113,8 +113,11 @@ class MainDetailActivityTableViewCell: UITableViewCell {
         }
     }
     
-    public func configure(title: String, content: String) {
-
+    public func configure(url: String, title: String,date: String, location: String) {
+        bookImageView.kf.setImage(with: URL(string: url))
+        titleLabel.text = title
+        dateLabel.text = date
+        locationLabel.text = location
     }
 
 }

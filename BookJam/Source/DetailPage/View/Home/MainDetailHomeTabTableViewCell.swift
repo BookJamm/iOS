@@ -45,7 +45,7 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         
         setDatasource()
         setUpConstraint()
-        setSnapShot()
+//        setSnapShot()
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +56,7 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         print("bindViewModel 함수 실행")
         homeAllList
             .subscribe(onNext: { [weak self] homeAllList in
-                self?.updateSnapshot(section: .News("\(String(describing: homeAllList.homeList.name))의 소식"), items: homeAllList.newsList.map { DetailItem.NewsItem($0) })
+                self?.updateSnapshot(section: .News(homeAllList.homeList.name!), items: homeAllList.newsList.map { DetailItem.NewsItem($0) })
                 self?.updateSnapshot(section: .BookList, items: homeAllList.bookList.map { DetailItem.BookListItem($0) })
                 self?.updateSnapshot(section: .Activity, items: homeAllList.activityList.map { DetailItem.ActivityItem($0) })
                 self?.updateSnapshot(section: .Review, items: homeAllList.reviewList.map { DetailItem.ReviewItem($0) })
@@ -103,22 +103,23 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
             switch itemIdentifier {
             case .ActivityItem(let contentData):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookActivityCollectionViewCell.id, for: indexPath) as? BookActivityCollectionViewCell
-//                cell?.configure(title: contentData.title, review: contentData.vote, desc: contentData.overview, imageURL: contentData.posterURL)
                 cell?.configure(title: contentData.title, url: contentData.imageUrl!)
                 print("Activity Item 데이터소스 등록")
                 return cell!
-            case .BookListItem(let movieData):
+            case .BookListItem(let bookList):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookListCollectionViewCell.id, for: indexPath) as? BookListCollectionViewCell
-                cell?.configure(url: movieData.cover!, title: movieData.title!, author: movieData.author!, publish: movieData.publisher!)
+                cell?.configure(url: bookList.cover!, title: bookList.title!, author: bookList.author!, publish: bookList.publisher!)
+                print("BookList Item 데이터소스 등록")
                 return cell!
-            case .NewsItem(let movieData):
+            case .NewsItem(let news):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookNewsCollectionViewCell.id, for: indexPath) as? BookNewsCollectionViewCell
-                cell?.configure(title: movieData.title!, content: movieData.contents!)
+                cell?.configure(title: news.title!, content: news.contents!)
                 print("News Item 데이터소스 등록")
                 return cell!
-            case .ReviewItem(let movieData):
+            case .ReviewItem(let review):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookReviewCollectionViewCell.id, for: indexPath) as? BookReviewCollectionViewCell
-//                cell?.configure(title: movieData.title, releaseDate: movieData.releaseDate, url: movieData.posterUrl)
+                cell?.configure(name: review.author.username!, contents: review.contents!, visitedAt: review.visitedAt!)
+                print("Review Item 데이터소스 등록")
                 return cell!
             case .homeItem(_):
                 return UICollectionViewCell()
@@ -220,8 +221,10 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
                 print("액티비티 레이아웃 생성")
                 return self?.createActivitySection()
             case .Review:
+                print("리뷰 레이아웃 생성")
                 return self?.createReviewSection()
             case .BookList:
+                print("책목록 레이아웃 생성")
                 return self?.createBookListSection()
             default:
                 return self!.createActivitySection()

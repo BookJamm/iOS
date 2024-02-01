@@ -107,7 +107,7 @@ final class MainDetailPageViewController: UIViewController {
                 
             case .homeItem(let homeAllList):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-//                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
+                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
                 return cell
                 
             case .NewsItem(let news):
@@ -117,12 +117,12 @@ final class MainDetailPageViewController: UIViewController {
                 
             case .ActivityItem(let activity):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
-                
+                cell.configure(url: activity.imageUrl!, title: activity.title, date: activity.createdAt!, location: activity.info)
                 return cell
                 
             case .ReviewItem(let review):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
-                
+                cell.configure(name: review.author.username!, contents: review.contents!, visitedAt: review.visitedAt!)
                 return cell
                 
             case .BookListItem(let book):
