@@ -45,9 +45,11 @@ class MainDetailPageViewModel{
     let newsList1 = News(newsId: 2, createdAt: "2022-22-22", updatedAt: "2022-22-22", title: "굿굿", contents: "대박대박", placeId: 1)
     
     let bookList = Book(title: "진격의거인", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의거인", publisher: "출판사")
-    let activityList = Activity(activityId: 1, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
+    let bookList2 = Book(title: "진격거2", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사")
+    let activityList = Activity(activityId: 1, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "모임", info: "모임 가지기", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
+    let activityList2 = Activity(activityId: 3, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
     let reviewList = Review(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil))
-    
+    let reviewList2 = Review(reviewId: 2, visitedAt: "2025-34-05", contents: "자주 갈게요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil))
     
     // MARK: Transform
 
@@ -65,17 +67,17 @@ class MainDetailPageViewModel{
                .disposed(by: disposeBag)
            
            input.activityTrigger
-               .map { [self.activityList] }
+            .map { [self.activityList, self.activityList2] }
                .bind(to: activityItemsRelay)
                .disposed(by: disposeBag)
            
            input.reviewTrigger
-               .map { [self.reviewList] }
+            .map { [self.reviewList, self.reviewList2] }
                .bind(to: reviewItemsRelay)
                .disposed(by: disposeBag)
            
            input.bookListTrigger
-               .map { [self.bookList] }
+            .map { [self.bookList, self.bookList2] }
                .bind(to: bookListItemsRelay)
                .disposed(by: disposeBag)
            

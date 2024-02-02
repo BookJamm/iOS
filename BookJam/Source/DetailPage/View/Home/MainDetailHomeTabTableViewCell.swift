@@ -69,16 +69,9 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         print("\(section) 업데이트 스냅샷")
         var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
 
-        if snapshot.sectionIdentifiers.contains(section) {
-            // 섹션의 모든 아이템을 삭제합니다.
-            print("올드 아이템 제거")
-            let oldItems = snapshot.itemIdentifiers(inSection: section)
-            snapshot.deleteItems(oldItems)
-        } else {
             // 새로운 섹션을 추가합니다.
             print("새로운 섹션 추가")
             snapshot.appendSections([section])
-        }
 
         // 새 아이템을 추가합니다.
         snapshot.appendItems(items, toSection: section)
@@ -148,60 +141,6 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
             return header
         }
     }
-    
-     func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
-        //소식
-        let section1 = DetailSection.News("임시")
-        snapshot.appendSections([section1])
-        
-        let defailtNewsData = News(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
-        let bannerItems1 = [
-            DetailItem.NewsItem(defailtNewsData)
-        ]
-        snapshot.appendItems(bannerItems1, toSection: section1)
-        
-        //책 목록
-        let section2 = DetailSection.BookList
-        snapshot.appendSections([section2])
-        let bookData = DetailItem.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        let bookData1 = DetailItem.BookListItem(Book(title: "진격거2", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        let bookData2 = DetailItem.BookListItem(Book(title: "진격거3", author: "에렌 예거", cover: "https://image.aladin.co.kr/product/26/0/cover500/s742633278_1.jpg", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        
-        let bookItems = [
-            bookData,
-            bookData1,
-            bookData2
-        ]
-        snapshot.appendItems(bookItems, toSection: section2)
-        
-        // 독서 활동
-        let section = DetailSection.Activity
-        snapshot.appendSections([section])
-        let defaultActivityData = Activity(activityId: 1, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let defaultActivityData1 = Activity(activityId: 2, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-            
-        let defaultActivityData3 = Activity(activityId: 3, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let defaultActivityData4 = Activity(activityId: 4, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let bannerItems = [
-            DetailItem.ActivityItem(defaultActivityData),
-            DetailItem.ActivityItem(defaultActivityData1),
-            DetailItem.ActivityItem(defaultActivityData3),
-            DetailItem.ActivityItem(defaultActivityData4),
-        ]
-            
-        snapshot.appendItems(bannerItems, toSection: section)
-        
-        let section3 = DetailSection.Review
-        snapshot.appendSections([section3])
-        let reviewItem = DetailItem.ReviewItem(Review(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil)))
-        snapshot.appendItems([reviewItem], toSection: section3)
-        
-        self.dataSource?.apply(snapshot)
-        
-        print("Snapshot 함수 완료")
-    }
-    
 
     // MARK: Function
     
