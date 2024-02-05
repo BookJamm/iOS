@@ -91,6 +91,7 @@ final class SearchPageViewController: UIViewController {
     // MARK: Configure View
     private func setUpView() {
         self.view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: Data Binding
@@ -280,6 +281,7 @@ extension SearchPageViewController: UICollectionViewDelegate {
             case .topIndicatorView:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchPageResultCountViewCell.id, for: indexPath) as? SearchPageResultCountViewCell else { return UICollectionViewCell() }
                 // viewModel Inject
+                cell.viewModel  = SearchPageResultCountViewModel(dataProvider: self.viewModel)
                 return cell
                 
             case .wholeView:
