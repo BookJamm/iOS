@@ -86,6 +86,7 @@
 		88A7EF3C2B710DFA00E47C8B /* SearchPageSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */; };
 		88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundView.swift */; };
 		88A7EF402B710EA200E47C8B /* SearchPageContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3F2B710EA200E47C8B /* SearchPageContentHeaderView.swift */; };
+		88A7EF422B712B3600E47C8B /* SearchPageBackgroundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */; };
 		88B0DBBC2B37450C0047F0A0 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */; };
 		88C431582B5A9B1E00A29180 /* BookClubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C431572B5A9B1E00A29180 /* BookClubCollectionViewCell.swift */; };
 		88C4315A2B5AA8B800A29180 /* PublicationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C431592B5AA8B800A29180 /* PublicationCollectionViewCell.swift */; };
@@ -217,6 +218,7 @@
 		88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageSearchBar.swift; sourceTree = "<group>"; };
 		88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundView.swift; sourceTree = "<group>"; };
 		88A7EF3F2B710EA200E47C8B /* SearchPageContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageContentHeaderView.swift; sourceTree = "<group>"; };
+		88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundType.swift; sourceTree = "<group>"; };
 		88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		88C431572B5A9B1E00A29180 /* BookClubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubCollectionViewCell.swift; sourceTree = "<group>"; };
 		88C431592B5AA8B800A29180 /* PublicationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -588,6 +590,7 @@
 		88A7EF362B7104A300E47C8B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -986,6 +989,7 @@
 				8830924A2B3853960082729B /* BookClub.swift in Sources */,
 				88472AAE2B18E9610073AE61 /* Coordinate.swift in Sources */,
 				885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */,
+				88A7EF422B712B3600E47C8B /* SearchPageBackgroundType.swift in Sources */,
 				8829B05E2B66A5CC005BD999 /* ColorToggleButtonCell.swift in Sources */,
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
 				8885EA9F2B3C24AB008DE7F8 /* PublicationSearchFilter.swift in Sources */,
