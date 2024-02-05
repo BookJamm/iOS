@@ -84,7 +84,7 @@
 		8885EAA52B3C3743008DE7F8 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EAA42B3C3743008DE7F8 /* MainPageViewModel.swift */; };
 		88A7EF3A2B7104DF00E47C8B /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF392B7104DF00E47C8B /* SearchPageViewController.swift */; };
 		88A7EF3C2B710DFA00E47C8B /* SearchPageSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */; };
-		88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundView.swift */; };
+		88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */; };
 		88A7EF402B710EA200E47C8B /* SearchPageContentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3F2B710EA200E47C8B /* SearchPageContentHeaderView.swift */; };
 		88A7EF422B712B3600E47C8B /* SearchPageBackgroundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */; };
 		88B0DBBC2B37450C0047F0A0 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */; };
@@ -216,7 +216,7 @@
 		8885EAA42B3C3743008DE7F8 /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		88A7EF392B7104DF00E47C8B /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
 		88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageSearchBar.swift; sourceTree = "<group>"; };
-		88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundView.swift; sourceTree = "<group>"; };
+		88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundViewCell.swift; sourceTree = "<group>"; };
 		88A7EF3F2B710EA200E47C8B /* SearchPageContentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageContentHeaderView.swift; sourceTree = "<group>"; };
 		88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundType.swift; sourceTree = "<group>"; };
 		88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
@@ -599,7 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */,
-				88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundView.swift */,
+				88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */,
 				88A7EF3F2B710EA200E47C8B /* SearchPageContentHeaderView.swift */,
 			);
 			path = View;
@@ -1023,7 +1023,7 @@
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
 				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
 				885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */,
-				88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundView.swift in Sources */,
+				88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift in Sources */,
 				885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,

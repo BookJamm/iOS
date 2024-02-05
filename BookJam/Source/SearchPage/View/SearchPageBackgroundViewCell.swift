@@ -9,7 +9,9 @@ import UIKit
 import SnapKit
 import Then
 
-class SearchPageBackgroundView: UICollectionViewCell {
+class SearchPageBackgroundViewCell: UICollectionViewCell {
+    
+    static let id = "SearchPageBackgroundViewCell"
     
     var backgroundContentType: SearchPageBackgroundType = .start
     
@@ -79,5 +81,5 @@ class SearchPageBackgroundView: UICollectionViewCell {
 
 @available(iOS 17.0,*)
 #Preview {
-    SearchPageBackgroundView()
+    SearchPageBackgroundViewCell()
 }
