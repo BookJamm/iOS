@@ -49,7 +49,7 @@ final class SearchPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     /// Rx - ViewModel
-    private var viewModel = MainPageViewModel()
+    private var viewModel = SearchPageViewModel()
     
     private lazy var searchBar = SearchPageSearchBar().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -82,42 +82,9 @@ final class SearchPageViewController: UIViewController {
         setUpBinding()
         
         var snapshot = NSDiffableDataSourceSnapshot<searchPageSection,searchPageItem>()
-        
-        let sec0 = searchPageSection.wholeView
-        let sec1 = searchPageSection.topIndicatorView
-        let sec2 = searchPageSection.bookPlace
-        let sec3 = searchPageSection.bookClub
-        let sec4 = searchPageSection.publication
-        
-
-        
-//        snapshot.appendSections([sec0])
-//        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
-        
-                snapshot.appendSections([sec1])
-                snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
-        
-        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
-                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
-            return searchPageItem.bookPlace(place)}
-        
-        snapshot.appendSections([sec2])
-        snapshot.appendItems(items2, toSection: sec2)
-        
-        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
-                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
-            return searchPageItem.bookClub(place)}
-        
-        snapshot.appendSections([sec3])
-        snapshot.appendItems(items3, toSection: sec3)
-        
-        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
-                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
-            return searchPageItem.publication(place)}
-        
-        snapshot.appendSections([sec4])
-        snapshot.appendItems(items4, toSection: sec4)
-        
+        let wholeSec = searchPageSection.wholeView
+        snapshot.appendSections([wholeSec])
+        snapshot.appendItems([searchPageItem.wholeView], toSection: wholeSec)
         self.searchDataSource?.apply(snapshot)
     }
     
@@ -128,19 +95,66 @@ final class SearchPageViewController: UIViewController {
     
     // MARK: Data Binding
     private func setUpBinding() {
-        // MARK: Input
-//        let input = MainPageViewModel.Input(
-//            categoryTrigger: self.selectCategory.asObservable(),
-//            selectFilter: self.selectFilter.asObservable()
-//        )
+        let searchTextInput = self.searchBar.searchTextField.rx.text
+            .orEmpty
+            .distinctUntilChanged()
         
-        // MARK: Output
-//        let output = viewModel.transform(input: input)
-//        output.
-//        output.selectedCategory // topview에 디자인 연결
-//
-//        output.selectedFilter // headerview에 목록 연결
-
+        let input = SearchPageViewModel.Input(
+            searchText: searchTextInput
+        )
+        
+        let output = viewModel.transform(input: input)
+       
+        Observable.zip(
+            output.bookStoreList,
+            output.bookClubList,
+            output.publicationList
+        )
+        .subscribe(onNext: { [weak self] (places, clubs, books) in
+            var snapshot = NSDiffableDataSourceSnapshot<searchPageSection,searchPageItem>()
+            
+            if places.isEmpty && clubs.isEmpty && books.isEmpty {
+                let wholeViewSec = searchPageSection.wholeView
+                snapshot.appendSections([wholeViewSec])
+                snapshot.appendItems([searchPageItem.wholeView], toSection: wholeViewSec)
+            }
+            else {
+                let topViewSec = searchPageSection.topIndicatorView
+                snapshot.appendSections([topViewSec])
+                snapshot.appendItems([searchPageItem.topIndicatorView], toSection: topViewSec)
+                
+                if !places.isEmpty {
+                    let placeSec = searchPageSection.bookPlace
+                    let items = places.map { place in
+                        return searchPageItem.bookPlace(place)
+                    }.prefix(2)
+                    snapshot.appendSections([placeSec])
+                    snapshot.appendItems(Array(items), toSection: placeSec)
+                }
+                
+                if !clubs.isEmpty {
+                    let clubSec = searchPageSection.bookClub
+                    let items = clubs.map  { club in
+                        return  searchPageItem.bookClub(club)
+                    }.prefix(2)
+                    snapshot.appendSections([clubSec])
+                    snapshot.appendItems(Array(items), toSection: clubSec)
+                }
+                
+                if !books.isEmpty {
+                    let bookSec = searchPageSection.publication
+                    let items = books.map { book in
+                        return searchPageItem.publication(book)
+                    }.prefix(2)
+                    snapshot.appendSections([bookSec])
+                    snapshot.appendItems(Array(items), toSection: bookSec)
+                }
+            }
+            
+            
+            self?.searchDataSource?.apply(snapshot)
+        })
+        .disposed(by: disposeBag)
     }
     
     // MARK: Layout

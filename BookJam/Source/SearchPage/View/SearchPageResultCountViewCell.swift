@@ -20,7 +20,7 @@ class SearchPageResultCountViewCell: UICollectionViewCell {
     let disposeBag = DisposeBag()
     
     // Rx - ViewModel
-    var viewModel: MainPageCollectionHeaderViewModel? {
+    var viewModel: SearchPageResultCountViewModel? {
         didSet {
             setUpBinding()
         }
@@ -44,7 +44,13 @@ class SearchPageResultCountViewCell: UICollectionViewCell {
     }
     
     private func setUpBinding() {
-
+        let output = viewModel?.transform(input: SearchPageResultCountViewModel.Input())
+        
+        output?.result
+            .bind { [weak self] (text,count) in
+                self?.applyConfigWithString(target: text, count: count)
+            }
+            .disposed(by: disposeBag)
     }
     
     private func setUpLayout() {
