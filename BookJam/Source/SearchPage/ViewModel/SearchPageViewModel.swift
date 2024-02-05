@@ -85,6 +85,7 @@ final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
 //        .map { resModel in
 //            return resModel.map { $0.toDomain() }
 //        }
+        if text == "" { return Observable.just([]) }
         return Observable
             .just([Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
                                 Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
@@ -98,6 +99,7 @@ final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
     }
     
     private func getBookClubList(text:String) -> Observable<[BookClub]> {
+        if text == "" { return Observable.just([]) }
         return Observable
             .just([BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
                                 BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil),
@@ -111,6 +113,7 @@ final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
     }
     
     private func getBookList(text:String) -> Observable<[Book]> {
+        if text == "" { return Observable.just([]) }
         return Observable
             .just([Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
                                 Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
