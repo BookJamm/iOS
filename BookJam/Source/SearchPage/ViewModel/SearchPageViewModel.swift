@@ -6,7 +6,6 @@
 //
 
 import RxSwift
-import CoreLocation
 import RxRelay
 
 final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
