@@ -41,6 +41,7 @@ class SearchPageBackgroundViewCell: UICollectionViewCell {
     }
     
     private func setUpView() {
+        self.backgroundColor = .white
         imageView.image = backgroundContentType.image
         title.text = backgroundContentType.title
         subTitle.text = backgroundContentType.subTitle
@@ -60,7 +61,8 @@ class SearchPageBackgroundViewCell: UICollectionViewCell {
             $0.size.equalTo(210)
             $0.leading.equalTo(70)
             $0.trailing.equalTo(-70)
-            $0.top.equalToSuperview()
+//            $0.top.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-100)
         }
         
         title.snp.makeConstraints {

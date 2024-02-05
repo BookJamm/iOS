@@ -37,11 +37,13 @@ final class SearchPageViewController: UIViewController {
     /// Rx - ViewModel
     private var viewModel = MainPageViewModel()
     
-    private lazy var searchBar = SearchPageSearchBar()
+    private lazy var searchBar = SearchPageSearchBar().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     /// 검색 컨텐츠 보여주는 콜렉션 뷰
     private lazy var searchCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .gray01
         
 
         $0.register(SearchPageBackgroundViewCell.self, forCellWithReuseIdentifier: SearchPageBackgroundViewCell.id) // 뒷 배경 상태 셀
@@ -73,39 +75,41 @@ final class SearchPageViewController: UIViewController {
         let sec3 = searchPageSection.bookClub
         let sec4 = searchPageSection.publication
         
-        snapshot.appendSections([sec1])
-        snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
+
         
-//        snapshot.appendSections([sec0])
-//        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
+        snapshot.appendSections([sec0])
+        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
         
-        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
-                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
-            return searchPageItem.bookPlace(place)}
+        //        snapshot.appendSections([sec1])
+        //        snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
         
-        snapshot.appendSections([sec2])
-        snapshot.appendItems(items2, toSection: sec2)
-        
-        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
-                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
-            return searchPageItem.bookClub(place)}
-        
-        snapshot.appendSections([sec3])
-        snapshot.appendItems(items3, toSection: sec3)
-        
-        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
-                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
-            return searchPageItem.publication(place)}
-        
-        snapshot.appendSections([sec4])
-        snapshot.appendItems(items4, toSection: sec4)
+//        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
+//                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
+//            return searchPageItem.bookPlace(place)}
+//        
+//        snapshot.appendSections([sec2])
+//        snapshot.appendItems(items2, toSection: sec2)
+//        
+//        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
+//                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
+//            return searchPageItem.bookClub(place)}
+//        
+//        snapshot.appendSections([sec3])
+//        snapshot.appendItems(items3, toSection: sec3)
+//        
+//        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
+//                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
+//            return searchPageItem.publication(place)}
+//        
+//        snapshot.appendSections([sec4])
+//        snapshot.appendItems(items4, toSection: sec4)
         
         self.searchDataSource?.apply(snapshot)
     }
     
     // MARK: Configure View
     private func setUpView() {
-        self.view.backgroundColor = .gray01
+        self.view.backgroundColor = .white
     }
     
     // MARK: Data Binding
@@ -141,6 +145,7 @@ final class SearchPageViewController: UIViewController {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(8)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
+            $0.height.equalTo(44)
 //            $0.bottom.equalToSuperview().offset(-12)
         }
         
@@ -199,7 +204,7 @@ extension SearchPageViewController {
     // MARK: CollectionView 배경에 들어갈 전체 View Section Layout 생성
     private func createWholeViewSection() -> NSCollectionLayoutSection {
         // item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(353))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group

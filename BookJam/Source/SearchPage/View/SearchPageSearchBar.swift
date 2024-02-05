@@ -36,9 +36,9 @@ class SearchPageSearchBar: UISearchBar {
         // textField SNP
         self.searchTextField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
-            $0.top.equalToSuperview().offset(16)
+            $0.top.equalToSuperview().offset(15)
             $0.trailing.equalToSuperview().offset(-10)
-            $0.bottom.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview().offset(-15)
         }
     }
     
