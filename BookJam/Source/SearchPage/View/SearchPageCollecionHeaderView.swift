@@ -74,6 +74,10 @@ final class SearchPageCollecionHeaderView: UICollectionReusableView {
         }
     }
     
+    func configure(title:String) {
+        self.titleLabel.text = title
+    }
+    
 }
 
 @available(iOS 17.0, *)

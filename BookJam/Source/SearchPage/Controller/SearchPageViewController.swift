@@ -17,6 +17,20 @@ enum searchPageSection: Hashable {
     case bookPlace // 독립서점 섹션
     case bookClub // 모임 섹션
     case publication // 출판물 섹션
+    
+    // 헤더 타이틀용
+    var sectionTitle: String {
+        switch self {
+        case .bookPlace:
+            return "독립 서점"
+        case .bookClub:
+            return "모임"
+        case .publication:
+            return "출판물"
+        default:
+            return ""
+        }
+    }
 }
 
 enum searchPageItem: Hashable {
@@ -77,32 +91,32 @@ final class SearchPageViewController: UIViewController {
         
 
         
-        snapshot.appendSections([sec0])
-        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
+//        snapshot.appendSections([sec0])
+//        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
         
-        //        snapshot.appendSections([sec1])
-        //        snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
+                snapshot.appendSections([sec1])
+                snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
         
-//        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
-//                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
-//            return searchPageItem.bookPlace(place)}
-//        
-//        snapshot.appendSections([sec2])
-//        snapshot.appendItems(items2, toSection: sec2)
-//        
-//        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
-//                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
-//            return searchPageItem.bookClub(place)}
-//        
-//        snapshot.appendSections([sec3])
-//        snapshot.appendItems(items3, toSection: sec3)
-//        
-//        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
-//                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
-//            return searchPageItem.publication(place)}
-//        
-//        snapshot.appendSections([sec4])
-//        snapshot.appendItems(items4, toSection: sec4)
+        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
+                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
+            return searchPageItem.bookPlace(place)}
+        
+        snapshot.appendSections([sec2])
+        snapshot.appendItems(items2, toSection: sec2)
+        
+        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
+                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
+            return searchPageItem.bookClub(place)}
+        
+        snapshot.appendSections([sec3])
+        snapshot.appendItems(items3, toSection: sec3)
+        
+        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
+                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
+            return searchPageItem.publication(place)}
+        
+        snapshot.appendSections([sec4])
+        snapshot.appendItems(items4, toSection: sec4)
         
         self.searchDataSource?.apply(snapshot)
     }
@@ -279,8 +293,11 @@ extension SearchPageViewController: UICollectionViewDelegate {
         searchDataSource?.supplementaryViewProvider = { (collectionView, kind, indexPath) -> UICollectionReusableView in
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SearchPageCollecionHeaderView.id, for: indexPath) as? SearchPageCollecionHeaderView else { return UICollectionReusableView() }
 
-            // 여기에서 ViewModel의 state 참조 - Viewmodel 필요
-//            header.viewModel = MainPageCollectionHeaderViewModel(dataProvider: self.viewModel)
+            // 여기에서 해당 cell의 이름이 필요함
+            // 해당 section에 대한 데이터를 가져와서 헤더에 적용
+            if let section = self.searchDataSource?.snapshot().sectionIdentifiers[indexPath.section] {
+                header.configure(title: section.sectionTitle)
+            }
             
             return header
         }

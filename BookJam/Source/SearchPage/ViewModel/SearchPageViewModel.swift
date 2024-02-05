@@ -68,7 +68,7 @@ final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
     }
     
     // MARK: API Call
-    private func getTotalCountList(text: text) -> Observable<(String,Int)> {
+    private func getTotalCountList(text:String) -> Observable<(String,Int)> {
         return Observable
             .just((text, 12))
     }
