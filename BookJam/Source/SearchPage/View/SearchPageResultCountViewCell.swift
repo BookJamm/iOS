@@ -11,7 +11,7 @@ import Then
 import RxSwift
 
 
-class SearchPageResultCountView: UICollectionReusableView {
+class SearchPageResultCountViewCell: UICollectionViewCell {
     
     // MARK: Variables
     static let id = "SearchPageCollecionHeaderView"
@@ -80,5 +80,5 @@ class SearchPageResultCountView: UICollectionReusableView {
 
 @available(iOS 17.0, *)
 #Preview {
-    SearchPageResultCountView()
+    SearchPageResultCountViewCell()
 }
