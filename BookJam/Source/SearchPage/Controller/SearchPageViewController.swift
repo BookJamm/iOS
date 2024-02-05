@@ -64,6 +64,43 @@ final class SearchPageViewController: UIViewController {
         setUpConstraint()
         setDataSource()
         setUpBinding()
+        
+        var snapshot = NSDiffableDataSourceSnapshot<searchPageSection,searchPageItem>()
+        
+        let sec0 = searchPageSection.wholeView
+        let sec1 = searchPageSection.topIndicatorView
+        let sec2 = searchPageSection.bookPlace
+        let sec3 = searchPageSection.bookClub
+        let sec4 = searchPageSection.publication
+        
+        snapshot.appendSections([sec1])
+        snapshot.appendItems([searchPageItem.topIndicatorView], toSection: sec1)
+        
+//        snapshot.appendSections([sec0])
+//        snapshot.appendItems([searchPageItem.wholeView], toSection: sec0)
+        
+        let items2 = [Place(placeId: 0, name: "BookStore1", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil),
+                     Place(placeId: 1, name: "BookStore2", rating: 0.0, reviewCount: 0, category: 0, open: false, images: nil, address: nil, coords: nil)].map { place in
+            return searchPageItem.bookPlace(place)}
+        
+        snapshot.appendSections([sec2])
+        snapshot.appendItems(items2, toSection: sec2)
+        
+        let items3 = [BookClub(bookClubID: 0, name: "BookClub2", date: nil, cover: nil, place: nil, type: nil),
+                      BookClub(bookClubID: 1, name: "BookClub3", date: nil, cover: nil, place: nil, type: nil)].map { place in
+            return searchPageItem.bookClub(place)}
+        
+        snapshot.appendSections([sec3])
+        snapshot.appendItems(items3, toSection: sec3)
+        
+        let items4 = [Book(bookID: 0, place: nil, title: "Publication3", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil),
+                      Book(bookID: 1, place: nil, title: "Publication4", author: nil, cover: nil, genre: nil, price: nil, isbn: nil, description: nil, publisher: nil)].map { place in
+            return searchPageItem.publication(place)}
+        
+        snapshot.appendSections([sec4])
+        snapshot.appendItems(items4, toSection: sec4)
+        
+        self.searchDataSource?.apply(snapshot)
     }
     
     // MARK: Configure View
@@ -104,7 +141,7 @@ final class SearchPageViewController: UIViewController {
             $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(8)
             $0.left.equalToSuperview().offset(20)
             $0.right.equalToSuperview().offset(-20)
-            $0.bottom.equalToSuperview().offset(-12)
+//            $0.bottom.equalToSuperview().offset(-12)
         }
         
         searchCollectionView.snp.makeConstraints {
@@ -123,6 +160,7 @@ extension SearchPageViewController {
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.scrollDirection = .vertical
+        config.interSectionSpacing = 1
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, _ in
             
             let section = self?.searchDataSource?.sectionIdentifier(for: sectionIndex)
@@ -161,11 +199,11 @@ extension SearchPageViewController {
     // MARK: CollectionView 배경에 들어갈 전체 View Section Layout 생성
     private func createWholeViewSection() -> NSCollectionLayoutSection {
         // item
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(353))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         // group
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(1.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         // section
@@ -186,7 +224,7 @@ extension SearchPageViewController {
         
         // header
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(48))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading, absoluteOffset: CGPoint(x: 0, y: 0))
         
         // section
         let section = NSCollectionLayoutSection(group: group)
@@ -238,10 +276,14 @@ extension SearchPageViewController: UICollectionViewDelegate {
 
             // 여기에서 ViewModel의 state 참조 - Viewmodel 필요
 //            header.viewModel = MainPageCollectionHeaderViewModel(dataProvider: self.viewModel)
-
+            
             return header
         }
     }
 
 }
 
+@available(iOS 17.0,*)
+#Preview {
+    SearchPageViewController()
+}
