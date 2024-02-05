@@ -9,7 +9,7 @@ import RxSwift
 import CoreLocation
 import RxRelay
 
-final class SearchPageViewModel: ViewModelType {
+final class SearchPageViewModel: ViewModelType, SearchPageDataProvider {
     
     var disposeBag = DisposeBag()
     
@@ -32,7 +32,9 @@ final class SearchPageViewModel: ViewModelType {
     }
     
     // MARK: State
-    internal let searchResult = PublishRelay<Int>()
+    /// (String,Int) 형의 구조체로 올지, 각 리스트의 개수를 세야할 지 확실치 않음.
+    /// 추후 API 명세서 나오면 추가작업 필요
+    internal let searchResult = PublishRelay<(String,Int)>()
     
     private let bookStoreList = PublishRelay<[Place]>()
     private let bookClubList = PublishRelay<[BookClub]>()
@@ -46,13 +48,15 @@ final class SearchPageViewModel: ViewModelType {
                 return Observable.zip(
                     self?.getBookStoreList(text: text) ?? .empty(), // 비동기 함수가 nil인 경우
                     self?.getBookClubList(text: text) ?? .empty(),
-                    self?.getBookList(text: text) ?? .empty()
+                    self?.getBookList(text: text) ?? .empty(),
+                    self?.getTotalCountList(text: text) ?? .empty()
                 )
             }
             .bind { [weak self] searchResult in
                 self?.bookStoreList.accept(searchResult.0)
                 self?.bookClubList.accept(searchResult.1)
                 self?.PublicationList.accept(searchResult.2)
+                self?.searchResult.accept(searchResult.3)
             }
             .disposed(by: disposeBag)
         
@@ -65,6 +69,12 @@ final class SearchPageViewModel: ViewModelType {
     }
     
     // MARK: API Call
+    private func getTotalCountList(text: text) -> Observable<(String,Int)> {
+        return Observable
+            .just((text, 12))
+    }
+    
+    
     private func getBookStoreList(text:String) -> Observable<[Place]> {
 //        return APIManager.shared.requestData(
 //            endpoint: .getPlaces,
