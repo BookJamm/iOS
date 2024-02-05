@@ -10,7 +10,7 @@ import SnapKit
 
 class SearchPageSearchBar: UISearchBar {
     override init(frame: CGRect) {
-        super.init(frame: CGRect(x: 0, y: 0, width: 350, height: 44))
+        super.init(frame: frame)
         
         // setup
         self.tintColor = .main02
@@ -49,5 +49,5 @@ class SearchPageSearchBar: UISearchBar {
 
 @available(iOS 17.0,*)
 #Preview {
-    SearchBar()
+    SearchPageSearchBar(frame: CGRect(x: 0, y: 0, width: 350, height: 44))
 }
