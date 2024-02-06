@@ -82,6 +82,15 @@
 		8885EAA12B3C251C008DE7F8 /* InfoComments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EAA02B3C251C008DE7F8 /* InfoComments.swift */; };
 		8885EAA32B3C31E4008DE7F8 /* BookStoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EAA22B3C31E4008DE7F8 /* BookStoreCollectionViewCell.swift */; };
 		8885EAA52B3C3743008DE7F8 /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EAA42B3C3743008DE7F8 /* MainPageViewModel.swift */; };
+		88A7EF3A2B7104DF00E47C8B /* SearchPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF392B7104DF00E47C8B /* SearchPageViewController.swift */; };
+		88A7EF3C2B710DFA00E47C8B /* SearchPageSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */; };
+		88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */; };
+		88A7EF402B710EA200E47C8B /* SearchPageResultCountViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF3F2B710EA200E47C8B /* SearchPageResultCountViewCell.swift */; };
+		88A7EF422B712B3600E47C8B /* SearchPageBackgroundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */; };
+		88A7EF442B71330900E47C8B /* SearchPageCollecionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF432B71330900E47C8B /* SearchPageCollecionHeaderView.swift */; };
+		88A7EF462B7156E300E47C8B /* SearchPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF452B7156E300E47C8B /* SearchPageViewModel.swift */; };
+		88A7EF492B715E3D00E47C8B /* SearchPageDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF482B715E3D00E47C8B /* SearchPageDataProvider.swift */; };
+		88A7EF4B2B71613800E47C8B /* SearchPageResultCountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7EF4A2B71613800E47C8B /* SearchPageResultCountViewModel.swift */; };
 		88B0DBBC2B37450C0047F0A0 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */; };
 		88C431582B5A9B1E00A29180 /* BookClubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C431572B5A9B1E00A29180 /* BookClubCollectionViewCell.swift */; };
 		88C4315A2B5AA8B800A29180 /* PublicationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C431592B5AA8B800A29180 /* PublicationCollectionViewCell.swift */; };
@@ -209,6 +218,15 @@
 		8885EAA02B3C251C008DE7F8 /* InfoComments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoComments.swift; sourceTree = "<group>"; };
 		8885EAA22B3C31E4008DE7F8 /* BookStoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookStoreCollectionViewCell.swift; sourceTree = "<group>"; };
 		8885EAA42B3C3743008DE7F8 /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
+		88A7EF392B7104DF00E47C8B /* SearchPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewController.swift; sourceTree = "<group>"; };
+		88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageSearchBar.swift; sourceTree = "<group>"; };
+		88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundViewCell.swift; sourceTree = "<group>"; };
+		88A7EF3F2B710EA200E47C8B /* SearchPageResultCountViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageResultCountViewCell.swift; sourceTree = "<group>"; };
+		88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageBackgroundType.swift; sourceTree = "<group>"; };
+		88A7EF432B71330900E47C8B /* SearchPageCollecionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageCollecionHeaderView.swift; sourceTree = "<group>"; };
+		88A7EF452B7156E300E47C8B /* SearchPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageViewModel.swift; sourceTree = "<group>"; };
+		88A7EF482B715E3D00E47C8B /* SearchPageDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageDataProvider.swift; sourceTree = "<group>"; };
+		88A7EF4A2B71613800E47C8B /* SearchPageResultCountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageResultCountViewModel.swift; sourceTree = "<group>"; };
 		88B0DBBB2B37450C0047F0A0 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		88C431572B5A9B1E00A29180 /* BookClubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookClubCollectionViewCell.swift; sourceTree = "<group>"; };
 		88C431592B5AA8B800A29180 /* PublicationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -558,6 +576,62 @@
 			path = Dependancy;
 			sourceTree = "<group>";
 		};
+		88A7EF342B71036300E47C8B /* SearchPage */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF352B71049A00E47C8B /* Controller */,
+				88A7EF362B7104A300E47C8B /* Model */,
+				88A7EF372B7104A800E47C8B /* View */,
+				88A7EF382B7104AD00E47C8B /* ViewModel */,
+			);
+			path = SearchPage;
+			sourceTree = "<group>";
+		};
+		88A7EF352B71049A00E47C8B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF392B7104DF00E47C8B /* SearchPageViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		88A7EF362B7104A300E47C8B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF412B712B3600E47C8B /* SearchPageBackgroundType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88A7EF372B7104A800E47C8B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF3B2B710DFA00E47C8B /* SearchPageSearchBar.swift */,
+				88A7EF3D2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift */,
+				88A7EF3F2B710EA200E47C8B /* SearchPageResultCountViewCell.swift */,
+				88A7EF432B71330900E47C8B /* SearchPageCollecionHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88A7EF382B7104AD00E47C8B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF472B715E0B00E47C8B /* Dependancy */,
+				88A7EF452B7156E300E47C8B /* SearchPageViewModel.swift */,
+				88A7EF4A2B71613800E47C8B /* SearchPageResultCountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		88A7EF472B715E0B00E47C8B /* Dependancy */ = {
+			isa = PBXGroup;
+			children = (
+				88A7EF482B715E3D00E47C8B /* SearchPageDataProvider.swift */,
+			);
+			path = Dependancy;
+			sourceTree = "<group>";
+		};
 		88B0DBB62B35586A0047F0A0 /* MainPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -727,6 +801,7 @@
 				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
 				885EFA922B30A1B3009F6F7E /* Common */,
 				885EFA8D2B30A18A009F6F7E /* LocationPage */,
+				88A7EF342B71036300E47C8B /* SearchPage */,
 				949750F02AFDF99A00DCC096 /* DetailPage */,
 				DDAA84052B109A7200132964 /* OnboardingPage */,
 			);
@@ -934,6 +1009,7 @@
 				8830924A2B3853960082729B /* BookClub.swift in Sources */,
 				88472AAE2B18E9610073AE61 /* Coordinate.swift in Sources */,
 				885EFAB02B31F8AC009F6F7E /* BaseBottomSheetViewController.swift in Sources */,
+				88A7EF422B712B3600E47C8B /* SearchPageBackgroundType.swift in Sources */,
 				8829B05E2B66A5CC005BD999 /* ColorToggleButtonCell.swift in Sources */,
 				DD0919242AFA6B4F001E5501 /* UIView+.swift in Sources */,
 				8885EA9F2B3C24AB008DE7F8 /* PublicationSearchFilter.swift in Sources */,
@@ -946,6 +1022,7 @@
 				88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */,
 				882517982B403F16009CFA71 /* CombinedSearchFilter.swift in Sources */,
 				94F5500A2B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift in Sources */,
+				88A7EF462B7156E300E47C8B /* SearchPageViewModel.swift in Sources */,
 				94A844FD2B04D1280036DE72 /* PlaceNetwork.swift in Sources */,
 				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
 				8830924D2B385AEF0082729B /* MainPageTopView.swift in Sources */,
@@ -961,10 +1038,13 @@
 				88472A792B15D9220073AE61 /* LoginDTO.swift in Sources */,
 				DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */,
 				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
+				88A7EF3A2B7104DF00E47C8B /* SearchPageViewController.swift in Sources */,
 				88472A722B15D9210073AE61 /* SearchFriendDTO.swift in Sources */,
+				88A7EF3C2B710DFA00E47C8B /* SearchPageSearchBar.swift in Sources */,
 				94A844FB2B04C6C80036DE72 /* Network.swift in Sources */,
 				DD81286C2B230E2A00743DF2 /* FindEmailPopUpVC.swift in Sources */,
 				885EFAA02B31E13D009F6F7E /* RxMKMapViewDelegateProxy.swift in Sources */,
+				88A7EF3E2B710E3B00E47C8B /* SearchPageBackgroundViewCell.swift in Sources */,
 				885EFAA62B31EA12009F6F7E /* Diff.swift in Sources */,
 				88472A9B2B18CA1E0073AE61 /* CoordinateDTO.swift in Sources */,
 				88472A6C2B15D9210073AE61 /* LocationCategory.swift in Sources */,
@@ -975,6 +1055,7 @@
 				885EFAAA2B31EE84009F6F7E /* LocationViewModel.swift in Sources */,
 				8885EA9D2B3C2373008DE7F8 /* BookClubSearchFilter.swift in Sources */,
 				DD0919272AFA6B4F001E5501 /* UIImage+.swift in Sources */,
+				88A7EF4B2B71613800E47C8B /* SearchPageResultCountViewModel.swift in Sources */,
 				DD5E40692B1CD444002D7686 /* LoginVC.swift in Sources */,
 				8885EA972B38779B008DE7F8 /* Category.swift in Sources */,
 				88472A512B15D8500073AE61 /* BaseResponse.swift in Sources */,
@@ -982,6 +1063,7 @@
 				887A91742B4ED4B300FC8D54 /* MainPageDataProvider.swift in Sources */,
 				8885EAA12B3C251C008DE7F8 /* InfoComments.swift in Sources */,
 				8830924F2B38642A0082729B /* CategoryButton.swift in Sources */,
+				88A7EF442B71330900E47C8B /* SearchPageCollecionHeaderView.swift in Sources */,
 				949750F92AFE303E00DCC096 /* BookListCollectionViewCell.swift in Sources */,
 				8829B05A2B667FAE005BD999 /* MainPageClubCategoryViewModel.swift in Sources */,
 				885EFAAE2B31F809009F6F7E /* BookStoreListViewController.swift in Sources */,
@@ -1014,6 +1096,7 @@
 				8885EAA32B3C31E4008DE7F8 /* BookStoreCollectionViewCell.swift in Sources */,
 				88472A7F2B15D9220073AE61 /* RecordFriendDTO.swift in Sources */,
 				8829B0562B667C9A005BD999 /* BookClubCategory.swift in Sources */,
+				88A7EF492B715E3D00E47C8B /* SearchPageDataProvider.swift in Sources */,
 				88472A912B18B7310073AE61 /* Book.swift in Sources */,
 				88472A732B15D9210073AE61 /* PlaceIdBooksDTO.swift in Sources */,
 				DD0919282AFA6B4F001E5501 /* UIColor+.swift in Sources */,
@@ -1025,6 +1108,7 @@
 				949750FB2AFE347100DCC096 /* HeaderView.swift in Sources */,
 				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
 				882517B42B449119009CFA71 /* MainPageTopViewModel.swift in Sources */,
+				88A7EF402B710EA200E47C8B /* SearchPageResultCountViewCell.swift in Sources */,
 				88472A952B18BF600073AE61 /* AddressDTO.swift in Sources */,
 				94A6BF402B20824B00DF2BF8 /* News.swift in Sources */,
 				88C4315A2B5AA8B800A29180 /* PublicationCollectionViewCell.swift in Sources */,
