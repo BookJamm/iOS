@@ -73,6 +73,10 @@
 		885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */; };
 		885EFAB82B31F97D009F6F7E /* LocationAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */; };
 		885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */; };
+		8870C85E2B78E86E001D083B /* MyPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C85D2B78E86E001D083B /* MyPageViewModel.swift */; };
+		8870C8602B78E88A001D083B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C85F2B78E88A001D083B /* MyPageViewController.swift */; };
+		8870C8622B78E8F1001D083B /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */; };
+		8870C8642B78E909001D083B /* MyPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */; };
 		887A91742B4ED4B300FC8D54 /* MainPageDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A91732B4ED4B300FC8D54 /* MainPageDataProvider.swift */; };
 		8885EA972B38779B008DE7F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EA962B38779B008DE7F8 /* Category.swift */; };
 		8885EA992B387D75008DE7F8 /* SearhBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EA982B387D75008DE7F8 /* SearhBarButton.swift */; };
@@ -209,6 +213,10 @@
 		885EFAB42B31F928009F6F7E /* ColorToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorToggleButton.swift; sourceTree = "<group>"; };
 		885EFAB72B31F97D009F6F7E /* LocationAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAnnotationView.swift; sourceTree = "<group>"; };
 		885EFAB92B31F98E009F6F7E /* LocationDataMapClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataMapClusterView.swift; sourceTree = "<group>"; };
+		8870C85D2B78E86E001D083B /* MyPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewModel.swift; sourceTree = "<group>"; };
+		8870C85F2B78E88A001D083B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
+		8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCollectionViewCell.swift; sourceTree = "<group>"; };
 		887A91732B4ED4B300FC8D54 /* MainPageDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageDataProvider.swift; sourceTree = "<group>"; };
 		8885EA962B38779B008DE7F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		8885EA982B387D75008DE7F8 /* SearhBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhBarButton.swift; sourceTree = "<group>"; };
@@ -568,6 +576,57 @@
 			path = Annotation;
 			sourceTree = "<group>";
 		};
+		8870C8582B78E831001D083B /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				8870C8652B78E962001D083B /* Main */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		8870C8592B78E838001D083B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8870C85F2B78E88A001D083B /* MyPageViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8870C85A2B78E83E001D083B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8870C85B2B78E842001D083B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */,
+				8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8870C85C2B78E846001D083B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8870C85D2B78E86E001D083B /* MyPageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8870C8652B78E962001D083B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8870C8592B78E838001D083B /* Controller */,
+				8870C85A2B78E83E001D083B /* Model */,
+				8870C85B2B78E842001D083B /* View */,
+				8870C85C2B78E846001D083B /* ViewModel */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		887A91722B4ED48F00FC8D54 /* Dependancy */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +856,7 @@
 		DD0919122AFA5FC2001E5501 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				8870C8582B78E831001D083B /* MyPage */,
 				88B0DBB62B35586A0047F0A0 /* MainPage */,
 				DD754DF32AFA4D940001FBC4 /* LaunchScreen.storyboard */,
 				885EFA922B30A1B3009F6F7E /* Common */,
@@ -1001,6 +1061,7 @@
 				DD0919252AFA6B4F001E5501 /* UIViewController+.swift in Sources */,
 				88472A752B15D9220073AE61 /* RecordImagesDTO.swift in Sources */,
 				885EFABA2B31F98E009F6F7E /* LocationDataMapClusterView.swift in Sources */,
+				8870C8622B78E8F1001D083B /* MyPageHeaderView.swift in Sources */,
 				88472A742B15D9220073AE61 /* UsersActivitiesDTO.swift in Sources */,
 				DD0919262AFA6B4F001E5501 /* UIScrollView+.swift in Sources */,
 				885EFA9B2B31DCF3009F6F7E /* LocationViewController.swift in Sources */,
@@ -1035,6 +1096,8 @@
 				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
 				88472A772B15D9220073AE61 /* UsersOutlineDTO.swift in Sources */,
 				88472A992B18CA020073AE61 /* ImageDTO.swift in Sources */,
+				8870C8642B78E909001D083B /* MyPageCollectionViewCell.swift in Sources */,
+				8870C85E2B78E86E001D083B /* MyPageViewModel.swift in Sources */,
 				88472A792B15D9220073AE61 /* LoginDTO.swift in Sources */,
 				DD754DE92AFA4D920001FBC4 /* AppDelegate.swift in Sources */,
 				DD0919182AFA6225001E5501 /* ColorData.swift in Sources */,
@@ -1069,6 +1132,7 @@
 				885EFAAE2B31F809009F6F7E /* BookStoreListViewController.swift in Sources */,
 				949370C22B308B22005E21FE /* MainDetailReviewTableViewCell.swift in Sources */,
 				DD0919162AFA621D001E5501 /* FontData.swift in Sources */,
+				8870C8602B78E88A001D083B /* MyPageViewController.swift in Sources */,
 				88472A712B15D9210073AE61 /* RecommendFriendDTO.swift in Sources */,
 				88472A6E2B15D9210073AE61 /* Filter.swift in Sources */,
 				885EFAB52B31F928009F6F7E /* ColorToggleButton.swift in Sources */,
