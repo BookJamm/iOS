@@ -13,8 +13,6 @@ class MyPageProfileViewCell: UICollectionViewCell {
     
     static let id = "MyPageProfileViewCell"
     
-//    var viewModel: MyPageProfileViewCellModel?
-    
     /// 프로필 이미지 뷰
     private lazy var profileImageView: UIImageView = UIImageView().then {
         $0.image = UIImage.defaultProfile
