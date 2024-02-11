@@ -13,13 +13,22 @@ class MyPageCollectionViewCell: UICollectionViewCell {
     
     static let id = "MyPageCollectionViewCell"
     
-    var listCellType: MyPageListCellType?
+    lazy var listCellType: MyPageListCellType? = nil {
+        didSet {
+            self.applyConfigWithCellType(type: listCellType)
+        }
+    }
     
     /// 리스트 타이틀 라벨
     private lazy var titleLabel: UILabel = UILabel().then {
         $0.text = "default"
         $0.font = paragraph03
         $0.textColor = .black
+    }
+    
+    private lazy var settingSwitch: UISwitch = UISwitch().then {
+        $0.onTintColor = .main01 // 추후 확인 필요
+        $0.isHidden = true
     }
     
     override init(frame: CGRect) {
@@ -35,12 +44,12 @@ class MyPageCollectionViewCell: UICollectionViewCell {
     
     private func setUpView() {
         self.backgroundColor = .white
-        applyConfigWithCellType(type: self.listCellType)
     }
     
     private func setUpLayout() {
         [
-            titleLabel
+            titleLabel,
+            settingSwitch
         ].forEach { self.addSubview($0)}
         
     }
@@ -52,6 +61,12 @@ class MyPageCollectionViewCell: UICollectionViewCell {
             $0.bottom.equalToSuperview().offset(-16)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20).priority(.low)
+        }
+        
+        settingSwitch.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(12)
+            $0.bottom.equalToSuperview().offset(-12)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     
@@ -67,6 +82,8 @@ class MyPageCollectionViewCell: UICollectionViewCell {
         self.titleLabel.text = type.title
             
         switch type {
+        case .changeNotificationSetting:
+            self.settingSwitch.isHidden = false
         case .logout:
             self.titleLabel.textColor = .red
         case .accountTermination:
