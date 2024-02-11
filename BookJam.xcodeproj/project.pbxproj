@@ -77,6 +77,7 @@
 		8870C8602B78E88A001D083B /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C85F2B78E88A001D083B /* MyPageViewController.swift */; };
 		8870C8622B78E8F1001D083B /* MyPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */; };
 		8870C8642B78E909001D083B /* MyPageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */; };
+		8870C8672B78FA08001D083B /* MyPageProfileViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8870C8662B78FA08001D083B /* MyPageProfileViewCell.swift */; };
 		887A91742B4ED4B300FC8D54 /* MainPageDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887A91732B4ED4B300FC8D54 /* MainPageDataProvider.swift */; };
 		8885EA972B38779B008DE7F8 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EA962B38779B008DE7F8 /* Category.swift */; };
 		8885EA992B387D75008DE7F8 /* SearhBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8885EA982B387D75008DE7F8 /* SearhBarButton.swift */; };
@@ -217,6 +218,7 @@
 		8870C85F2B78E88A001D083B /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageHeaderView.swift; sourceTree = "<group>"; };
 		8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageCollectionViewCell.swift; sourceTree = "<group>"; };
+		8870C8662B78FA08001D083B /* MyPageProfileViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageProfileViewCell.swift; sourceTree = "<group>"; };
 		887A91732B4ED4B300FC8D54 /* MainPageDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageDataProvider.swift; sourceTree = "<group>"; };
 		8885EA962B38779B008DE7F8 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		8885EA982B387D75008DE7F8 /* SearhBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearhBarButton.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			children = (
 				8870C8612B78E8F1001D083B /* MyPageHeaderView.swift */,
 				8870C8632B78E909001D083B /* MyPageCollectionViewCell.swift */,
+				8870C8662B78FA08001D083B /* MyPageProfileViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1173,6 +1176,7 @@
 				DD81286E2B2311CA00743DF2 /* UILabel+.swift in Sources */,
 				882517B42B449119009CFA71 /* MainPageTopViewModel.swift in Sources */,
 				88A7EF402B710EA200E47C8B /* SearchPageResultCountViewCell.swift in Sources */,
+				8870C8672B78FA08001D083B /* MyPageProfileViewCell.swift in Sources */,
 				88472A952B18BF600073AE61 /* AddressDTO.swift in Sources */,
 				94A6BF402B20824B00DF2BF8 /* News.swift in Sources */,
 				88C4315A2B5AA8B800A29180 /* PublicationCollectionViewCell.swift in Sources */,

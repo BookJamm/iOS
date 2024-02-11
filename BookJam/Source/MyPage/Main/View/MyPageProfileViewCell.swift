@@ -1,5 +1,5 @@
 //
-//  MyPageCollectionViewCell.swift
+//  MyPageProfileViewCell.swift
 //  BookJam
 //
 //  Created by 박민서 on 2/11/24.
@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 import Then
 
-class MyPageCollectionViewCell: UICollectionViewCell {
+class MyPageProfileViewCell: UICollectionViewCell {
     
-    static let id = "MyPageCollectionViewCell"
+    static let id = "MyPageProfileViewCell"
     
-    var viewModel: MyPageCollectionViewCellModel?
+//    var viewModel: MyPageProfileViewCellModel?
     
     /// 프로필 이미지 뷰
     private lazy var profileImageView: UIImageView = UIImageView().then {
@@ -70,5 +70,6 @@ class MyPageCollectionViewCell: UICollectionViewCell {
 
 @available(iOS 17.0,*)
 #Preview {
-    MyPageCollectionViewCell()
+    MyPageProfileViewCell()
 }
+
