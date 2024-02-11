@@ -13,17 +13,12 @@ class MyPageCollectionViewCell: UICollectionViewCell {
     
     static let id = "MyPageCollectionViewCell"
     
-    var viewModel: MyPageCollectionViewCellModel?
+    var listCellType: MyPageListCellType?
     
-    /// 프로필 이미지 뷰
-    private lazy var profileImageView: UIImageView = UIImageView().then {
-        $0.image = UIImage.defaultProfile
-    }
-    
-    /// 프로필 텍스트 라벨
-    private lazy var profileTextLabel: UILabel = UILabel().then {
+    /// 리스트 타이틀 라벨
+    private lazy var titleLabel: UILabel = UILabel().then {
         $0.text = "default"
-        $0.font = paragraph02
+        $0.font = paragraph03
         $0.textColor = .black
     }
     
@@ -40,31 +35,45 @@ class MyPageCollectionViewCell: UICollectionViewCell {
     
     private func setUpView() {
         self.backgroundColor = .white
+        applyConfigWithCellType(type: self.listCellType)
     }
     
     private func setUpLayout() {
         [
-            profileImageView,
-            profileTextLabel
+            titleLabel
         ].forEach { self.addSubview($0)}
         
     }
     
     private func setUpConstraint() {
-        profileImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(24)
-            $0.centerX.equalToSuperview()
-        }
         
-        profileTextLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImageView.snp.bottom).offset(8)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview().offset(-24)
+        titleLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.bottom.equalToSuperview().offset(-16)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20).priority(.low)
         }
     }
     
-    private func setUpBinding() {
+    func configure(type: MyPageListCellType) {
+        self.listCellType = type
+    }
+    
+    /// 해당 Cell Type에 따라 타이틀 라벨의 속성을 조정합니다.
+    private func applyConfigWithCellType(type: MyPageListCellType?) {
         
+        guard let type = type else { return }
+        
+        self.titleLabel.text = type.title
+            
+        switch type {
+        case .logout:
+            self.titleLabel.textColor = .red
+        case .accountTermination:
+            self.titleLabel.textColor = .gray05
+        default:
+            break
+        }
     }
 }
 
