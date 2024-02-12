@@ -14,15 +14,48 @@ enum AlertWindowType {
     case logout(userEmail: String)
     /// 회원탈퇴
     case accountTerminate(userEmail: String)
+    /// 회원탈퇴 완료
+    case accountTerminationCompleted
 }
 
+enum AlertWindowDisplaytype {
+    /// 텍스트 라벨 + 버튼 2개
+    case fullSize
+    /// 텍스트라벨
+    case textOnly
+}
+
+
 extension AlertWindowType {
+    
+    /// alert 창 UI 표시 타입
+    var displayType: AlertWindowDisplaytype {
+        switch self {
+        case .logout, .accountTerminate:
+            return .fullSize
+        case .accountTerminationCompleted:
+            return .textOnly
+        }
+    }
+    
+    /// 기본 폰트 설정의 내용 텍스트
+    var mainText: String {
+        switch self {
+        case .logout(let userEmail):
+            return "\(userEmail)\n계정에서 로그아웃이 됩니다."
+        case .accountTerminate(let userEmail):
+            return "\(userEmail)\n북잼에서 탈퇴 됩니다."
+        case .accountTerminationCompleted:
+            return "북잼에서 탈퇴가 완료되었습니다."
+        }
+    }
+    
     /// 폰트와 색 지정이 완료된 내용 텍스트
     var attributedMainText: NSAttributedString {
         switch self {
             
-        case .logout(let userEmail):
-            let text = "\(userEmail)\n계정에서 로그아웃이 됩니다."
+        case .logout:
+            let text = self.mainText
             let attrString = NSMutableAttributedString(string: text)
             
             attrString.addAttribute(.foregroundColor, value: UIColor.alert, range: (text as NSString).range(of: "로그아웃"))
@@ -30,8 +63,8 @@ extension AlertWindowType {
             
             return attrString
             
-        case .accountTerminate(let userEmail):
-            let text = "\(userEmail)\n북잼에서 탈퇴 됩니다."
+        case .accountTerminate, .accountTerminationCompleted:
+            let text = self.mainText
             let attrString = NSMutableAttributedString(string: text)
             
             attrString.addAttribute(.foregroundColor, value: UIColor.alert, range: (text as NSString).range(of: "탈퇴"))
@@ -48,6 +81,8 @@ extension AlertWindowType {
             return "로그아웃"
         case .accountTerminate:
             return "회원탈퇴"
+        case .accountTerminationCompleted:
+            return "" // confirm 버튼 X
         }
     }
     
@@ -64,6 +99,8 @@ extension AlertWindowType {
         switch self {
         case .logout, .accountTerminate :
             return "아니오"
+        case .accountTerminationCompleted:
+            return "" // cancel 버튼 X
         }
     }
     

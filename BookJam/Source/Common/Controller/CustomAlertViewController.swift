@@ -67,9 +67,21 @@ class CustomAlertViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let alertType = self.alertType else {
+            print("alertType not configured")
+            cancelButtonTapped()
+            return
+        }
+        
         setUpView()
         setUpLayout()
-        setUpConstraint()
+        if alertType.displayType == .fullSize {
+            setUpConstraintWithButton()
+        }
+        if alertType.displayType == .textOnly {
+            setUpConstraintWithoutButton()
+        }
         setUpBinding()
     }
     
@@ -94,7 +106,7 @@ class CustomAlertViewController: UIViewController {
     }
 
     // MARK: Constraint
-    private func setUpConstraint() {
+    private func setUpConstraintWithButton() {
         
         alertView.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -123,6 +135,24 @@ class CustomAlertViewController: UIViewController {
         }
 
     }
+    
+    // MARK: Constraint
+    private func setUpConstraintWithoutButton() {
+        
+        alertView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalTo(330)
+            $0.height.equalTo(70).priority(.low)
+        }
+        
+        contentLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.leading.equalToSuperview().offset(46)
+            $0.trailing.equalToSuperview().offset(-46)
+        }
+    }
+    
     
     // MARK: Binding
     private func setUpBinding() {
