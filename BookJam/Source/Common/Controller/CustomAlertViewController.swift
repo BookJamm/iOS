@@ -12,9 +12,21 @@ import RxSwift
 
 /// Custom Alert의 Delegate입니다.
 protocol CustomAlertDelegate {
-    var alertWindowType: AlertWindowType { get } // Alert 창 내용
-    func action()   // confirm button event
+    func action(alertType: AlertWindowType)   // confirm button event
     func exit()     // cancel button event
+}
+
+extension CustomAlertDelegate where Self: UIViewController {
+    func showAlert(alertType: AlertWindowType) {
+        
+        let alertVC = CustomAlertViewController()
+        alertVC.delegate = self // AlertController의 Delegate 위임
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        alertVC.configureContent(alertType: alertType)
+        self.present(alertVC, animated: true, completion: nil)
+        
+    }
 }
 
 class CustomAlertViewController: UIViewController {
@@ -22,6 +34,8 @@ class CustomAlertViewController: UIViewController {
     var delegate: CustomAlertDelegate?
     
     var disposeBag = DisposeBag()
+    
+    var alertType: AlertWindowType?
     
     /// 중앙 팝업 창
     private lazy var alertView: UIView = UIView().then {
@@ -56,14 +70,13 @@ class CustomAlertViewController: UIViewController {
         setUpView()
         setUpLayout()
         setUpConstraint()
+        setUpBinding()
     }
     
 
     // MARK: View
     private func setUpView() {
-        self.view.backgroundColor = .gray08
-        self.view.layer.opacity = 0.5
-        configureContent()
+        self.view.backgroundColor = .gray08.withAlphaComponent(0.5)
     }
     
     
@@ -128,26 +141,27 @@ class CustomAlertViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    // 확인 버튼 이벤트 처리
+    /// 확인 버튼 이벤트 처리
     private func confirmButtonTapped() {
         self.dismiss(animated: true) {
-            self.delegate?.action()
+            guard let alertType = self.alertType else { return }
+            self.delegate?.action(alertType: alertType)
         }
     }
     
-    // 취소 버튼 이벤트 처리
+    /// 취소 버튼 이벤트 처리
     private func cancelButtonTapped() {
         self.dismiss(animated: true) {
             self.delegate?.exit()
         }
     }
     
-    private func configureContent() {
-        if let alertType = self.delegate?.alertWindowType {
-            self.contentLabel.attributedText = alertType.attributedMainText
-            self.confirmButton.setAttributedTitle(alertType.attributedConfirmButtonText, for: .normal)
-            self.cancelButton.setAttributedTitle(alertType.attributedCancelButtonText, for: .normal)
-        }
+    /// Alert 창의 내용 주입
+    func configureContent(alertType: AlertWindowType) {
+        self.alertType = alertType
+        self.contentLabel.attributedText = alertType.attributedMainText
+        self.confirmButton.setAttributedTitle(alertType.attributedConfirmButtonText, for: .normal)
+        self.cancelButton.setAttributedTitle(alertType.attributedCancelButtonText, for: .normal)
     }
 }
 
