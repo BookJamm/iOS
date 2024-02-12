@@ -12,4 +12,6 @@ struct UserProfile {
     let userId: Int
     let image: String?
     let name: String
+    let userEmail: String
+    let notificationSetting: Bool
 }
