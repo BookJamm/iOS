@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Then
 import RxSwift
+import RxRelay
 
 
 enum MyPageSection: Hashable {
@@ -33,7 +34,7 @@ enum MyPageSection: Hashable {
 }
 
 enum MyPageItem: Hashable {
-    case topProfile // 상단 프로필
+    case topProfile(UserProfile) // 상단 프로필
     case myBookLife(MyPageListCellType) // 나의 독서생활
     case myInfo(MyPageListCellType) // 나의 정보
     case manageAccount(MyPageListCellType) // 계정 관리
@@ -47,7 +48,10 @@ final class MyPageViewController: UIViewController {
     private var disposeBag = DisposeBag()
     
     /// Rx - ViewModel
-//    private var viewModel = SearchPageViewModel()
+    private var viewModel = MyPageViewModel()
+    
+    /// Rx - 알림 설정 Switch
+    private var setNotification = PublishRelay<Bool>()
     
     /// 상단 "마이페이지" 탭 배경 뷰
     private lazy var topBarView = UIView().then {
@@ -81,33 +85,6 @@ final class MyPageViewController: UIViewController {
         setUpConstraint()
         setDataSource()
         setUpBinding()
-        
-        let myBookLifeList:[MyPageItem] = [
-            .participatedActivityStatus,
-            .markedActivities
-        ].map { return MyPageItem.myBookLife($0)}
-        
-        let myInfoList:[MyPageItem] = [
-            .changeProfileOrNickname,
-            .changePassword,
-            .changeNotificationSetting
-        ].map { return MyPageItem.myInfo($0)}
-        
-        let manageAccList:[MyPageItem] = [
-            .userInquiry,
-            .logout,
-            .accountTermination
-        ].map { return MyPageItem.manageAccount($0)}
-        
-        var snapshot = NSDiffableDataSourceSnapshot<MyPageSection,MyPageItem>()
-        snapshot.appendSections([.topProfile, .myBookLife, .myInfo, .manageAccount])
-        snapshot.appendItems([.topProfile], toSection: .topProfile)
-        snapshot.appendItems(myBookLifeList, toSection: .myBookLife)
-        snapshot.appendItems(myInfoList, toSection: .myInfo)
-        snapshot.appendItems(manageAccList, toSection: .manageAccount)
-        self.myPageDataSource?.apply(snapshot)
-        
-        showAlert(for: .logout(userEmail: "ㅁㄴㅇㄹ"))
     }
     
     // MARK: Configure View
@@ -118,7 +95,15 @@ final class MyPageViewController: UIViewController {
     
     // MARK: Data Binding
     private func setUpBinding() {
-
+        let input = MyPageViewModel.Input(setNotificationSetting: setNotification.asObservable())
+        
+        let output = viewModel.transform(input: input)
+        
+        output.profile.bind { [weak self] profile in
+            self?.presentContent(profile: profile)
+        }
+        .disposed(by: disposeBag)
+        
     }
     
     // MARK: Layout
@@ -155,7 +140,44 @@ final class MyPageViewController: UIViewController {
         }
     }
     
-    func showAlert(for alertType: AlertWindowType) {
+    private func presentContent(profile: UserProfile?) {
+        let myProfile:[MyPageItem] = [
+            .topProfile(profile ?? UserProfile(
+                userId: -1,
+                image: nil,
+                name: "default",
+                userEmail: "default",
+                notificationSetting: false))
+        ]
+        
+        let myBookLifeList:[MyPageItem] = [
+            .participatedActivityStatus,
+            .markedActivities
+        ].map { return MyPageItem.myBookLife($0)}
+        
+        let myInfoList:[MyPageItem] = [
+            .changeProfileOrNickname,
+            .changePassword,
+            .changeNotificationSetting
+        ].map { return MyPageItem.myInfo($0)}
+        
+        let manageAccList:[MyPageItem] = [
+            .userInquiry,
+            .logout,
+            .accountTermination
+        ].map { return MyPageItem.manageAccount($0)}
+        
+        var snapshot = NSDiffableDataSourceSnapshot<MyPageSection,MyPageItem>()
+        snapshot.appendSections([.topProfile, .myBookLife, .myInfo, .manageAccount])
+        snapshot.appendItems(myProfile, toSection: .topProfile)
+        snapshot.appendItems(myBookLifeList, toSection: .myBookLife)
+        snapshot.appendItems(myInfoList, toSection: .myInfo)
+        snapshot.appendItems(manageAccList, toSection: .manageAccount)
+        self.myPageDataSource?.apply(snapshot)
+
+    }
+    
+    private func showAlert(for alertType: AlertWindowType) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
         // UIAlertAction 생성
@@ -266,7 +288,6 @@ extension MyPageViewController: UICollectionViewDelegate {
                 
             case .myBookLife(let type), .myInfo(let type), .manageAccount(let type) :
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCollectionViewCell.id, for: indexPath) as? MyPageCollectionViewCell else { return UICollectionViewCell() }
-                print(type)
                 cell.configure(type: type)
                 return cell
             }
