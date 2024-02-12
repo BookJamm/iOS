@@ -20,7 +20,6 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     var disposeBag = DisposeBag()
 
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
-        // HomwCell, EventCell, participantCell,,, 5개
         
         $0.register(BookNewsCollectionViewCell.self, forCellWithReuseIdentifier: BookNewsCollectionViewCell.id)
         $0.register(BookActivityCollectionViewCell.self, forCellWithReuseIdentifier: BookActivityCollectionViewCell.id)
@@ -68,14 +67,14 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     private func updateSnapshot(section: DetailSection, items: [DetailItem]) {
         print("\(section) 업데이트 스냅샷")
         var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
-
-            // 새로운 섹션을 추가합니다.
-            print("새로운 섹션 추가")
-            snapshot.appendSections([section])
-
+        
+        // 새로운 섹션을 추가합니다.
+        print("새로운 섹션 추가")
+        snapshot.appendSections([section])
+        
         // 새 아이템을 추가합니다.
         snapshot.appendItems(items, toSection: section)
-
+        
         self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
 

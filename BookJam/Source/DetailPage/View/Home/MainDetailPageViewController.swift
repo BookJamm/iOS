@@ -44,10 +44,8 @@ final class MainDetailPageViewController: UIViewController {
     lazy var output = viewModel.transform(input: input)
     
     var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
-
-    typealias DataSource = MainDetailDataSource
     
-    var dataSource: DataSource!
+    var dataSource: MainDetailDataSource!
     
     // MARK: viewDidLoad()
     
@@ -125,7 +123,7 @@ final class MainDetailPageViewController: UIViewController {
                 cell.configure(name: review.author.username!, contents: review.contents!, visitedAt: review.visitedAt!)
                 return cell
                 
-            case .BookListItem(let book):
+            case .BookListItem(_):
                 let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
                 
                 return cell
@@ -136,14 +134,11 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Data Binding
     private func setUpBinding() {
         output.homeAllList.bind { [weak self] homeAll in
-        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            _ = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
             let items = homeAll.map { homeAllList in
                 return DetailItem.homeItem(homeAllList)
             }
-//            let section = DetailSection.Home
-//            snapshot.deleteAllItems()
-//            snapshot.appendSections([section])
-//            snapshot.appendItems(items, toSection: section )
+
             self?.dataSource.update(section: DetailSection.Home, items: items)
             
 //            self?.dataSource.apply(snapshot)
@@ -155,13 +150,9 @@ final class MainDetailPageViewController: UIViewController {
             let items = newsList.map { news in
                 return DetailItem.NewsItem(news)
             }
-//            let section = DetailSection.News("gg")
-//            snapshot.deleteAllItems()
-//            snapshot.appendSections([section])
-//            snapshot.appendItems(items, toSection: section )
+
             self?.dataSource.update(section: DetailSection.News("장모"), items: items)
             
-//            self?.dataSource.apply(snapshot)
         }
         .disposed(by: disposeBag)
         

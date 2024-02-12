@@ -21,7 +21,6 @@ class BookStorePhotoCollectionViewCell: UICollectionViewCell {
     static var id = "bookStorePhotoCell"
     
     var photoImageView: UIImageView = UIImageView().then {
-//        $0.image = UIImage(named: "squareDefaultImage")
         $0.image = .squareDefault
         $0.clipsToBounds = true
     }

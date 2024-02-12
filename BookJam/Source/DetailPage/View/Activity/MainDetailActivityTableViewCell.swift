@@ -43,10 +43,11 @@ class MainDetailActivityTableViewCell: UITableViewCell {
     }
     
     var activityTypeButton: UIButton = UIButton().then {
-        $0.setTitle("    글쓰기    ", for: .normal)
+        $0.setTitle("글쓰기", for: .normal)
+        $0.contentVerticalAlignment = .center
         $0.setTitleColor(main03, for: .normal)
         $0.titleLabel?.font = captionText01
-        $0.layer.cornerRadius = 14
+        $0.layer.cornerRadius = 5
         $0.backgroundColor = main05
     }
     
@@ -108,6 +109,7 @@ class MainDetailActivityTableViewCell: UITableViewCell {
             $0.leading.equalTo(locationPinImageView.snp.trailing).offset(4)
         }
         activityTypeButton.snp.makeConstraints{
+            $0.width.equalTo(53)
             $0.top.equalTo(locationLabel.snp.bottom).offset(4)
             $0.leading.equalTo(titleLabel)
         }
