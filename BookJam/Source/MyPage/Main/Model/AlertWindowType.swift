@@ -26,7 +26,6 @@ extension AlertWindowType {
             let attrString = NSMutableAttributedString(string: text)
             
             attrString.addAttribute(.foregroundColor, value: UIColor.alert, range: (text as NSString).range(of: "로그아웃"))
-            
             attrString.addAttribute(.font, value: title05!, range: NSRange(location: 0, length: attrString.length))
             
             return attrString
@@ -36,10 +35,43 @@ extension AlertWindowType {
             let attrString = NSMutableAttributedString(string: text)
             
             attrString.addAttribute(.foregroundColor, value: UIColor.alert, range: (text as NSString).range(of: "탈퇴"))
-            
             attrString.addAttribute(.font, value: title05!, range: NSRange(location: 0, length: attrString.length))
             
             return attrString
         }
+    }
+    
+    /// 기본 폰트 설정의 confirm 버튼 텍스트
+    var confirmButtonText: String {
+        switch self {
+        case .logout:
+            return "로그아웃"
+        case .accountTerminate:
+            return "회원탈퇴"
+        }
+    }
+    
+    /// 폰트와 색 지정이 완료된 confirm 버튼 텍스트
+    var attributedConfirmButtonText: NSAttributedString {
+        return NSAttributedString(
+            string: self.confirmButtonText,
+            attributes: [.font: paragraph02!, .foregroundColor: UIColor.black]
+        )
+    }
+    
+    /// 기본 폰트 설정의 cancel 버튼 텍스트
+    var cancelButtonText: String {
+        switch self {
+        case .logout, .accountTerminate :
+            return "아니오"
+        }
+    }
+    
+    /// 폰트와 색 지정이 완료된 cancel 버튼 텍스트
+    var attributedCancelButtonText: NSAttributedString {
+        return NSAttributedString(
+            string: self.cancelButtonText,
+            attributes: [.font: paragraph02!, .foregroundColor: UIColor.white]
+        )
     }
 }
