@@ -91,6 +91,7 @@ final class MyPageViewController: UIViewController {
     private func setUpView() {
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
+        self.myPageCollectionView.delegate = self
     }
     
     // MARK: Data Binding
@@ -177,35 +178,6 @@ final class MyPageViewController: UIViewController {
 
     }
     
-    private func showAlert(for alertType: AlertWindowType) {
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        
-        // UIAlertAction 생성
-        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
-            print("확인 버튼이 눌렸습니다.")
-        }
-        
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
-            print("취소 버튼이 눌렸습니다.")
-        }
-        
-        // UIAlertAction을 UIAlertController에 추가
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        
-        // AlertWindowType에 따라 메시지 설정
-        switch alertType {
-        case .logout(let userEmail):
-            alertController.title = "로그아웃"
-            alertController.message = "\(userEmail)\n계정에서 로그아웃이 됩니다."
-        case .accountTerminate(let userEmail):
-            alertController.title = "회원탈퇴"
-            alertController.message = "\(userEmail)\n북잼에서 탈퇴 됩니다."
-        }
-        
-        // 현재 화면에 UIAlertController를 표시
-        present(alertController, animated: true, completion: nil)
-    }
 }
 
 
@@ -307,6 +279,43 @@ extension MyPageViewController: UICollectionViewDelegate {
             }
             return header
         }
+    }
+    
+    // Cell Tap Event 처리
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // myPageDataSource의 itemIdentifier를 통해 해당 item으로 코드를 작성
+        if let selectedItem = myPageDataSource?.itemIdentifier(for: indexPath) {
+            switch selectedItem {
+            case .topProfile(let profile):
+                print("Selected topProfile item with profile: \(profile)")
+            case .myBookLife(let type):
+                print("Selected myBookLife item with type: \(type)")
+            case .myInfo(let type):
+                print("Selected myInfo item with type: \(type)")
+            case .manageAccount(let type):
+                print("Selected manageAccount item with type: \(type)")
+                if type == .logout {
+                    showAlert(alertType: .logout(userEmail: "imStruggling@naver.com"))
+                }
+                if type == .accountTermination {
+                    showAlert(alertType: .accountTerminate(userEmail: "neverDoThis@again.com"))
+                }
+            }
+        }
+        // 선택된 셀에 대한 작업 수행
+        print("Selected item at indexPath: \(indexPath)")
+    }
+
+}
+
+extension MyPageViewController: CustomAlertDelegate {
+
+    func action(alertType: AlertWindowType) {
+        print("액션: \(alertType)")
+    }
+    
+    func exit() {
+        print("Exit")
     }
 
 }
