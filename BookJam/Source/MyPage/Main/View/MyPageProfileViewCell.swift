@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Kingfisher
 
 class MyPageProfileViewCell: UICollectionViewCell {
     
@@ -61,8 +62,13 @@ class MyPageProfileViewCell: UICollectionViewCell {
         }
     }
     
-    private func setUpBinding() {
-        
+    /// 임시 테스트용 Configure입니다. -> API 완성후 보완 필요
+    /// 여기에서 URL을 가지고 Request 하는게 맞는지, ViewModel에서 처리후 VC를 통해 UIImage를 주입받아야 하는지는 추후 고려해야 합니다.
+    func configure(imageURL: String?, name: String) {
+        if let imageURL = imageURL, let url = URL(string: imageURL) {
+            profileImageView.kf.setImage(with: url)
+        }
+        profileTextLabel.text = name
     }
 }
 

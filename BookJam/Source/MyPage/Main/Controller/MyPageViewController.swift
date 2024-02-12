@@ -281,14 +281,17 @@ extension MyPageViewController: UICollectionViewDelegate {
             
             switch itemIdentifier {
                 
-            case .topProfile:
+            case .topProfile(let profile):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageProfileViewCell.id, for: indexPath) as? MyPageProfileViewCell else { return UICollectionViewCell() }
-                // cell configure 필요
+                cell.configure(imageURL: profile.image, name: profile.name)
                 return cell
                 
             case .myBookLife(let type), .myInfo(let type), .manageAccount(let type) :
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPageCollectionViewCell.id, for: indexPath) as? MyPageCollectionViewCell else { return UICollectionViewCell() }
                 cell.configure(type: type)
+                cell.settingSwitch.rx.isOn
+                    .skip(1) // 셀 등록시 호출 스킵
+                    .bind(to: self.setNotification).disposed(by: self.disposeBag)
                 return cell
             }
         })

@@ -26,7 +26,7 @@ class MyPageCollectionViewCell: UICollectionViewCell {
         $0.textColor = .black
     }
     
-    private lazy var settingSwitch: UISwitch = UISwitch().then {
+    lazy var settingSwitch: UISwitch = UISwitch().then {
         $0.onTintColor = .main01 // 추후 확인 필요
         $0.isHidden = true
     }
