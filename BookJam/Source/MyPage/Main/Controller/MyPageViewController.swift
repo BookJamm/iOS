@@ -107,6 +107,7 @@ final class MyPageViewController: UIViewController {
         snapshot.appendItems(manageAccList, toSection: .manageAccount)
         self.myPageDataSource?.apply(snapshot)
         
+        showAlert(for: .logout(userEmail: "ㅁㄴㅇㄹ"))
     }
     
     // MARK: Configure View
@@ -153,7 +154,36 @@ final class MyPageViewController: UIViewController {
             $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
         }
     }
-
+    
+    func showAlert(for alertType: AlertWindowType) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        
+        // UIAlertAction 생성
+        let okAction = UIAlertAction(title: "확인", style: .default) { _ in
+            print("확인 버튼이 눌렸습니다.")
+        }
+        
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) { _ in
+            print("취소 버튼이 눌렸습니다.")
+        }
+        
+        // UIAlertAction을 UIAlertController에 추가
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        // AlertWindowType에 따라 메시지 설정
+        switch alertType {
+        case .logout(let userEmail):
+            alertController.title = "로그아웃"
+            alertController.message = "\(userEmail)\n계정에서 로그아웃이 됩니다."
+        case .accountTerminate(let userEmail):
+            alertController.title = "회원탈퇴"
+            alertController.message = "\(userEmail)\n북잼에서 탈퇴 됩니다."
+        }
+        
+        // 현재 화면에 UIAlertController를 표시
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 
