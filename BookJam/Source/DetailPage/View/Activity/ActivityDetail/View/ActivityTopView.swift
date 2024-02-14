@@ -35,7 +35,7 @@ final class ActivityTopView: UIView {
     }
     
     var ifDeadLineButton: UIButton = UIButton().then {
-        $0.setTitle("마감임박", for: .normal)
+        $0.setTitle("마감 임박", for: .normal)
         $0.contentVerticalAlignment = .center
         $0.titleLabel?.font = captionText01
         $0.layer.cornerRadius = 5
@@ -64,7 +64,7 @@ final class ActivityTopView: UIView {
     }
     
     var line: UIView = UIView().then{
-        $0.backgroundColor = .gray
+        $0.backgroundColor = gray03
     }
     
     var activityTitleLabel: UILabel = UILabel().then {
@@ -88,6 +88,7 @@ final class ActivityTopView: UIView {
     
     var peopleImageView: UIImageView = UIImageView().then{
         $0.image = UIImage(systemName: "person.2.fill")
+        $0.tintColor = gray05
         $0.contentMode = .scaleAspectFit
     }
     
@@ -97,7 +98,7 @@ final class ActivityTopView: UIView {
         $0.sizeToFit()
     }
     var line2: UIView = UIView().then{
-        $0.backgroundColor = .gray
+        $0.backgroundColor = gray03
     }
     var typeLabel: UILabel = UILabel().then{
         $0.font = paragraph06
@@ -107,6 +108,7 @@ final class ActivityTopView: UIView {
     
     let priceImageView: UIImageView = UIImageView().then{
         $0.image = UIImage(systemName: "book.pages.fill")
+        $0.tintColor = gray05
         $0.contentMode = .scaleAspectFit
     }
     
@@ -180,10 +182,14 @@ final class ActivityTopView: UIView {
         ifDeadLineButton.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(20)
             $0.top.equalToSuperview().offset(12)
+            $0.width.equalTo(69)
+            $0.height.equalTo(25)
         }
         activityTypeButton.snp.makeConstraints{
             $0.leading.equalTo(ifDeadLineButton.snp.trailing).offset(8)
             $0.top.equalTo(ifDeadLineButton)
+            $0.width.equalTo(53)
+            $0.height.equalTo(25)
         }
         activityDayLabel.snp.makeConstraints{
             $0.leading.equalTo(ifDeadLineButton)
@@ -196,8 +202,8 @@ final class ActivityTopView: UIView {
         }
         line.snp.makeConstraints{
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.top.equalToSuperview()
-            $0.height.equalTo(1)
+            $0.top.equalTo(activityWeekLabel.snp.bottom).offset(12)
+            $0.height.equalTo(0.34)
         }
         activityTitleLabel.snp.makeConstraints{
             $0.top.equalTo(line).offset(8)
@@ -206,6 +212,7 @@ final class ActivityTopView: UIView {
         locationPinImageView.snp.makeConstraints{
             $0.leading.equalTo(activityTitleLabel)
             $0.top.equalTo(activityTitleLabel.snp.bottom).offset(6.5)
+            $0.size.equalTo(20)
         }
         locationLabel.snp.makeConstraints{
             $0.leading.equalTo(locationPinImageView.snp.trailing).offset(6)
@@ -214,6 +221,7 @@ final class ActivityTopView: UIView {
         peopleImageView.snp.makeConstraints{
             $0.leading.equalTo(locationPinImageView)
             $0.top.equalTo(locationPinImageView.snp.bottom).offset(6)
+            $0.size.equalTo(20)
         }
         numberOfPeopleLabel.snp.makeConstraints{
             $0.leading.equalTo(peopleImageView.snp.trailing).offset(6)
@@ -221,7 +229,7 @@ final class ActivityTopView: UIView {
         }
         line2.snp.makeConstraints{
             $0.height.equalTo(8)
-            $0.width.equalTo(1)
+            $0.width.equalTo(0.7)
             $0.centerY.equalTo(numberOfPeopleLabel)
             $0.leading.equalTo(numberOfPeopleLabel.snp.trailing).offset(6.5)
         }
@@ -231,11 +239,13 @@ final class ActivityTopView: UIView {
         }
         priceImageView.snp.makeConstraints{
             $0.leading.equalTo(peopleImageView)
-            $0.top.equalTo(peopleImageView).offset(6)
+            $0.top.equalTo(peopleImageView.snp.bottom).offset(6)
+            $0.size.equalTo(20)
+            $0.bottom.equalToSuperview().inset(20)
         }
         priceLabel.snp.makeConstraints{
             $0.leading.equalTo(priceImageView.snp.trailing).offset(6)
-            $0.top.equalTo(priceLabel)
+            $0.top.equalTo(priceImageView)
         }
     }
     
@@ -243,3 +253,18 @@ final class ActivityTopView: UIView {
 
 
 }
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct ActivityTopView_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewPreview {
+            let button = ActivityTopView()
+            return button
+        }
+        .previewLayout(.sizeThatFits)
+    }
+}
+#endif

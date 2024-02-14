@@ -113,6 +113,8 @@
 		94A844FF2B0601980036DE72 /* MainDetailSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A844FE2B0601980036DE72 /* MainDetailSegmentedControl.swift */; };
 		94BC23512B77BE75007FF3D9 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC23502B77BE75007FF3D9 /* ActivityDetailViewController.swift */; };
 		94BC23542B7A2667007FF3D9 /* ActivityTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC23532B7A2667007FF3D9 /* ActivityTopView.swift */; };
+		94BC23562B7A777E007FF3D9 /* ActivityIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC23552B7A777E007FF3D9 /* ActivityIntroduceView.swift */; };
+		94BC23582B7A83DB007FF3D9 /* ActivityBookIntroduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BC23572B7A83DB007FF3D9 /* ActivityBookIntroduceView.swift */; };
 		94F550062B18A17600F11371 /* MainDetailNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F550052B18A17600F11371 /* MainDetailNewsTableViewCell.swift */; };
 		94F5500A2B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F550092B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift */; };
 		DD02247A2AFBD476005637B6 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = DD0224792AFBD476005637B6 /* FloatingPanel */; };
@@ -242,6 +244,8 @@
 		94A844FE2B0601980036DE72 /* MainDetailSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailSegmentedControl.swift; sourceTree = "<group>"; };
 		94BC23502B77BE75007FF3D9 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		94BC23532B7A2667007FF3D9 /* ActivityTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTopView.swift; sourceTree = "<group>"; };
+		94BC23552B7A777E007FF3D9 /* ActivityIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIntroduceView.swift; sourceTree = "<group>"; };
+		94BC23572B7A83DB007FF3D9 /* ActivityBookIntroduceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityBookIntroduceView.swift; sourceTree = "<group>"; };
 		94F550052B18A17600F11371 /* MainDetailNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailNewsTableViewCell.swift; sourceTree = "<group>"; };
 		94F550092B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailHomeTabTableViewCell.swift; sourceTree = "<group>"; };
 		DD0919152AFA621D001E5501 /* FontData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontData.swift; sourceTree = "<group>"; };
@@ -729,6 +733,8 @@
 			isa = PBXGroup;
 			children = (
 				94BC23532B7A2667007FF3D9 /* ActivityTopView.swift */,
+				94BC23552B7A777E007FF3D9 /* ActivityIntroduceView.swift */,
+				94BC23572B7A83DB007FF3D9 /* ActivityBookIntroduceView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -964,6 +970,7 @@
 				88472A7D2B15D9220073AE61 /* EmailDuplicateDTO.swift in Sources */,
 				88472A782B15D9220073AE61 /* PlacesDTO.swift in Sources */,
 				88472A8B2B1892300073AE61 /* APIMethod.swift in Sources */,
+				94BC23562B7A777E007FF3D9 /* ActivityIntroduceView.swift in Sources */,
 				88472A972B18BFD40073AE61 /* Address.swift in Sources */,
 				88472A6B2B15D9210073AE61 /* ReviewImageDTO.swift in Sources */,
 				88472A832B15EFDE0073AE61 /* APIHeader.swift in Sources */,
@@ -991,6 +998,7 @@
 				88472A4D2B15D6D00073AE61 /* APIManager.swift in Sources */,
 				882517982B403F16009CFA71 /* CombinedSearchFilter.swift in Sources */,
 				94F5500A2B1C674900F11371 /* MainDetailHomeTabTableViewCell.swift in Sources */,
+				94BC23582B7A83DB007FF3D9 /* ActivityBookIntroduceView.swift in Sources */,
 				94A844FD2B04D1280036DE72 /* PlaceNetwork.swift in Sources */,
 				88472A7A2B15D9220073AE61 /* UsersRecordsDTO.swift in Sources */,
 				8830924D2B385AEF0082729B /* MainPageTopView.swift in Sources */,
