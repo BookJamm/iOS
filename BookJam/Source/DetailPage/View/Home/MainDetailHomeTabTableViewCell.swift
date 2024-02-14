@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 // 메인디테일 홈탭에 보여질 테이블뷰 셀입니다.
 @available(iOS 16.0, *)
@@ -14,10 +15,11 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     // MARK: Variables
     
     static let id = "MainDetailHomeTabCell"
-    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, Item>?
+    private var dataSource: UICollectionViewDiffableDataSource<DetailSection, DetailItem>?
     
+    var disposeBag = DisposeBag()
+
     lazy var collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout()).then {
-        // HomwCell, EventCell, participantCell,,, 5개
         
         $0.register(BookNewsCollectionViewCell.self, forCellWithReuseIdentifier: BookNewsCollectionViewCell.id)
         $0.register(BookActivityCollectionViewCell.self, forCellWithReuseIdentifier: BookActivityCollectionViewCell.id)
@@ -31,21 +33,49 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
         
     }
     
+    override func prepareForReuse() {
+            super.prepareForReuse()
+            
+            disposeBag = DisposeBag() // 셀이 재사용될 때마다 새 DisposeBag을 생성합니다.
+        }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setDatasource()
         setUpConstraint()
-        setSnapShot()
+//        setSnapShot()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+    func bindViewModel(homeAllList: Observable<DetailHomeTabModel>) {
+        print("bindViewModel 함수 실행")
+        homeAllList
+            .subscribe(onNext: { [weak self] homeAllList in
+                self?.updateSnapshot(section: .News(homeAllList.homeList.name!), items: homeAllList.newsList.map { DetailItem.NewsItem($0) })
+                self?.updateSnapshot(section: .BookList, items: homeAllList.bookList.map { DetailItem.BookListItem($0) })
+                self?.updateSnapshot(section: .Activity, items: homeAllList.activityList.map { DetailItem.ActivityItem($0) })
+                self?.updateSnapshot(section: .Review, items: homeAllList.reviewList.map { DetailItem.ReviewItem($0) })
+            })
+            .disposed(by: disposeBag)
+    }
+    
+
+    private func updateSnapshot(section: DetailSection, items: [DetailItem]) {
+        print("\(section) 업데이트 스냅샷")
+        var snapshot = dataSource?.snapshot() ?? NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+        
+        // 새로운 섹션을 추가합니다.
+        print("새로운 섹션 추가")
+        snapshot.appendSections([section])
+        
+        // 새 아이템을 추가합니다.
+        snapshot.appendItems(items, toSection: section)
+        
+        self.dataSource?.apply(snapshot, animatingDifferences: true)
     }
 
     // MARK: Constraint
@@ -60,28 +90,31 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     // MARK: Delegate
     
     func setDatasource() {
-        dataSource = UICollectionViewDiffableDataSource<DetailSection, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<DetailSection, DetailItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
             switch itemIdentifier {
             case .ActivityItem(let contentData):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookActivityCollectionViewCell.id, for: indexPath) as? BookActivityCollectionViewCell
-//                cell?.configure(title: contentData.title, review: contentData.vote, desc: contentData.overview, imageURL: contentData.posterURL)
                 cell?.configure(title: contentData.title, url: contentData.imageUrl!)
                 print("Activity Item 데이터소스 등록")
                 return cell!
-            case .BookListItem(let movieData):
+            case .BookListItem(let bookList):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookListCollectionViewCell.id, for: indexPath) as? BookListCollectionViewCell
-                cell?.configure(url: movieData.cover!, title: movieData.title!, author: movieData.author!, publish: movieData.publisher!)
+                cell?.configure(url: bookList.cover!, title: bookList.title!, author: bookList.author!, publish: bookList.publisher!)
+                print("BookList Item 데이터소스 등록")
                 return cell!
-            case .NewsItem(let movieData):
+            case .NewsItem(let news):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookNewsCollectionViewCell.id, for: indexPath) as? BookNewsCollectionViewCell
-                cell?.configure(title: movieData.title!, content: movieData.contents!)
+                cell?.configure(title: news.title!, content: news.contents!)
                 print("News Item 데이터소스 등록")
                 return cell!
-            case .ReviewItem(let movieData):
+            case .ReviewItem(let review):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookReviewCollectionViewCell.id, for: indexPath) as? BookReviewCollectionViewCell
-//                cell?.configure(title: movieData.title, releaseDate: movieData.releaseDate, url: movieData.posterUrl)
+                cell?.configure(name: review.author.username!, contents: review.contents!, visitedAt: review.visitedAt!)
+                print("Review Item 데이터소스 등록")
                 return cell!
+            case .homeItem(_):
+                return UICollectionViewCell()
             }
         })
         
@@ -97,7 +130,7 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
             case .BookList:
                 (header as? HeaderView)?.configure(title: "책 목록")
             case .Activity:
-                (header as? HeaderView)?.configure(title: "독서 활동 참여 목록")
+                (header as? HeaderView)?.configure(title: "추천 모임")
             case .Review:
                 (header as? HeaderView)?.configure(title: "리뷰")
             default:
@@ -107,52 +140,6 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
             return header
         }
     }
-    
-    private func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
-        //소식
-        let section1 = DetailSection.News("임시")
-        snapshot.appendSections([section1])
-        
-        let defailtNewsData = News(newsId: 1, createdAt: "2022", updatedAt: "2022", title: "NEws", contents: "뉴스 내용입니다", placeId: 1)
-        let bannerItems1 = [
-            Item.NewsItem(defailtNewsData)
-        ]
-        snapshot.appendItems(bannerItems1, toSection: section1)
-        
-        //책 목록
-        let section2 = DetailSection.BookList
-        snapshot.appendSections([section2])
-        let bookData = Item.BookListItem(Book(title: "진격거", author: "에렌 예거", cover: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp", isbn: "", description: "진격의 거인", publisher: "출판사"))
-        snapshot.appendItems([bookData], toSection: section2)
-        
-        // 독서 활동
-        let section = DetailSection.Activity
-        snapshot.appendSections([section])
-        let defaultActivityData = Activity(activityId: 1, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let defaultActivityData1 = Activity(activityId: 2, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-            
-        let defaultActivityData3 = Activity(activityId: 3, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let defaultActivityData4 = Activity(activityId: 4, createdAt: "2022", updatedAt: "2022", placeId: 1, title: "home", info: "good home", capacity: 1, headcount: 1, totalRating: 3.0, reviewCount: 3, imageUrl: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")
-        let bannerItems = [
-            Item.ActivityItem(defaultActivityData),
-            Item.ActivityItem(defaultActivityData1),
-            Item.ActivityItem(defaultActivityData3),
-            Item.ActivityItem(defaultActivityData4),
-        ]
-            
-        snapshot.appendItems(bannerItems, toSection: section)
-        
-        let section3 = DetailSection.Review
-        snapshot.appendSections([section3])
-        let reviewItem = Item.ReviewItem(Review(reviewId: 1, visitedAt: "2022 03 05", contents: "인테리어도 좋고 귀여운 아이템들도 있어서 아주 좋아요", rating: 5.0, images: [Image(id: 1, url: "https://i.namu.wiki/i/sQvSmVl3xla1olYzD7h4X_md8vEGv6SoiVeXGVralO3EbNWwTY1EZ2GVXkt5xO6J_2Xmxr8U7Uw-5ofFdufCcA.webp")], author: Author(userId: 1, username: "독서 광인", profileImage: nil)))
-        snapshot.appendItems([reviewItem], toSection: section3)
-        
-        self.dataSource?.apply(snapshot)
-        
-        print("Snapshot 함수 완료")
-    }
-    
 
     // MARK: Function
     
@@ -172,8 +159,10 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
                 print("액티비티 레이아웃 생성")
                 return self?.createActivitySection()
             case .Review:
+                print("리뷰 레이아웃 생성")
                 return self?.createReviewSection()
             case .BookList:
+                print("책목록 레이아웃 생성")
                 return self?.createBookListSection()
             default:
                 return self!.createActivitySection()
@@ -212,12 +201,12 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     }
     
     private func createActivitySection() -> NSCollectionLayoutSection {//참여 섹션
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.5))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 4, bottom: 8, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.38), heightDimension: .absolute(350))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(390))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 2)
 //        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         
         let section = NSCollectionLayoutSection(group: group)
@@ -248,13 +237,13 @@ class MainDetailHomeTabTableViewCell: UITableViewCell {
     }
     
     private func createBookListSection() -> NSCollectionLayoutSection {//책 종류 섹션
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.38), heightDimension: .absolute(320))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(275))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, repeatingSubitem: item, count: 3)
+        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 0)
         let section = NSCollectionLayoutSection(group: group)
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))

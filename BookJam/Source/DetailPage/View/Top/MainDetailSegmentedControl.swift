@@ -50,12 +50,6 @@ class MainDetailSegmentedControl: UISegmentedControl {
         // Default selected segment
         selectedSegmentIndex = 0
         
-        // Add target for value change
-        addTarget(self, action: #selector(didFeedSegmentControllerValueChanged), for: .valueChanged)
-    }
-    
-    @objc private func didFeedSegmentControllerValueChanged() {
-        
     }
 
 }

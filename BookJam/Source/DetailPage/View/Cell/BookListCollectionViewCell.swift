@@ -22,7 +22,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
     
     var bookImageView: UIImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.image = UIImage(named: "emptyBook")
+        $0.image = UIImage(named: "defaultBook")
     }
     
     var titleLabel: UILabel = UILabel().then {
@@ -79,8 +79,7 @@ class BookListCollectionViewCell: UICollectionViewCell {
         bookImageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(200)
-            $0.width.equalTo(100)
+            $0.size.equalTo(160)
         }
         
         titleLabel.snp.makeConstraints {

@@ -35,7 +35,6 @@ class BookReviewCollectionViewCell: UICollectionViewCell {
         $0.setTitleColor(UIColor.white, for: .normal)
         $0.layer.backgroundColor = main03?.cgColor
         $0.titleLabel?.font = captionText01
-        $0.addTarget(self, action: #selector(didAddFriendButtonTapped), for: .touchUpInside)
         $0.layer.cornerRadius = 14
     }
 
@@ -181,8 +180,9 @@ class BookReviewCollectionViewCell: UICollectionViewCell {
     
     // MARK: Functions
     
-    // TODO: 친구 추가 버튼 누르면 버튼 바뀌는 부분과 서버에 데이터 전송하는 부분 구현 필요
-    @objc func didAddFriendButtonTapped() {
-        
+    func configure(name: String, contents: String, visitedAt: String) {
+        userNameLabel.text = name
+        commentLabel.text = contents
+        userVisitDateLabel.text = visitedAt + " 방문"
     }
 }

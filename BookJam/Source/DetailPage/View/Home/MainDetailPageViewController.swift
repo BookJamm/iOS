@@ -10,8 +10,7 @@ import SnapKit
 import RxSwift
 import RxCocoa
 import Then
-
-
+import RxDataSources
 
 @available(iOS 16.0, *)
 final class MainDetailPageViewController: UIViewController {
@@ -19,19 +18,34 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Variables
     
     private var viewModel = MainDetailPageViewModel()
-    let disposeBag = DisposeBag()
     
-    private var dataSource = [SettingSection]()
+    let disposeBag = DisposeBag()
     
     var topView = MainDetailTopView()
     
     lazy var tableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then{
         $0.register(MainDetailHomeTabTableViewCell.self, forCellReuseIdentifier: MainDetailHomeTabTableViewCell.id)
         $0.register(MainDetailNewsTableViewCell.self, forCellReuseIdentifier: MainDetailNewsTableViewCell.id)
-        
+        $0.register(MainDetailReviewTableViewCell.self, forCellReuseIdentifier: MainDetailReviewTableViewCell.id)
+        $0.register(MainDetailActivityTableViewCell.self, forCellReuseIdentifier: MainDetailActivityTableViewCell.id)
+        $0.register(MainDetailBookListTableViewCell.self, forCellReuseIdentifier: MainDetailBookListTableViewCell.id)
         $0.register(MainDetailHomeHeader.self, forHeaderFooterViewReuseIdentifier: MainDetailHomeHeader.id)
     }
     var innerScrollingDownDueToOuterScroll = false
+    
+    let homeTrigger = PublishSubject<Void>()
+    let newsTrigger = PublishSubject<Void>()
+    let activityTrigger = PublishSubject<Void>()
+    let reviewTrigger = PublishSubject<Void>()
+    let bookListTrigger = PublishSubject<Void>()
+    
+    lazy var input = MainDetailPageViewModel.Input(homeTrigger: homeTrigger.asObservable(), newsTrigger: newsTrigger.asObservable(), activityTrigger: activityTrigger.asObservable(), reviewTrigger: reviewTrigger.asObservable(), bookListTrigger: bookListTrigger.asObservable())
+    
+    lazy var output = viewModel.transform(input: input)
+    
+    var selectedSegmentIndex = 0    //현재 선택된 인덱스 저장하는 변수
+    
+    var dataSource: MainDetailDataSource!
     
     // MARK: viewDidLoad()
     
@@ -39,11 +53,12 @@ final class MainDetailPageViewController: UIViewController {
         super.viewDidLoad()
         
         setUpView()
-        //        setUpLayout()
         setUpConstraint()
-        setSnapShot()
         setUpDelegate()
+        setUpDatasource()
         
+        setUpBinding()
+        homeTrigger.onNext(Void())
     }
     
     
@@ -54,14 +69,12 @@ final class MainDetailPageViewController: UIViewController {
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 450))
         tableView.tableHeaderView?.addSubview(topView)
-        
         topView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: 450)
         
         tableView.snp.makeConstraints{
             $0.horizontalEdges.bottom.equalToSuperview()
             $0.top.equalToSuperview()
         }
-
     }
     
     // MARK: View
@@ -80,58 +93,177 @@ final class MainDetailPageViewController: UIViewController {
     // MARK: Delegate
     
     private func setUpDelegate() {
-        tableView.dataSource = self
+        
         tableView.delegate = self
     }
     
-    private func setSnapShot() {
-        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, Item>()
+    // MARK: SetUpDataSource
+    
+    private func setUpDatasource() {
+        self.dataSource = MainDetailDataSource(tableView: tableView, cellProvider: { tableView, indexPath, item in
+            switch item {
+                
+            case .homeItem(let homeAllList):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
+                cell.bindViewModel(homeAllList: Observable.just(homeAllList))
+                return cell
+                
+            case .NewsItem(let news):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailNewsTableViewCell.id, for: indexPath) as! MainDetailNewsTableViewCell
+                cell.configure(title: news.title!, content: news.contents!, date: news.createdAt!)
+                return cell
+                
+            case .ActivityItem(let activity):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailActivityTableViewCell.id, for: indexPath) as! MainDetailActivityTableViewCell
+                cell.configure(url: activity.imageUrl!, title: activity.title, date: activity.createdAt!, location: activity.info)
+                return cell
+                
+            case .ReviewItem(let review):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailReviewTableViewCell.id, for: indexPath) as! MainDetailReviewTableViewCell
+                cell.configure(name: review.author.username!, contents: review.contents!, visitedAt: review.visitedAt!)
+                return cell
+                
+            case .BookListItem(_):
+                let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailBookListTableViewCell.id, for: indexPath) as! MainDetailBookListTableViewCell
+                
+                return cell
+            }
+        })
     }
     
+    // MARK: Data Binding
+    private func setUpBinding() {
+        output.homeAllList.bind { [weak self] homeAll in
+            _ = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = homeAll.map { homeAllList in
+                return DetailItem.homeItem(homeAllList)
+            }
 
-    // MARK: Function
-    
-    
-    private func createHomeSection() -> NSCollectionLayoutSection{//홈 섹션
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 4, bottom: 8, trailing: 4)
+            self?.dataSource.update(section: DetailSection.Home, items: items)
+            
+//            self?.dataSource.apply(snapshot)
+        }
+        .disposed(by: disposeBag)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(320))
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, repeatingSubitem: item, count: 4)
-        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
-        let section = NSCollectionLayoutSection(group: group)
+        output.newsList.bind { [weak self] newsList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = newsList.map { news in
+                return DetailItem.NewsItem(news)
+            }
+
+            self?.dataSource.update(section: DetailSection.News("장모"), items: items)
+            
+        }
+        .disposed(by: disposeBag)
         
-        return section
+        output.activityList.bind { [weak self] activityList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = activityList.map { activity in
+                return DetailItem.ActivityItem(activity)
+            }
+            self?.dataSource.update(section: DetailSection.Activity, items: items)
+        }
+        .disposed(by: disposeBag)
+        
+        output.reviewList.bind { [weak self] reviewList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = reviewList.map { review in
+                return DetailItem.ReviewItem(review)
+            }
+            self?.dataSource.update(section: DetailSection.Review, items: items)
+        }
+        .disposed(by: disposeBag)
+        
+        output.bookList.bind { [weak self] bookList in
+        var snapshot = NSDiffableDataSourceSnapshot<DetailSection, DetailItem>()
+            let items = bookList.map { book in
+                return DetailItem.BookListItem(book)
+            }
+            self?.dataSource.update(section: DetailSection.BookList, items: items)
+        }
+        .disposed(by: disposeBag)
     }
     
+    // MARK: Function
+
     func updateTableViewUI(_ selectedIndex: Int) {
            // 선택된 인덱스에 따라 테이블 뷰의 UI를 업데이트하는 로직을 수행
            // 예를 들어, 데이터를 변경하고 다시 로드하는 등의 작업을 수행할 수 있음
            print("Selected index: \(selectedIndex)")
            // 여기서 필요한 로직을 구현하면 됩니다.
         
-        tableView.beginUpdates()
-
-        
         switch selectedIndex {
+        case 0:
+            print("홈 탭 클릭")
+            self.homeTrigger.onNext(Void())
         case 1:
-
             print("소식 탭 등록")
-            
-
+            self.newsTrigger.onNext(Void())
+        case 2:
+            print("참여 탭 클릭")
+            self.activityTrigger.onNext(Void())
+        case 3:
+            print("리뷰 탭 클릭")
+            self.reviewTrigger.onNext(Void())
+        case 4:
+            print("책 종류 클릭")
+            self.bookListTrigger.onNext(Void())
         default:
             break
         }
-        
-        tableView.endUpdates()
-
        }
     
     
+}//end of MainDetailPageViewController
+
+
+
+@available(iOS 16.0, *)
+extension MainDetailPageViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch selectedSegmentIndex {
+        case 0:
+            return 1000
+        case 1: // 소식 탭
+            return 122
+        case 2: // 모임 탭
+            return 152
+        case 3: // 리뷰 탭
+            return 254
+        case 4: // 책 종류 탭
+            return 134
+        default:
+            return 44 // 기본 셀 높이
+        }
+        
+    }
+    
+    //헤더 등록 및 rx 바인딩
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id) as! MainDetailHomeHeader
+        
+        header.segmentedControlValue
+            .subscribe(onNext: { [weak self] selectedIndex in
+                // selectedIndex를 사용하여 테이블 뷰의 UI 업데이트 로직을 수행
+                self?.selectedSegmentIndex = selectedIndex
+                self?.updateTableViewUI(selectedIndex)
+            })
+            .disposed(by: disposeBag)
+        header.segmentedControl.selectedSegmentIndex = selectedSegmentIndex
+        
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
 }
 
-@available(iOS 16.0, *) // 이중 스크롤 구현
+// MARK: 이중 스크롤 구현 부분
+@available(iOS 16.0, *)
 extension MainDetailPageViewController: UICollectionViewDelegate {
     private enum Policy {
             static let floatingPointTolerance = 0.1
@@ -189,53 +321,11 @@ extension MainDetailPageViewController: UICollectionViewDelegate {
     }
 }
 
-@available(iOS 16.0, *)
-extension MainDetailPageViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    // 셀 데이터 삽입
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MainDetailHomeTabTableViewCell.id, for: indexPath) as! MainDetailHomeTabTableViewCell
-        
-        cell.selectionStyle = .none
-        cell.collectionView.delegate = self
-
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 1000 //임시
-        
-    }
-    
-    //헤더 등록 및 rx 바인딩
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: MainDetailHomeHeader.id) as! MainDetailHomeHeader
-        
-        header.segmentedControlValue
-            .subscribe(onNext: { [weak self] selectedIndex in
-                // selectedIndex를 사용하여 테이블 뷰의 UI 업데이트 로직을 수행
-                self?.updateTableViewUI(selectedIndex)
-            })
-            .disposed(by: disposeBag
-            )
-        return header
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    
-}
-
-import SwiftUI
-@available(iOS 16.0, *)
-struct MainDetailPageViewController_Preview: PreviewProvider {
-    static var previews: some View {
-        MainDetailPageViewController().toPreview()
-            //.edgesIgnoringSafeArea(.all)
-    }
-}
+//import SwiftUI
+//@available(iOS 16.0, *)
+//struct MainDetailPageViewController_Preview: PreviewProvider {
+//    static var previews: some View {
+//        MainDetailPageViewController().toPreview()
+//            //.edgesIgnoringSafeArea(.all)
+//    }
+//}

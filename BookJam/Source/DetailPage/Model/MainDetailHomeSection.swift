@@ -16,10 +16,11 @@ enum DetailSection: Hashable {
     case BookList
 }
 
-//디테일 페이지 셀
-enum Item: Hashable {
-    case ReviewItem(Review)
-    case ActivityItem(Activity)
+enum DetailItem: Hashable {
+    case homeItem(DetailHomeTabModel)
     case NewsItem(News)
+    case ActivityItem(Activity)
+    case ReviewItem(Review)
     case BookListItem(Book)
 }
+

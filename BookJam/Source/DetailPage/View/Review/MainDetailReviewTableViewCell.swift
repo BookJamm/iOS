@@ -105,10 +105,11 @@ class MainDetailReviewTableViewCell: UITableViewCell {
         
     }
     
-//    public func configure(title: String, content: String) {
-//        newsLabel.text = title
-//        newsContent.text = content
-//    }
+    func configure(name: String, contents: String, visitedAt: String) {
+        nickNameLabel.text = name
+        reviewContent.text = contents
+        reviewDate.text = visitedAt + " 방문"
+    }
 }
 
 #if DEBUG

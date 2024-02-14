@@ -59,7 +59,7 @@ final class MainPageViewController: UIViewController {
         $0.register(MainPageCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MainPageCollectionHeaderView.id)// 섹션헤더
     }
     
-    private var mainDataSource: UICollectionViewDiffableDataSource<mainPageSection,mainPageItem>?
+    private var mainDataSource: UICollectionViewDiffableDataSource<mainPageSection, mainPageItem>?
     
     // MARK: LifeCycle
     override func viewDidLoad() {
